@@ -111,38 +111,21 @@ alias ls="exa"
 alias cat="bat"
 alias vim="nvim"
 alias diff="diff-so-fancy"
-alias mc="mc -S ~/.local/share/mc/skins/dracula256.ini"
+alias mc="mc --skin=dark"
 alias fk="fuck"
 
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-### lyft_localdevtools_shell_rc start
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
-fi
-
 fzd() {
   local dir
   dir=$(find "$1" -type d 2>/dev/null | fzf +m) && cd "$dir"
 }
 
-### lyft_localdevtools_shell_rc end
-export PATH=/opt/homebrew/bin:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export GOPATH="${HOME}/go"
-if [[ $PATH != *$GOPATH* ]]; then
-    export PATH="${GOPATH}/bin:${PATH}"
-fi
-
-# pnpm
-export PNPM_HOME="/Users/adyshev/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 eval $(thefuck --alias)
+
+export GOPATH="${HOME}/go"
+export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
