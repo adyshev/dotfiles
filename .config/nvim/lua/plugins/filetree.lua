@@ -9,14 +9,14 @@ return {
   config = function()
     require("neo-tree").setup({
       window = {
-        width = 65,
+        width = 40,
       },
       filesystem = {
         filtered_items = {
           visible = true,
           show_hidden_count = true,
           hide_dotfiles = false,
-          hide_gitignored = true,
+          hide_gitignored = false,
           hide_by_name = {
             ".git",
           },
