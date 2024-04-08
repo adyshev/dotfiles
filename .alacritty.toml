@@ -5,6 +5,11 @@ import = [
     "~/.config/alacritty/themes/themes/one_dark.toml"
 ]
 
+ipc_socket = true
+
+[selection]
+save_to_clipboard = true
+
 [font]
 size = 15
 
