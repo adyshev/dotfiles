@@ -9,19 +9,16 @@ vim.keymap.set({ "n", "x", "v" }, "vG", "vG$", { desc = "Select all+new" })
 
 -- Tools
 vim.keymap.set({ "n", "x" }, "<leader>z", ":ZenMode<CR>", { desc = "Zen Mode" })
+vim.keymap.set("n", "<leader>n", ":SimpleNoteList<CR>", { desc = "List of Notes" })
+vim.keymap.set("n", "<leader>fs", "<cmd>Telescope symbols<cr>", { desc = "Find Symbols" })
 
 -- Toggles
--- vim.keymap.set("n", "<leader>tC", ":Copilot disable<CR>", { desc = "Disable Copilot" })
--- vim.keymap.set("n", "<leader>te", ":Copilot enable<CR>", { desc = "Enable Copilot" })
-vim.keymap.set("n", "<leader>tn", ":SimpleNoteList<CR>", { desc = "List of Notes" })
+vim.keymap.set("n", "<leader>oC", ":Copilot disable<CR>", { desc = "Disable Copilot" })
+vim.keymap.set("n", "<leader>oc", ":Copilot enable<CR>", { desc = "Enable Copilot" })
 
 -- Inserts
--- insert the date in my desired configuration
 vim.keymap.set("n", "<leader>id", "<cmd>r!date<cr>", { desc = "Insert date" })
 vim.keymap.set("n", "<leader>iq", 'ciw""<Esc>P', { desc = "Insert word surround quotes" })
-
--- telescope symbols
-vim.keymap.set("n", "<leader>fs", "<cmd>Telescope symbols<cr>", { desc = "Find Symbols" })
 
 -- these keep the cursor in the middle when scrolling with ctrl d and u
 -- from https://github.com/ThePrimeagen/init.lua
