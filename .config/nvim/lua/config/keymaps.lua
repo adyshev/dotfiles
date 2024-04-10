@@ -11,8 +11,8 @@ vim.keymap.set({ "n", "x", "v" }, "vG", "vG$", { desc = "Select all+new" })
 vim.keymap.set({ "n", "x" }, "<leader>z", ":ZenMode<CR>", { desc = "Zen Mode" })
 
 -- Toggles
-vim.keymap.set("n", "<leader>tC", ":Copilot disable<CR>", { desc = "Disable Copilot" })
-vim.keymap.set("n", "<leader>te", ":Copilot enable<CR>", { desc = "Enable Copilot" })
+-- vim.keymap.set("n", "<leader>tC", ":Copilot disable<CR>", { desc = "Disable Copilot" })
+-- vim.keymap.set("n", "<leader>te", ":Copilot enable<CR>", { desc = "Enable Copilot" })
 vim.keymap.set("n", "<leader>tn", ":SimpleNoteList<CR>", { desc = "List of Notes" })
 
 -- Inserts
