@@ -18,10 +18,7 @@ vim.keymap.set("n", "<leader>tn", ":SimpleNoteList<CR>", { desc = "List of Notes
 -- Inserts
 -- insert the date in my desired configuration
 vim.keymap.set("n", "<leader>id", "<cmd>r!date<cr>", { desc = "Insert date" })
----
-
--- surrounding words
-vim.keymap.set("n", "<leader>sw", 'ciw""<Esc>P', { desc = "Word Surround Quotes" })
+vim.keymap.set("n", "<leader>iq", 'ciw""<Esc>P', { desc = "Insert word surround quotes" })
 
 -- telescope symbols
 vim.keymap.set("n", "<leader>fs", "<cmd>Telescope symbols<cr>", { desc = "Find Symbols" })
