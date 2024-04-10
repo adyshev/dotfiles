@@ -1,3 +1,3 @@
-# Test
+# Dotfiles
 
-this text is a test
+My dotfiles. Use it wiselly.
