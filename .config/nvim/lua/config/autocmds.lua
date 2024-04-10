@@ -10,8 +10,8 @@ local function find_python_executable()
       vim.api.nvim_echo({ { "Using path for python: " .. executable_path, "None" } }, false, {})
       return executable_path
     end
-  elseif vim.fn.filereadable(".venv/bin/python") == 1 then
-    local executable_path = vim.fn.expand(".venv/bin/python")
+  elseif vim.fn.filereadable("./venv/bin/python") == 1 then
+    local executable_path = vim.fn.expand("./venv/bin/python")
     vim.api.nvim_echo({ { "Using path for python: " .. executable_path, "None" } }, false, {})
     return executable_path
   end
