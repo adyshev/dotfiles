@@ -28,7 +28,7 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
+vim.api.nvim_create_autocmd("filetype", {
   pattern = { "go" },
   callback = function()
     vim.opt_local.colorcolumn = "120" -- Ruler at column number
@@ -51,5 +51,13 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.api.nvim_win_set_cursor(0, curpos)
       end,
     })
+  end,
+})
+
+-- disable completion on markdown files by default
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = { "gitcommit", "markdown" },
+  callback = function()
+    require("cmp").setup({ enabled = false })
   end,
 })

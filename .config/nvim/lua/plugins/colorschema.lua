@@ -11,9 +11,12 @@ return {
     end,
   },
   -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "wittyjudge/gruvbox-material.nvim" },
+
   {
     "LazyVim/LazyVim",
     opts = {
+      -- colorscheme = "gruvbox-material",
       colorscheme = "onedark",
       -- colorscheme = "catppuccin-macchiato", -- catppuccin-latte, catppuccin-frappe, catppuccin-macchiato, catppuccin-mocha
     },
