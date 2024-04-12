@@ -13,12 +13,11 @@ vim.keymap.set("n", "<leader>n", ":SimpleNoteList<CR>", { desc = "List of Notes"
 vim.keymap.set("n", "<leader>fs", "<cmd>Telescope symbols<cr>", { desc = "Find Symbols" })
 
 -- Toggles
-vim.keymap.set("n", "<leader>oC", ":Copilot disable<CR>", { desc = "Disable Copilot" })
-vim.keymap.set("n", "<leader>oc", ":Copilot enable<CR>", { desc = "Enable Copilot" })
 
 -- Inserts
 vim.keymap.set("n", "<leader>id", "<cmd>r!date<cr>", { desc = "Insert date" })
 vim.keymap.set("n", "<leader>iq", 'ciw""<Esc>P', { desc = "Insert word surround quotes" })
+vim.keymap.set("n", "<leader>iQ", 'c$""<Esc>P', { desc = "Insert string surround quotes" })
 
 -- these keep the cursor in the middle when scrolling with ctrl d and u
 -- from https://github.com/ThePrimeagen/init.lua
