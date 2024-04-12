@@ -34,7 +34,7 @@ return {
       },
       alacritty = {
         enabled = true,
-        font = "16", -- font size
+        font = "18", -- font size
       },
     },
   },
