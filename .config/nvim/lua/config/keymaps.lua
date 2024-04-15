@@ -27,6 +27,7 @@ vim.keymap.set("n", "<PageUp>", "<C-u>zz")
 -- Disable annoying command line thing
 vim.keymap.set("n", "q:", ":")
 
+-- If you want to keep defaut command history, please uncomment
 -- vim.keymap.set("c", "<C-f>", function()
 --   vim.g.requested_cmdwin = true
 --   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-f>",true, false, true), "n", false)
