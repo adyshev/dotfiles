@@ -23,6 +23,7 @@ style = "Regular"
 [window]
 decorations = "none"
 startup_mode = "Maximized"
+option_as_alt = "Both"
 
 [window.padding]
 x = 3

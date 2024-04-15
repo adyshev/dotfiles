@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("trim_whitespaces", { clear = true }),
   desc = "Trim trailing white spaces",
-  pattern = { "python", "go", "markdown", "gitcommit" },
+  pattern = { "python", "go", "markdown" },
   callback = function()
     vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = "<buffer>",
@@ -27,13 +27,5 @@ vim.api.nvim_create_autocmd("FileType", {
         vim.api.nvim_win_set_cursor(0, curpos)
       end,
     })
-  end,
-})
-
--- disable completion on markdown files by default
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "gitcommit", "markdown" },
-  callback = function()
-    require("cmp").setup({ enabled = false })
   end,
 })
