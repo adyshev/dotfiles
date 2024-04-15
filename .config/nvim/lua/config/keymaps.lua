@@ -1,5 +1,3 @@
--- Keymaps are automatically loaded on the VeryLazy event
--- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
 -- Keymaps
@@ -23,3 +21,27 @@ vim.keymap.set("n", "<leader>iQ", 'c$""<Esc>P', { desc = "Insert string surround
 -- from https://github.com/ThePrimeagen/init.lua
 vim.keymap.set("n", "<PageDown>", "<C-d>zz")
 vim.keymap.set("n", "<PageUp>", "<C-u>zz")
+
+-- Disable annoying command line thing
+vim.keymap.set("n", "q:", ":")
+
+local function escape(keys)
+  return vim.api.nvim_replace_termcodes(keys, true, false, true)
+end
+
+-- vim.keymap.set("c", "<C-f>", function()
+--   vim.g.requested_cmdwin = true
+--   vim.api.nvim_feedkeys(escape("<C-f>"), "n", false)
+-- end)
+
+vim.api.nvim_create_autocmd("CmdWinEnter", {
+  group = vim.api.nvim_create_augroup("CWE", { clear = true }),
+  pattern = "*",
+  callback = function()
+    if vim.g.requested_cmdwin then
+      vim.g.requested_cmdwin = nil
+    else
+      vim.api.nvim_feedkeys(escape(":q<CR>:"), "m", false)
+    end
+  end,
+})
