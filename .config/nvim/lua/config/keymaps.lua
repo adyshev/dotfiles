@@ -16,6 +16,8 @@ vim.keymap.set("n", "<leader>fs", "<cmd>Telescope symbols<cr>", { desc = "Find S
 vim.keymap.set("n", "<leader>id", "<cmd>r!date<cr>", { desc = "Insert date" })
 vim.keymap.set("n", "<leader>iq", 'ciw""<Esc>P', { desc = "Insert word surround quotes" })
 vim.keymap.set("n", "<leader>iQ", 'c$""<Esc>P', { desc = "Insert string surround quotes" })
+vim.keymap.set("n", "<leader>ie", "<cmd>Encrypt<cr>", { desc = "Encrypt text" })
+vim.keymap.set("n", "<leader>iE", "<cmd>Decrypt<cr>", { desc = "Decrypt text" })
 
 -- these keep the cursor in the middle when scrolling with ctrl d and u
 -- from https://github.com/ThePrimeagen/init.lua
