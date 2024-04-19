@@ -4,3 +4,26 @@
 vim.opt.relativenumber = false
 vim.opt.ignorecase = false
 vim.opt.listchars = "tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮" -- show symbols for whitespace
+
+vim.opt_local.colorcolumn = "120" -- Ruler at column number
+vim.opt_local.tabstop = 4 -- Number of spaces tabs count for
+vim.opt_local.shiftwidth = 4 -- Size of an indent
+vim.opt.softtabstop = 4
+
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+vim.opt.wrap = false
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
+vim.opt.undofile = true
+
+vim.opt.hlsearch = false
+vim.opt.incsearch = true
+vim.opt.termguicolors = true
+
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = "yes"
+vim.opt.isfname:append("@-@")
+vim.opt.updatetime = 50
+vim.opt.colorcolumn = "120"

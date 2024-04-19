@@ -3,18 +3,9 @@
 -- Add any additional autocmds here
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "python", "go" },
-  callback = function()
-    vim.opt_local.colorcolumn = "120" -- Ruler at column number
-    vim.opt_local.tabstop = 4 -- Number of spaces tabs count for
-    vim.opt_local.shiftwidth = 4 -- Size of an indent
-  end,
-})
-
-vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("trim_whitespaces", { clear = true }),
   desc = "Trim trailing white spaces",
-  pattern = { "python", "go", "markdown" },
+  pattern = "*",
   callback = function()
     vim.api.nvim_create_autocmd("BufWritePre", {
       pattern = "<buffer>",
