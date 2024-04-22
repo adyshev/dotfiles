@@ -10,6 +10,10 @@ vim.keymap.set({ "n", "x" }, "<leader>z", ":ZenMode<CR>", { desc = "Zen Mode" })
 vim.keymap.set("n", "<leader>n", ":SimpleNoteList<CR>", { desc = "List of Notes" })
 vim.keymap.set("n", "<leader>fs", "<cmd>Telescope symbols<cr>", { desc = "Find Symbols" })
 
+vim.keymap.set("n", "<leader>mo", MiniMap.open, { desc = "Open Minimap" })
+vim.keymap.set("n", "<leader>mc", MiniMap.close, { desc = "Close Minimap" })
+vim.keymap.set("n", "<leader>mf", MiniMap.toggle_focus, { desc = "Toogle Focus" })
+
 -- Toggles
 
 -- Inserts
