@@ -110,8 +110,9 @@ source $ZSH/oh-my-zsh.sh
 alias ls="exa"
 alias cat="bat"
 alias vim="nvim"
+alias v="nvim"
 alias diff="diff-so-fancy"
-alias mc="mc --skin=dark"
+alias mc="mc --skin=onedark"
 alias fk="fuck"
 
 
@@ -129,3 +130,4 @@ eval $(thefuck --alias)
 
 export GOPATH="${HOME}/go"
 export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
+export MC_SKIN=onedark
