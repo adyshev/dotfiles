@@ -126,8 +126,9 @@ fzd() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval $(/opt/homebrew/bin/thefuck --alias)
-
 export GOPATH="${HOME}/go"
 export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
 export MC_SKIN=onedark
+
+eval $(/opt/homebrew/bin/thefuck --alias)
+
