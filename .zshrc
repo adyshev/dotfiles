@@ -126,7 +126,7 @@ fzd() {
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-eval $(thefuck --alias)
+eval $(/opt/homebrew/bin/thefuck --alias)
 
 export GOPATH="${HOME}/go"
 export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
