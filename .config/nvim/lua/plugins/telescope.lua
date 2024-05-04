@@ -27,6 +27,19 @@ return {
     "nvim-telescope/telescope-symbols.nvim",
   },
 
+  {
+    "nvim-telescope/telescope-frecency.nvim",
+    keys = {
+      { "<leader>fq", "<cmd>Telescope frecency<cr>", desc = "frecency (root dir)" },
+      { "<leader>fQ", "<cmd>Telescope frecency workspace=CWD<cr>", desc = "frecency (cwd)" },
+    },
+    config = function()
+      require("telescope").load_extension("frecency")
+    end,
+    opts = {
+      db_safe_mode = false,
+    },
+  },
   -- Custom ripgrep configuration:
 
   -- I want to search in hidden/dot files.
