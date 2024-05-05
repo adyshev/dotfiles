@@ -1,3 +1,3 @@
 # Dotfiles
 
-test1
+brew install yq
