@@ -5,7 +5,6 @@ return {
       ["<leader>o"] = { name = "+toggle" },
       ["<leader>y"] = { name = "+yanks" },
       ["<leader>i"] = { name = "+insert" },
-      ["<leader>D"] = { name = "+database" },
     },
   },
 }
