@@ -96,7 +96,7 @@ source $ZSH/oh-my-zsh.sh
 #fi
 
 
-export EDITOR='nvim'
+export EDITOR='vk'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -111,9 +111,12 @@ export EDITOR='nvim'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 alias ls="exa"
+alias ll="la"
+alias la="exa -la"
 alias cat="bat"
+alias v="vk"
 alias vl='NVIM_APPNAME=nvim-lazy nvim'
-alias vk='NVIM_APPNAME=nvim-kickstarter nvim'
+alias vk='NVIM_APPNAME=nvim-kickstart nvim'
 alias diff="diff-so-fancy"
 alias mc="mc --skin=onedark"
 alias fk="fuck"
