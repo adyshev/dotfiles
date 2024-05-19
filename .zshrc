@@ -88,14 +88,15 @@ source $ZSH/oh-my-zsh.sh
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR='nvim'
-
 # Preferred editor for local and remote sessions
 #if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 #else
 #   export EDITOR='mvim'
 #fi
+
+
+export EDITOR='nvim'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -111,12 +112,11 @@ export EDITOR='nvim'
 
 alias ls="exa"
 alias cat="bat"
-alias vim="nvim"
-alias v="nvim"
+alias vl='NVIM_APPNAME=nvim-lazy nvim'
+alias vk='NVIM_APPNAME=nvim-kickstarter nvim'
 alias diff="diff-so-fancy"
 alias mc="mc --skin=onedark"
 alias fk="fuck"
-
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
