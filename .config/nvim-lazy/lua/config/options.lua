@@ -5,9 +5,9 @@ vim.opt.relativenumber = false
 vim.opt.ignorecase = false
 vim.opt.listchars = "tab:▸ ,trail:·,nbsp:␣,extends:❯,precedes:❮" -- show symbols for whitespace
 
-vim.opt_local.colorcolumn = "120" -- Ruler at column number
-vim.opt_local.tabstop = 4 -- Number of spaces tabs count for
-vim.opt_local.shiftwidth = 4 -- Size of an indent
+vim.opt.colorcolumn = "120" -- Ruler at column number
+vim.opt.tabstop = 4 -- Number of spaces tabs count for
+vim.opt.shiftwidth = 4 -- Size of an indent
 vim.opt.softtabstop = 4
 
 vim.opt.expandtab = true

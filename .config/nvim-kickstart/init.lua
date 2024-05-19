@@ -648,12 +648,12 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        -- Conform can also run multiple formatters sequentially
-        -- python = { "isort", "black" },
-        --
-        -- You can use a sub-list to tell conform to run *until* a formatter
-        -- is found.
-        -- javascript = { { "prettierd", "prettier" } },
+        python = { 'isort', 'black' },
+        go = { 'goimports', 'gofmt' },
+        json = { 'prettier' },
+        markdown = { 'prettier' },
+        sh = { 'shfmt' },
+        yaml = { 'yamlfmt' },
       },
     },
   },
@@ -907,6 +907,7 @@ require('lazy').setup({
   },
   {
     'nvim-treesitter/nvim-treesitter-context',
+    opts = { mode = 'cursor', max_lines = 3 },
   },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and

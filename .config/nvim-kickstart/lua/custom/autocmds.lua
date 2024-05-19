@@ -25,3 +25,27 @@ vim.api.nvim_create_autocmd('BufEnter', {
   end,
   once = true,
 })
+
+vim.api.nvim_create_autocmd(
+  { 'BufRead', 'BufNewFile' },
+  -- { pattern = { "*.txt", "*.md", "*.tex" }, command = [[setlocal spell<cr> setlocal spelllang=en,de<cr>]] }
+  {
+    pattern = { '*.txt', '*.md', '*.tex', '*.typ' },
+    callback = function()
+      vim.opt.spell = true
+      vim.opt.spelllang = 'en,uk,ru'
+    end,
+    desc = 'Enable spell checking for certain file types',
+  }
+)
+
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = 'go',
+  callback = function()
+    vim.opt.colorcolumn = '120' -- Ruler at column number
+    vim.opt.tabstop = 4 -- Number of spaces tabs count for
+    vim.opt.shiftwidth = 4 -- Size of an indent
+    vim.opt.softtabstop = 4
+  end,
+  desc = 'Golang specific settings',
+})
