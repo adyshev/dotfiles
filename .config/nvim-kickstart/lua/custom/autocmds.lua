@@ -14,9 +14,9 @@ vim.api.nvim_create_autocmd('CmdWinEnter', {
   end,
 })
 
-vim.api.nvim_create_autocmd('BufEnter', {
+vim.api.nvim_create_autocmd('VimEnter', {
   desc = 'Auto select virtualenv Nvim open',
-  pattern = '*.py',
+  pattern = '*',
   callback = function()
     local venv = vim.fn.findfile('pyproject.toml', vim.fn.getcwd() .. ';')
     if venv ~= '' then
@@ -43,6 +43,14 @@ vim.api.nvim_create_autocmd('Filetype', {
     vim.opt.tabstop = 4 -- Number of spaces tabs count for
     vim.opt.shiftwidth = 4 -- Size of an indent
     vim.opt.softtabstop = 4
+  end,
+  desc = 'Golang & Python specific settings',
+})
+
+vim.api.nvim_create_autocmd('Filetype', {
+  pattern = '*.lua',
+  callback = function()
+    vim.opt.colorcolumn = '120' -- Ruler at column number
   end,
   desc = 'Golang & Python specific settings',
 })

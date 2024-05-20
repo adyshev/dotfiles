@@ -286,6 +286,7 @@ require('lazy').setup({
         ['<leader>m'] = { name = '[M]inimap', _ = 'which_key_ignore' },
         ['<leader>h'] = { name = '[H]Git Hunk', _ = 'which_key_ignore' },
         ['<leader>i'] = { name = '[I]Encrypt/Decrypt', _ = 'which_key_ignore' },
+        ['<leader>x'] = { name = '[X]Diagnostic', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -372,7 +373,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+      -- vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
@@ -560,12 +561,51 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         gopls = {},
-        ruff_lsp = {},
+        pyright = {
+          capabilities = {
+            textDocument = {
+              publishDiagnostics = {
+                tagSupport = {
+                  valueSet = { 2 },
+                },
+              },
+            },
+          },
+          settings = {
+            pyright = {
+              disableOrganizeImports = true,
+              disableTaggedHints = true,
+            },
+            python = {
+              analysis = {
+                diagnosticSeverityOverrides = {
+                  -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
+                  reportUndefinedVariable = 'none',
+                  reportAttributeAccessIssue = 'none',
+                },
+                -- ignore = { '*' }, -- Using Ruff
+                -- typeCheckingMode = 'off', -- Using mypy
+              },
+            },
+          },
+        },
+        ruff_lsp = {
+          init_options = {
+            settings = {
+              args = {
+                -- '--ignore=F821',
+                '--line-length=120',
+              },
+            },
+          },
+        },
         templ = {},
         cssls = {},
         sqls = {},
         htmx = {},
         html = {},
+        jsonls = {},
+        yamlls = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -650,7 +690,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'black', 'ruff' },
+        python = { 'isort', 'black' },
         go = { 'goimports', 'gofmt' },
         json = { 'prettier' },
         markdown = { 'prettier' },
@@ -870,7 +910,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'python', 'go', 'diff', 'html', 'templ', 'json', 'yaml', 'css', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
