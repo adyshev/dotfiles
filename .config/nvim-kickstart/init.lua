@@ -580,8 +580,8 @@ require('lazy').setup({
               analysis = {
                 diagnosticSeverityOverrides = {
                   -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
-                  reportUndefinedVariable = 'none',
-                  reportAttributeAccessIssue = 'none',
+                  -- reportUndefinedVariable = 'none',
+                  -- reportAttributeAccessIssue = 'none',
                 },
                 -- ignore = { '*' }, -- Using Ruff
                 -- typeCheckingMode = 'off', -- Using mypy
@@ -677,7 +677,7 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
