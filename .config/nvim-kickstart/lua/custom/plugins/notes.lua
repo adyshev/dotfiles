@@ -11,6 +11,6 @@ return {
       telescope_delete = '<M-d>',
       telescope_rename = '<M-r>',
     }
-    vim.keymap.set('n', '<leader>so', ':SimpleNoteList<CR>', { desc = '[O]Search Notes' })
+    vim.keymap.set('n', '<leader>fo', ':SimpleNoteList<CR>', { desc = '[O]Find Notes' })
   end,
 }
