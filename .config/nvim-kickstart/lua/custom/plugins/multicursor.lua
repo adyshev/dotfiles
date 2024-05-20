@@ -5,7 +5,18 @@ return {
     'smoka7/hydra.nvim',
   },
   opts = {
-    hint_config = false,
+    hint_config = {
+      border = 'rounded',
+      position = 'bottom-right',
+    },
+    generate_hints = {
+      normal = true,
+      insert = true,
+      extend = true,
+      config = {
+        column_count = 1,
+      },
+    },
   },
   cmd = { 'MCstart', 'MCvisual' },
   keys = {
