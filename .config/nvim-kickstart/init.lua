@@ -171,8 +171,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
-vim.keymap.set('n', '<S-l>', '<CMD>bprev<CR>', { desc = 'Prev buffer' })
-vim.keymap.set('n', '<S-h>', '<CMD>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<S-h>', '<CMD>bprev<CR>', { desc = 'Prev buffer' })
+vim.keymap.set('n', '<S-l>', '<CMD>bnext<CR>', { desc = 'Next buffer' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -399,8 +399,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
-
-      vim.keymap.set('n', '<leader>sy', ':Telescope yank_history<CR>', { desc = '[S]earch clipboard history' })
     end,
   },
 
@@ -561,9 +559,13 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        -- clangd = {},
-        -- gopls = {},
-        -- pyright = {},
+        gopls = {},
+        ruff_lsp = {},
+        templ = {},
+        cssls = {},
+        sqls = {},
+        htmx = {},
+        html = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
@@ -648,7 +650,7 @@ require('lazy').setup({
       end,
       formatters_by_ft = {
         lua = { 'stylua' },
-        python = { 'isort', 'black' },
+        python = { 'isort', 'black', 'ruff' },
         go = { 'goimports', 'gofmt' },
         json = { 'prettier' },
         markdown = { 'prettier' },

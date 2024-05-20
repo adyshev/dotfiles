@@ -16,7 +16,7 @@ vim.api.nvim_create_autocmd('CmdWinEnter', {
 
 vim.api.nvim_create_autocmd('BufEnter', {
   desc = 'Auto select virtualenv Nvim open',
-  pattern = 'python',
+  pattern = '*.py',
   callback = function()
     local venv = vim.fn.findfile('pyproject.toml', vim.fn.getcwd() .. ';')
     if venv ~= '' then
@@ -26,26 +26,23 @@ vim.api.nvim_create_autocmd('BufEnter', {
   once = true,
 })
 
-vim.api.nvim_create_autocmd(
-  { 'BufRead', 'BufNewFile' },
-  -- { pattern = { "*.txt", "*.md", "*.tex" }, command = [[setlocal spell<cr> setlocal spelllang=en,de<cr>]] }
-  {
-    pattern = { '*.txt', '*.md', '*.tex', '*.typ' },
-    callback = function()
-      vim.opt.spell = true
-      vim.opt.spelllang = 'en,uk,ru'
-    end,
-    desc = 'Enable spell checking for certain file types',
-  }
-)
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { '*.txt', '*.md' },
+  -- command = [[setlocal spell<cr> setlocal spelllang=en<cr>]],
+  callback = function()
+    vim.opt.spell = true
+    vim.opt.spelllang = 'en' -- could be 'en,gb,fr'
+  end,
+  desc = 'Enable spell checking for certain file types',
+})
 
 vim.api.nvim_create_autocmd('Filetype', {
-  pattern = 'go',
+  pattern = { '*.go', '*.python' },
   callback = function()
     vim.opt.colorcolumn = '120' -- Ruler at column number
     vim.opt.tabstop = 4 -- Number of spaces tabs count for
     vim.opt.shiftwidth = 4 -- Size of an indent
     vim.opt.softtabstop = 4
   end,
-  desc = 'Golang specific settings',
+  desc = 'Golang & Python specific settings',
 })
