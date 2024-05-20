@@ -373,7 +373,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[S]Find Select Telescope' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[W]Find current Word' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[G]Find by Grep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[D]Find Diagnostics' })
+      vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[D]Find Diagnostics' })
       vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[R]Find Resume' })
       vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[.]Find Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
