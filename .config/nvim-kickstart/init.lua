@@ -367,15 +367,15 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[F]ind Help' })
-      vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[F]ind Keymaps' })
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]ind Files' })
-      vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[F]ind Select Telescope' })
-      vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[F]ind current Word' })
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[F]ind by Grep' })
-      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[F]ind Diagnostics' })
-      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[F]ind [R]esume' })
-      vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[F]ind Recent Files ("." for repeat)' })
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[H]Find Help' })
+      vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[K]Find Keymaps' })
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]Find Files' })
+      vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[S]Find Select Telescope' })
+      vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[W]Find current Word' })
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[G]Find by Grep' })
+      vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[D]Find Diagnostics' })
+      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[R]Find Resume' })
+      vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[.]Find Recent Files ("." for repeat)' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
