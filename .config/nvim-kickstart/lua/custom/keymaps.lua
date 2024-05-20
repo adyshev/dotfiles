@@ -1,4 +1,5 @@
--- Added useful keymaps vim.keymap.set('n', 'vA', 'gg^VG', { desc = 'All' })
+-- Added useful keymaps
+vim.keymap.set('n', 'vA', 'gg^VG', { desc = 'All' })
 vim.keymap.set('n', 'yA', 'gg^VGy', { desc = 'All' })
 vim.keymap.set('n', '<PageDown>', '<C-d>zz')
 vim.keymap.set('n', '<PageUp>', '<C-u>zz')

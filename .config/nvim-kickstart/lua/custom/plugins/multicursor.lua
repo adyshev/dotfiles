@@ -1,11 +1,25 @@
 return {
-  'mg979/vim-visual-multi',
-  branch = 'master',
-  init = function()
-    vim.g.VM_maps = {
-      ['Find Under'] = '<C-M-n>',
-      ['Add Cursor Down'] = '<C-M-j>',
-      ['Add Cursor Up'] = '<C-M-k>',
-    }
-  end,
+  'smoka7/multicursors.nvim',
+  event = 'VeryLazy',
+  dependencies = {
+    'smoka7/hydra.nvim',
+  },
+  opts = {
+    hint_config = false,
+  },
+  cmd = { 'MCstart', 'MCvisual' },
+  keys = {
+    {
+      mode = { 'v', 'n' },
+      '<C-n>',
+      '<cmd>MCstart<cr>',
+      desc = 'Start Multicursors',
+    },
+    {
+      mode = { 'v', 'n' },
+      '<C-m>',
+      '<cmd>MCvisual<cr>',
+      desc = 'Multicursors in visual mode',
+    },
+  },
 }
