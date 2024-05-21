@@ -355,13 +355,13 @@ require('lazy').setup({
         -- },
         pickers = {
           find_files = {
-            find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
+            find_command = { 'rg', '--files', '--hidden', '-g', '!{**/.git/*,**/node_modules/*,**/venv/*}' },
           },
           grep_string = {
-            additional_args = { '--hidden', '-g', '!.git' },
+            additional_args = { '--hidden', '-g', '!{**/.git/*,**/node_modules/*,**/venv/*}' },
           },
           live_grep = {
-            additional_args = { '--hidden', '-g', '!.git' },
+            additional_args = { '--hidden', '-g', '!{**/.git/*,**/node_modules/*,**/venv/*}' },
           },
         },
         extensions = {
