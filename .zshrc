@@ -143,14 +143,3 @@ export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
 export MC_SKIN=onedark
 
 eval $(/opt/homebrew/bin/thefuck --alias)
-
-
-### lyft_localdevtools_shell_rc start
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
-fi
-### lyft_localdevtools_shell_rc end
-
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
