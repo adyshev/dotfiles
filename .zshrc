@@ -121,14 +121,6 @@ alias diff="diff-so-fancy"
 alias mc="mc --skin=onedark"
 alias fk="fuck"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-fzd() {
-  local dir
-  dir=$(find "$1" -type d 2>/dev/null | fzf +m) && cd "$dir"
-}
-
 # find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
 fif() {
     if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
@@ -136,6 +128,8 @@ fif() {
     file="$(rga --max-count=1 --hidden --ignore-case --files-with-matches --no-messages "$@" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$@"' {}")" && open "$file"
 }
 
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export GOPATH="${HOME}/go"
