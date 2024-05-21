@@ -358,10 +358,10 @@ require('lazy').setup({
             find_command = { 'rg', '--files', '--hidden', '-g', '!.git' },
           },
           grep_string = {
-            additional_args = { '--hidden' },
+            additional_args = { '--hidden', '-g', '!.git' },
           },
           live_grep = {
-            additional_args = { '--hidden' },
+            additional_args = { '--hidden', '-g', '!.git' },
           },
         },
         extensions = {
