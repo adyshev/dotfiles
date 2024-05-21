@@ -95,7 +95,7 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 #fi
 
-
+export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 export EDITOR='vk'
 
 # Compilation flags
@@ -129,6 +129,13 @@ fzd() {
   dir=$(find "$1" -type d 2>/dev/null | fzf +m) && cd "$dir"
 }
 
+# find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
+fif() {
+    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
+    local file
+    file="$(rga --max-count=1 --hidden --ignore-case --files-with-matches --no-messages "$@" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$@"' {}")" && open "$file"
+}
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 export GOPATH="${HOME}/go"
@@ -137,3 +144,13 @@ export MC_SKIN=onedark
 
 eval $(/opt/homebrew/bin/thefuck --alias)
 
+
+### lyft_localdevtools_shell_rc start
+### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
+    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
+fi
+### lyft_localdevtools_shell_rc end
+
+### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
