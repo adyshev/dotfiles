@@ -8,8 +8,8 @@ return {
   event = 'VeryLazy', -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
   keys = {
     -- Keymap to open VenvSelector to pick a venv.
-    { '<leader>cv', '<cmd>VenvSelect<cr>', desc = '[V]Select virtualenv' },
+    { '<leader>cv', '<cmd>VenvSelect<cr>', desc = '[v]Select virtualenv' },
     -- Keymap to retrieve the venv from a cache (the one previously used for the same project directory).
-    { '<leader>cb', '<cmd>VenvSelectCached<cr>', desc = '[B]Select cached virtualenv' },
+    { '<leader>cb', '<cmd>VenvSelectCached<cr>', desc = '[b]Select cached virtualenv' },
   },
 }

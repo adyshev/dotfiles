@@ -18,13 +18,19 @@ return {
       },
     },
   },
-  cmd = { 'MCstart', 'MCvisual' },
+  cmd = { 'MCstart', 'MCvisual', 'MCclear' },
   keys = {
     {
       mode = { 'v', 'n' },
       '<C-n>',
       '<cmd>MCstart<cr>',
       desc = 'Start Multicursors',
+    },
+    {
+      mode = { 'v', 'n' },
+      '<C-c>',
+      '<cmd>MCclear<cr>',
+      desc = 'Clear Multicursors',
     },
     {
       mode = { 'v', 'n' },

@@ -163,16 +163,23 @@ vim.opt.hlsearch = true
 require 'custom.options'
 
 -- Keymaps
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+local diagnostic_goto = function(next, severity)
+  local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
+  severity = severity and vim.diagnostic.severity[severity] or nil
+  return function()
+    go { severity = severity }
+  end
+end
+vim.keymap.set('n', ']d', diagnostic_goto(true), { desc = 'Next Diagnostic message' })
+vim.keymap.set('n', '[d', diagnostic_goto(false), { desc = 'Previous Diagnostic message' })
+vim.keymap.set('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' })
+vim.keymap.set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
+vim.keymap.set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
+vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
 
-vim.keymap.set('n', '<S-h>', '<CMD>bprev<CR>', { desc = 'Prev buffer' })
-vim.keymap.set('n', '<S-l>', '<CMD>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[e]Line Diagnostic' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -277,16 +284,10 @@ require('lazy').setup({
 
       -- Document existing key chains
       require('which-key').register {
-        ['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
-        ['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
-        ['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
-        ['<leader>f'] = { name = '[F]find', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
-        ['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
-        ['<leader>m'] = { name = '[M]inimap', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = '[H]Git Hunk', _ = 'which_key_ignore' },
-        ['<leader>i'] = { name = '[I]Encrypt/Decrypt', _ = 'which_key_ignore' },
-        ['<leader>x'] = { name = '[X]Diagnostic', _ = 'which_key_ignore' },
+        ['<leader>c'] = { name = '[c]Code', _ = 'which_key_ignore' },
+        ['<leader>f'] = { name = '[f]Find', _ = 'which_key_ignore' },
+        ['<leader>m'] = { name = '[m]Misc', _ = 'which_key_ignore' },
+        ['<leader>x'] = { name = '[x]Diagnostic', _ = 'which_key_ignore' },
       }
     end,
   },
@@ -377,25 +378,12 @@ require('lazy').setup({
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
-      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[H]Find Help' })
-      vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[K]Find Keymaps' })
-      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[F]Find Files' })
-      vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[S]Find Select Telescope' })
-      vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[W]Find current Word' })
-      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[G]Find by Grep' })
-      vim.keymap.set('n', '<leader>fd', builtin.diagnostics, { desc = '[D]Find Diagnostics' })
-      vim.keymap.set('n', '<leader>fr', builtin.resume, { desc = '[R]Find Resume' })
-      vim.keymap.set('n', '<leader>f.', builtin.oldfiles, { desc = '[.]Find Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
-
-      -- Slightly advanced example of overriding default behavior and theme
-      vim.keymap.set('n', '<leader>/', function()
-        -- You can pass additional configuration to Telescope to change the theme, layout, etc.
-        builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-          winblend = 10,
-          previewer = false,
-        })
-      end, { desc = '[/] Fuzzily find in current buffer' })
+      vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[h]Find Help' })
+      vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
+      vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
+      vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[g]Find by Grep' })
+      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ]Find existing buffers' })
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -409,7 +397,7 @@ require('lazy').setup({
       -- Shortcut for searching your Neovim configuration files
       vim.keymap.set('n', '<leader>fn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[N]Find Neovim files' })
+      end, { desc = '[n]Find Active Neovim config files' })
     end,
   },
 
@@ -468,41 +456,37 @@ require('lazy').setup({
           -- In this case, we create a function that lets us more easily define mappings specific
           -- for LSP related items. It sets the mode, buffer and description for us each time.
           local map = function(keys, func, desc)
-            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+            vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
           end
 
           -- Jump to the definition of the word under your cursor.
           --  This is where a variable was first declared, or where a function is defined, etc.
           --  To jump back, press <C-t>.
-          map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
+          map('gd', require('telescope.builtin').lsp_definitions, '[d]Goto Definition')
 
           -- Find references for the word under your cursor.
-          map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+          -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
+          map('gI', require('telescope.builtin').lsp_implementations, '[I]Goto Implementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+          map('gt', require('telescope.builtin').lsp_type_definitions, '[t]Goto Type Definition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-
-          -- Fuzzy find all the symbols in your current workspace.
-          --  Similar to document symbols, except searches over your entire project.
-          map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+          map('<leader>fs', require('telescope.builtin').lsp_document_symbols, '[s]Find Symbols')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+          map('<leader>cr', vim.lsp.buf.rename, '[r]Rename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+          map('<leader>ca', vim.lsp.buf.code_action, '[a]Code Action')
 
           -- Opens a popup that displays documentation about the word under your cursor
           --  See `:help K` for why this keymap.
@@ -510,7 +494,7 @@ require('lazy').setup({
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
-          map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
+          map('gD', vim.lsp.buf.declaration, '[D]Goto Declaration')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -546,9 +530,9 @@ require('lazy').setup({
           --
           -- This may be unwanted, since they displace some of your code
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            map('<leader>th', function()
+            map('<leader>ct', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
-            end, '[T]oggle Inlay [H]ints')
+            end, '[t]Toggle Inlay Hints')
           end
         end,
       })
@@ -851,6 +835,7 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
+      require('mini.basics').setup()
       -- Better Around/Inside textobjects
       --
       -- Examples:
@@ -881,8 +866,6 @@ require('lazy').setup({
         return '%2l:%-2v'
       end
 
-      require('mini.basics').setup { options = { extra_ui = true } }
-      require('mini.operators').setup()
       require('mini.move').setup()
       require('mini.trailspace').setup()
       require('mini.tabline').setup()
@@ -914,9 +897,9 @@ require('lazy').setup({
           show_integration_count = false,
         },
       }
-      vim.keymap.set('n', '<leader>mo', MiniMap.open, { desc = 'Open Minimap' })
-      vim.keymap.set('n', '<leader>mc', MiniMap.close, { desc = 'Close Minimap' })
-      vim.keymap.set('n', '<leader>mf', MiniMap.toggle_focus, { desc = 'Focus Minimap' })
+      vim.keymap.set('n', '<leader>mo', MiniMap.open, { desc = '[o]Open Minimap' })
+      vim.keymap.set('n', '<leader>mc', MiniMap.close, { desc = '[c]Close Minimap' })
+      vim.keymap.set('n', '<leader>mf', MiniMap.toggle_focus, { desc = '[f]Focus Minimap' })
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
@@ -981,7 +964,7 @@ require('lazy').setup({
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
-  require 'kickstart.plugins.gitsigns',
+  -- require 'kickstart.plugins.gitsigns',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.

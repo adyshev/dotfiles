@@ -6,11 +6,11 @@ return {
   config = function()
     require('simple-note').setup {
       -- configuration defaults
-      notes_dir = '~/notes/',
+      notes_dir = '~/secondbrain/',
       telescope_new = '<M-c>',
       telescope_delete = '<M-d>',
       telescope_rename = '<M-r>',
     }
-    vim.keymap.set('n', '<leader>fo', ':SimpleNoteList<CR>', { desc = '[O]Find Notes' })
+    vim.keymap.set('n', '<leader>fo', ':SimpleNoteList<CR>', { desc = '[o]Find Notes' })
   end,
 }
