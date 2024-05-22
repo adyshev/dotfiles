@@ -319,7 +319,12 @@ require('lazy').setup({
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
+      {
+        'nvim-telescope/telescope-symbols.nvim',
+        config = function()
+          vim.keymap.set('n', '<leader>fs', '<cmd>Telescope symbols<cr>', { desc = '[s]Find Symbols' })
+        end,
+      },
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
@@ -479,7 +484,7 @@ require('lazy').setup({
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
-          map('<leader>fs', require('telescope.builtin').lsp_document_symbols, '[s]Find Symbols')
+          map('<leader>fl', require('telescope.builtin').lsp_document_symbols, '[l]Find literals')
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
@@ -927,7 +932,24 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'python', 'go', 'diff', 'html', 'templ', 'json', 'yaml', 'css', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'python',
+        'go',
+        'diff',
+        'html',
+        'regex',
+        'templ',
+        'json',
+        'yaml',
+        'css',
+        'lua',
+        'luadoc',
+        'markdown',
+        'vim',
+        'vimdoc',
+      },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

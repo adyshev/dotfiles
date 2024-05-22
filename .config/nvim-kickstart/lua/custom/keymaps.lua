@@ -11,6 +11,10 @@ map('n', '<C-z>', ':echo "Yaay!!!"<CR>')
 map('n', '<C-d>', 'yyP')
 map('i', '<C-d>', '<C-O>yy<C-O>P')
 
+-- Completion
+vim.keymap.set('n', '<leader>p', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = 'Enable completion' })
+vim.keymap.set('n', '<leader>P', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = 'Disable completion' })
+
 -- Buffers
 map('n', '<S-h>', '<CMD>bprev<CR>', { desc = 'Prev buffer' })
 map('n', '<S-l>', '<CMD>bnext<CR>', { desc = 'Next buffer' })
