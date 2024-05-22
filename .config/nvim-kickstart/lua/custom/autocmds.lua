@@ -28,7 +28,6 @@ vim.api.nvim_create_autocmd('VimEnter', {
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = { '*.txt', '*.md' },
-  -- command = [[setlocal spell<cr> setlocal spelllang=en<cr>]],
   callback = function()
     vim.opt.spell = true
     vim.opt.spelllang = 'en' -- could be 'en,gb,fr'

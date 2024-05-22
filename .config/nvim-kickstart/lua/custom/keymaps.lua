@@ -12,8 +12,8 @@ map('n', '<C-d>', 'yyP')
 map('i', '<C-d>', '<C-O>yy<C-O>P')
 
 -- Buffers
-vim.keymap.set('n', '<S-h>', '<CMD>bprev<CR>', { desc = 'Prev buffer' })
-vim.keymap.set('n', '<S-l>', '<CMD>bnext<CR>', { desc = 'Next buffer' })
+map('n', '<S-h>', '<CMD>bprev<CR>', { desc = 'Prev buffer' })
+map('n', '<S-l>', '<CMD>bnext<CR>', { desc = 'Next buffer' })
 
 -- Resize window using <ctrl> arrow keys
 map('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })
