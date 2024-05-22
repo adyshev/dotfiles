@@ -379,6 +379,7 @@ require('lazy').setup({
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[h]Find Help' })
+      vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', { desc = '[t]Find TODO' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
