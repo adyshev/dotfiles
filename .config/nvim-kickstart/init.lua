@@ -654,6 +654,7 @@ require('lazy').setup({
         'mypy',
         'shfmt',
         'prettier',
+        'jq',
         'markdownlint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -779,7 +780,7 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<space>'] = cmp.mapping.confirm { select = true },
+          ['<C-Space>'] = cmp.mapping.confirm { select = true },
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
