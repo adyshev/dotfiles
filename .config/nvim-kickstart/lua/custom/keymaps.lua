@@ -12,8 +12,12 @@ map('n', '<C-d>', 'yyP')
 map('i', '<C-d>', '<C-O>yy<C-O>P')
 
 -- Completion
-map('n', '<leader>p', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[p]Enable completion' })
-map('n', '<leader>P', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[P]Disable completion' })
+map('n', '<leader>mp', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[p]Enable completion' })
+map('n', '<leader>mP', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[P]Disable completion' })
+
+-- Buffers
+map('n', '<S-h>', '<CMD>bprev<CR>', { desc = 'Prev buffer' })
+map('n', '<S-l>', '<CMD>bnext<CR>', { desc = 'Next buffer' })
 
 -- Resize window using <ctrl> arrow keys
 map('n', '<C-Up>', '<cmd>resize +2<cr>', { desc = 'Increase Window Height' })

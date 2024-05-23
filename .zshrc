@@ -115,6 +115,7 @@ alias ll="la"
 alias la="exa -la"
 alias cat="bat"
 alias v="vk"
+alias vim="vk"
 alias vl='NVIM_APPNAME=nvim-lazy nvim'
 alias vk='NVIM_APPNAME=nvim-kickstart nvim'
 alias diff="diff-so-fancy"

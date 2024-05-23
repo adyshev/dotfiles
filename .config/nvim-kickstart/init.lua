@@ -539,11 +539,11 @@ require('lazy').setup({
           -- code, if the language server you are using supports them
           --
           -- This may be unwanted, since they displace some of your code
-          if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            map('<leader>ct', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
-            end, '[t]Toggle Inlay Hints')
-          end
+          -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+          --   map('<leader>ct', function()
+          --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
+          --   end, '[t]Toggle Inlay Hints')
+          -- end
         end,
       })
 
@@ -899,10 +899,6 @@ require('lazy').setup({
 
       require('mini.move').setup()
       require('mini.trailspace').setup()
-      require('mini.tabline').setup()
-
-      vim.keymap.set('n', '<S-h>', '<CMD>bprev<CR>', { desc = 'Prev buffer' })
-      vim.keymap.set('n', '<S-l>', '<CMD>bnext<CR>', { desc = 'Next buffer' })
 
       require('mini.map').setup()
       local map = require 'mini.map'
@@ -993,7 +989,9 @@ require('lazy').setup({
     dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('lualine').setup {
-        options = { theme = 'gruvbox-material' },
+        options = {
+          theme = 'gruvbox-material',
+        },
       }
     end,
   },
