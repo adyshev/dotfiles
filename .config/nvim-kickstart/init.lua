@@ -780,7 +780,7 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          ['<Space>'] = cmp.mapping.confirm { select = true },
+          ['<C-Space>'] = cmp.mapping.confirm { select = true },
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
@@ -885,17 +885,17 @@ require('lazy').setup({
       -- Simple and easy statusline
       --  You could remove this setup call if you don't like it,
       --  and try some other statusline plugin
-      local statusline = require 'mini.statusline'
+      -- local statusline = require 'mini.statusline'
       -- set use_icons to true if you have a Nerd Font
-      statusline.setup { use_icons = vim.g.have_nerd_font }
+      -- statusline.setup { use_icons = vim.g.have_nerd_font }
 
       -- You can configure sections in the statusline by overriding their
       -- default behavior. For example, here we set the section for
       -- cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
-      statusline.section_location = function()
-        return '%2l:%-2v'
-      end
+      -- statusline.section_location = function()
+      --   return '%2l:%-2v'
+      -- end
 
       require('mini.move').setup()
       require('mini.trailspace').setup()
@@ -995,6 +995,56 @@ require('lazy').setup({
       }
     end,
   },
+  {
+    'b0o/incline.nvim',
+    config = function()
+      local function get_diagnostic_label(props)
+        local icons = {
+          Error = '',
+          Warn = '',
+          Info = '',
+          Hint = '',
+        }
+
+        local label = {}
+        for severity, icon in pairs(icons) do
+          local n = #vim.diagnostic.get(props.buf, { severity = vim.diagnostic.severity[string.upper(severity)] })
+          if n > 0 then
+            local fg = '#' .. string.format('%06x', vim.api.nvim_get_hl_by_name('DiagnosticSign' .. severity, true)['foreground'])
+            table.insert(label, { icon .. ' ' .. n .. ' ', guifg = fg })
+          end
+        end
+        return label
+      end
+
+      require('incline').setup {
+        debounce_threshold = { falling = 500, rising = 250 },
+        render = function(props)
+          local bufname = vim.api.nvim_buf_get_name(props.buf)
+          local filename = vim.fn.fnamemodify(bufname, ':t')
+          local diagnostics = get_diagnostic_label(props)
+          local modified = vim.api.nvim_buf_get_option(props.buf, 'modified') and 'bold,italic' or 'None'
+          local filetype_icon, color = require('nvim-web-devicons').get_icon_color(filename)
+
+          local buffer = {
+            { filetype_icon, guifg = color },
+            { ' ' },
+            { filename, gui = modified },
+          }
+
+          if #diagnostics > 0 then
+            table.insert(diagnostics, { '| ', guifg = 'grey' })
+          end
+          for _, buffer_ in ipairs(buffer) do
+            table.insert(diagnostics, buffer_)
+          end
+          return diagnostics
+        end,
+      }
+    end,
+    event = 'VeryLazy',
+  },
+
   {
     'nvim-treesitter/nvim-treesitter-context',
     opts = { mode = 'cursor', max_lines = 3 },
