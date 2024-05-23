@@ -187,7 +187,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[e]Line Di
 --
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
+-- vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -319,6 +319,7 @@ require('lazy').setup({
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
+      { 'nvim-telescope/telescope-smart-history.nvim' },
       {
         'nvim-telescope/telescope-symbols.nvim',
         config = function()
@@ -380,10 +381,13 @@ require('lazy').setup({
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'smart_history')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[h]Find Help' })
+      vim.keymap.set('n', '<leader>fc', ':Telescope command_history<CR>', { desc = '[c]Find Command History' })
+      vim.keymap.set('n', '<leader>fs', ':Telescope search_history<CR>', { desc = '[s]Find Search History' })
       vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', { desc = '[t]Find TODO' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
@@ -488,7 +492,7 @@ require('lazy').setup({
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          map('<leader>cr', vim.lsp.buf.rename, '[r]Rename')
+          -- map('<leader>cr', vim.lsp.buf.rename, '[r]Rename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
@@ -672,6 +676,7 @@ require('lazy').setup({
   { -- Autoformat
     'stevearc/conform.nvim',
     lazy = false,
+    -- TODO: Review
     keys = {
       {
         '<leader>f',
@@ -741,6 +746,7 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-emoji',
     },
     config = function()
       -- See `:help cmp`
@@ -773,11 +779,12 @@ require('lazy').setup({
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
-          -- ['<C-y>'] = cmp.mapping.confirm { select = true },
+          ['<C-y>'] = cmp.mapping.confirm { select = true },
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          ['<CR>'] = cmp.mapping.confirm { select = true },
+          -- ['<CR>'] = cmp.mapping.confirm { select = true },
+
           ['<Tab>'] = cmp.mapping.select_next_item(),
           ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
@@ -811,6 +818,7 @@ require('lazy').setup({
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
+          { name = 'emoji' },
           { name = 'path' },
         },
       }
@@ -854,7 +862,6 @@ require('lazy').setup({
     dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {},
   },
-
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
@@ -892,6 +899,9 @@ require('lazy').setup({
       require('mini.move').setup()
       require('mini.trailspace').setup()
       require('mini.tabline').setup()
+
+      vim.keymap.set('n', '<S-h>', '<CMD>bprev<CR>', { desc = 'Prev buffer' })
+      vim.keymap.set('n', '<S-l>', '<CMD>bnext<CR>', { desc = 'Next buffer' })
 
       require('mini.map').setup()
       local map = require 'mini.map'
