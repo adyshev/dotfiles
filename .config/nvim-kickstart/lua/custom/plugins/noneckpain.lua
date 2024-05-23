@@ -4,7 +4,7 @@ return {
   keys = { { '<leader>z', '<cmd>NoNeckPain<cr>', desc = '[z]Zen Mode' } },
   config = function()
     require('no-neck-pain').setup {
-      width = 127,
+      width = 128,
     }
   end,
 }
