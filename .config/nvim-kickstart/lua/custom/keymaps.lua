@@ -1,7 +1,7 @@
 local map = vim.keymap.set
 
 local opts = { noremap = true }
-local opts_expr = { noremap = true, expr = true}
+local opts_expr = { noremap = true, expr = true }
 
 -- Added useful keymaps
 map('n', 'vA', 'gg^VG', opts)
@@ -13,6 +13,7 @@ map('n', ';', ':', opts)
 map('n', '<C-z>', ':echo "Yaay!!!"<CR>', opts)
 map('n', '<C-d>', 'yyP', opts)
 map('i', '<C-d>', '<ESC>yy<C-O>P', opts)
+map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', opts)
 
 -- Buffers
 map('n', '<S-h>', '<CMD>bprev<CR>', opts)
