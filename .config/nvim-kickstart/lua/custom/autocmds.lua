@@ -3,7 +3,6 @@
 -- Add any additional autocmds here
 
 vim.api.nvim_create_autocmd('CmdWinEnter', {
-  group = vim.api.nvim_create_augroup('CWE', { clear = true }),
   pattern = '*',
   callback = function()
     if vim.g.requested_cmdwin then
@@ -12,6 +11,12 @@ vim.api.nvim_create_autocmd('CmdWinEnter', {
       vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(':q<CR>:', true, false, true), 'm', false)
     end
   end,
+})
+
+vim.api.nvim_create_autocmd('FocusLost', {
+  desc = 'Save/write all unsaved buffers when focus is lost',
+  pattern = '*',
+  command = 'silent! wall',
 })
 
 vim.api.nvim_create_autocmd('VimEnter', {
