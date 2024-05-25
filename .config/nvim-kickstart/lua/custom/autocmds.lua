@@ -71,20 +71,12 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 })
 
 vim.api.nvim_create_autocmd('Filetype', {
-  pattern = { '*.go', '*.python' },
+  pattern = { '*.python' },
   callback = function()
     vim.opt.colorcolumn = '120' -- Ruler at column number
     vim.opt.tabstop = 4 -- Number of spaces tabs count for
-    vim.opt.shiftwidth = 4 -- Size of an indent
+    vim.opt.shiftwidth = 2 -- Size of an indent
     vim.opt.softtabstop = 4
   end,
-  desc = 'Golang & Python specific settings',
-})
-
-vim.api.nvim_create_autocmd('Filetype', {
-  pattern = '*.lua',
-  callback = function()
-    vim.opt.colorcolumn = '120' -- Ruler at column number
-  end,
-  desc = 'Golang & Python specific settings',
+  desc = 'Python specific settings',
 })
