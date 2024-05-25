@@ -5,7 +5,9 @@ return {
     { 'e', "<cmd>lua require('spider').motion('e')<cr>", desc = 'Spider-e', mode = { 'n', 'o', 'x' } },
     { 'b', "<cmd>lua require('spider').motion('b')<cr>", desc = 'Spider-b', mode = { 'n', 'o', 'x' } },
   },
-  opts = {
-    skipInsignificantPunctuation = true,
-  },
+  config = function()
+    require('spider').setup {
+      skipInsignificantPunctuation = true,
+    }
+  end,
 }
