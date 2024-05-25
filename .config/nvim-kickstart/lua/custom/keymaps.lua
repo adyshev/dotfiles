@@ -13,6 +13,7 @@ map('n', ';', ':', opts)
 map('n', '<C-z>', ':echo "Yaay!!!"<CR>', opts)
 map('n', '<C-d>', 'yyP', opts)
 map('i', '<C-d>', '<ESC>yy<C-O>P', opts)
+map('n', 'qq', '<cmd>qa!<CR>', opts)
 map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', opts)
 
 -- Buffers
