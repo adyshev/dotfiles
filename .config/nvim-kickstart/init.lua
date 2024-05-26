@@ -204,10 +204,6 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[e]Line Di
 -- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 -- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
--- Completion
-vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
-vim.keymap.set('n', '<leader>oC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
-
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -242,7 +238,7 @@ require('lazy').setup({
   --    require('Comment').setup({})
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  -- { 'numToStr/Comment.nvim', opts = {} },
 
   -- Here is a more advanced example where we pass configuration
   -- options to `gitsigns.nvim`. This is equivalent to the following Lua:
@@ -290,7 +286,13 @@ require('lazy').setup({
         ['<leader>m'] = { name = '[m]Misc', _ = 'which_key_ignore' },
         ['<leader>x'] = { name = '[x]Diagnostic', _ = 'which_key_ignore' },
         ['<leader>o'] = { name = '[o]Options', _ = 'which_key_ignore' },
+        ['<leader>w'] = { name = '[w]Word spell', _ = 'which_key_ignore' },
       }
+
+      vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
+      vim.keymap.set('n', '<leader>oC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
+      vim.keymap.set('n', '<leader>wa', 'zg', { desc = '[a]Add word to internal dict' })
+      vim.keymap.set('n', '<leader>wu', 'zug', { desc = '[u]Remove word from internal dict' })
     end,
   },
 
