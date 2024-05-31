@@ -1,7 +1,10 @@
 local map = vim.keymap.set
+local gmap = vim.api.nvim_set_keymap
 
-local opts = { noremap = true }
-local opts_expr = { noremap = true, expr = true }
+local opts = { noremap = true, silent = true }
+local opts_expr = { noremap = true, expr = true, silent = true }
+
+gmap('i', 'jj', '<Esc>', opts)
 
 -- Added useful keymaps
 map('n', 'vA', 'gg^VG', opts)
@@ -15,6 +18,7 @@ map('n', '<C-d>', 'yyP', opts)
 map('i', '<C-d>', '<ESC>yy<C-O>P', opts)
 map('n', 'qq', '<cmd>qa!<CR>', opts)
 map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', opts)
+map({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 
 -- Buffers
 map('n', '<S-h>', '<CMD>bprev<CR>', opts)

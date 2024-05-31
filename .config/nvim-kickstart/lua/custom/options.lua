@@ -12,5 +12,11 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
--- vim.opt.isfname:append '@-@'
--- vim.opt.updatetime = 50
+vim.opt.isfname:append '@-@'
+vim.opt.updatetime = 250
+
+-- Set completeopt to have a better completion experience
+vim.o.completeopt = 'menuone,noselect'
+
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '

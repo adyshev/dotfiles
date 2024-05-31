@@ -287,6 +287,7 @@ require('lazy').setup({
         ['<leader>x'] = { name = '[x]Diagnostic', _ = 'which_key_ignore' },
         ['<leader>o'] = { name = '[o]Options', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[w]Word spell', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = '[h]Git Sings', _ = 'which_key_ignore' },
       }
 
       vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
@@ -790,8 +791,8 @@ require('lazy').setup({
           -- you can uncomment the following lines
           ['<CR>'] = cmp.mapping.confirm { select = true },
 
-          ['<Down>'] = cmp.mapping.select_next_item(),
-          ['<Up>'] = cmp.mapping.select_prev_item(),
+          ['<Tab>'] = cmp.mapping.select_next_item(),
+          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -1124,6 +1125,7 @@ require('lazy').setup({
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
+  require 'kickstart.plugins.gitsign',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
