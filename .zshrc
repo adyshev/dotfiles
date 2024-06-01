@@ -110,16 +110,18 @@ export EDITOR='vk'
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias ls="exa"
-alias ll="la"
-alias la="exa -la"
+alias tree='tree -a -I .git'
+alias ls="exa --icons --group-directories-first"
+alias ll="exa -lha --icons --no-user --time-style=long-iso --group-directories-first"
+alias lt="exa -lha --icons --no-user --time-style=long-iso -s=modified"
+alias ltree="exa -ha --icons --no-user --time-style=long-iso --group-directories-first -s=modified --tree --level=2"
 alias cat="bat"
 alias v="vk"
 alias vim="vk"
 alias vl='NVIM_APPNAME=nvim-lazy nvim'
 alias vk='NVIM_APPNAME=nvim-kickstart nvim'
 alias diff="diff-so-fancy"
-alias mc="mc --skin=onedark"
+alias mc="SHELL=/bin/bash;export PS1=':\w\$ '; mc --skin=gruvbox"
 alias fk="fuck"
 
 # find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
@@ -129,12 +131,18 @@ fif() {
     file="$(rga --max-count=1 --hidden --ignore-case --files-with-matches --no-messages "$@" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$@"' {}")" && open "$file"
 }
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 export GOPATH="${HOME}/go"
 export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
 export MC_SKIN=onedark
 
-eval $(/opt/homebrew/bin/thefuck --alias)
+eval "$(/opt/homebrew/bin/thefuck --alias)"
+
+source <(fzf --zsh)
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+if ps $PPID | grep mc; then
+    # this removes git_prompt_string cool stuff but I have no other solution for now
+    PROMPT='%n@%m %1~ %# '
+fi
