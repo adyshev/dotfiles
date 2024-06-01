@@ -11,7 +11,20 @@ alias vim="vk"
 alias vl='NVIM_APPNAME=nvim-lazy nvim'
 alias vk='NVIM_APPNAME=nvim-kickstart nvim'
 alias diff="diff-so-fancy"
-alias mc="SHELL=/bin/bash;export PS1=':\w\$ '; mc --skin=gruvbox"
 alias fk="fuck"
+
+fif() {
+	if [ ! "$#" -gt 0 ]; then
+		echo "Need a string to search for!"
+		return 1
+	fi
+	local file
+	file="$(rga --max-count=1 --hidden --ignore-case --files-with-matches --no-messages "$@" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$@"' {}")" && open "$file"
+}
+
+export GOPATH="${HOME}/go"
+export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
+
+eval "$(/opt/homebrew/bin/thefuck --alias)"
 
 source ~/.fzf/fzf.bash
