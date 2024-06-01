@@ -121,7 +121,7 @@ alias vim="vk"
 alias vl='NVIM_APPNAME=nvim-lazy nvim'
 alias vk='NVIM_APPNAME=nvim-kickstart nvim'
 alias diff="diff-so-fancy"
-alias mc="SHELL=/bin/bash;export PS1=':\w\$ '; mc --skin=gruvbox"
+alias mc="SHELL=/bin/bash mc --skin=gruvbox"
 alias fk="fuck"
 
 # find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
@@ -137,12 +137,5 @@ export MC_SKIN=onedark
 
 eval "$(/opt/homebrew/bin/thefuck --alias)"
 
-source <(fzf --zsh)
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-if ps $PPID | grep mc; then
-    # this removes git_prompt_string cool stuff but I have no other solution for now
-    PROMPT='%n@%m %1~ %# '
-fi
+source ~/.fzf/fzf.zsh
+source ~/.p10k/p10k.zsh
