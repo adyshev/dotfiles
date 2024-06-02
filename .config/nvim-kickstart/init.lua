@@ -287,7 +287,7 @@ require('lazy').setup({
         ['<leader>x'] = { name = '[x]Diagnostic', _ = 'which_key_ignore' },
         ['<leader>o'] = { name = '[o]Options', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[w]Word spell', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = '[h]Git Sings', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = '[h]Gitsigns', _ = 'which_key_ignore' },
       }
 
       vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
@@ -324,15 +324,25 @@ require('lazy').setup({
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-      { 'nvim-telescope/telescope-smart-history.nvim' },
+      { 'nvim-telescope/telescope-project.nvim' },
       {
         'nvim-telescope/telescope-symbols.nvim',
         config = function()
           vim.keymap.set('n', '<leader>fs', '<cmd>Telescope symbols<cr>', { desc = '[s]Find Symbols' })
         end,
       },
+      {
+        'nvim-telescope/telescope-frecency.nvim',
+        config = function()
+          require('telescope').load_extension 'frecency'
+        end,
+      },
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      {
+        'nvim-telescope/telescope-file-browser.nvim',
+        dependencies = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
+      },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -356,13 +366,14 @@ require('lazy').setup({
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
+      local project_actions = require 'telescope._extensions.project.actions'
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         -- defaults = {
         --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+        --     i = { ['<C-f>'] = actions.to_fuzzy_refine },
         --   },
         -- },
         pickers = {
@@ -380,13 +391,26 @@ require('lazy').setup({
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          project = {
+            hidden_files = true, -- default: false
+            theme = 'dropdown',
+            order_by = 'asc',
+            search_by = 'title',
+            sync_with_nvim_tree = true, -- default false
+            -- default for on_project_selected = find project files
+            on_project_selected = function(prompt_bufnr)
+              -- Do anything you want in here. For example:
+              project_actions.change_working_directory(prompt_bufnr, false)
+            end,
+          },
         },
       }
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'smart_history')
+      pcall(require('telescope').load_extension, 'file_browser')
+      pcall(require('telescope').load_extension, 'project')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -399,6 +423,13 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[g]Find by Grep' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ]Find existing buffers' })
+      vim.keymap.set('n', '<leader>fr', ':Telescope frecency workspace=CWD<CR>', { desc = '[r]Find recent' })
+      vim.api.nvim_set_keymap(
+        'n',
+        '<leader>p',
+        ":lua require'telescope'.extensions.project.project{}<CR>",
+        { desc = '[p]Projects', noremap = true, silent = true }
+      )
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -1125,7 +1156,7 @@ require('lazy').setup({
   require 'kickstart.plugins.lint',
   require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
-  require 'kickstart.plugins.gitsign',
+  require 'kickstart.plugins.gitsigns',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
