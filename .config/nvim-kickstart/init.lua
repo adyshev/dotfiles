@@ -405,6 +405,7 @@ require('lazy').setup({
       pcall(require('telescope').load_extension, 'ui-select')
       pcall(require('telescope').load_extension, 'file_browser')
       pcall(require('telescope').load_extension, 'project')
+      pcall(require('telescope').load_extension, 'noice')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -417,7 +418,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[g]Find by Grep' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ]Find existing buffers' })
-      vim.keymap.set('n', '<leader>fr', ':Telescope frecency workspace=CWD<CR>', { desc = '[r]Find recent' })
+      vim.keymap.set('n', '<leader>fr', ':Telescope frecency workspace=CWD<CR>', { desc = '[r]Find Recent' })
       vim.api.nvim_set_keymap(
         'n',
         '<leader>p',
@@ -777,6 +778,9 @@ require('lazy').setup({
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-emoji',
     },
     config = function()
@@ -784,6 +788,29 @@ require('lazy').setup({
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
+
+      -- `/` cmdline setup.
+      cmp.setup.cmdline('/', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' },
+        },
+      })
+
+      -- `:` cmdline setup.
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' },
+        }, {
+          {
+            name = 'cmdline',
+            option = {
+              ignore_cmds = { 'Man', '!' },
+            },
+          },
+        }),
+      })
 
       cmp.setup {
         snippet = {
@@ -850,12 +877,13 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'emoji' },
+          { name = 'cmdline' },
+          { name = 'buffer' },
           { name = 'path' },
         },
       }
     end,
   },
-
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
