@@ -2,4 +2,4 @@
 
 ## Install Homebrew packages
 
-xargs brew install < .local/share/homebrew/list.txt
+xargs brew install < .homebrew/list.txt
