@@ -4,7 +4,9 @@ local gmap = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 local opts_expr = { noremap = true, expr = true, silent = true }
 
+-- Not sure
 gmap('i', 'jj', '<Esc>', opts)
+-- map('n', ';', ':', opts)
 
 -- Added useful keymaps
 map('n', 'vA', 'gg^VG', opts)
@@ -12,7 +14,6 @@ map('n', 'yA', 'gg^VGy', opts)
 map('n', '<PageDown>', '<C-d>zz', opts)
 map('n', '<PageUp>', '<C-u>zz', opts)
 map('n', 'q:', ':', opts)
-map('n', ';', ':', opts)
 map('n', '<C-z>', ':echo "Yaay!!!"<CR>', opts)
 map('n', '<C-d>', 'yyP', opts)
 map('i', '<C-d>', '<ESC>yy<C-O>P', opts)
