@@ -287,8 +287,11 @@ require('lazy').setup({
         ['<leader>x'] = { name = '[x]Diagnostic', _ = 'which_key_ignore' },
         ['<leader>o'] = { name = '[o]Options', _ = 'which_key_ignore' },
         ['<leader>w'] = { name = '[w]Word spell', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = '[h]Gitsigns', _ = 'which_key_ignore' },
+        ['<leader>h'] = { name = '[h]Git Hunk', _ = 'which_key_ignore' },
       }
+      require('which-key').register({
+        ['<leader>h'] = { '[h]Git Hunk' },
+      }, { mode = 'v' })
 
       vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
       vim.keymap.set('n', '<leader>oC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
@@ -660,7 +663,7 @@ require('lazy').setup({
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
@@ -685,6 +688,8 @@ require('lazy').setup({
         'shfmt',
         'prettier',
         'jq',
+        'jsonlint',
+        'yamlfmt',
         'markdownlint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -795,17 +800,11 @@ require('lazy').setup({
           end,
         },
         completion = { completeopt = 'menu,menuone,noinsert' },
-
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
         --
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
         mapping = cmp.mapping.preset.insert {
-          -- Select the [n]ext item
-          -- ['<C-n>'] = cmp.mapping.select_next_item(),
-          -- Select the [p]revious item
-          -- ['<C-p>'] = cmp.mapping.select_prev_item(),
-
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
@@ -821,6 +820,11 @@ require('lazy').setup({
 
           ['<Tab>'] = cmp.mapping.select_next_item(),
           ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+
+          -- Select the [n]ext item
+          -- ['<C-n>'] = cmp.mapping.select_next_item(),
+          -- Select the [p]revious item
+          -- ['<C-p>'] = cmp.mapping.select_prev_item(),
 
           -- Manually trigger a completion from nvim-cmp.
           --  Generally you don't need this, because nvim-cmp will display
@@ -850,18 +854,18 @@ require('lazy').setup({
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
-        sources = {
+        sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'emoji' },
-          -- { name = 'cmdline' },
-          -- { name = 'buffer' },
           { name = 'path' },
-        },
+        }, {
+          { name = 'buffer' },
+        }),
       }
 
       -- `/` cmdline setup.
-      cmp.setup.cmdline('/', {
+      cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
           { name = 'buffer' },
@@ -1008,6 +1012,7 @@ require('lazy').setup({
       },
       indent = { enable = true, disable = { 'ruby' } },
     },
+
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
