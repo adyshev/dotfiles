@@ -45,17 +45,18 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('VimEnter', {
-  desc = 'Auto select virtualenv Nvim open',
-  pattern = '*',
-  callback = function()
-    local venv = vim.fn.findfile('pyproject.toml', vim.fn.getcwd() .. ';')
-    if venv ~= '' then
-      require('venv-selector').retrieve_from_cache()
-    end
-  end,
-  once = true,
-})
+-- vim.api.nvim_create_autocmd('VimEnter', {
+--   desc = 'Auto select virtualenv Nvim open',
+--   pattern = '*',
+--   callback = function()
+--     local venv = require('venv-selector').venv()
+--     if venv ~= nil then
+--       local command = 'source ' .. venv .. '/bin/activate'
+--       vim.api.nvim_feedkeys(command .. '\n', 'n', false)
+--     end
+--   end,
+--   once = true,
+-- })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = { '*.txt', '*.md' },
@@ -71,13 +72,13 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
   command = [[%s/\s\+$//e]],
 })
 
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.python' },
-  callback = function()
-    vim.opt.colorcolumn = '120' -- Ruler at column number
-    vim.opt.tabstop = 4 -- Number of spaces tabs count for
-    vim.opt.shiftwidth = 2 -- Size of an indent
-    vim.opt.softtabstop = 4
-  end,
-  desc = 'Python specific settings',
-})
+-- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+--   pattern = { '*.python' },
+--   callback = function()
+--     vim.opt.colorcolumn = '120' -- Ruler at column number
+--     vim.opt.tabstop = 4 -- Number of spaces tabs count for
+--     vim.opt.shiftwidth = 2 -- Size of an indent
+--     vim.opt.softtabstop = 4
+--   end,
+--   desc = 'Python specific settings',
+-- })
