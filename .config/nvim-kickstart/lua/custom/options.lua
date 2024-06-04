@@ -21,3 +21,4 @@ vim.o.spellfile = os.getenv 'HOME' .. '/.config/nvim-kickstart/spell/en.utf-8.ad
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+

@@ -7,7 +7,7 @@ local opts_expr = { noremap = true, expr = true, silent = true }
 -- Not sure
 gmap('i', 'jj', '<Esc>', opts)
 gmap('n', 'qq', ':qa!<CR>', opts)
--- map('n', ';', ':', opts)
+map('n', ';', ':', opts)
 
 -- Added useful keymaps
 map('n', 'vA', 'gg^VG', opts)
