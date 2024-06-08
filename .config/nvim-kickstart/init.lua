@@ -781,16 +781,49 @@ require('lazy').setup({
       --  nvim-cmp does not ship with all sources by default. They are split
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-document-symbol',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-emoji',
+      'hrsh7th/cmp-calc',
+      'onsails/lspkind.nvim',
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+      local custom_menu_icon = {
+        calc = '󰃬',
+      }
+      local kind_icons = {
+        Text = '',
+        Method = '󰆧',
+        Function = '󰊕',
+        Constructor = '',
+        Field = '󰇽',
+        Variable = '󰂡',
+        Class = '󰠱',
+        Interface = '',
+        Module = '',
+        Property = '󰜢',
+        Unit = '',
+        Value = '󰎠',
+        Enum = '',
+        Keyword = '󰌋',
+        Snippet = '',
+        Color = '󰏘',
+        File = '󰈙',
+        Reference = '',
+        Folder = '󰉋',
+        EnumMember = '',
+        Constant = '󰏿',
+        Struct = '',
+        Event = '',
+        Operator = '󰆕',
+        TypeParameter = '󰅲',
+      }
       luasnip.config.setup {}
 
       cmp.setup {
@@ -799,7 +832,39 @@ require('lazy').setup({
             luasnip.lsp_expand(args.body)
           end,
         },
-        completion = { completeopt = 'menu,menuone,noinsert' },
+        window = {
+          completion = cmp.config.window.bordered {
+            winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
+          },
+          documentation = cmp.config.window.bordered {
+            winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
+          },
+        },
+        formatting = {
+          fields = { 'kind', 'abbr', 'menu' },
+          format = function(entry, vim_item)
+            -- Kind icons
+            vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+            if entry.source.name == 'calc' then
+              -- Get the custom icon for 'calc' source
+              -- Replace the kind glyph with the custom icon
+              vim_item.kind = custom_menu_icon.calc
+            end
+            -- Source
+            vim_item.menu = ({
+              buffer = '[Buffer]',
+              nvim_lsp = '[LSP]',
+              luasnip = '[LuaSnip]',
+              nvim_lua = '[Lua]',
+              path = '[Path]',
+              emoji = '[Emoji]',
+              calc = '[Calc]',
+              latex_symbols = '[LaTeX]',
+            })[entry.source.name]
+            return vim_item
+          end,
+        },
+        -- completion = { completeopt = 'menu,menuone,noinsert' },
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
         --
@@ -854,21 +919,37 @@ require('lazy').setup({
           -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
-        sources = cmp.config.sources({
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'emoji' },
-          { name = 'path' },
-        }, {
-          { name = 'buffer' },
-        }),
+        sources = cmp.config.sources {
+          { name = 'nvim_lsp', group_index = 1 },
+          { name = 'luasnip', group_index = 1 },
+          { name = 'calc', group_index = 1 },
+          { name = 'emoji', group_index = 4 },
+          { name = 'path', keyword_length = 1, group_index = 2 },
+          { name = 'buffer', group_index = 3 },
+        },
       }
+
+      cmp.setup.filetype('lua', {
+        sources = {
+          { name = 'nvim_lsp', group_index = 1 },
+          { name = 'nvim_lua', group_index = 1 },
+          { name = 'calc', group_index = 1 },
+          { name = 'luasnip', group_index = 2 },
+          { name = 'path', group_index = 3 },
+          { name = 'buffer', group_index = 4 },
+          { name = 'emoji', group_index = 5 },
+        },
+      })
 
       -- `/` cmdline setup.
       cmp.setup.cmdline({ '/', '?' }, {
         mapping = cmp.mapping.preset.cmdline(),
         sources = {
+          { name = 'nvim_lsp_document_symbol' },
           { name = 'buffer' },
+        },
+        view = {
+          entries = { name = 'wildmenu', separator = ' · ' },
         },
       })
 
