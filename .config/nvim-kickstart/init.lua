@@ -750,6 +750,7 @@ require('lazy').setup({
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     event = 'InsertEnter',
+    lazy = false,
     dependencies = {
       -- Snippet Engine & its associated nvim-cmp source
       {
@@ -789,6 +790,7 @@ require('lazy').setup({
       'hrsh7th/cmp-emoji',
       'hrsh7th/cmp-calc',
       'onsails/lspkind.nvim',
+      'lukas-reineke/cmp-under-comparator',
     },
     config = function()
       -- See `:help cmp`
@@ -824,8 +826,9 @@ require('lazy').setup({
         Operator = '󰆕',
         TypeParameter = '󰅲',
       }
-      luasnip.config.setup {}
 
+      luasnip.config.setup {}
+      vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = '#7DAEA3' })
       cmp.setup {
         snippet = {
           expand = function(args)
@@ -834,10 +837,25 @@ require('lazy').setup({
         },
         window = {
           completion = cmp.config.window.bordered {
+            -- border = 'double',
             winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
           },
           documentation = cmp.config.window.bordered {
+            -- border = 'double',
             winhighlight = 'Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None',
+          },
+        },
+        sorting = {
+          comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            require('cmp-under-comparator').under,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
           },
         },
         formatting = {
@@ -850,6 +868,10 @@ require('lazy').setup({
               -- Replace the kind glyph with the custom icon
               vim_item.kind = custom_menu_icon.calc
             end
+
+            -- if entry.source.name == 'luasnip' or entry.source.name == 'nvim_lsp' then
+            --   vim_item.dup = nil
+            -- end
             -- Source
             vim_item.menu = ({
               buffer = '[Buffer]',
@@ -864,7 +886,7 @@ require('lazy').setup({
             return vim_item
           end,
         },
-        -- completion = { completeopt = 'menu,menuone,noinsert' },
+        completion = { completeopt = 'menu,menuone,noinsert,noselect' },
         -- For an understanding of why these mappings were
         -- chosen, you will need to read `:help ins-completion`
         --
@@ -923,21 +945,20 @@ require('lazy').setup({
           { name = 'nvim_lsp', group_index = 1 },
           { name = 'luasnip', group_index = 1 },
           { name = 'calc', group_index = 1 },
-          { name = 'emoji', group_index = 4 },
           { name = 'path', keyword_length = 1, group_index = 2 },
           { name = 'buffer', group_index = 3 },
+          { name = 'emoji', group_index = 4 },
         },
       }
-
       cmp.setup.filetype('lua', {
         sources = {
           { name = 'nvim_lsp', group_index = 1 },
           { name = 'nvim_lua', group_index = 1 },
+          { name = 'luasnip', group_index = 1 },
           { name = 'calc', group_index = 1 },
-          { name = 'luasnip', group_index = 2 },
-          { name = 'path', group_index = 3 },
-          { name = 'buffer', group_index = 4 },
-          { name = 'emoji', group_index = 5 },
+          { name = 'path', group_index = 2 },
+          { name = 'buffer', group_index = 3 },
+          { name = 'emoji', group_index = 4 },
         },
       })
 
@@ -949,7 +970,7 @@ require('lazy').setup({
           { name = 'buffer' },
         },
         view = {
-          entries = { name = 'wildmenu', separator = ' · ' },
+          entries = { name = 'wildmenu', separator = ' ⇨ ' },
         },
       })
 
@@ -1274,6 +1295,10 @@ require('lazy').setup({
 
   { import = 'custom.plugins' },
 }, {
+  defaults = {
+    version = false,
+    lazy = false,
+  },
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
@@ -1292,10 +1317,6 @@ require('lazy').setup({
       task = '📌',
       lazy = '💤 ',
     },
-  },
-  defaults = {
-    version = false,
-    lazy = false,
   },
 })
 -- The line beneath this is called `modeline`. See `:help modeline`
