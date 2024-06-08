@@ -938,27 +938,27 @@ require('lazy').setup({
             end
           end, { 'i', 's' }),
 
-          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
+          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, epansion) see:
           --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
         },
         sources = cmp.config.sources {
-          { name = 'nvim_lsp', group_index = 1 },
-          { name = 'luasnip', group_index = 1 },
-          { name = 'calc', group_index = 1 },
-          { name = 'path', keyword_length = 1, group_index = 2 },
-          { name = 'buffer', group_index = 3 },
-          { name = 'emoji', group_index = 4 },
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'calc' },
+          { name = 'path' },
+          { name = 'emoji' },
+          { name = 'buffer' },
         },
       }
       cmp.setup.filetype('lua', {
         sources = {
-          { name = 'nvim_lsp', group_index = 1 },
-          { name = 'nvim_lua', group_index = 1 },
-          { name = 'luasnip', group_index = 1 },
-          { name = 'calc', group_index = 1 },
-          { name = 'path', group_index = 2 },
-          { name = 'buffer', group_index = 3 },
-          { name = 'emoji', group_index = 4 },
+          { name = 'nvim_lsp' },
+          { name = 'nvim_lua' },
+          { name = 'luasnip' },
+          { name = 'calc' },
+          { name = 'path' },
+          { name = 'emoji' },
+          { name = 'buffer' },
         },
       })
 
