@@ -50,6 +50,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   callback = function()
     vim.opt.spell = true
     vim.opt.spelllang = { 'en_us' }
+    vim.opt.colorcolumn = '120' -- Ruler at column number
   end,
   desc = 'Enable spell checking for certain file types',
 })
