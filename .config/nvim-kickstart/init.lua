@@ -781,6 +781,7 @@ require('lazy').setup({
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-emoji',
       'hrsh7th/cmp-calc',
+      'f3fora/cmp-spell',
       'onsails/lspkind.nvim',
       'lukas-reineke/cmp-under-comparator',
     },
@@ -873,6 +874,7 @@ require('lazy').setup({
               path = '[Path]',
               emoji = '[Emoji]',
               calc = '[Calc]',
+              spell = '[Spell]',
               latex_symbols = '[LaTeX]',
             })[entry.source.name]
             return vim_item
@@ -940,6 +942,16 @@ require('lazy').setup({
           { name = 'path' },
           { name = 'emoji' },
           { name = 'buffer' },
+          {
+            name = 'spell',
+            option = {
+              keep_all_entries = false,
+              enable_in_context = function()
+                return true
+              end,
+              preselect_correct_word = false,
+            },
+          },
         },
       }
       cmp.setup.filetype('lua', {

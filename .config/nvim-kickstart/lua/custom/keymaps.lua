@@ -12,13 +12,10 @@ map('n', ';', ':', opts)
 -- Added useful keymaps
 map('n', 'vA', 'gg^VG', opts)
 map('n', 'yA', 'gg^VGy', opts)
-map('n', '<PageDown>', '<C-d>zz', opts)
-map('n', '<PageUp>', '<C-u>zz', opts)
 map('n', 'q:', ':', opts)
 map('n', '<C-z>', ':echo "Yaay!!!"<CR>', opts)
 map('n', '<C-d>', 'yyP', opts)
-map('i', '<C-d>', '<ESC>yy<C-O>P', opts)
-map('n', 'qq', '<cmd>qa!<CR>', opts)
+map('i', '<C-v>', '<C-r>+', opts)
 map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', opts)
 map({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 
@@ -43,12 +40,6 @@ map('v', '<M-k>', ":m '<-2<cr>gv=gv", opts)
 -- windows
 map('n', '<leader>-', '<C-W>s', opts)
 map('n', '<leader>|', '<C-W>v', opts)
-
--- better indenting
-map('v', '<', '<gv', opts)
-map('v', '>', '>gv', opts)
-
-map('n', '<C-n>', 'i<C-o><C-n>', opts)
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map('n', 'n', "'Nn'[v:searchforward].'zv'", opts_expr)
