@@ -284,19 +284,19 @@ require('lazy').setup({
         ['<leader>c'] = { name = '[c]Code', _ = 'which_key_ignore' },
         ['<leader>f'] = { name = '[f]Find', _ = 'which_key_ignore' },
         ['<leader>m'] = { name = '[m]Misc', _ = 'which_key_ignore' },
-        ['<leader>x'] = { name = '[x]Diagnostic', _ = 'which_key_ignore' },
-        ['<leader>o'] = { name = '[o]Options', _ = 'which_key_ignore' },
-        ['<leader>w'] = { name = '[w]Word spell', _ = 'which_key_ignore' },
-        ['<leader>h'] = { name = '[h]Git Hunk', _ = 'which_key_ignore' },
+        ['<leader>x'] = { name = '[x]Trouble', _ = 'which_key_ignore' },
+        ['<leader>s'] = { name = '[s]Spell', _ = 'which_key_ignore' },
       }
       require('which-key').register({
         ['<leader>h'] = { '[h]Git Hunk' },
       }, { mode = 'v' })
 
-      vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
-      vim.keymap.set('n', '<leader>oC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
-      vim.keymap.set('n', '<leader>wa', 'zg', { desc = '[a]Add word to internal dict' })
-      vim.keymap.set('n', '<leader>wu', 'zug', { desc = '[u]Remove word from internal dict' })
+      vim.keymap.set('n', '<leader>d', require('telescope.builtin').lsp_definitions, { desc = '[d]Definition' })
+      vim.keymap.set('n', '<leader>r', require('telescope.builtin').lsp_references, { desc = '[r]Reference' })
+      vim.keymap.set('n', '<leader>cc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
+      vim.keymap.set('n', '<leader>cC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
+      vim.keymap.set('n', '<leader>sa', 'zg', { desc = '[a]Add word to internal dict' })
+      vim.keymap.set('n', '<leader>su', 'zug', { desc = '[u]Remove word from internal dict' })
     end,
   },
 
@@ -501,14 +501,6 @@ require('lazy').setup({
           local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
           end
-
-          -- Jump to the definition of the word under your cursor.
-          --  This is where a variable was first declared, or where a function is defined, etc.
-          --  To jump back, press <C-t>.
-          map('gd', require('telescope.builtin').lsp_definitions, '[d]Goto Definition')
-
-          -- Find references for the word under your cursor.
-          -- map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
@@ -715,12 +707,12 @@ require('lazy').setup({
     -- TODO: Review
     keys = {
       {
-        '<leader>f',
+        '<leader>cf',
         function()
           require('conform').format { async = true, lsp_fallback = true }
         end,
         mode = '',
-        desc = '[F]ormat buffer',
+        desc = '[f]Format buffer',
       },
     },
     opts = {
