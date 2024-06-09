@@ -285,7 +285,6 @@ require('lazy').setup({
         ['<leader>f'] = { name = '[f]Find', _ = 'which_key_ignore' },
         ['<leader>m'] = { name = '[m]Misc', _ = 'which_key_ignore' },
         ['<leader>x'] = { name = '[x]Trouble', _ = 'which_key_ignore' },
-        ['<leader>s'] = { name = '[s]Spell', _ = 'which_key_ignore' },
       }
       require('which-key').register({
         ['<leader>h'] = { '[h]Git Hunk' },
@@ -295,8 +294,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>r', require('telescope.builtin').lsp_references, { desc = '[r]Reference' })
       vim.keymap.set('n', '<leader>cc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
       vim.keymap.set('n', '<leader>cC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
-      vim.keymap.set('n', '<leader>sa', 'zg', { desc = '[a]Add word to internal dict' })
-      vim.keymap.set('n', '<leader>su', 'zug', { desc = '[u]Remove word from internal dict' })
     end,
   },
 
@@ -529,7 +526,8 @@ require('lazy').setup({
 
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
-          map('gD', vim.lsp.buf.declaration, '[D]Goto Declaration')
+
+          -- map('gD', vim.lsp.buf.declaration, '[D]Goto Declaration')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
