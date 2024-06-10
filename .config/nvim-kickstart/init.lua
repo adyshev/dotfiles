@@ -331,12 +331,6 @@ require('lazy').setup({
           vim.keymap.set('n', '<leader>fs', '<cmd>Telescope symbols<cr>', { desc = '[s]Find Symbols' })
         end,
       },
-      {
-        'nvim-telescope/telescope-frecency.nvim',
-        config = function()
-          require('telescope').load_extension 'frecency'
-        end,
-      },
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
       {
@@ -417,7 +411,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[g]Find by Grep' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ]Find existing buffers' })
-      vim.keymap.set('n', '<leader>fr', ':Telescope frecency workspace=CWD<CR>', { desc = '[r]Find Recent' })
       vim.api.nvim_set_keymap(
         'n',
         '<leader>p',
@@ -1022,8 +1015,6 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- require('mini.basics').setup()
-
       -- Better Around/Inside textobjects
       --
       -- Examples:
@@ -1086,7 +1077,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>mo', MiniMap.open, { desc = '[o]Open Minimap' })
       vim.keymap.set('n', '<leader>mc', MiniMap.close, { desc = '[c]Close Minimap' })
       vim.keymap.set('n', '<leader>mf', MiniMap.toggle_focus, { desc = '[f]Focus Minimap' })
-
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,
