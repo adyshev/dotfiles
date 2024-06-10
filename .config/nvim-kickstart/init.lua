@@ -494,12 +494,12 @@ require('lazy').setup({
 
           -- Jump to the implementation of the word under your cursor.
           --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', require('telescope.builtin').lsp_implementations, '[I]Goto Implementation')
+          map('gI', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
           --  the definition of its *type*, not where it was *defined*.
-          map('gt', require('telescope.builtin').lsp_type_definitions, '[t]Goto Type Definition')
+          map('gt', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
 
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
@@ -507,7 +507,7 @@ require('lazy').setup({
 
           -- Rename the variable under your cursor.
           --  Most Language Servers support renaming across files, etc.
-          -- map('<leader>cr', vim.lsp.buf.rename, '[r]Rename')
+          map('<leader>cr', vim.lsp.buf.rename, '[r]Rename')
 
           -- Execute a code action, usually your cursor needs to be on top of an error
           -- or a suggestion from your LSP for this to activate.
@@ -517,10 +517,13 @@ require('lazy').setup({
           --  See `:help K` for why this keymap.
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
+          map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
+          map('gr', require('telescope.builtin').lsp_references, 'Goto Reference')
+
           -- WARN: This is not Goto Definition, this is Goto Declaration.
           --  For example, in C this would take you to the header.
 
-          -- map('gD', vim.lsp.buf.declaration, '[D]Goto Declaration')
+          map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
 
           -- The following two autocommands are used to highlight references of the
           -- word under your cursor when your cursor rests there for a little while.
@@ -620,11 +623,15 @@ require('lazy').setup({
             },
           },
         },
-        templ = {},
+        templ = {
+          filetypes = { 'templ' },
+        },
         cssls = {},
         sqls = {},
         htmx = {},
-        html = {},
+        html = {
+          filetypes = { 'html' },
+        },
         jsonls = {},
         yamlls = {},
         -- rust_analyzer = {},
