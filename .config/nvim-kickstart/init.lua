@@ -290,6 +290,7 @@ require('lazy').setup({
         ['<leader>h'] = { '[h]Git Hunk' },
       }, { mode = 'v' })
 
+      vim.keymap.set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[q]Close Buffer' })
       vim.keymap.set('n', '<leader>d', require('telescope.builtin').lsp_definitions, { desc = '[d]Definition' })
       vim.keymap.set('n', '<leader>r', require('telescope.builtin').lsp_references, { desc = '[r]Reference' })
       vim.keymap.set('n', '<leader>cc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
