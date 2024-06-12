@@ -1,15 +1,15 @@
 local map = vim.keymap.set
-local gmap = vim.api.nvim_set_keymap
 
 local opts = { noremap = true, silent = true }
 local opts_expr = { noremap = true, expr = true, silent = true }
 
 -- Not sure
-gmap('i', 'jj', '<Esc>', opts)
-gmap('n', 'qq', ':qa!<CR>', opts)
+map('i', 'jj', '<Esc>', opts)
+map('n', 'qq', ':qa!<CR>', opts)
 map('n', ';', ':', opts)
 
 -- Added useful keymaps
+map('t', '<C-t>', '<C-\\><C-n>', opts)
 map('n', 'vA', 'gg^VG', opts)
 map('n', 'yA', 'gg^VGy', opts)
 map('n', 'q:', ':', opts)

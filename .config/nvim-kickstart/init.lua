@@ -290,6 +290,8 @@ require('lazy').setup({
         ['<leader>h'] = { '[h]Git Hunk' },
       }, { mode = 'v' })
 
+      vim.keymap.set('n', '<leader>t', '<C-W>v:terminal<CR>', { desc = '[t]Terminal Verical' })
+      vim.keymap.set('n', '<leader>T', '<C-W>s:terminal<CR>', { desc = '[T]Terminal Horisonatal' })
       vim.keymap.set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[q]Close Buffer' })
       vim.keymap.set('n', '<leader>d', require('telescope.builtin').lsp_definitions, { desc = '[d]Definition' })
       vim.keymap.set('n', '<leader>r', require('telescope.builtin').lsp_references, { desc = '[r]Reference' })

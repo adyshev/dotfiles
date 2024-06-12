@@ -17,7 +17,7 @@ return {
           show_hidden = true,
           natural_order = true,
           is_always_hidden = function(name, _)
-            return name == '..' or name == '.git'
+            return vim.startswith(name, '.DS_Store') or name == '..' or name == '.git'
           end,
         },
         win_options = {
