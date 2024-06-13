@@ -1034,7 +1034,7 @@ require('lazy').setup({
           animation = require('mini.indentscope').gen_animation.none(),
         },
       }
-
+      require('mini.starter').setup()
       -- Add/delete/replace surroundings (brackets, quotes, etc.)
       --
       -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
