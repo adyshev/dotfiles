@@ -26,7 +26,7 @@ tmux:
 homebrew:
 	@echo "Installing homebrew..."
 	@stow homebrew
-	@xargs brew install --force < ~/.homebrew/list.txt
+	@xargs brew install --adopt < ~/.homebrew/list.txt
 
 uninstall:
 	@echo "Removing all symlinks..."
