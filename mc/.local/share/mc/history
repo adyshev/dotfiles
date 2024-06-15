@@ -1,14 +1,6 @@
 [input-def]
 0=*
 
-[input2]
-0=/Users/adyshev/alacritty.toml
-1=/Users/adyshev/.config/alacritty/
-2=../
-3=.fzf.bash
-4=.fsf.zsh
-5=.fzf.zsh
-
 [cmdline]
 0=mv nvim.old nvim
 1=:q!
@@ -194,3 +186,21 @@
 57=/Users/adyshev/.dotfiles/shell/.fzf
 58=/Users/adyshev/.dotfiles/shell
 59=/Users/adyshev/.dotfiles
+
+[input2]
+0=/Users/adyshev/alacritty.toml
+1=/Users/adyshev/.config/alacritty/
+2=../
+3=.fzf.bash
+4=.fsf.zsh
+5=.fzf.zsh
+6=/Users/odyshev/.dotfiles/shell/
+7=src
+8=iris.json
+9=Other
+10=keyboards
+
+[inpmc.fm.mkdir]
+0=Other
+1=keyboards
+2=secondbrain
