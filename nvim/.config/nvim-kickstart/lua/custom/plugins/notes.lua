@@ -6,7 +6,7 @@ return {
   config = function()
     require('simple-note').setup {
       -- configuration defaults
-      notes_dir = '~/secondbrain/',
+      notes_dir = '~/.secondbrain/',
       telescope_new = '<M-c>',
       telescope_delete = '<M-d>',
       telescope_rename = '<M-r>',
