@@ -27,4 +27,4 @@ export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
 
 eval "$(/opt/homebrew/bin/thefuck --alias)"
 
-source ~/.fzf/fzf.bash
+source ~/.fzf.bash

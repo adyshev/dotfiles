@@ -138,5 +138,4 @@ eval "$(/opt/homebrew/bin/thefuck --alias)"
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
-source ~/.fzf/fzf.zsh
 source ~/.p10k/p10k.zsh
