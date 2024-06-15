@@ -23,12 +23,6 @@ map({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 map('n', '<S-h>', '<CMD>bprev<CR>', opts)
 map('n', '<S-l>', '<CMD>bnext<CR>', opts)
 
--- Resize window using <ctrl> arrow keys
-map('n', '<C-Up>', '<cmd>resize +2<cr>', opts)
-map('n', '<C-Down>', '<cmd>resize -2<cr>', opts)
-map('n', '<C-Left>', '<cmd>vertical resize -2<cr>', opts)
-map('n', '<C-Right>', '<cmd>vertical resize +2<cr>', opts)
-
 -- Move Lines
 map('n', '<M-j>', '<cmd>m .+1<cr>==', opts)
 map('n', '<M-k>', '<cmd>m .-2<cr>==', opts)
