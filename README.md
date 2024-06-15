@@ -1,10 +1,13 @@
 # Dotfiles
 
-## Install Homebrew packages
+## Install stow
 
-xargs brew install < .homebrew/list.txt
+```shell
+brew install stow
+```
 
-## Add / Remove word into the local Library
+## Install stow packages
 
-zg - Adds word under cursor into the local library
-zug - Removes word under cursor from the local library
+```shell
+make # or make <package> to install individual package
+```
