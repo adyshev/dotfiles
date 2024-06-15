@@ -10,9 +10,6 @@ zsh-autosuggestions
 zsh-syntax-highlighting
 go
 jq
-kubefwd
-terraform
-kubernetes-cli
 lazygit
 neovim
 node
