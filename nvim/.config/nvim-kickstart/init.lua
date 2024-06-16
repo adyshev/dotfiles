@@ -353,11 +353,6 @@ require('lazy').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<C-f>'] = actions.to_fuzzy_refine },
-        --   },
-        -- },
         pickers = {
           find_files = {
             find_command = { 'rg', '--files', '--hidden', '-g', '!{**/.git/*,**/node_modules/*,**/venv/*}' },
