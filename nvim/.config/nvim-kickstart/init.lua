@@ -375,9 +375,14 @@ require('lazy').setup({
           },
           project = {
             hidden_files = true, -- default: false
+            sync_with_nvim_tree = true,
             theme = 'dropdown',
             order_by = 'asc',
             search_by = 'title',
+            on_project_selected = function(prompt_bufnr)
+              -- Do anything you want in here. For example:
+              project_actions.change_working_directory(prompt_bufnr, false)
+            end,
           },
         },
       }
