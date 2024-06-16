@@ -13,7 +13,7 @@ return {
   config = function()
     vim.cmd [[
       :hi Floaterm guibg=#282828
-      :hi FloatermBorder guibg=#282828 guifg=orange
+      :hi FloatermBorder guibg=#282828 guifg=#D4BE98
     ]]
   end,
 }
