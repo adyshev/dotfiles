@@ -8,7 +8,7 @@ version = 2
   [[blocks.segments]]
     type = 'time'
     style = 'plain'
-    foreground = '#00C5C7'
+    foreground = 'blue'
     template = '{{ .CurrentDate | date .Format }}'
 
     [blocks.segments.properties]
