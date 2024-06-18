@@ -1,4 +1,18 @@
 export PS1=':\w\$ '
+export GOPATH="${HOME}/go"
+export PATH="$HOME/bin:/opt/homebrew/bin:${GOPATH}/bin:/usr/local/bin:${PATH}"
+
+export FZF_BASE="/opt/homebrew/opt/fzf"
+export LANG=en_US.UTF-8
+
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+	export EDITOR='vim'
+else
+	export EDITOR='vk'
+fi
+
+export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'
 alias ls="exa --icons --group-directories-first"
@@ -26,5 +40,6 @@ export GOPATH="${HOME}/go"
 export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
 
 eval "$(/opt/homebrew/bin/thefuck --alias)"
+eval "$(oh-my-posh init bash --config "$HOME/.config/ohmyposh/config.toml")"
 
 source ~/.fzf.bash

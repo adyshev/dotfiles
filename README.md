@@ -11,3 +11,9 @@ brew install stow
 ```shell
 make # or make <package> to install individual package
 ```
+
+## Install oh-my-posh
+
+```shell
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+```

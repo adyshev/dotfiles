@@ -6,9 +6,9 @@ fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "${FZF_PATH}/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "${HOME}/.fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "${FZF_PATH}/shell/key-bindings.zsh"
+source "${HOME}/.fzf/shell/key-bindings.zsh"
 
