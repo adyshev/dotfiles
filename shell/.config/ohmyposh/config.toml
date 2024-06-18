@@ -19,7 +19,7 @@ version = 2
     style = 'plain'
     foreground = 'yellow'
     background = 'transparent'
-    template = " {{ .FormattedMs }}'
+    template = ' {{ .FormattedMs }}'
 
     [blocks.segments.properties]
       threshold = 5000
@@ -43,7 +43,7 @@ version = 2
     style = 'plain'
     foreground = 'p:grey'
     background = 'transparent'
-    template = '{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }}<cyan>{{ if gt .Behind 0 }} ⇣{{ end }}{{ if gt .Ahead 0 }} ⇡{{ end }}</>'
+    template = '{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }}<cyan>{{ if gt .Behind 0 }} ⇣{{ end }}{{ if gt .Ahead 0 }} ⇡{{ end }}</> '
 
     [blocks.segments.properties]
       branch_icon = ''
@@ -55,10 +55,10 @@ version = 2
     style = 'plain'
     background = 'transparent'
     foreground = 'magenta'
-    template = ' ❯ '
+    template = '❯ '
 
 [secondary_prompt]
   foreground = 'magenta'
   background = 'transparent'
-  template = ' ❯❯ '
+  template = '❯❯ '
 
