@@ -63,7 +63,7 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.python' },
+  pattern = { '*.py' },
   callback = function()
     vim.opt.colorcolumn = '120' -- Ruler at column number
     vim.opt.tabstop = 4 -- Number of spaces tabs count for
