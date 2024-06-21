@@ -8,6 +8,11 @@ map('i', 'jj', '<Esc>', opts)
 map('n', 'qq', ':qa!<CR>', opts)
 map('n', ';', ':', opts)
 
+map('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+map('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+map('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+map('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+
 -- Added useful keymaps
 map('t', '<C-t>', '<C-\\><C-n>', opts)
 map('n', 'vA', 'gg^VG', opts)
@@ -18,6 +23,10 @@ map('n', '<C-d>', 'yyP', opts)
 map('i', '<C-v>', '<C-r>+', opts)
 map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', opts)
 map({ 'n', 'v' }, '<Space>', '<Nop>', opts)
+map('n', '<PageDown>', '1000<C-D>0')
+map('n', '<PageUp>', '1000<C-U>0')
+map('i', '<PageDown>', '<C-O>1000<C-D>')
+map('i', '<PageUp>', '<C-O>1000<C-U>')
 
 -- Buffers
 map('n', '<S-h>', '<CMD>bprev<CR>', opts)
