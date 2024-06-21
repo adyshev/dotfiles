@@ -5,13 +5,11 @@ local opts_expr = { noremap = true, expr = true, silent = true }
 
 -- Not sure
 map('i', 'jj', '<Esc>', opts)
-map('n', 'qq', ':qa!<CR>', opts)
 map('n', ';', ':', opts)
-
-map('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
-map('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
-map('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
-map('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
+-- map('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+-- map('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+-- map('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+-- map('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Added useful keymaps
 map('t', '<C-t>', '<C-\\><C-n>', opts)
