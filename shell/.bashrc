@@ -26,6 +26,7 @@ alias vl='NVIM_APPNAME=nvim-lazy nvim'
 alias vk='NVIM_APPNAME=nvim-kickstart nvim'
 alias diff="diff-so-fancy"
 alias fk="fuck"
+alias mc="mc --skin=gruvbox"
 
 fif() {
 	if [ ! "$#" -gt 0 ]; then

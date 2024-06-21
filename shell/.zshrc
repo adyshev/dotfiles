@@ -24,7 +24,7 @@ alias vim="vk"
 alias vl='NVIM_APPNAME=nvim-lazy nvim'
 alias vk='NVIM_APPNAME=nvim-kickstart nvim'
 alias diff="diff-so-fancy"
-alias mc="SHELL=/bin/bash mc"
+alias mc="SHELL=/bin/bash mc --skin=gruvbox"
 alias fk="fuck"
 
 # find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
