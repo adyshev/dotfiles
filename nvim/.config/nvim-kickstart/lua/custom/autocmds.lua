@@ -49,6 +49,10 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = { '*.txt', '*.md' },
   callback = function()
+    vim.opt.expandtab = true
+    vim.opt.tabstop = 2
+    vim.opt.softtabstop = 2
+    vim.opt.shiftwidth = 2
     vim.opt.spell = true
     vim.opt.spelllang = { 'en_us' }
     vim.opt.colorcolumn = '120' -- Ruler at column number

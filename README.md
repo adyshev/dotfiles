@@ -2,26 +2,26 @@
 
 ## Install stow
 
-```shell
+```bash
 brew install stow
 ```
 
 ## Install stow packages
 
-```shell
+```bash
 make # or make <package> to install individual package
 ```
 
 ## ZSH features
 
-```shell
+```bash
 brew install zsh-autosuggestions
 brew install zsh-syntax-highlighting
 ```
 
 ## Install oh-my-posh
 
-```shell
+```bash
 brew install jandedobbeleer/oh-my-posh/oh-my-posh
 ```
 
@@ -30,10 +30,10 @@ brew install jandedobbeleer/oh-my-posh/oh-my-posh
 ```bash
 #!/bin/bash
 tmux -f /dev/null -L temp start-server \; list-keys |
-	sed -r \
-		-e "s/bind-key(\s+)([\"#~\$])(\s+)/bind-key\1\'\2\'\3/g" \
-		-e "s/bind-key(\s+)([\'])(\s+)/bind-key\1\"\2\"\3/g" \
-		-e "s/bind-key(\s+)([;])(\s+)/bind-key\1\\\\\2\3/g" \
-		-e "s/command-prompt -I #([SW])/command-prompt -I \"#\1\"/g" \
-		>./.tmux.reset.conf
+    sed -r \
+        -e "s/bind-key(\s+)([\"#~\$])(\s+)/bind-key\1\'\2\'\3/g" \
+        -e "s/bind-key(\s+)([\'])(\s+)/bind-key\1\"\2\"\3/g" \
+        -e "s/bind-key(\s+)([;])(\s+)/bind-key\1\\\\\2\3/g" \
+        -e "s/command-prompt -I #([SW])/command-prompt -I \"#\1\"/g" \
+        >./.tmux.reset.conf
 ```
