@@ -68,15 +68,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     [blocks.segments.properties]
       threshold = 5000
 
-  [[blocks.segments]]
-    type = 'time'
-    style = 'plain'
-    foreground = 'blue'
-    template = ' {{ .CurrentDate | date .Format }} '
-
-    [blocks.segments.properties]
-      time_format = '15:04:05'
-
 [[blocks]]
   type = 'prompt'
   alignment = 'left'

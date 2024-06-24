@@ -26,7 +26,6 @@ style = "Regular"
 decorations = "None"
 startup_mode = "Windowed"
 option_as_alt = "Both"
-dynamic_padding = false
 
 [window.padding]
 x = 5
