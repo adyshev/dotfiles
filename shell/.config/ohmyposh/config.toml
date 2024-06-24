@@ -20,9 +20,31 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       style = 'full'
 
   [[blocks.segments]]
+    type = "go"
+    style = "plain"
+    foreground = "p:grey"
+    background = "transparent"
+    template = "Go {{ .Full }} "
+
+  [[blocks.segments]]
+    type = "python"
+    style = "plain"
+    home_enabled = true
+    foreground = "p:grey"
+    background = "tanparent"
+    template = "Py {{ .Full }} "
+
+  [[blocks.segments]]
+    type = "lua"
+    style = "plain"
+    foreground = "p:grey"
+    background = "transparent"
+    template = "Lua {{ .Full }} "
+
+  [[blocks.segments]]
     type = 'git'
     style = 'plain'
-    foreground = 'p:grey'
+    foreground = 'p:green'
     background = 'transparent'
     template = '{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }}<cyan>{{ if gt .Behind 0 }} ⇣{{ end }}{{ if gt .Ahead 0 }} ⇡{{ end }}</> '
 
@@ -53,7 +75,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     template = ' {{ .CurrentDate | date .Format }} '
 
     [blocks.segments.properties]
-      time_format = 'Mon, 03 Jul | 15:04:05'
+      time_format = '15:04:05'
 
 [[blocks]]
   type = 'prompt'
@@ -66,7 +88,7 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
     background = 'transparent'
     foreground = 'magenta'
     template = '❯'
-  
+
 [transient_prompt]
   foreground_templates = [
     "{{if gt .Code 0}}red{{end}}",
@@ -80,3 +102,6 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
   background = 'transparent'
   template = '❯❯ '
 
+[palette]
+grey = '#6c6c6c'
+green = '#A9B665'

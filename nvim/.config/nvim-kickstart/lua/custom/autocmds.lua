@@ -61,7 +61,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  pattern = { '*.txt', '*.md', 'Makefile' },
+  pattern = { '*.txt', '*.md', '*.toml', 'Makefile' },
   command = [[%s/\s\+$//e]],
   desc = 'Trim spaces for MD and TXT files',
 })
