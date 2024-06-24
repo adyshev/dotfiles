@@ -29,5 +29,6 @@ homebrew:
 	@stow homebrew
 	@xargs brew install --adopt < ~/.homebrew/list.txt
 
-uninstall:
+rm:
 	@echo "Removing all symlinks..."
+	@stow --delete $(target)
