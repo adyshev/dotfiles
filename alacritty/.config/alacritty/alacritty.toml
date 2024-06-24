@@ -24,13 +24,13 @@ style = "Regular"
 
 [window]
 decorations = "None"
-startup_mode = "Fullscreen"
+startup_mode = "Windowed"
 option_as_alt = "Both"
 dynamic_padding = false
 
 [window.padding]
-x = 0
-y = 0
+x = 5
+y = 5
 
 [shell]
 program = "/bin/zsh"
