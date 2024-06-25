@@ -11,6 +11,8 @@ else
     export EDITOR='vk'
 fi
 
+bindkey '\t\t' autosuggest-accept
+
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'

@@ -13,7 +13,7 @@ ipc_socket = true
 save_to_clipboard = true
 
 [font]
-size = 18
+size = 16
 
 [env]
 TERM = "tmux-256color"
@@ -26,6 +26,10 @@ style = "Regular"
 decorations = "None"
 startup_mode = "Windowed"
 option_as_alt = "Both"
+
+[window.dimensions]
+columns = 110
+lines = 30
 
 [window.padding]
 x = 5
