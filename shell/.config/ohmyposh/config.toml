@@ -53,17 +53,12 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
       commit_icon = '@'
       fetch_status = true
 
-[[blocks]]
-  type = 'prompt'
-  alignment = 'right'
-  overflow = 'hidden'
-
   [[blocks.segments]]
     type = 'executiontime'
     style = 'plain'
-    foreground = 'blue'
+    foreground = 'yellow'
     background = 'transparent'
-    template = '{{ .FormattedMs }} |'
+    template = '{{ .FormattedMs }}'
 
     [blocks.segments.properties]
       threshold = 5000
