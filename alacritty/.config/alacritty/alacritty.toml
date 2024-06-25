@@ -22,8 +22,11 @@ TERM = "tmux-256color"
 family = "JetBrainsMono Nerd Font Mono"
 style = "Regular"
 
+[mouse]
+hide_when_typing = true
+
 [window]
-decorations = "None"
+decorations = "buttonless"
 startup_mode = "Windowed"
 option_as_alt = "Both"
 
@@ -38,3 +41,8 @@ y = 5
 [shell]
 program = "/bin/zsh"
 args = ["-l", "-c", "/opt/homebrew/bin/tmux new-session -A -D -s default"]
+
+[[keyboard.bindings]]
+action = "None"
+key = "t"
+mods = "Super"
