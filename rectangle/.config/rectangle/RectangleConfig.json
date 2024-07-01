@@ -243,6 +243,10 @@
       "keyCode" : 4,
       "modifierFlags" : 917504
     },
+    "firstTwoThirds" : {
+      "keyCode" : 4,
+      "modifierFlags" : 393216
+    },
     "lastFourth" : {
       "keyCode" : 40,
       "modifierFlags" : 917504
@@ -255,8 +259,8 @@
       "keyCode" : 37,
       "modifierFlags" : 917504
     },
-    "leftHalf" : {
-      "keyCode" : 4,
+    "lastTwoThirds" : {
+      "keyCode" : 37,
       "modifierFlags" : 393216
     },
     "maximize" : {
@@ -266,10 +270,6 @@
     "reflowTodo" : {
       "keyCode" : 45,
       "modifierFlags" : 786432
-    },
-    "rightHalf" : {
-      "keyCode" : 37,
-      "modifierFlags" : 393216
     },
     "toggleTodo" : {
       "keyCode" : 11,

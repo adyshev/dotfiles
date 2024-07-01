@@ -15,8 +15,8 @@ map('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Added useful keymaps
 map('t', '<C-t>', '<C-\\><C-n>', opts)
-map('n', 'vA', 'gg^VG', opts)
-map('n', 'yA', 'gg^VGy', opts)
+map('n', 'vA', 'gg^VG')
+map('n', 'yA', 'gg^VGy')
 map('n', 'q:', ':', opts)
 map('n', '<C-z>', ':echo "Yaay!!!"<CR>', opts)
 map('n', '<C-d>', 'yyP', opts)
