@@ -230,9 +230,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>x', '<cmd>Trouble diagnostics toggle<cr>', { desc = '[x]Diagnostic' })
       vim.keymap.set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[q]Close Buffer' })
       vim.keymap.set('n', '<leader>d', require('telescope.builtin').lsp_definitions, { desc = '[d]Definition' })
-      vim.keymap.set('n', '<leader>D', require('telescope.builtin').lsp_references, { desc = '[r]Reference' })
-      vim.keymap.set('n', '<leader>cc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
-      vim.keymap.set('n', '<leader>cC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
+      vim.keymap.set('n', '<leader>r', require('telescope.builtin').lsp_references, { desc = '[D]Reference' })
+      vim.keymap.set('n', '<leader>mc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
+      vim.keymap.set('n', '<leader>mC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
       vim.keymap.set('n', '<leader>mX', '<cmd>lua vim.diagnostic.enable(false)<cr>', { desc = '[X]Disable diagnostic messages' })
       vim.keymap.set('n', '<leader>mx', '<cmd>lua vim.diagnostic.enable(true)<cr>', { desc = '[x]Enable diagnostic messages' })
     end,
@@ -1007,6 +1007,8 @@ require('lazy').setup({
         { name = 'Select Session', action = ':lua require("persistence").select()', section = 'Sessions' },
         { name = 'Restore Session', action = ':lua require("persistence").load()', section = 'Sessions' },
         { name = 'Restore Previous Session', action = ':lua require("persistence").load({ last = true })', section = 'Sessions' },
+        { name = 'Notes', action = ':SimpleNoteList', section = 'Misc' },
+        { name = 'Projects', action = ':lua require("telescope").extensions.project.project{}', section = 'Misc' },
         starter.sections.telescope(),
         starter.sections.recent_files(10, false),
       }
