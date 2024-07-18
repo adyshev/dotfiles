@@ -1,0 +1,20 @@
+return {
+  'okuuva/auto-save.nvim',
+  config = function()
+    require('auto-save').setup {
+      noautocmd = true,
+      execution_message = {
+        message = function()
+          vim.opt.termguicolors = true
+          require 'notify'('AutoSave: saved at ' .. vim.fn.strftime '%H:%M:%S')
+          return ''
+        end,
+      },
+      trigger_events = { -- See :h events
+        immediate_save = { 'BufLeave', 'FocusLost' }, -- vim events that trigger an immediate save
+        defer_save = {}, -- vim events that trigger a deferred save (saves after `debounce_delay`)
+        cancel_defered_save = { 'InsertEnter' }, -- vim events that cancel a pending deferred save
+      },
+    }
+  end,
+}
