@@ -1,0 +1,48 @@
+# themes from https://github.com/alacritty/alacritty-theme
+
+import = [
+    # "~/.config/alacritty/themes/themes/one_dark.toml"
+    # "~/.config/alacritty/themes/themes/remedy_dark.toml"
+    "~/.config/alacritty/themes/gruvbox_material_medium_dark.toml"
+    # "~/.config/alacritty/themes/themes/dark_pastels.toml"
+]
+
+ipc_socket = true
+
+[selection]
+save_to_clipboard = true
+
+[font]
+size = 17
+
+[env]
+TERM = "tmux-256color"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font Mono"
+style = "Regular"
+
+[mouse]
+hide_when_typing = true
+
+[window]
+decorations = "buttonless"
+startup_mode = "Windowed"
+option_as_alt = "Both"
+
+[window.dimensions]
+columns = 110
+lines = 30
+
+[window.padding]
+x = 5
+y = 5
+
+[shell]
+program = "/bin/zsh"
+args = ["-l", "-c", "/opt/homebrew/bin/tmux new-session -A -D -s default"]
+
+[[keyboard.bindings]]
+action = "None"
+key = "t"
+mods = "Super"
