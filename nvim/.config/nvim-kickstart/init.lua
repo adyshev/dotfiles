@@ -230,7 +230,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>x', '<cmd>Trouble diagnostics toggle<cr>', { desc = '[x]Diagnostic' })
       vim.keymap.set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[q]Close Buffer' })
       vim.keymap.set('n', '<leader>d', require('telescope.builtin').lsp_definitions, { desc = '[d]Definition' })
-      vim.keymap.set('n', '<leader>D', require('telescope.builtin').lsp_references, { desc = '[D]Reference' })
+      vim.keymap.set('n', '<leader>D', require('telescope.builtin').lsp_references, { desc = '[r]Reference' })
       vim.keymap.set('n', '<leader>cc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
       vim.keymap.set('n', '<leader>cC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
       vim.keymap.set('n', '<leader>mX', '<cmd>lua vim.diagnostic.enable(false)<cr>', { desc = '[X]Disable diagnostic messages' })

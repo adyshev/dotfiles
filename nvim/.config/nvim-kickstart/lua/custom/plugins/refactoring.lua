@@ -6,7 +6,7 @@ return {
   },
   config = function()
     require('refactoring').setup()
-    vim.keymap.set({ 'n', 'x' }, '<leader>r', function()
+    vim.keymap.set({ 'n', 'x' }, '<leader>cr', function()
       require('refactoring').select_refactor()
     end, { desc = '[r]Refactoring' })
   end,
