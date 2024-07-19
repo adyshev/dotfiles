@@ -1004,11 +1004,10 @@ require('lazy').setup({
       local starter = require 'mini.starter'
       local my_items = {
         starter.sections.builtin_actions(),
-        { name = 'Select Session', action = ':lua require("persistence").select()', section = 'Sessions' },
-        { name = 'Restore Session', action = ':lua require("persistence").load()', section = 'Sessions' },
-        { name = 'Restore Previous Session', action = ':lua require("persistence").load({ last = true })', section = 'Sessions' },
         { name = 'Notes', action = ':SimpleNoteList', section = 'Misc' },
         { name = 'Projects', action = ':lua require("telescope").extensions.project.project{}', section = 'Misc' },
+        { name = 'Select Session', action = ':lua require("persistence").select()', section = 'Misc' },
+        { name = 'Restore Last Session', action = ':lua require("persistence").load({ last = true })', section = 'Misc' },
         starter.sections.telescope(),
         starter.sections.recent_files(10, false),
       }
