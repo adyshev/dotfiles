@@ -6,9 +6,8 @@ return {
   config = function()
     require('simple-note').setup {
       -- configuration defaults
-      notes_dir = '~/.notes/default/',
+      notes_dir = '~/.notes/personal/',
       notes_directories = {
-        '~/.notes/default/',
         '~/.notes/personal/',
         '~/.notes/work/',
       },
