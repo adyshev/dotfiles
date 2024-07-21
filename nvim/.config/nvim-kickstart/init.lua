@@ -974,9 +974,9 @@ require('lazy').setup({
       local starter = require 'mini.starter'
       local my_items = {
         starter.sections.builtin_actions(),
-        { name = 'Notes', action = ':SimpleNoteList', section = 'Misc' },
+        { name = 'Notes List', action = ':SimpleNoteList', section = 'Misc' },
         starter.sections.telescope(),
-        { name = 'Find Notes', action = ':Telescope live_grep search_dirs={"~/.notes/"}', section = 'Telescope' },
+        { name = 'Find In Notes', action = ':Telescope live_grep search_dirs={"~/.notes/"}', section = 'Telescope' },
         starter.sections.recent_files(10, false),
       }
 
