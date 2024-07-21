@@ -265,7 +265,6 @@ require('lazy').setup({
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-      { 'nvim-telescope/telescope-project.nvim' },
       { 'nvim-telescope/telescope-file-browser.nvim' },
       {
         'nvim-telescope/telescope-symbols.nvim',
@@ -298,7 +297,6 @@ require('lazy').setup({
 
       -- [[ Configure Telescope ]]
       -- See `:help telescope` and `:help telescope.setup()`
-      local project_actions = require 'telescope._extensions.project.actions'
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
@@ -324,24 +322,12 @@ require('lazy').setup({
             -- disables netrw and use telescope-file-browser in its place
             hijack_netrw = true,
           },
-          project = {
-            hidden_files = true, -- default: false
-            sync_with_nvim_tree = true,
-            theme = 'dropdown',
-            order_by = 'asc',
-            search_by = 'title',
-            on_project_selected = function(prompt_bufnr)
-              -- Do anything you want in here. For example:
-              project_actions.change_working_directory(prompt_bufnr, false)
-            end,
-          },
         },
       }
 
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'project')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -350,16 +336,11 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fs', ':Telescope search_history<CR>', { desc = '[s]Find Search History' })
       vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', { desc = '[t]Find TODO' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
+      vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/.notes/"}<CR>', { desc = '[n]Find Notes' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[g]Find by Grep' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ]Find existing buffers' })
-      vim.api.nvim_set_keymap(
-        'n',
-        '<leader>p',
-        ":lua require'telescope'.extensions.project.project{}<CR>",
-        { desc = '[p]Projects', noremap = true, silent = true }
-      )
 
       -- It's also possible to pass additional configuration options.
       --  See `:help telescope.builtin.live_grep()` for information about particular keys
@@ -371,9 +352,9 @@ require('lazy').setup({
       end, { desc = '[/]Find in Open Files' })
 
       -- Shortcut for searching your Neovim configuration files
-      vim.keymap.set('n', '<leader>fn', function()
+      vim.keymap.set('n', '<leader>fc', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
-      end, { desc = '[n]Find Active Neovim config files' })
+      end, { desc = '[c]Find Neovim config files' })
     end,
   },
 
@@ -954,17 +935,6 @@ require('lazy').setup({
       })
     end,
   },
-
-  {
-    'folke/persistence.nvim',
-    event = 'BufReadPre',
-    config = function()
-      require('persistence').setup()
-      vim.keymap.set('n', '<leader>s', function()
-        require('persistence').select()
-      end, { desc = '[s]Sessions' })
-    end,
-  },
   -- Highlight todo, notes, etc in comments
   {
     'folke/todo-comments.nvim',
@@ -1005,9 +975,6 @@ require('lazy').setup({
       local my_items = {
         starter.sections.builtin_actions(),
         { name = 'Notes', action = ':SimpleNoteList', section = 'Misc' },
-        { name = 'Projects', action = ':lua require("telescope").extensions.project.project{}', section = 'Misc' },
-        { name = 'Select Session', action = ':lua require("persistence").select()', section = 'Misc' },
-        { name = 'Restore Last Session', action = ':lua require("persistence").load({ last = true })', section = 'Misc' },
         starter.sections.telescope(),
         starter.sections.recent_files(10, false),
       }

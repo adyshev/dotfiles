@@ -1,5 +1,5 @@
 # Hide the personal data
-shell/.secondbrain/*
+shell/.notes/*
 !.exists
 
 
