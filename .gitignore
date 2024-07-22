@@ -1,5 +1,6 @@
 # Hide the personal data
-shell/.notes/*
+shell/.notes/personal/*
+shell/.notes/work/*
 !.exists
 
 
