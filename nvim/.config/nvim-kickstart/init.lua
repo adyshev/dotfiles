@@ -1007,7 +1007,16 @@ ____________________________
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
       require('mini.move').setup()
+      require('mini.jump').setup {
+        mappings = {
+          repeat_jump = '',
+        },
+        highlight_delay = 0,
+      }
       require('mini.trailspace').setup()
+      require('mini.sessions').setup {
+        directory = vim.fn.stdpath 'config' .. '/sessions',
+      }
       require('mini.map').setup()
       local map = require 'mini.map'
       map.setup {
@@ -1231,7 +1240,13 @@ ____________________________
 
   {
     'nvim-treesitter/nvim-treesitter-context',
-    opts = { mode = 'cursor', max_lines = 3 },
+    config = function()
+      require('treesitter-context').setup { mode = 'cursor', max_lines = 0, separator = '─' }
+      vim.cmd [[hi TreesitterContextSeparator guifg='#5A524C']]
+      vim.keymap.set('n', '[c', function()
+        require('treesitter-context').go_to_context(vim.v.count1)
+      end, { silent = true })
+    end,
   },
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
@@ -1286,4 +1301,4 @@ ____________________________
   },
 })
 -- The line beneath this is called `modeline`. see `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
+-- vim: ts=2 sts=2 sw=2

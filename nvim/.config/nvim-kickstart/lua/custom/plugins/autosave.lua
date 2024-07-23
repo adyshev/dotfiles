@@ -5,8 +5,6 @@ return {
       noautocmd = true,
       execution_message = {
         message = function()
-          vim.opt.termguicolors = true
-          require 'notify'('AutoSave: saved at ' .. vim.fn.strftime '%H:%M:%S')
           return ''
         end,
       },
