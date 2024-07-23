@@ -1241,13 +1241,14 @@ ____________________________
   {
     'nvim-treesitter/nvim-treesitter-context',
     config = function()
-      require('treesitter-context').setup { mode = 'cursor', max_lines = 0, separator = '─' }
+      require('treesitter-context').setup { mode = 'cursor', max_lines = 8, separator = '─' }
       vim.cmd [[hi TreesitterContextSeparator guifg='#5A524C']]
       vim.keymap.set('n', '[c', function()
         require('treesitter-context').go_to_context(vim.v.count1)
-      end, { silent = true })
+      end, { silent = true, desc = 'Go to parent context' })
     end,
   },
+
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.
