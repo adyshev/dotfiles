@@ -14,6 +14,10 @@ return {
       show_dirname = false,
       show_modified = true,
       show_basename = true,
+
+      theme = {
+        normal = { bg = '#32302F' },
+      },
     }
 
     vim.api.nvim_create_autocmd({

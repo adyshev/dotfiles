@@ -4,8 +4,8 @@ local opts = { noremap = true, silent = true }
 local opts_expr = { noremap = true, expr = true, silent = true }
 
 -- Not sure
-map('i', 'jj', '<Esc>', opts)
-map('n', ';', ':', opts)
+-- map('i', 'jj', '<Esc>', opts)
+-- map('n', ';', ':', opts)
 
 -- At this point i think this is makes sense as you don't want to move in INSERT mode
 -- map('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -14,6 +14,8 @@ map('n', ';', ':', opts)
 -- map('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Added useful keymaps
+map('o', '<down>', ':echo "Yaay!!!"<CR>')
+map('o', '<up>', ':echo "Yaay!!!"<CR>')
 map('t', '<C-t>', '<C-\\><C-n>', opts)
 map('n', 'vA', 'gg^VG')
 map('n', 'yA', 'gg^VGy', opts)

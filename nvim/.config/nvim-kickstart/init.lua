@@ -964,7 +964,6 @@ require('lazy').setup({
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
       require('mini.ai').setup { n_lines = 500 }
-
       require('mini.indentscope').setup {
         symbol = '│',
         draw = {
@@ -1007,12 +1006,7 @@ ____________________________
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
       require('mini.move').setup()
-      require('mini.jump').setup {
-        mappings = {
-          repeat_jump = '',
-        },
-        highlight_delay = 0,
-      }
+      require('mini.jump').setup {}
       require('mini.trailspace').setup()
       require('mini.sessions').setup {
         directory = vim.fn.stdpath 'config' .. '/sessions',
@@ -1238,16 +1232,16 @@ ____________________________
     event = 'VeryLazy',
   },
 
-  {
-    'nvim-treesitter/nvim-treesitter-context',
-    config = function()
-      require('treesitter-context').setup { mode = 'cursor', max_lines = 8, separator = '─' }
-      vim.cmd [[hi TreesitterContextSeparator guifg='#5A524C']]
-      vim.keymap.set('n', '[c', function()
-        require('treesitter-context').go_to_context(vim.v.count1)
-      end, { silent = true, desc = 'Go to parent context' })
-    end,
-  },
+  -- {
+  --   'nvim-treesitter/nvim-treesitter-context',
+  --   config = function()
+  --     require('treesitter-context').setup { mode = 'cursor', max_lines = 8, separator = '─' }
+  --     vim.cmd [[hi TreesitterContextSeparator guifg='#5A524C']]
+  --     vim.keymap.set('n', '[c', function()
+  --       require('treesitter-context').go_to_context(vim.v.count1)
+  --     end, { silent = true, desc = 'Go to parent context' })
+  --   end,
+  -- },
 
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
