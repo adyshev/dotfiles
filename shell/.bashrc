@@ -48,6 +48,7 @@ function yy() {
 export GOPATH="${HOME}/go"
 export PATH="/opt/homebrew/bin:${GOPATH}/bin:${PATH}"
 
+eval "$(zoxide init bash)"
 eval "$(/opt/homebrew/bin/thefuck --alias)"
 eval "$(oh-my-posh init bash --config "$HOME/.config/ohmyposh/config.toml")"
 

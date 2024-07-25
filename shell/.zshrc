@@ -51,6 +51,8 @@ if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/config.toml")"
 fi
 
+eval "$(zoxide init zsh)"
+
 source ~/.fzf.zsh
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
