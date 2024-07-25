@@ -77,6 +77,12 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   desc = 'Python specific settings',
 })
 
+-- Restore Beam '|' cursor
+vim.cmd [[augroup RestoreCursorShapeOnExit
+    autocmd!
+    autocmd VimLeave * set guicursor=a:ver25
+augroup END]]
+
 -- Disable commenting new lines
 vim.cmd 'autocmd BufEnter * set formatoptions-=cro'
 vim.cmd 'autocmd BufEnter * setlocal formatoptions-=cro'
