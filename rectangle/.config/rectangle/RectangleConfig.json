@@ -231,36 +231,28 @@
     }
   },
   "shortcuts" : {
+    "bottomHalf" : {
+      "keyCode" : 38,
+      "modifierFlags" : 393216
+    },
     "firstFourth" : {
       "keyCode" : 38,
       "modifierFlags" : 917504
-    },
-    "firstThird" : {
-      "keyCode" : 38,
-      "modifierFlags" : 393216
     },
     "firstThreeFourths" : {
       "keyCode" : 4,
       "modifierFlags" : 917504
     },
-    "firstTwoThirds" : {
-      "keyCode" : 4,
-      "modifierFlags" : 393216
-    },
     "lastFourth" : {
       "keyCode" : 40,
       "modifierFlags" : 917504
-    },
-    "lastThird" : {
-      "keyCode" : 40,
-      "modifierFlags" : 393216
     },
     "lastThreeFourths" : {
       "keyCode" : 37,
       "modifierFlags" : 917504
     },
-    "lastTwoThirds" : {
-      "keyCode" : 37,
+    "leftHalf" : {
+      "keyCode" : 4,
       "modifierFlags" : 393216
     },
     "maximize" : {
@@ -271,9 +263,17 @@
       "keyCode" : 45,
       "modifierFlags" : 786432
     },
+    "rightHalf" : {
+      "keyCode" : 37,
+      "modifierFlags" : 393216
+    },
     "toggleTodo" : {
       "keyCode" : 11,
       "modifierFlags" : 786432
+    },
+    "topHalf" : {
+      "keyCode" : 40,
+      "modifierFlags" : 393216
     }
   },
   "version" : "87"
