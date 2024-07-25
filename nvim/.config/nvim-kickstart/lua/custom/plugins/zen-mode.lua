@@ -39,6 +39,10 @@ return {
           enabled = true,
           font = 18,
         },
+        kitty = {
+          enabled = true,
+          font = 18, -- font size increment
+        },
       },
     }
     vim.keymap.set('n', '<leader>z', ':ZenMode<CR>', { desc = '[z]Zen Mode' })

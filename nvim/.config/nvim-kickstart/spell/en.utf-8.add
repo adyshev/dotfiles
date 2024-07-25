@@ -7,3 +7,6 @@ txt
 xargs
 test
 git
+tmux
+conf
+ZSH
