@@ -235,19 +235,23 @@
       "keyCode" : 38,
       "modifierFlags" : 393216
     },
-    "firstFourth" : {
+    "firstThird" : {
       "keyCode" : 38,
       "modifierFlags" : 917504
     },
-    "firstThreeFourths" : {
+    "firstTwoThirds" : {
       "keyCode" : 4,
       "modifierFlags" : 917504
     },
-    "lastFourth" : {
+    "larger" : {
+      "keyCode" : 24,
+      "modifierFlags" : 393216
+    },
+    "lastThird" : {
       "keyCode" : 40,
       "modifierFlags" : 917504
     },
-    "lastThreeFourths" : {
+    "lastTwoThirds" : {
       "keyCode" : 37,
       "modifierFlags" : 917504
     },
@@ -265,6 +269,10 @@
     },
     "rightHalf" : {
       "keyCode" : 37,
+      "modifierFlags" : 393216
+    },
+    "smaller" : {
+      "keyCode" : 27,
       "modifierFlags" : 393216
     },
     "toggleTodo" : {

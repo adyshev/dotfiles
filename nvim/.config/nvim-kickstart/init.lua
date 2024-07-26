@@ -963,13 +963,43 @@ require('lazy').setup({
       --  - va)  - [V]isually select [A]round [)]paren
       --  - yinq - [Y]ank [I]nside [N]ext [']quote
       --  - ci'  - [C]hange [I]nside [']quote
-      require('mini.ai').setup { n_lines = 500 }
       require('mini.indentscope').setup {
         symbol = '│',
         draw = {
           animation = require('mini.indentscope').gen_animation.none(),
         },
       }
+      require('mini.misc').setup()
+      MiniMisc.setup_restore_cursor {
+        ignore_filetype = { 'gitcommit', 'gitrebase', 'SFTerm', 'fzf' },
+      }
+
+      local gen_spec = require('mini.ai').gen_spec
+      require('mini.ai').setup {
+        custom_textobjects = {
+          m = gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }, {}),
+          g = function()
+            local from = { line = 1, col = 1 }
+            local to = {
+              line = vim.fn.line '$',
+              col = math.max(vim.fn.getline('$'):len(), 1),
+            }
+            return { from = from, to = to }
+          end,
+        },
+      }
+
+      local hipatterns = require 'mini.hipatterns'
+      hipatterns.setup {
+        highlighters = {
+          fixme = { pattern = '%f[%w]()FIXME()%f[%W]', group = 'MiniHipatternsFixme' },
+          todo = { pattern = '%f[%w]()TODO()%f[%W]', group = 'MiniHipatternsTodo' },
+          note = { pattern = '%f[%w]()NOTE()%f[%W]', group = 'MiniHipatternsNote' },
+          hack = { pattern = '%f[%w]()HACK()%f[%W]', group = 'MiniHipatternsHack' },
+          hex_color = hipatterns.gen_highlighter.hex_color(), -- Highlight hex color strings (`#rrggbb`) using that color
+        },
+      }
+
       local starter = require 'mini.starter'
       local my_items = {
         starter.sections.builtin_actions(),
@@ -1006,41 +1036,8 @@ ____________________________
       -- - sr)'  - [S]urround [R]eplace [)] [']
       require('mini.surround').setup()
       require('mini.move').setup()
-      require('mini.jump').setup {}
       require('mini.trailspace').setup()
-      require('mini.sessions').setup {
-        directory = vim.fn.stdpath 'config' .. '/sessions',
-      }
-      require('mini.map').setup()
-      local map = require 'mini.map'
-      map.setup {
-        integrations = {
-          map.gen_integration.builtin_search(),
-          map.gen_integration.diagnostic {
-            error = 'DiagnosticFloatingError',
-            warn = 'DiagnosticFloatingWarn',
-            info = 'DiagnosticFloatingInfo',
-            hint = 'DiagnosticFloatingHint',
-          },
-          map.gen_integration.gitsigns {
-            add = 'GitSignsAdd',
-            change = 'GitSignsChange',
-            delete = 'GitSignsDelete',
-          },
-        },
-        symbols = {
-          encode = map.gen_encode_symbols.dot '3x2',
-        },
-        window = {
-          side = 'right',
-          width = 15, -- set to 1 for a pure scrollbar :)
-          winblend = 15,
-          show_integration_count = false,
-        },
-      }
-      vim.keymap.set('n', '<leader>mm', MiniMap.open, { desc = '[o]Open Minimap' })
-      vim.keymap.set('n', '<leader>mM', MiniMap.close, { desc = '[c]Close Minimap' })
-      vim.keymap.set('n', '<leader>mf', MiniMap.toggle_focus, { desc = '[f]Focus Minimap' })
+      require('mini.bracketed').setup()
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
     end,

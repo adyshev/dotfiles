@@ -10,24 +10,6 @@ vim.api.nvim_create_autocmd('CmdWinEnter', {
   end,
 })
 
-vim.api.nvim_create_autocmd('FocusLost', {
-  desc = 'Save/write all unsaved buffers when focus is lost',
-  pattern = '*',
-  command = 'silent! wall',
-})
-
-vim.api.nvim_create_autocmd('BufReadPost', {
-  desc = 'Jump to the last known position of a file before closing it',
-  callback = function()
-    local mark = vim.api.nvim_buf_get_mark(0, '"')
-    local line_count = vim.api.nvim_buf_line_count(0)
-
-    if mark[1] > 0 and mark[1] <= line_count then
-      pcall(vim.api.nvim_win_set_cursor, 0, mark)
-    end
-  end,
-})
-
 vim.api.nvim_create_autocmd('FileType', {
   desc = "Close some filtypes simply by pressing 'q'",
   pattern = { 'checkhealth', 'help', 'lspinfo', 'man', 'notify', 'qf', 'query' },
@@ -61,9 +43,11 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-  pattern = { '*.txt', '*.md', '*.toml', 'Makefile' },
-  command = [[%s/\s\+$//e]],
-  desc = 'Trim spaces for MD and TXT files',
+  pattern = '*',
+  callback = function()
+    MiniTrailspace.trim()
+  end,
+  desc = 'Trim spaces',
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {

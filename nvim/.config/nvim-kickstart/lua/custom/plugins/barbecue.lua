@@ -34,7 +34,7 @@ return {
         require('barbecue.ui').update()
       end,
     })
-    vim.keymap.set('n', '[b', function()
+    vim.keymap.set('n', '[a', function()
       require('barbecue.ui').navigate(-2)
     end, { silent = true, desc = 'Go to parent context' })
   end,
