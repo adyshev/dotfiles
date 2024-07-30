@@ -337,6 +337,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', { desc = '[t]Find TODO' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
       vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/.notes/"}<CR>', { desc = '[n]Find Notes' })
+      vim.keymap.set('n', '<leader>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[b]File Browser' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[g]Find by Grep' })
@@ -996,7 +997,7 @@ ____________________________
       require('mini.surround').setup()
       require('mini.trailspace').setup()
       require('mini.move').setup()
-      require 'mini.operators'
+      require('mini.operators').setup()
       local minimisc = require 'mini.misc'
       minimisc.setup()
       minimisc.setup_auto_root()
