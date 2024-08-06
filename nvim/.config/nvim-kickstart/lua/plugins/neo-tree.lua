@@ -26,14 +26,11 @@ return {
   end,
   config = function()
     require('neo-tree').setup {
-      window = {
-        width = 30,
-      },
       filesystem = {
         hijack_netrw_behavior = 'open_current',
         filtered_items = {
           visible = true,
-          show_hidden_count = true,
+          show_hidden_count = false,
           hide_dotfiles = false,
           hide_gitignored = false,
           hide_by_name = {
