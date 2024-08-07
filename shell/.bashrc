@@ -17,8 +17,8 @@ fi
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'
-alias ll="ls -la --color=auto | sort -f -k 9,9"
-alias ls="ls --color=auto | sort -f -k 9,9"
+alias ll="ls -la --color=auto"
+alias ls="ls --color=auto"
 alias cat="bat"
 alias v='nvim'
 alias diff="diff-so-fancy"
