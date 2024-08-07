@@ -24,8 +24,6 @@ return {
     { '<p', '<Plug>(YankyPutIndentAfterShiftLeft)', desc = 'Put and Indent Left' },
     { '>P', '<Plug>(YankyPutIndentBeforeShiftRight)', desc = 'Put Before and Indent Right' },
     { '<P', '<Plug>(YankyPutIndentBeforeShiftLeft)', desc = 'Put Before and Indent Left' },
-    { '=p', '<Plug>(YankyPutAfterFilter)', desc = 'Put After Applying a Filter' },
-    { '=P', '<Plug>(YankyPutBeforeFilter)', desc = 'Put Before Applying a Filter' },
   },
   config = function()
     require('yanky').setup {

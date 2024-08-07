@@ -1019,6 +1019,13 @@ ____________________________
   },
   { import = 'plugins' },
 }, {
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        'netrwPlugin',
+      },
+    },
+  },
   defaults = {
     version = false,
     lazy = false,

@@ -5,7 +5,6 @@ local opts_expr = { noremap = true, expr = true, silent = true }
 
 -- Not sure
 -- map('i', 'jj', '<Esc>', opts)
--- map('n', ';', ':', opts)
 
 -- At this point i think this is makes sense as you don't want to move in INSERT mode
 -- map('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
