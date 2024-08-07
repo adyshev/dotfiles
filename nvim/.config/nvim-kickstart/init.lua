@@ -360,7 +360,6 @@ require('lazy').setup({
         'yamlfmt',
         'vale',
         'tflint',
-        'hadolint',
         'markdownlint',
         'markdown-toc',
       })
@@ -426,7 +425,6 @@ require('lazy').setup({
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
         python = { 'ruff', 'mypy', 'flake8' },
-        dockerfile = { 'hadolint' },
         json = { 'jsonlint' },
         rst = { 'vale' },
         terraform = { 'tflint' },
