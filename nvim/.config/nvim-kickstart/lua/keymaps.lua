@@ -19,12 +19,9 @@ map('o', '<left>', ':echo "Yaay!!!"<CR>')
 map('o', '<right>', ':echo "Yaay!!!"<CR>')
 map('t', '<C-t>', '<C-\\><C-n>', opts)
 map('n', 'vv', '^v$', opts)
-map('n', 'va', 'gg^VG', opts)
-map('n', 'ya', 'gg^VGy', opts)
 map('n', 'q:', ':', opts)
 map('n', '<C-z>', ':echo "Yaay!!!"<CR>', opts)
 map('i', '<C-v>', '<C-r>+', opts)
-map('n', '<C-d>', 'YP', opts)
 map({ 'i', 'x', 'n', 's' }, '<C-s>', '<cmd>w<cr><esc>', opts)
 map({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 map('n', '<PageDown>', '1000<C-D>0')
@@ -35,6 +32,13 @@ map('i', '<PageUp>', '<C-O>1000<C-U>')
 -- Buffers
 map('n', '<S-h>', '<CMD>bprev<CR>', opts)
 map('n', '<S-l>', '<CMD>bnext<CR>', opts)
+
+-- Yank all
+map('n', '<M-y>', 'ggVGy', opts)
+-- Select all
+map('n', '<M-a>', 'ggVG', opts)
+-- Duplicate line
+map('n', '<M-d>', 'YP', opts)
 
 -- Move Lines
 map('n', '<M-j>', '<cmd>m .+1<cr>==', opts)

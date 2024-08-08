@@ -54,13 +54,14 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>x', '<cmd>Trouble diagnostics toggle<cr>', { desc = '[x]Diagnostic' })
       vim.keymap.set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[q]Close Buffer' })
       vim.keymap.set('n', '<leader>d', require('telescope.builtin').lsp_definitions, { desc = '[d]Definition' })
-      vim.keymap.set('n', '<leader>r', require('telescope.builtin').lsp_references, { desc = '[D]Reference' })
+      vim.keymap.set('n', '<leader>r', require('telescope.builtin').lsp_references, { desc = '[r]Reference' })
       vim.keymap.set('n', '<leader>mc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
       vim.keymap.set('n', '<leader>mC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
       vim.keymap.set('n', '<leader>mX', '<cmd>lua vim.diagnostic.enable(false)<cr>', { desc = '[X]Disable diagnostic messages' })
       vim.keymap.set('n', '<leader>mx', '<cmd>lua vim.diagnostic.enable(true)<cr>', { desc = '[x]Enable diagnostic messages' })
-      vim.keymap.set('n', '<leader>/', ':normal gcc<CR><DOWN>', { desc = '[/] Toggle comment line' })
-      vim.keymap.set('v', '<leader>/', '<Esc>:normal gvgc<CR>', { desc = '[/] Toggle comment block' })
+      vim.keymap.set('n', '<leader>/', ':normal gcc<CR><DOWN>', { desc = '[/]Toggle comment line' })
+      vim.keymap.set('v', '<leader>/', '<Esc>:normal gvgc<CR>', { desc = '[/]Toggle comment block' })
+      vim.keymap.set('n', '<leader>t', [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = '[t]Recent files' })
     end,
   },
   { -- Fuzzy Finder (files, lsp, etc)
@@ -146,7 +147,6 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[g]Find by Grep' })
-      vim.keymap.set('n', '<leader>fr', [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = '[r]Recent files' })
       vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ]Find existing buffers' })
 
       vim.keymap.set('n', '<leader>f/', function()
@@ -237,9 +237,9 @@ require('lazy').setup({
           --
           -- This may be unwanted, since they displace some of your code
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            map('<leader>ct', function()
+            map('<leader>mh', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
-            end, '[t]Toggle Inlay Hints')
+            end, '[h]Toggle Inlay Hints')
           end
         end,
       })
@@ -715,7 +715,7 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      require('mini.ai').setup { n_lines = 500 }
+      -- require('mini.ai').setup { n_lines = 500 }
       require('mini.indentscope').setup {
         symbol = '│',
         draw = {
@@ -754,8 +754,7 @@ ____________________________
       -- require('mini.surround').setup()
       require('mini.trailspace').setup()
       require('mini.move').setup()
-
-      require('mini.operators').setup()
+      -- require('mini.operators').setup()
       local minimisc = require 'mini.misc'
       minimisc.setup()
       -- NOTE: Detects and changes the filetree root automatically
