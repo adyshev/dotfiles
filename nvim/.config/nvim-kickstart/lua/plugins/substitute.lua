@@ -1,7 +1,7 @@
 return {
   'gbprod/substitute.nvim',
   config = function()
-  require('substitute').setup {
+    require('substitute').setup {
       on_substitute = require('yanky.integration').substitute(),
     }
     vim.keymap.set('n', 's', require('substitute').operator, { noremap = true })

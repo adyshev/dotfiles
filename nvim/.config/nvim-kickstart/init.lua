@@ -59,6 +59,8 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>mC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
       vim.keymap.set('n', '<leader>mX', '<cmd>lua vim.diagnostic.enable(false)<cr>', { desc = '[X]Disable diagnostic messages' })
       vim.keymap.set('n', '<leader>mx', '<cmd>lua vim.diagnostic.enable(true)<cr>', { desc = '[x]Enable diagnostic messages' })
+      vim.keymap.set('n', '<leader>/', ':normal gcc<CR><DOWN>', { desc = '[/] Toggle comment line' })
+      vim.keymap.set('v', '<leader>/', '<Esc>:normal gvgc<CR>', { desc = '[/] Toggle comment block' })
     end,
   },
   { -- Fuzzy Finder (files, lsp, etc)
@@ -201,7 +203,7 @@ require('lazy').setup({
           --  See `:help K` for why this keymap.
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
           map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
-          map('gr', require('telescope.builtin').lsp_references, 'Goto Reference')
+          map('gR', require('telescope.builtin').lsp_references, 'Goto Reference')
           map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
 
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
@@ -379,20 +381,9 @@ require('lazy').setup({
       }
     end,
   },
-
   { -- Autoformat
     'stevearc/conform.nvim',
     lazy = false,
-    keys = {
-      {
-        '<leader>cf',
-        function()
-          require('conform').format { async = true, lsp_fallback = true }
-        end,
-        mode = '',
-        desc = '[f]Format buffer',
-      },
-    },
     opts = {
       notify_on_error = true,
       format_on_save = function(bufnr)
@@ -760,9 +751,10 @@ ____________________________
           starter.gen_hook.aligning('center', 'center'),
         },
       }
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
       require('mini.trailspace').setup()
       require('mini.move').setup()
+
       require('mini.operators').setup()
       local minimisc = require 'mini.misc'
       minimisc.setup()
