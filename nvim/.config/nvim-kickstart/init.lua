@@ -715,7 +715,7 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- require('mini.ai').setup { n_lines = 500 }
+      -- require('mini.ai').setup()
       require('mini.indentscope').setup {
         symbol = '│',
         draw = {
@@ -754,7 +754,7 @@ ____________________________
       -- require('mini.surround').setup()
       require('mini.trailspace').setup()
       require('mini.move').setup()
-      -- require('mini.operators').setup()
+      require('mini.operators').setup()
       local minimisc = require 'mini.misc'
       minimisc.setup()
       -- NOTE: Detects and changes the filetree root automatically
