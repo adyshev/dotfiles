@@ -31,6 +31,7 @@ map('i', '<PageUp>', '<C-O>1000<C-U>')
 
 -- Buffers
 map('n', '<S-h>', '<CMD>bprev<CR>', opts)
+map('n', '<S-j>', '<Nop>', opts)
 map('n', '<S-l>', '<CMD>bnext<CR>', opts)
 
 -- Yank all
@@ -38,7 +39,7 @@ map('n', '<M-y>', 'ggVGy', opts)
 -- Select all
 map('n', '<M-a>', 'ggVG', opts)
 -- Duplicate line
-map('n', '<M-d>', 'YP', opts)
+map('n', '<C-d>', 'YP', opts)
 
 -- Move Lines
 map('n', '<M-j>', '<cmd>m .+1<cr>==', opts)
@@ -47,10 +48,6 @@ map('i', '<M-j>', '<esc><cmd>m .+1<cr>==gi', opts)
 map('i', '<M-k>', '<esc><cmd>m .-2<cr>==gi', opts)
 map('v', '<M-j>', ":m '>+1<cr>gv=gv", opts)
 map('v', '<M-k>', ":m '<-2<cr>gv=gv", opts)
-
--- windows
-map('n', '<leader>-', '<C-W>s', opts)
-map('n', '<leader>|', '<C-W>v', opts)
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 map('n', 'n', "'Nn'[v:searchforward].'zv'", opts_expr)

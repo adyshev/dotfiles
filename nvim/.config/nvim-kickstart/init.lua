@@ -17,7 +17,6 @@ vim.keymap.set('n', ']e', diagnostic_goto(true, 'ERROR'), { desc = 'Next Error' 
 vim.keymap.set('n', '[e', diagnostic_goto(false, 'ERROR'), { desc = 'Prev Error' })
 vim.keymap.set('n', ']w', diagnostic_goto(true, 'WARN'), { desc = 'Next Warning' })
 vim.keymap.set('n', '[w', diagnostic_goto(false, 'WARN'), { desc = 'Prev Warning' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[e]Line Diagnostic' })
 
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
@@ -29,8 +28,6 @@ if not vim.loop.fs_stat(lazypath) then
   vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable', lazyrepo, lazypath }
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
-
--- System plugins
 
 -- NOTE: Here is where you install your plugins.
 require('lazy').setup({
@@ -44,24 +41,28 @@ require('lazy').setup({
 
       -- Document existing key chains
       require('which-key').add {
-        { '<leader>c', group = '[c]Code' },
-        { '<leader>c_', hidden = true },
         { '<leader>f', group = '[f]Find' },
-        { '<leader>f_', hidden = true },
-        { '<leader>m', group = '[m]Misc' },
-        { '<leader>m_', hidden = true },
+        { '<leader>c', group = '[c]Code' },
+        { '<leader>o', group = '[o]Options' },
       }
-      vim.keymap.set('n', '<leader>x', '<cmd>Trouble diagnostics toggle<cr>', { desc = '[x]Diagnostic' })
+      -- Main
       vim.keymap.set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[q]Close Buffer' })
-      vim.keymap.set('n', '<leader>d', require('telescope.builtin').lsp_definitions, { desc = '[d]Definition' })
-      vim.keymap.set('n', '<leader>r', require('telescope.builtin').lsp_references, { desc = '[r]Reference' })
-      vim.keymap.set('n', '<leader>mc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
-      vim.keymap.set('n', '<leader>mC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
-      vim.keymap.set('n', '<leader>mX', '<cmd>lua vim.diagnostic.enable(false)<cr>', { desc = '[X]Disable diagnostic messages' })
-      vim.keymap.set('n', '<leader>mx', '<cmd>lua vim.diagnostic.enable(true)<cr>', { desc = '[x]Enable diagnostic messages' })
       vim.keymap.set('n', '<leader>/', ':normal gcc<CR><DOWN>', { desc = '[/]Toggle comment line' })
       vim.keymap.set('v', '<leader>/', '<Esc>:normal gvgc<CR>', { desc = '[/]Toggle comment block' })
-      vim.keymap.set('n', '<leader>t', [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = '[t]Recent files' })
+      vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[e]Line Diagnostic' })
+      vim.keymap.set('n', '<leader>x', '<cmd>Trouble diagnostics toggle<cr>', { desc = '[x]Diagnostic' })
+      vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = '[-]Horisontal split' })
+      vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = '[|]Vertical split' })
+      -- Code
+      vim.keymap.set('n', '<leader>cr', function()
+        return ':IncRename ' .. vim.fn.expand '<cword>'
+      end, { expr = true, desc = '[r]Rename' })
+      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[c]Code Action' })
+      -- Options
+      vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
+      vim.keymap.set('n', '<leader>oC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
+      vim.keymap.set('n', '<leader>oX', '<cmd>lua vim.diagnostic.enable(false)<cr>', { desc = '[X]Disable diagnostic messages' })
+      vim.keymap.set('n', '<leader>ox', '<cmd>lua vim.diagnostic.enable(true)<cr>', { desc = '[x]Enable diagnostic messages' })
     end,
   },
   { -- Fuzzy Finder (files, lsp, etc)
@@ -89,7 +90,7 @@ require('lazy').setup({
       {
         'nvim-telescope/telescope-symbols.nvim',
         config = function()
-          vim.keymap.set('n', '<leader>fs', '<cmd>Telescope symbols<cr>', { desc = '[s]Find Symbols' })
+          vim.keymap.set('n', '<leader>fy', '<cmd>Telescope symbols<cr>', { desc = '[y]Find Symbols' })
         end,
       },
       -- Useful for getting pretty icons, but requires a Nerd Font.
@@ -147,7 +148,8 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[g]Find by Grep' })
-      vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ]Find existing buffers' })
+      vim.keymap.set('n', '<leader><leader>', [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = '[ ]Find Recent files' })
+      vim.keymap.set('n', '<leader>fo', builtin.buffers, { desc = '[o]Find open buffers' })
 
       vim.keymap.set('n', '<leader>f/', function()
         builtin.live_grep {
@@ -177,31 +179,11 @@ require('lazy').setup({
           local map = function(keys, func, desc)
             vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
           end
-
-          -- Jump to the implementation of the word under your cursor.
-          --  Useful when your language has ways of declaring types without an actual implementation.
-          map('gI', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
-
-          -- Jump to the type of the word under your cursor.
-          --  Useful when you're not sure what type a variable is and you want to see
-          --  the definition of its *type*, not where it was *defined*.
-          map('gt', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
-
-          -- Fuzzy find all the symbols in your current document.
-          --  Symbols are things like variables, functions, types, etc.
-          map('<leader>fl', require('telescope.builtin').lsp_document_symbols, '[l]Find literals')
-
-          -- Rename the variable under your cursor.
-          --  Most Language Servers support renaming across files, etc.
-          map('<leader>cr', vim.lsp.buf.rename, '[r]Rename')
-
-          -- Execute a code action, usually your cursor needs to be on top of an error
-          -- or a suggestion from your LSP for this to activate.
-          map('<leader>ca', vim.lsp.buf.code_action, '[a]Code Action')
-
-          -- Opens a popup that displays documentation about the word under your cursor
-          --  See `:help K` for why this keymap.
           map('K', vim.lsp.buf.hover, 'Hover Documentation')
+
+          -- GoTo operator
+          map('gI', require('telescope.builtin').lsp_implementations, 'Goto Implementation')
+          map('gT', require('telescope.builtin').lsp_type_definitions, 'Goto Type Definition')
           map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
           map('gR', require('telescope.builtin').lsp_references, 'Goto Reference')
           map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
@@ -237,7 +219,7 @@ require('lazy').setup({
           --
           -- This may be unwanted, since they displace some of your code
           if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            map('<leader>mh', function()
+            map('<leader>oh', function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
             end, '[h]Toggle Inlay Hints')
           end
@@ -726,6 +708,9 @@ require('lazy').setup({
     'echasnovski/mini.nvim',
     config = function()
       require('mini.surround').setup()
+      require('mini.trailspace').setup()
+      require('mini.move').setup()
+      require('mini.operators').setup()
       require('mini.indentscope').setup {
         symbol = '│ ',
         options = {
@@ -735,6 +720,7 @@ require('lazy').setup({
           animation = require('mini.indentscope').gen_animation.none(),
         },
       }
+      -- INFO: Mini-starter page configuration
       local starter = require 'mini.starter'
       local my_items = {
         starter.sections.builtin_actions(),
@@ -743,7 +729,6 @@ require('lazy').setup({
         { name = 'Find In Notes', action = ':Telescope live_grep search_dirs={"~/.notes/"}', section = 'Telescope' },
         starter.sections.recent_files(10, false),
       }
-
       starter.setup {
         evaluate_single = true,
         header = [[
@@ -764,13 +749,11 @@ ______________________________
           starter.gen_hook.aligning('center', 'center'),
         },
       }
-      require('mini.trailspace').setup()
-      require('mini.move').setup()
-      require('mini.operators').setup()
+      -- INFO: Miscellaneous useful functions
       local minimisc = require 'mini.misc'
       minimisc.setup()
-      -- NOTE: Detects and changes the filetree root automatically
-      -- minimisc.setup_auto_root()
+      minimisc.setup_auto_root()
+      minimisc.setup_termbg_sync()
       minimisc.setup_restore_cursor()
     end,
   },
@@ -818,7 +801,20 @@ ______________________________
   -- { -- Treesitter context
   --   'nvim-treesitter/nvim-treesitter-context',
   --   config = function()
-  --     require('treesitter-context').setup { mode = 'cursor', max_lines = 0, separator = '─' }
+  --     require('treesitter-context').setup {
+  --       enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+  --       max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+  --       min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+  --       line_numbers = true,
+  --       multiline_threshold = 20, -- Maximum number of lines to show for a single context
+  --       trim_scope = 'inner', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+  --       mode = 'topline', -- Line used to calculate context. Choices: 'cursor', 'topline'
+  --       -- Separator between context and content. Should be a single character string, like '-'.
+  --       -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+  --       separator = '—',
+  --       zindex = 20, -- The Z-index of the context window
+  --       on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+  --     }
   --     vim.cmd [[hi TreesitterContextSeparator guifg='#5A524C']]
   --     vim.keymap.set('n', '[c', function()
   --       require('treesitter-context').go_to_context(vim.v.count1)
