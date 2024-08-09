@@ -610,6 +610,16 @@ require('lazy').setup({
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
 
+          -- Disable navigation using arrows within autocomplete windows
+          ['<Down>'] = cmp.mapping(function(fallback)
+            cmp.close()
+            fallback()
+          end, { 'i' }),
+          ['<Up>'] = cmp.mapping(function(fallback)
+            cmp.close()
+            fallback()
+          end, { 'i' }),
+
           -- Accept ([y]es) the completion.
           --  This will auto-import if your LSP supports it.
           --  This will expand snippets if the LSP sent a snippet.
@@ -715,9 +725,12 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- require('mini.ai').setup()
+      require('mini.surround').setup()
       require('mini.indentscope').setup {
-        symbol = '│',
+        symbol = '│ ',
+        options = {
+          try_as_border = true,
+        },
         draw = {
           animation = require('mini.indentscope').gen_animation.none(),
         },
@@ -734,15 +747,15 @@ require('lazy').setup({
       starter.setup {
         evaluate_single = true,
         header = [[
-____________________________
+______________________________
 < MAY THE FORCE BE WITH YOU! >
- ----------------------------
+------------------------------
         \   ^__^
          \  (oo)\_______
             (__)\       )\/\
                 ||----w |
                 ||     ||
-  ]],
+        ]],
         items = my_items,
         content_hooks = {
           starter.gen_hook.adding_bullet(),
@@ -751,7 +764,6 @@ ____________________________
           starter.gen_hook.aligning('center', 'center'),
         },
       }
-      -- require('mini.surround').setup()
       require('mini.trailspace').setup()
       require('mini.move').setup()
       require('mini.operators').setup()
@@ -803,10 +815,10 @@ ____________________________
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
-  -- {
+  -- { -- Treesitter context
   --   'nvim-treesitter/nvim-treesitter-context',
   --   config = function()
-  --     require('treesitter-context').setup { mode = 'cursor', max_lines = 8, separator = '─' }
+  --     require('treesitter-context').setup { mode = 'cursor', max_lines = 0, separator = '─' }
   --     vim.cmd [[hi TreesitterContextSeparator guifg='#5A524C']]
   --     vim.keymap.set('n', '[c', function()
   --       require('treesitter-context').go_to_context(vim.v.count1)
@@ -977,7 +989,6 @@ ____________________________
             end
             return label
           end
-
           local function get_file_name()
             local label = {}
             table.insert(label, { (ft_icon or '') .. ' ', guifg = ft_color, guibg = 'none' })

@@ -61,6 +61,25 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   desc = 'Python specific settings',
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = {
+    'help',
+    'alpha',
+    'dashboard',
+    'neo-tree',
+    'Trouble',
+    'trouble',
+    'lazy',
+    'mason',
+    'notify',
+    'toggleterm',
+    'lazyterm',
+  },
+  callback = function()
+    vim.b.miniindentscope_disable = true
+  end,
+})
+
 -- Restore Beam '|' cursor
 vim.cmd [[augroup RestoreCursorShapeOnExit
     autocmd!
@@ -68,6 +87,5 @@ vim.cmd [[augroup RestoreCursorShapeOnExit
 augroup END]]
 
 -- Disable commenting new lines
-
 vim.cmd 'autocmd BufEnter * set formatoptions-=cro'
 vim.cmd 'autocmd BufEnter * setlocal formatoptions-=cro'
