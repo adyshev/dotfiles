@@ -121,11 +121,13 @@ require('lazy').setup({
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          recent_files = {
+            only_cwd = true,
+          },
           file_browser = {
             hidden = { file_browser = true, folder_browser = true },
             -- theme = 'ivy',
-            -- disables netrw and use telescope-file-browser in its place
-            hijack_netrw = true,
+            -- hijack_netrw = true,
           },
         },
       }
