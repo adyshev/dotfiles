@@ -3,9 +3,6 @@ local map = vim.keymap.set
 local opts = { noremap = true, silent = true }
 local opts_expr = { noremap = true, expr = true, silent = true }
 
--- Not sure
--- map('i', 'jj', '<Esc>', opts)
-
 -- At this point i think this is makes sense as you don't want to move in INSERT mode
 -- map('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- map('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -13,10 +10,10 @@ local opts_expr = { noremap = true, expr = true, silent = true }
 -- map('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- Added useful keymaps
-map('o', '<down>', ':echo "Yaay!!!"<CR>')
-map('o', '<up>', ':echo "Yaay!!!"<CR>')
-map('o', '<left>', ':echo "Yaay!!!"<CR>')
-map('o', '<right>', ':echo "Yaay!!!"<CR>')
+map('o', '<down>', ':echo "Yaay!!!"<CR>', opts)
+map('o', '<up>', ':echo "Yaay!!!"<CR>', opts)
+map('o', '<left>', ':echo "Yaay!!!"<CR>', opts)
+map('o', '<right>', ':echo "Yaay!!!"<CR>', opts)
 map('t', '<C-t>', '<C-\\><C-n>', opts)
 map('n', 'vv', '^v$', opts)
 map('n', 'q:', ':', opts)
