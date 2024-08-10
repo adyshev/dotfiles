@@ -12,12 +12,38 @@ return {
         ['cmp.entry.get_documentation'] = true,
       },
     },
+    progress = {
+      enabled = true,
+    },
+    signature = {
+      enabled = true,
+      auto_open = {
+        enabled = true,
+        trigger = true, -- Automatically show signature help when typing a trigger character from the LSP
+        luasnip = true, -- Will open signature help when jumping to Luasnip insert nodes
+        throttle = 50, -- Debounce lsp signature help request by 50ms
+      },
+      view = nil, -- when nil, use defaults from documentation
+      ---@type NoiceViewOptions
+      opts = {}, -- merged with defaults from documentation
+    },
     presets = {
       bottom_search = false,
       command_palette = false,
       long_message_to_split = true,
       inc_rename = true,
       lsp_doc_border = true,
+    },
+    documentation = {
+      view = 'hover',
+      ---@type NoiceViewOptions
+      opts = {
+        lang = 'markdown',
+        replace = true,
+        render = 'plain',
+        format = { '{message}' },
+        win_options = { concealcursor = 'n', conceallevel = 3 },
+      },
     },
     routes = {
       {
@@ -31,6 +57,19 @@ return {
         },
         view = 'mini',
       },
+      {
+        filter = {
+          event = 'notify',
+          find = 'No information available',
+        },
+        opts = { skip = true },
+      },
+    },
+    messages = {
+      view_search = false,
+    },
+    popupmenu = {
+      backend = 'cmp', -- backend to use to show regular cmdline completions
     },
   },
   config = function(_, opts)

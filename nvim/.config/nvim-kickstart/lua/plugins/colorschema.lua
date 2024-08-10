@@ -19,13 +19,13 @@ return {
       vim.g.gruvbox_material_enable_italic = 1
       vim.g.gruvbox_material_enable_bold = 0
       vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
-      vim.g.gruvbox_material_dim_inactive_windows = 1
+      vim.g.gruvbox_material_dim_inactive_windows = 0
       vim.g.gruvbox_material_transparent_background = 0
       vim.g.gruvbox_material_background = 'medium'
       vim.g.gruvbox_material_foreground = 'mix' -- 'material'`, `'mix'`, `'original
       vim.g.gruvbox_material_ui_contrast = 'high' -- `'low'`, `'high'`
       vim.g.gruvbox_material_float_style = 'dim'
-      vim.g.gruvbox_material_show_eob = 1
+      vim.g.gruvbox_material_show_eob = 0
       vim.g.gruvbox_material_diagnostic_line_highlight = 0
       vim.g.gruvbox_material_better_performance = 1
       vim.g.gruvbox_material_colors_override = {
