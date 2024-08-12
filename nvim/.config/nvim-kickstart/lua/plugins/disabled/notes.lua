@@ -1,5 +1,6 @@
 return {
   'rguruprakash/simple-note.nvim',
+  enabled = false,
   dependencies = {
     'nvim-telescope/telescope.nvim',
   },

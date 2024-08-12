@@ -43,6 +43,7 @@ require('lazy').setup({
       require('which-key').add {
         { '<leader>f', group = '[f]Find' },
         { '<leader>c', group = '[c]Code' },
+        { '<leader>n', group = '[c]Notes' },
         { '<leader>o', group = '[o]Options' },
       }
       -- Main
@@ -145,7 +146,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fs', ':Telescope search_history<CR>', { desc = '[s]Find Search History' })
       vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', { desc = '[t]Find TODO' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
-      vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/.notes/"}<CR>', { desc = '[n]Find Notes' })
+      vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Find Notes' })
       vim.keymap.set('n', '<leader>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[b]File Browser' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
@@ -489,7 +490,6 @@ require('lazy').setup({
       'hrsh7th/cmp-path',
       'hrsh7th/cmp-cmdline',
       'hrsh7th/cmp-emoji',
-      'hrsh7th/cmp-calc',
       'f3fora/cmp-spell',
       'onsails/lspkind.nvim',
       'lukas-reineke/cmp-under-comparator',
@@ -498,9 +498,6 @@ require('lazy').setup({
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
-      local custom_menu_icon = {
-        calc = '󰃬',
-      }
       local kind_icons = {
         Text = '',
         Method = '󰆧',
@@ -565,11 +562,6 @@ require('lazy').setup({
           format = function(entry, vim_item)
             -- Kind icons
             vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
-            if entry.source.name == 'calc' then
-              -- Get the custom icon for 'calc' source
-              -- Replace the kind glyph with the custom icon
-              vim_item.kind = custom_menu_icon.calc
-            end
             vim_item.menu = ({
               buffer = '[Buffer]',
               nvim_lsp = '[LSP]',
@@ -577,7 +569,7 @@ require('lazy').setup({
               nvim_lua = '[Lua]',
               path = '[Path]',
               emoji = '[Emoji]',
-              calc = '[Calc]',
+              neorg = '[Neorg]',
               spell = '[Spell]',
               latex_symbols = '[LaTeX]',
             })[entry.source.name]
@@ -621,18 +613,25 @@ require('lazy').setup({
         sources = cmp.config.sources {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-          { name = 'calc' },
           { name = 'path' },
           { name = 'emoji' },
         },
       }
+
+      cmp.setup.filetype('norg', {
+        sources = {
+          { name = 'neorg' },
+          { name = 'luasnip' },
+          { name = 'path' },
+          { name = 'emoji' },
+        },
+      })
 
       cmp.setup.filetype('lua', {
         sources = {
           { name = 'nvim_lsp' },
           { name = 'nvim_lua' },
           { name = 'luasnip' },
-          { name = 'calc' },
           { name = 'path' },
           { name = 'emoji' },
         },
@@ -643,12 +642,12 @@ require('lazy').setup({
           { name = 'nvim_lsp' },
           { name = 'buffer' },
           { name = 'luasnip' },
-          { name = 'calc' },
           { name = 'path' },
           { name = 'emoji' },
           {
             name = 'spell',
             option = {
+              keyword_length = 4,
               keep_all_entries = false,
               enable_in_context = function()
                 return true

@@ -46,27 +46,54 @@ return {
       },
     },
     routes = {
-      {
+      { -- route long messages to split
+        filter = {
+          event = 'msg_show',
+          any = { { min_height = 5 }, { min_width = 200 } },
+          ['not'] = {
+            kind = { 'confirm', 'confirm_sub', 'return_prompt', 'quickfix', 'search_count' },
+          },
+          blocking = false,
+        },
+        view = 'messages',
+        opts = { stop = true },
+      },
+      { -- route long messages to split
+        filter = {
+          event = 'msg_show',
+          any = { { min_height = 5 }, { min_width = 200 } },
+          ['not'] = {
+            kind = { 'confirm', 'confirm_sub', 'return_prompt', 'quickfix', 'search_count' },
+          },
+          blocking = true,
+        },
+        view = 'mini',
+      },
+      { -- hide `written` message
+        filter = {
+          event = 'msg_show',
+          kind = '',
+          find = 'written',
+        },
+        opts = { skip = true },
+      },
+      { -- send annoying msgs to mini
         filter = {
           event = 'msg_show',
           any = {
-            { find = '%d+L, %d+B' },
             { find = '; after #%d+' },
             { find = '; before #%d+' },
+            { find = 'fewer lines' },
           },
         },
         view = 'mini',
       },
-      {
-        filter = {
-          event = 'notify',
-          find = 'No information available',
-        },
-        opts = { skip = true },
-      },
     },
     messages = {
       view_search = false,
+      view_error = false,
+      view_warn = false,
+      view_history = false,
     },
     popupmenu = {
       backend = 'cmp', -- backend to use to show regular cmdline completions
