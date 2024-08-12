@@ -16,15 +16,13 @@ local lazy_loading_keymaps = {
 local dirman_configuration = {
   config = {
     workspaces = {
-      default = '~/neorg',
       work = '~/neorg/work',
       journal = '~/neorg/journal',
       personal = '~/neorg/personal',
     },
     autochdir = true,
-    default_workspace = 'default',
+    default_workspace = 'personal',
     index = 'index.norg',
-    last_workspace = vim.fn.stdpath 'cache' .. '/neorg_last_workspace.txt',
   },
 }
 
