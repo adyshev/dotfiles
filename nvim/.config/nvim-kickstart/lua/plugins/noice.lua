@@ -93,7 +93,6 @@ return {
       view_search = false,
       view_error = false,
       view_warn = false,
-      view_history = false,
     },
     popupmenu = {
       backend = 'cmp', -- backend to use to show regular cmdline completions

@@ -9,7 +9,6 @@ local lazy_loading_keymaps = {
   { '<leader>nw', '<cmd>Neorg workspace work<cr>', desc = '[w]Edit Work Notes' },
   { '<leader>np', '<cmd>Neorg workspace personal<cr>', desc = '[p]Edit Personal Notes' },
   { '<leader>ns', '<cmd>Neorg generate-workspace-summary<cr>', desc = '[s]Generate Workspace Summary' },
-  { '<leader>ni', '<cmd>Neorg index<cr>', desc = '[i]Neorg index' },
   { '<leader>nf', '<cmd>Telescope neorg search_headings<CR>', desc = '[f]Find Headings' },
 }
 
