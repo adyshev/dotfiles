@@ -640,8 +640,8 @@ require('lazy').setup({
       cmp.setup.filetype({ 'markdown', 'text' }, {
         sources = {
           { name = 'nvim_lsp' },
-          { name = 'buffer' },
           { name = 'luasnip' },
+          { name = 'buffer' },
           { name = 'path' },
           { name = 'emoji' },
           {
@@ -907,7 +907,15 @@ ______________________________
           lualine_a = { 'mode' },
           lualine_b = { 'branch', 'diff', 'diagnostics' },
           lualine_c = { 'filename' },
-          lualine_x = { 'cdate', 'ctime' },
+          lualine_x = {
+            {
+              require('noice').api.statusline.mode.get,
+              cond = require('noice').api.statusline.mode.has,
+              color = { fg = '#B8BB26' },
+            },
+            'cdate',
+            'ctime',
+          },
           lualine_y = { 'progress' },
           lualine_z = { 'location' },
         },
