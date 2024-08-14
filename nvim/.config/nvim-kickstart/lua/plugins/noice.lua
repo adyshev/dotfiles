@@ -32,7 +32,7 @@ return {
       lsp_progress = { event = 'lsp', kind = 'progress' },
     },
     presets = {
-      bottom_search = false,
+      bottom_search = true,
       command_palette = false,
       long_message_to_split = true,
       inc_rename = true,
@@ -86,5 +86,8 @@ return {
   },
   config = function(_, opts)
     require('noice').setup(opts)
+    vim.keymap.set('n', '<leader>l', function()
+      require('noice').cmd 'history'
+    end, { desc = '[l]Messages History' })
   end,
 }
