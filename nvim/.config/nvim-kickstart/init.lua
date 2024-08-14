@@ -906,13 +906,15 @@ ______________________________
         sections = {
           lualine_a = { 'mode' },
           lualine_b = { 'branch', 'diff', 'diagnostics' },
-          lualine_c = { 'filename' },
-          lualine_x = {
+          lualine_c = {
+            -- 'filename',
             {
               require('noice').api.statusline.mode.get,
               cond = require('noice').api.statusline.mode.has,
               color = { fg = '#B8BB26' },
             },
+          },
+          lualine_x = {
             -- 'cdate',
             -- 'ctime',
           },
@@ -932,6 +934,15 @@ ______________________________
         inactive_winbar = {},
         extensions = {},
       }
+
+      -- Disable this since the mode will be displayed by lualine.
+      vim.o.showmode = false
+
+      -- Update the statusline with the latest LSP message.
+      vim.api.nvim_create_autocmd('LspProgress', {
+        pattern = '*',
+        command = 'redrawstatus',
+      })
     end,
   },
   {
@@ -1040,6 +1051,9 @@ ______________________________
   },
   { import = 'plugins' },
 }, {
+  change_detection = {
+    notify = false,
+  },
   performance = {
     rtp = {
       disabled_plugins = {

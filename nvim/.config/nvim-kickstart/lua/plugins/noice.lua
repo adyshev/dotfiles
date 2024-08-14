@@ -27,12 +27,17 @@ return {
       ---@type NoiceViewOptions
       opts = {}, -- merged with defaults from documentation
     },
+    status = {
+      -- Statusline component for LSP progress notifications.
+      lsp_progress = { event = 'lsp', kind = 'progress' },
+    },
     presets = {
       bottom_search = false,
       command_palette = false,
       long_message_to_split = true,
       inc_rename = true,
       lsp_doc_border = true,
+      cmdline_output_to_split = true,
     },
     documentation = {
       view = 'hover',
@@ -46,23 +51,37 @@ return {
       },
     },
     routes = {
+      -- Ignore the typical vim change messages.
+      {
+        filter = {
+          event = 'msg_show',
+          any = {
+            { find = '%d+L, %d+B' },
+            { find = '; after #%d+' },
+            { find = '; before #%d+' },
+            { find = '%d fewer lines' },
+            { find = '%d more lines' },
+          },
+        },
+        opts = { skip = true },
+      },
+      {
+        filter = {
+          event = 'lsp',
+          kind = 'progress',
+        },
+        opts = { skip = true },
+      },
       {
         filter = {
           event = 'msg_show',
           kind = '',
-          find = 'written',
         },
         opts = { skip = true },
       },
     },
     messages = {
       view_search = false,
-      view_error = false,
-      view_warn = false,
-      view_history = false,
-    },
-    popupmenu = {
-      backend = 'cmp', -- backend to use to show regular cmdline completions
     },
   },
   config = function(_, opts)

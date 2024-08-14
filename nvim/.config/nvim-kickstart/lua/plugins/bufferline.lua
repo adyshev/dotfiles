@@ -62,7 +62,7 @@ return {
         },
       },
       options = {
-        always_show_bufferline = false,
+        -- always_show_bufferline = false,
         separator_style = 'slant',
         style_preset = bufferline.style_preset.minimal,
       },
