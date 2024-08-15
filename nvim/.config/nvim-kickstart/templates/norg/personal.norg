@@ -1,0 +1,18 @@
+@document.meta
+title: {TITLE_INPUT}
+description:
+authors: {AUTHOR}
+categories: [
+  personal
+]
+created: {TODAY}
+updated: {TODAY}
+version: 1.0.0
+@end
+
+* {TITLE_INPUT}
+  Weather: {WEATHER}
+  {{:{YESTERDAY}:}}[Yesterday] - {{:{TOMORROW}:}}[Tomorrow]
+
+** Daily Review
+   - {CURSOR}
