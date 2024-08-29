@@ -43,10 +43,10 @@ return {
           bg = '#282828',
         },
         buffer_selected = {
-          fg = '#D4BE98',
+          fg = '#D7D7AF',
           bg = '#32302E',
-          bold = true,
-          italic = true,
+          bold = false,
+          italic = false,
         },
         close_button = {
           fg = '#928374',
@@ -63,6 +63,8 @@ return {
       },
       options = {
         always_show_bufferline = false,
+        show_buffer_close_icons = false,
+        show_close_icon = false,
         separator_style = 'slant',
         style_preset = bufferline.style_preset.minimal,
       },

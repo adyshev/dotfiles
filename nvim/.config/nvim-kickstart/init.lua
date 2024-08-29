@@ -42,6 +42,7 @@ require('lazy').setup({
       -- Document existing key chains
       require('which-key').add {
         { '<leader>f', group = '[f]Find' },
+        { '<leader>d', group = '[d]Debug' },
         { '<leader>c', group = '[c]Code' },
         { '<leader>n', group = '[c]Notes' },
         { '<leader>o', group = '[o]Options' },
@@ -172,7 +173,17 @@ require('lazy').setup({
       { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
-      { 'j-hui/fidget.nvim', opts = {} },
+      {
+        'j-hui/fidget.nvim',
+        opts = {
+          notification = {
+            window = {
+              winblend = 0,
+              border = 'rounded',
+            },
+          },
+        },
+      },
       { 'folke/neodev.nvim', opts = {} },
     },
     config = function()
@@ -246,7 +257,21 @@ require('lazy').setup({
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        gopls = {},
+        gopls = {
+          settings = {
+            gopls = {
+              hints = {
+                assignVariableTypes = false,
+                compositeLiteralFields = false,
+                compositeLiteralTypes = false,
+                constantValues = false,
+                functionTypeParameters = false,
+                parameterNames = false,
+                rangeVariableTypes = false,
+              },
+            },
+          },
+        },
         pyright = {
           capabilities = {
             textDocument = {
@@ -458,6 +483,11 @@ require('lazy').setup({
       -- Snippet Engine & its associated nvim-cmp source
       {
         'L3MON4D3/LuaSnip',
+        opts = {
+          history = true,
+          region_check_events = 'InsertEnter',
+          delete_check_events = 'TextChanged,InsertLeave',
+        },
         build = (function()
           -- Build Step is needed for regex support in snippets.
           -- This step is not supported in many windows environments.
@@ -896,6 +926,14 @@ ______________________________
     end,
   },
   {
+    'lukas-reineke/virt-column.nvim',
+    opts = {
+      char = { '│' },
+      virtcolumn = '119',
+      highlight = { 'NonText' },
+    },
+  },
+  {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', 'archibate/lualine-time' },
     config = function()
@@ -1057,7 +1095,14 @@ ______________________________
   performance = {
     rtp = {
       disabled_plugins = {
+        'gzip',
+        'matchit',
+        'matchparen',
         'netrwPlugin',
+        'tarPlugin',
+        'tohtml',
+        'tutor',
+        'zipPlugin',
       },
     },
   },
