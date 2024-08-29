@@ -1,9 +1,10 @@
 @document.meta
-title: {TITLE_INPUT}
+title:
 description:
-authors: {AUTHOR}
+authors: Oleksandr Dyshev
 categories: [
-  work
+    work,
+    lyft
 ]
 created: {TODAY}
 updated: {TODAY}
@@ -11,8 +12,4 @@ version: 1.0.0
 @end
 
 * {TITLE_INPUT}
-  Weather: {WEATHER}
-  {{:{YESTERDAY}:}}[Yesterday] - {{:{TOMORROW}:}}[Tomorrow]
-
-** Daily Review
    - {CURSOR}

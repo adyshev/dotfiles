@@ -62,7 +62,19 @@ local KEYWORDS = {
 }
 
 local module_list = {
-  ['core.defaults'] = {},
+  ['core.defaults'] = {
+    config = {
+      disable = {
+        'core.esupports.metagen',
+        'core.looking-glass',
+        'core.promo',
+        'core.pivot',
+        'core.tangle',
+        'core.qol.toc',
+        'core.ui.calendar',
+      },
+    },
+  },
   ['core.dirman'] = dirman_configuration,
   ['core.presenter'] = {
     config = {
@@ -98,6 +110,7 @@ local module_list = {
   },
   ['core.summary'] = {},
   ['core.integrations.nvim-cmp'] = {},
+  ['core.integrations.treesitter'] = {},
   ['core.concealer'] = {
     config = {
       folds = false,
