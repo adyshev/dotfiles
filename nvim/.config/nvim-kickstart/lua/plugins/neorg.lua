@@ -62,10 +62,15 @@ local KEYWORDS = {
 }
 
 local module_list = {
+  ['core.keybinds'] = {
+    config = {
+      default_keybinds = false,
+    },
+  },
   ['core.defaults'] = {
     config = {
       disable = {
-        'core.esupports.metagen',
+        -- 'core.esupports.metagen',
         'core.looking-glass',
         'core.promo',
         'core.pivot',

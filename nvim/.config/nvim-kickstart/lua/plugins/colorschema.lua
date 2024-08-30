@@ -19,7 +19,7 @@ return {
     config = function()
       vim.g.gruvbox_material_enable_italic = 1
       vim.g.gruvbox_material_enable_bold = 0
-      vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
+      vim.g.gruvbox_material_diagnostic_virtual_text = 'grey'
       vim.g.gruvbox_material_dim_inactive_windows = 0
       vim.g.gruvbox_material_transparent_background = 0
       vim.g.gruvbox_material_background = 'medium'

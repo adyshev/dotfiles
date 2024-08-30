@@ -12,7 +12,7 @@ version: 1.0.0
 
 * {TITLE_INPUT}
   Weather: {WEATHER}
-  {{:{YESTERDAY}:}}[Yesterday] - {{:{TOMORROW}:}}[Tomorrow]
+  {{:{YESTERDAY_OF_FILEPATH}:}}[Yesterday] - {{:{TOMORROW_OF_FILEPATH}:}}[Tomorrow]
 
 ** Daily Review
    - {CURSOR}

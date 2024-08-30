@@ -43,7 +43,7 @@ require('lazy').setup({
       require('which-key').add {
         { '<leader>f', group = '[f]Find' },
         { '<leader>c', group = '[c]Code' },
-        { '<leader>n', group = '[c]Notes' },
+        { '<leader>n', group = '[n]Notes' },
         { '<leader>o', group = '[o]Options' },
       }
       -- Main
@@ -613,6 +613,7 @@ require('lazy').setup({
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-e>'] = cmp.mapping.abort(),
 
           -- Disable navigation using arrows within autocomplete windows
           ['<Down>'] = cmp.mapping(function(fallback)
@@ -638,40 +639,18 @@ require('lazy').setup({
           ['<S-Tab>'] = cmp.mapping.select_prev_item(),
         },
 
-        sources = cmp.config.sources {
+        sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'emoji' },
-        },
+        }, {
+          { name = 'buffer' },
+        }),
       }
 
       cmp.setup.filetype('norg', {
         sources = {
           { name = 'neorg' },
           { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'emoji' },
-        },
-      })
-
-      cmp.setup.filetype('lua', {
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = 'nvim_lua' },
-          { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'emoji' },
-        },
-      })
-
-      cmp.setup.filetype({ 'markdown', 'text' }, {
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'buffer' },
-          { name = 'path' },
-          { name = 'emoji' },
           {
             name = 'spell',
             option = {
@@ -683,6 +662,36 @@ require('lazy').setup({
               preselect_correct_word = false,
             },
           },
+          { name = 'emoji' },
+        },
+      })
+
+      cmp.setup.filetype('lua', {
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'nvim_lua' },
+          { name = 'luasnip' },
+          { name = 'emoji' },
+        },
+      })
+
+      cmp.setup.filetype({ 'markdown', 'text' }, {
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'buffer' },
+          {
+            name = 'spell',
+            option = {
+              keyword_length = 4,
+              keep_all_entries = false,
+              enable_in_context = function()
+                return true
+              end,
+              preselect_correct_word = false,
+            },
+          },
+          { name = 'emoji' },
         },
       })
 
@@ -736,7 +745,7 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
       require('mini.trailspace').setup()
       require('mini.move').setup()
       require('mini.operators').setup()
@@ -807,6 +816,7 @@ ______________________________
         'markdown',
         'vim',
         'vimdoc',
+        'query',
       },
       -- Autoinstall languages that are not installed
       auto_install = true,
@@ -816,6 +826,9 @@ ______________________________
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
+      },
+      matchup = {
+        enable = true,
       },
       indent = { enable = true, disable = { 'ruby' } },
     },
@@ -850,6 +863,12 @@ ______________________________
   --     end, { silent = true, desc = 'Go to parent context' })
   --   end,
   -- },
+  {
+    'andymass/vim-matchup',
+    setup = function()
+      vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+    end,
+  },
   { -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
@@ -907,22 +926,22 @@ ______________________________
       cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
     end,
   },
-  {
-    'gbprod/substitute.nvim',
-    config = function()
-      require('substitute').setup {
-        on_substitute = require('yanky.integration').substitute(),
-      }
-      vim.keymap.set('n', 's', require('substitute').operator, { noremap = true })
-      vim.keymap.set('n', 'ss', require('substitute').line, { noremap = true })
-      vim.keymap.set('n', 'S', require('substitute').eol, { noremap = true })
-      vim.keymap.set('x', 's', require('substitute').visual, { noremap = true })
-      vim.keymap.set('n', 's<Down>', ':echo "Yaay!!!"<CR>', { noremap = true, silent = true })
-      vim.keymap.set('n', 's<Up>', ':echo "Yaay!!!"<CR>', { noremap = true, silent = true })
-      vim.keymap.set('n', 's<Left>', ':echo "Yaay!!!"<CR>', { noremap = true, silent = true })
-      vim.keymap.set('n', 's<Right>', ':echo "Yaay!!!"<CR>', { noremap = true, silent = true })
-    end,
-  },
+  -- {
+  --   'gbprod/substitute.nvim',
+  --   config = function()
+  --     require('substitute').setup {
+  --       on_substitute = require('yanky.integration').substitute(),
+  --     }
+  --     vim.keymap.set('n', 's', require('substitute').operator, { noremap = true })
+  --     vim.keymap.set('n', 'ss', require('substitute').line, { noremap = true })
+  --     vim.keymap.set('n', 'S', require('substitute').eol, { noremap = true })
+  --     vim.keymap.set('x', 's', require('substitute').visual, { noremap = true })
+  --     vim.keymap.set('n', 's<Down>', ':echo "Yaay!!!"<CR>', { noremap = true, silent = true })
+  --     vim.keymap.set('n', 's<Up>', ':echo "Yaay!!!"<CR>', { noremap = true, silent = true })
+  --     vim.keymap.set('n', 's<Left>', ':echo "Yaay!!!"<CR>', { noremap = true, silent = true })
+  --     vim.keymap.set('n', 's<Right>', ':echo "Yaay!!!"<CR>', { noremap = true, silent = true })
+  --   end,
+  -- },
   {
     'lukas-reineke/virt-column.nvim',
     opts = {

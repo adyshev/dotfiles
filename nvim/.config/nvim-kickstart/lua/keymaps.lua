@@ -1,7 +1,6 @@
 local map = vim.keymap.set
 
 local opts = { noremap = true, silent = true }
-local opts_expr = { noremap = true, expr = true, silent = true }
 
 -- At this point i think this is makes sense as you don't want to move in INSERT mode
 -- map('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -37,22 +36,6 @@ map('n', '<M-y>', 'ggVGy', opts)
 map('n', '<M-a>', 'ggVG', opts)
 -- Duplicate line
 map('n', '<C-d>', 'YP', opts)
-
--- Move Lines
-map('n', '<M-j>', '<cmd>m .+1<cr>==', opts)
-map('n', '<M-k>', '<cmd>m .-2<cr>==', opts)
-map('i', '<M-j>', '<esc><cmd>m .+1<cr>==gi', opts)
-map('i', '<M-k>', '<esc><cmd>m .-2<cr>==gi', opts)
-map('v', '<M-j>', ":m '>+1<cr>gv=gv", opts)
-map('v', '<M-k>', ":m '<-2<cr>gv=gv", opts)
-
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-map('n', 'n', "'Nn'[v:searchforward].'zv'", opts_expr)
-map('x', 'n', "'Nn'[v:searchforward]", opts_expr)
-map('o', 'n', "'Nn'[v:searchforward]", opts_expr)
-map('n', 'N', "'nN'[v:searchforward].'zv'", opts_expr)
-map('x', 'N', "'nN'[v:searchforward]", opts_expr)
-map('o', 'N', "'nN'[v:searchforward]", opts_expr)
 
 -- Clear search with <esc>
 map({ 'i', 'n' }, '<esc>', '<cmd>noh<cr><esc>', opts)

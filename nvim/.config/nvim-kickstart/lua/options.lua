@@ -50,12 +50,14 @@ vim.g.loaded_netrw_gitignore = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
+vim.g.loaded_matchit = 1
 
 vim.diagnostic.config {
   float = {
     border = 'rounded',
   },
 }
+
 vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = 'rounded' })
 vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = 'rounded' })
 
