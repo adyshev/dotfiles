@@ -943,14 +943,6 @@ ______________________________
   --   end,
   -- },
   {
-    'lukas-reineke/virt-column.nvim',
-    opts = {
-      char = { '│' },
-      virtcolumn = '119',
-      highlight = { 'NonText' },
-    },
-  },
-  {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons', 'archibate/lualine-time' },
     config = function()

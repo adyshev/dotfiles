@@ -28,17 +28,8 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'norg' },
-  callback = function()
-    vim.opt_local.wrap = true
-    vim.opt_local.spell = true
-    vim.opt.spelllang = { 'en_us' }
-  end,
-})
-
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.txt', '*.md' },
+  pattern = { '*.txt', '*.md', '*.norg' },
   callback = function()
     vim.opt.expandtab = true
     vim.opt.tabstop = 2
@@ -46,7 +37,6 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
     vim.opt.shiftwidth = 2
     vim.opt.spell = true
     vim.opt.spelllang = { 'en_us' }
-    vim.opt.colorcolumn = '120' -- Ruler at column number
   end,
   desc = 'Enable spell checking for certain file types',
 })
@@ -62,8 +52,8 @@ vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = { '*.py' },
   callback = function()
-    vim.opt.colorcolumn = '120' -- Ruler at column number
     vim.opt.tabstop = 4 -- Number of spaces tabs count for
+    vim.opt.colorcolumn = '120' -- Ruler at column number
     vim.opt.shiftwidth = 2 -- Size of an indent
     vim.opt.softtabstop = 4
   end,
