@@ -64,6 +64,7 @@ return {
       options = {
         always_show_bufferline = false,
         show_buffer_close_icons = false,
+        show_duplicate_prefix = false,
         show_close_icon = false,
         separator_style = 'slant',
         style_preset = bufferline.style_preset.minimal,

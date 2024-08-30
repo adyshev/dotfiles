@@ -613,6 +613,7 @@ require('lazy').setup({
           -- Scroll the documentation window [b]ack / [f]orward
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-e>'] = cmp.mapping.abort(),
 
           -- Disable navigation using arrows within autocomplete windows
           ['<Down>'] = cmp.mapping(function(fallback)
@@ -638,40 +639,18 @@ require('lazy').setup({
           ['<S-Tab>'] = cmp.mapping.select_prev_item(),
         },
 
-        sources = cmp.config.sources {
+        sources = cmp.config.sources({
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'emoji' },
-        },
+        }, {
+          { name = 'buffer' },
+        }),
       }
 
       cmp.setup.filetype('norg', {
         sources = {
           { name = 'neorg' },
           { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'emoji' },
-        },
-      })
-
-      cmp.setup.filetype('lua', {
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = 'nvim_lua' },
-          { name = 'luasnip' },
-          { name = 'path' },
-          { name = 'emoji' },
-        },
-      })
-
-      cmp.setup.filetype({ 'markdown', 'text' }, {
-        sources = {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'buffer' },
-          { name = 'path' },
-          { name = 'emoji' },
           {
             name = 'spell',
             option = {
@@ -683,6 +662,36 @@ require('lazy').setup({
               preselect_correct_word = false,
             },
           },
+          { name = 'emoji' },
+        },
+      })
+
+      cmp.setup.filetype('lua', {
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'nvim_lua' },
+          { name = 'luasnip' },
+          { name = 'emoji' },
+        },
+      })
+
+      cmp.setup.filetype({ 'markdown', 'text' }, {
+        sources = {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'buffer' },
+          {
+            name = 'spell',
+            option = {
+              keyword_length = 4,
+              keep_all_entries = false,
+              enable_in_context = function()
+                return true
+              end,
+              preselect_correct_word = false,
+            },
+          },
+          { name = 'emoji' },
         },
       })
 
@@ -817,6 +826,9 @@ ______________________________
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
+      matchup = {
+        enable = true,
+      },
       indent = { enable = true, disable = { 'ruby' } },
     },
 
@@ -850,6 +862,12 @@ ______________________________
   --     end, { silent = true, desc = 'Go to parent context' })
   --   end,
   -- },
+  {
+    'andymass/vim-matchup',
+    setup = function()
+      vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+    end,
+  },
   { -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`

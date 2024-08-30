@@ -14,10 +14,29 @@ return {
       show_dirname = false,
       show_modified = false,
       show_basename = false,
-
+      create_autocmd = false,
       theme = {
-        normal = { bg = '#32302F' },
+        normal = { bg = '#282828' },
       },
     }
+
+    vim.keymap.set('n', '[c', function()
+      require('barbecue.ui').navigate(-2)
+    end, { silent = true, desc = 'Go to parent context' })
+
+    vim.api.nvim_create_autocmd({
+      'WinScrolled', -- or WinResized on NVIM-v0.9 and higher
+      'BufWinEnter',
+      'CursorHold',
+      'InsertLeave',
+
+      -- include this if you have set `show_modified` to `true`
+      'BufModifiedSet',
+    }, {
+      group = vim.api.nvim_create_augroup('barbecue.updater', {}),
+      callback = function()
+        require('barbecue.ui').update()
+      end,
+    })
   end,
 }
