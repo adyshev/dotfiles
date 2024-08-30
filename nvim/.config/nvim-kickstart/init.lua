@@ -764,7 +764,7 @@ require('lazy').setup({
         starter.sections.builtin_actions(),
         { name = 'Notes List', action = ':SimpleNoteList', section = 'Misc' },
         starter.sections.telescope(),
-        { name = 'Find In Notes', action = ':Telescope live_grep search_dirs={"~/.notes/"}', section = 'Telescope' },
+        { name = 'Find In Notes', action = ':Telescope live_grep search_dirs={"~/neorg/"}', section = 'Telescope' },
         starter.sections.recent_files(10, false),
       }
       starter.setup {
