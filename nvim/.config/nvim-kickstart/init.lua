@@ -745,7 +745,7 @@ require('lazy').setup({
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
     config = function()
-      -- require('mini.surround').setup()
+      require('mini.surround').setup()
       require('mini.trailspace').setup()
       require('mini.move').setup()
       require('mini.operators').setup()
