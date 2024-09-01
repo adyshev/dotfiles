@@ -24,6 +24,13 @@ map('n', '<PageDown>', '1000<C-D>0')
 map('n', '<PageUp>', '1000<C-U>0')
 map('i', '<PageDown>', '<C-O>1000<C-D>')
 map('i', '<PageUp>', '<C-O>1000<C-U>')
+map({ 'n', 'v' }, '<Space>', '<Nop>', opts)
+
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('!', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('t', '<D-v>', '<C-R>+', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('v', '<D-v>', '<C-R>+', { noremap = true, silent = true })
 
 -- Buffers
 map('n', '<S-h>', '<CMD>bprev<CR>', opts)

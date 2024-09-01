@@ -1,6 +1,3 @@
 # Hide the personal data
-shell/.notes/personal/*
-shell/.notes/work/*
-nvim/.config/nvim-kickstart/sessions/*
 !.exists
 **/.DS_Store

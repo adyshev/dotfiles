@@ -16,7 +16,7 @@ return {
       show_basename = false,
       create_autocmd = false,
       theme = {
-        normal = { bg = '#282828', fg = '#4E4E4E' },
+        normal = { bg = '#282828', fg = '#928275' },
       },
     }
 

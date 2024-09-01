@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := all
-.PHONY:all shell alacritty kitty yazi rectangle nvim tmux homebrew
+.PHONY:all shell alacritty rectangle nvim tmux homebrew
 
-all: alacritty kitty yazi rectangle shell homebrew tmux nvim
+all: alacritty rectangle shell homebrew tmux nvim
 
 shell:
 	@echo "Installing Shell..."
@@ -11,6 +11,10 @@ shell:
 alacritty:
 	@echo "Installing Alacritty..."
 	@stow alacritty
+
+rectangle:
+	@echo "Install Rectangle..."
+	@stow rectangle
 
 rectangle:
 	@echo "Install Rectangle..."

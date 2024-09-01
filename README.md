@@ -25,6 +25,12 @@ brew install zsh-syntax-highlighting
 brew install jandedobbeleer/oh-my-posh/oh-my-posh
 ```
 
+## Install neovide
+
+```bash
+brew install neovide
+```
+
 ## Generate tmux.reset.conf script
 
 ```bash

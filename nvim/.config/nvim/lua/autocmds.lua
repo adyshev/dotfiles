@@ -12,7 +12,7 @@ vim.api.nvim_create_autocmd('CmdWinEnter', {
 
 vim.api.nvim_create_autocmd('FileType', {
   desc = "Close some filtypes simply by pressing 'q'",
-  pattern = { 'checkhealth', 'help', 'lspinfo', 'man', 'notify', 'qf', 'query' },
+  pattern = { 'checkhealth', 'help', 'lspinfo', 'man', 'notify', 'qf', 'query', 'lazygit' },
   callback = function(event)
     vim.bo[event.buf].buflisted = false
     vim.keymap.set('n', 'q', '<cmd>close<cr>', { buffer = event.buf, silent = true })
