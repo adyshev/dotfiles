@@ -2,6 +2,7 @@ local indent = 2
 
 vim.o.formatoptions = 'jcroqlnt'
 vim.o.shortmess = 'filnxtToOFWIcC'
+vim.opt.wrap = false
 vim.opt.breakindent = true
 vim.opt.cmdheight = 0
 vim.opt.completeopt = 'menuone,noselect'
@@ -39,6 +40,7 @@ vim.opt.timeoutlen = 300
 vim.opt.undofile = true
 vim.opt.updatetime = 200
 vim.opt.wildmode = 'longest:full,full'
+vim.opt.clipboard = 'unnamedplus'
 
 vim.o.spellfile = os.getenv 'HOME' .. '/.config/nvim/spell/en.utf-8.add'
 

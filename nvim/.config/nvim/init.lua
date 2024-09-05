@@ -364,7 +364,7 @@ require('lazy').setup({
       },
     },
   },
-  { 
+  {
     'mfussenegger/nvim-lint',
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
@@ -825,8 +825,8 @@ ______________________________
       -- custom_gruvbox.normal.a.bg = '#32302F'
       custom_gruvbox.normal.b.bg = '#32302F'
       custom_gruvbox.normal.c.bg = '#282828'
-      custom_gruvbox.insert.b.bg = '#32302F'
-      custom_gruvbox.insert.c.bg = '#282828'
+      -- custom_gruvbox.insert.b.bg = '#32302F'
+      -- custom_gruvbox.insert.c.bg = '#282828'
       custom_gruvbox.visual.b.bg = '#32302F'
       custom_gruvbox.visual.c.bg = '#282828'
       custom_gruvbox.replace.b.bg = '#32302F'
