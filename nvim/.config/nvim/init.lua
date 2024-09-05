@@ -811,34 +811,6 @@ ______________________________
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
-  -- Inspired by Astronvim
-  {
-    'stevearc/resession.nvim',
-    config = function()
-      local resession = require 'resession'
-      resession.setup {}
-
-      vim.api.nvim_create_autocmd('VimEnter', {
-        callback = function()
-          -- Only load the session if nvim was started with no args
-          if vim.fn.argc(-1) == 0 then
-            -- Save these to a different directory, so our manual sessions don't get polluted
-            resession.load(vim.fn.getcwd(), { dir = '.vimsession', silence_errors = true })
-          end
-        end,
-        nested = true,
-      })
-      vim.api.nvim_create_autocmd('VimLeavePre', {
-        callback = function()
-          resession.save(vim.fn.getcwd(), { dir = '.vimsession', notify = false })
-        end,
-      })
-
-      vim.keymap.set('n', '<leader>ss', resession.save, { desc = '[s]Save Session' })
-      vim.keymap.set('n', '<leader>sl', resession.load, { desc = '[l]Load Session' })
-      vim.keymap.set('n', '<leader>sd', resession.delete, { desc = '[d]Delete Session' })
-    end,
-  },
   { 'JoosepAlviste/nvim-ts-context-commentstring' },
   {
     'nmac427/guess-indent.nvim',
@@ -846,7 +818,6 @@ ______________________________
       require('guess-indent').setup {}
     end,
   },
-  --
   {
     'andymass/vim-matchup',
     setup = function()
