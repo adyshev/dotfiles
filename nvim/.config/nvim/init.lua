@@ -812,12 +812,11 @@ ______________________________
     end,
   },
   -- Inspired by Astronvim
-  { 'mrjones2014/smart-splits.nvim' },
   {
     'stevearc/resession.nvim',
     config = function()
       local resession = require 'resession'
-      resession.setup()
+      resession.setup {}
 
       vim.api.nvim_create_autocmd('VimEnter', {
         callback = function()
