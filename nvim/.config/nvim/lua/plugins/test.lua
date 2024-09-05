@@ -13,17 +13,6 @@ return {
     -- 'nvim-neotest/neotest-go',
   },
   config = function()
-    -- get neotest namespace (api call creates or returns namespace)
-    local neotest_ns = vim.api.nvim_create_namespace 'neotest'
-    vim.diagnostic.config({
-      virtual_text = {
-        format = function(diagnostic)
-          local message = diagnostic.message:gsub('\n', ' '):gsub('\t', ' '):gsub('%s+', ' '):gsub('^%s+', '')
-          return message
-        end,
-      },
-    }, neotest_ns)
-
     require('neotest').setup {
       status = { virtual_text = false },
       output = { open_on_run = true },
@@ -35,7 +24,7 @@ return {
       adapters = {
         require 'neotest-python',
         require 'neotest-golang' {
-          go_test_args = { '-v', '-race', '-count=1', '-timeout=60s' },
+          go_test_args = { '-v', '-race', '-count=1', '-timeout=60s', '-coverprofile=' .. vim.fn.getcwd() .. '/coverage.out' },
           testify_enabled = true,
           -- warn_test_name_dupes = false,
           warn_test_not_executed = false,

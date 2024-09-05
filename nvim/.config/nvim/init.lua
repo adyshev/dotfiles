@@ -46,6 +46,8 @@ require('lazy').setup({
       -- Document existing key chains
       require('which-key').add {
         { '<leader>f', group = '[f]Find' },
+        { '<leader>d', group = '[d]Debug' },
+        { '<leader>t', group = '[t]Test' },
         { '<leader>c', group = '[c]Code' },
         { '<leader>n', group = '[n]Notes' },
         { '<leader>o', group = '[o]Options' },
