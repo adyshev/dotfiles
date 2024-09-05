@@ -49,6 +49,7 @@ require('lazy').setup({
         { '<leader>d', group = '[d]Debug' },
         { '<leader>t', group = '[t]Test' },
         { '<leader>c', group = '[c]Code' },
+        { '<leader>s', group = '[s]Sessions' },
         { '<leader>n', group = '[n]Notes' },
         { '<leader>o', group = '[o]Options' },
       }
@@ -713,6 +714,7 @@ ______________________________
   },
   {
     'nvim-treesitter/nvim-treesitter',
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     build = ':TSUpdate',
     opts = {
       ensure_installed = {
@@ -741,16 +743,111 @@ ______________________________
       },
       matchup = {
         enable = true,
+        -- disable_virtual_text = true,
       },
       indent = { enable = true, disable = { 'ruby' } },
+      incremental_selection = {
+        enable = true,
+        keymaps = {
+          init_selection = '<c-space>',
+          node_incremental = '<c-space>',
+          scope_incremental = '<c-s>',
+          node_decremental = '<c-backspace>',
+        },
+      },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ['aa'] = '@parameter.outer',
+            ['ia'] = '@parameter.inner',
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
+            ['ii'] = '@conditional.inner',
+            ['ai'] = '@conditional.outer',
+            ['il'] = '@loop.inner',
+            ['al'] = '@loop.outer',
+            ['at'] = '@comment.outer',
+          },
+        },
+        move = {
+          enable = true,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            [']f'] = '@function.outer',
+            [']]'] = '@class.outer',
+          },
+          goto_next_end = {
+            [']F'] = '@function.outer',
+            [']['] = '@class.outer',
+          },
+          goto_previous_start = {
+            ['[f'] = '@function.outer',
+            ['[['] = '@class.outer',
+          },
+          goto_previous_end = {
+            ['[F'] = '@function.outer',
+            ['[]'] = '@class.outer',
+          },
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ['<leader>a'] = '@parameter.inner',
+          },
+          swap_previous = {
+            ['<leader>A'] = '@parameter.inner',
+          },
+        },
+      },
     },
-
     config = function(_, opts)
       require('nvim-treesitter.install').prefer_git = true
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
+  -- Inspired by Astronvim
+  { 'mrjones2014/smart-splits.nvim' },
+  {
+    'stevearc/resession.nvim',
+    config = function()
+      local resession = require 'resession'
+      resession.setup()
+
+      vim.api.nvim_create_autocmd('VimEnter', {
+        callback = function()
+          -- Only load the session if nvim was started with no args
+          if vim.fn.argc(-1) == 0 then
+            -- Save these to a different directory, so our manual sessions don't get polluted
+            resession.load(vim.fn.getcwd(), { dir = '.vimsession', silence_errors = true })
+          end
+        end,
+        nested = true,
+      })
+      vim.api.nvim_create_autocmd('VimLeavePre', {
+        callback = function()
+          resession.save(vim.fn.getcwd(), { dir = '.vimsession', notify = false })
+        end,
+      })
+
+      vim.keymap.set('n', '<leader>ss', resession.save, { desc = '[s]Save Session' })
+      vim.keymap.set('n', '<leader>sl', resession.load, { desc = '[l]Load Session' })
+      vim.keymap.set('n', '<leader>sd', resession.delete, { desc = '[d]Delete Session' })
+    end,
+  },
+  { 'JoosepAlviste/nvim-ts-context-commentstring' },
+  {
+    'nmac427/guess-indent.nvim',
+    config = function()
+      require('guess-indent').setup {}
+    end,
+  },
+  --
   {
     'andymass/vim-matchup',
     setup = function()
@@ -829,8 +926,8 @@ ______________________________
       custom_gruvbox.normal.c.bg = '#282828'
       -- custom_gruvbox.insert.b.bg = '#32302F'
       -- custom_gruvbox.insert.c.bg = '#282828'
-      custom_gruvbox.visual.b.bg = '#32302F'
-      custom_gruvbox.visual.c.bg = '#282828'
+      -- custom_gruvbox.visual.b.bg = '#32302F'
+      -- custom_gruvbox.visual.c.bg = '#282828'
       custom_gruvbox.replace.b.bg = '#32302F'
       custom_gruvbox.replace.c.bg = '#282828'
       custom_gruvbox.command.b.bg = '#32302F'
