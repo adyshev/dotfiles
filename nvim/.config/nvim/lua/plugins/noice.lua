@@ -51,7 +51,13 @@ return {
       },
     },
     routes = {
-      -- Ignore the typical vim change messages.
+      {
+        filter = {
+          event = 'notify',
+          min_height = 10,
+        },
+        view = 'split',
+      },
       {
         filter = {
           event = 'msg_show',
@@ -65,6 +71,13 @@ return {
         },
         opts = { skip = true },
       },
+      { filter = { event = 'msg_show', find = 'lsp_signature? handler RPC' }, skip = true },
+      { filter = { event = 'msg_show', find = '^%s*at process.processTicksAndRejections' }, skip = true },
+      { filter = { event = 'notify', find = 'No code actions available' }, skip = true },
+      { filter = { event = 'msg_show', find = '^[/?].' }, skip = true },
+      { filter = { event = 'msg_show', find = '^:!make' }, skip = true },
+      { filter = { event = 'msg_show', find = '^%(%d+ of %d+%):' }, skip = true },
+      { filter = { event = 'msg_show', find = 'E211: File .* no longer available' }, skip = true },
       {
         filter = {
           event = 'lsp',
@@ -77,17 +90,41 @@ return {
           event = 'msg_show',
           kind = '',
         },
-        opts = { skip = true },
+        view = 'mini',
+      },
+      {
+        filter = {
+          event = 'notify',
+          cond = function(msg)
+            return msg.opts and (msg.opts.title or ''):find 'mason'
+          end,
+        },
+        view = 'mini',
+      },
+      {
+        filter = {
+          event = 'notify',
+          cond = function(msg)
+            return msg.opts and (msg.opts.title or ''):find 'nvim-treesitter'
+          end,
+        },
+        view = 'mini',
       },
     },
     messages = {
+      enabled = true,
+      view = 'notify',
+      view_error = 'notify',
+      view_warn = 'notify',
+      view_history = 'messages',
       view_search = false,
     },
   },
   config = function(_, opts)
     require('noice').setup(opts)
+
     vim.keymap.set('n', '<leader>l', function()
       require('noice').cmd 'history'
-    end, { desc = '[l]Messages History' })
+    end, { desc = '[l]Noice History' })
   end,
 }

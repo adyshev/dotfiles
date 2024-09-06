@@ -10,7 +10,7 @@ return {
     local notify = require 'notify'
     notify.setup {
       timeout = 500,
-      render = 'minimal',
+      -- render = 'minimal',
       max_height = function()
         return math.floor(vim.o.lines * 0.75)
       end,

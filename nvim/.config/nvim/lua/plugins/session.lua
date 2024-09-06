@@ -2,7 +2,11 @@ return {
   'stevearc/resession.nvim',
   config = function()
     local resession = require 'resession'
-    resession.setup {}
+    local session_dir = vim.fn.stdpath 'config' .. '/session'
+
+    resession.setup {
+      dir = session_dir,
+    }
 
     vim.api.nvim_create_autocmd('VimLeavePre', {
       callback = function()

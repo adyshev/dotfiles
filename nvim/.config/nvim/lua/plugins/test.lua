@@ -107,5 +107,19 @@ return {
       end,
       desc = '[t]est [d]ebug',
     },
+    {
+      '<leader>tW',
+      function()
+        require('neotest').watch.toggle(vim.fn.expand '%')
+      end,
+      desc = '[t]est [w]atch file',
+    },
+    {
+      '<leader>tw',
+      function()
+        require('neotest').watch.toggle()
+      end,
+      desc = '[t]est [w]atch nearest',
+    },
   },
 }
