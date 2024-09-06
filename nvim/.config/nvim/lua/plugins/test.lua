@@ -9,8 +9,7 @@ return {
     'nvim-neotest/neotest-plenary',
     'nvim-neotest/neotest-vim-test',
     'nvim-neotest/neotest-python',
-    'fredrikaverpil/neotest-golang',
-    -- 'nvim-neotest/neotest-go',
+    'nvim-neotest/neotest-go',
   },
   config = function()
     require('neotest').setup {
@@ -23,11 +22,9 @@ return {
       },
       adapters = {
         require 'neotest-python',
-        require 'neotest-golang' {
-          go_test_args = { '-v', '-race', '-count=1', '-timeout=60s', '-coverprofile=' .. vim.fn.getcwd() .. '/coverage.out' },
-          testify_enabled = true,
-          -- warn_test_name_dupes = false,
-          warn_test_not_executed = false,
+        require 'neotest-go' {
+          args = { '-v', '-race', '-count=1', '-timeout=60s', '-coverprofile=' .. vim.fn.getcwd() .. '/coverage.out' },
+          recursive_run = true,
         },
       },
     }
@@ -106,9 +103,9 @@ return {
     {
       '<leader>td',
       function()
-        require('neotest').run.run { suite = false, strategy = 'dap' }
+        require('neotest').run.run { strategy = 'dap' }
       end,
-      desc = '[d]Debug nearest test',
+      desc = '[t]est [d]ebug',
     },
   },
 }

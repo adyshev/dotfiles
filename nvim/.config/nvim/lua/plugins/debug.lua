@@ -13,14 +13,13 @@ return {
   dependencies = {
     -- Creates a beautiful debugger UI
     'rcarriga/nvim-dap-ui',
-
     -- Required dependency for nvim-dap-ui
     'nvim-neotest/nvim-nio',
     'theHamsta/nvim-dap-virtual-text',
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-
+    'nvim-neotest/neotest',
     -- Add your own debuggers here
     'leoluz/nvim-dap-go',
     'mfussenegger/nvim-dap-python',
@@ -31,25 +30,29 @@ return {
     return {
       -- Basic debugging keymaps, feel free to change to your liking!
       { '<leader>dd', dap.continue, desc = '[d]Debug: Start/Continue' },
-      { '<leader>di', dap.step_into, desc = '[i]Debug: Step Into' },
-      { '<leader>do', dap.step_over, desc = '[o]Debug: Step Over' },
-      { '<leader>dq', dap.step_out, desc = '[q]Debug: Step Out' },
-      { '<leader>db', dap.toggle_breakpoint, desc = '[b]Debug: Toggle Breakpoint' },
+      { '<leader>dj', dap.step_into, desc = '[j]Debug: Step Into' },
+      { '<leader>dl', dap.step_over, desc = '[l]Debug: Step Next' },
+      { '<leader>dh', dap.step_back, desc = '[h]Debug: Step Prev' },
+      { '<leader>dk', dap.step_out, desc = '[k]Debug: Step Out' },
+      { '<leader>b', dap.toggle_breakpoint, desc = '[b]Debug: Toggle Breakpoint' },
       {
-        '<leader>dB',
+        '<leader>B',
         function()
           dap.set_breakpoint(vim.fn.input 'Breakpoint condition: ')
         end,
         desc = '[B]Debug: Set Breakpoint',
       },
       -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-      { '<leader>dp', dapui.toggle, desc = '[p]Debug: Print last session result.' },
+      { '<leader>du', dapui.toggle, desc = '[u]Debug: Toggle Debug UI' },
       unpack(keys),
     }
   end,
   config = function()
     local dap = require 'dap'
     local dapui = require 'dapui'
+
+    vim.fn.sign_define('DapBreakpoint', { text = '⛔', texthl = '', linehl = '', numhl = '' })
+    vim.fn.sign_define('DapStopped', { text = '👉', texthl = '', linehl = '', numhl = '' })
 
     require('mason-nvim-dap').setup {
       -- Makes a best effort to setup the various debuggers with
@@ -106,9 +109,12 @@ return {
         -- See https://github.com/leoluz/nvim-dap-go/blob/main/README.md#configuring
         detached = vim.fn.has 'win32' == 0,
       },
+      tests = {
+        -- enables verbosity when running the test.
+        verbose = false,
+      },
     }
 
     require('dap-python').setup 'python'
-    require('dap-python').test_runner = 'pytest'
   end,
 }
