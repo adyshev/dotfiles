@@ -27,10 +27,10 @@ map('i', '<PageUp>', '<C-O>1000<C-U>')
 map({ 'n', 'v' }, '<Space>', '<Nop>', opts)
 
 -- Resize panes
-vim.keymap.set('n', '<C-A-h>', '<Cmd>vertical resize -4<CR>', { desc = 'Resize Pane Left' })
-vim.keymap.set('n', '<C-A-l>', '<Cmd>vertical resize +6<CR>', { desc = 'Resize Pane Right' })
-vim.keymap.set('n', '<C-A-k>', '<Cmd>res +6<CR>', { desc = 'Resize Pane Up' })
-vim.keymap.set('n', '<C-A-j>', '<Cmd>res -4<CR>', { desc = 'Resize Pane Down' })
+-- vim.keymap.set('n', '<C-A-h>', '<Cmd>vertical resize -4<CR>', { desc = 'Resize Pane Left' })
+-- vim.keymap.set('n', '<C-A-l>', '<Cmd>vertical resize +6<CR>', { desc = 'Resize Pane Right' })
+-- vim.keymap.set('n', '<C-A-k>', '<Cmd>res +6<CR>', { desc = 'Resize Pane Up' })
+-- vim.keymap.set('n', '<C-A-j>', '<Cmd>res -4<CR>', { desc = 'Resize Pane Down' })
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })
