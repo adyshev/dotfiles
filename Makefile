@@ -16,10 +16,6 @@ rectangle:
 	@echo "Install Rectangle..."
 	@stow rectangle
 
-rectangle:
-	@echo "Install Rectangle..."
-	@stow rectangle
-
 yazi:
 	@echo "Install Yazi..."
 	@stow yazi
