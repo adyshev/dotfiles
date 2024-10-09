@@ -316,7 +316,6 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua',
         'black',
-        'flake8',
         'mypy',
         'isort',
         'goimports',
@@ -374,7 +373,7 @@ require('lazy').setup({
       local lint = require 'lint'
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
-        python = { 'ruff', 'mypy', 'flake8' },
+        python = { 'mypy' },
         json = { 'jsonlint' },
         rst = { 'vale' },
         terraform = { 'tflint' },
