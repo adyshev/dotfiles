@@ -243,6 +243,15 @@ require('lazy').setup({
           },
         },
         pyright = {
+          capabilities = {
+            textDocument = {
+              publishDiagnostics = {
+                tagSupport = {
+                  valueSet = { 2 },
+                },
+              },
+            },
+          },
           settings = {
             pyright = {
               disableOrganizeImports = true,
@@ -260,20 +269,11 @@ require('lazy').setup({
               },
             },
           },
-          capabilities = {
-            textDocument = {
-              publishDiagnostics = {
-                tagSupport = {
-                  valueSet = { 2 },
-                },
-              },
-            },
-          },
         },
         ruff = {
           init_options = {
             settings = {
-              lineLength = 120,
+              lineLength = 119,
               lint = {
                 ignore = {
                   'F821',
@@ -365,6 +365,11 @@ require('lazy').setup({
         markdown = { 'prettier' },
         sh = { 'shfmt' },
         yaml = { 'yamlfmt' },
+      },
+      formatters = {
+        black = {
+          prepend_args = { '--line-length', '119' },
+        },
       },
     },
   },
