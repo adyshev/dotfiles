@@ -274,7 +274,7 @@ require('lazy').setup({
           init_options = {
             settings = {
               args = {
-                -- '--ignore=F821',
+                '--ignore=F821',
                 '--line-length=120',
               },
             },

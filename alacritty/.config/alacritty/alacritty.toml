@@ -16,7 +16,7 @@ save_to_clipboard = true
 size = 16
 
 [env]
-TERM = "tmux-256color"
+TERM = "xterm-256color"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font Mono"
