@@ -25,6 +25,10 @@ map('n', '<PageUp>', '1000<C-U>0')
 map('i', '<PageDown>', '<C-O>1000<C-D>')
 map('i', '<PageUp>', '<C-O>1000<C-U>')
 map({ 'n', 'v' }, '<Space>', '<Nop>', opts)
+map('n', '<Home>', 'gg^')
+map('n', '<End>', 'G$')
+map('i', '<Home>', '<C-O>gg^')
+map('i', '<End>', '<C-O>G$')
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap('', '<D-v>', '+p<CR>', { noremap = true, silent = true })

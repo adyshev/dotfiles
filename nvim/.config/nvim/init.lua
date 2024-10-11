@@ -243,15 +243,6 @@ require('lazy').setup({
           },
         },
         pyright = {
-          capabilities = {
-            textDocument = {
-              publishDiagnostics = {
-                tagSupport = {
-                  valueSet = { 2 },
-                },
-              },
-            },
-          },
           settings = {
             pyright = {
               disableOrganizeImports = true,
@@ -269,13 +260,24 @@ require('lazy').setup({
               },
             },
           },
+          capabilities = {
+            textDocument = {
+              publishDiagnostics = {
+                tagSupport = {
+                  valueSet = { 2 },
+                },
+              },
+            },
+          },
         },
-        ruff_lsp = {
+        ruff = {
           init_options = {
             settings = {
-              args = {
-                '--ignore=F821',
-                '--line-length=120',
+              lineLength = 120,
+              lint = {
+                ignore = {
+                  'F821',
+                },
               },
             },
           },
