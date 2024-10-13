@@ -259,6 +259,10 @@ require('lazy').setup({
             },
             python = {
               analysis = {
+                autoImportCompletions = true,
+                autoSearchPaths = true,
+                diagnosticMode = 'workspace',
+                useLibraryCodeForTypes = true,
                 -- diagnosticSeverityOverrides = {
                 -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
                 -- reportUndefinedVariable = 'none',
@@ -385,6 +389,12 @@ require('lazy').setup({
         rst = { 'vale' },
         terraform = { 'tflint' },
         text = { 'vale' },
+      }
+
+      lint.linters.mypy.args = {
+        '--install-types',
+        '--non-interactive',
+        '--ignore-missing-imports',
       }
       --
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
