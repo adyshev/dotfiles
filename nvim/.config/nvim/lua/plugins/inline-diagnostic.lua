@@ -6,10 +6,10 @@ return {
     require('tiny-inline-diagnostic').setup {
       hi = {
         arrow = 'CursorLineNr',
-        mixing_color = '#3A3A3A',
+        mixing_color = '#282828',
       },
       options = {
-        throttle = 0,
+        throttle = 20,
 
         -- The minimum length of the message, otherwise it will be on a new line.
         softwrap = 30,
@@ -21,14 +21,14 @@ return {
         multilines = true,
       },
       blend = {
-        factor = 0,
+        factor = 0.27,
       },
       signs = {
         left = ' ',
         right = ' ',
         diag = '',
-        arrow = '    ',
-        up_arrow = '    ',
+        arrow = '   ',
+        up_arrow = '   ',
         vertical = '',
         vertical_end = '',
       },

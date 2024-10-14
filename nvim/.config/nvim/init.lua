@@ -6,6 +6,7 @@ require 'autocmds'
 vim.diagnostic.config {
   virtual_text = false,
   severity_sort = true,
+  underline = false,
   signs = true,
   float = {
     border = 'rounded',

@@ -27,7 +27,7 @@ return {
       vim.g.gruvbox_material_ui_contrast = 'low' -- `'low'`, `'high'`
       vim.g.gruvbox_material_float_style = 'dim'
       vim.g.gruvbox_material_show_eob = 0
-      vim.g.gruvbox_material_diagnostic_line_highlight = 0
+      vim.g.gruvbox_material_diagnostic_line_highlight = 1
       vim.g.gruvbox_material_better_performance = 1
       vim.g.gruvbox_material_colors_override = {
         bg0 = { '#282828', '235' },
@@ -42,7 +42,6 @@ return {
           local config = vim.fn['gruvbox_material#get_configuration']()
           local palette = vim.fn['gruvbox_material#get_palette'](config.background, config.foreground, config.colors_override)
           local set_hl = vim.fn['gruvbox_material#highlight']
-
           set_hl('CursorLineNr', palette.orange, palette.none)
         end,
       })
