@@ -12,6 +12,7 @@ else
 	export EDITOR='nvim'
 fi
 
+export TERM='screen-256color'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'

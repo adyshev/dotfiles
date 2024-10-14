@@ -3,7 +3,7 @@ export PATH="$HOME/bin:/opt/homebrew/bin:${GOPATH}/bin:/usr/local/bin:${PATH}"
 
 export FZF_BASE="/opt/homebrew/opt/fzf"
 export LANG="en_US.UTF-8"
-export TERM="xterm-256color"
+export TERM="screen-256color"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -27,7 +27,7 @@ alias mc="SHELL=/bin/bash mc --skin=gruvbox"
 alias fk="fuck"
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 1
+defaults write NSGlobalDomain KeyRepeat -int 3
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
