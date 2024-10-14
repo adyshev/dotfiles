@@ -4,10 +4,12 @@ require 'autocmds'
 
 -- Diagnostic
 vim.diagnostic.config {
-  virtual_text = true,
-  signs = true,
-  underline = false,
+  virtual_text = false,
   severity_sort = true,
+  signs = true,
+  float = {
+    border = 'rounded',
+  },
 }
 
 local diagnostic_goto = function(next, severity)
@@ -55,11 +57,14 @@ require('lazy').setup({
       }
       -- Main
       vim.keymap.set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[q]Close Buffer' })
-      -- vim.keymap.set('n', '<leader>/', ':normal gcc<CR><DOWN>', { desc = '[/]Toggle comment line' })
-      -- vim.keymap.set('v', '<leader>/', '<Esc>:normal gvgc<CR>', { desc = '[/]Toggle comment block' })
+      vim.keymap.set(
+        'n',
+        '<leader>e',
+        ":lua vim.diagnostic.open_float(nil, {focusable=false, scope='line', close_events = { 'CursorMoved', 'CursorMovedI', 'BufHidden', 'InsertCharPre', 'WinLeave'}})<CR>",
+        { desc = '[e]Line Diagnostic' }
+      )
       vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = '[-]Horisontal split' })
       vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = '[|]Vertical split' })
-      vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = '[e]Line Diagnostic' })
 
       -- Code
       vim.keymap.set('n', '<leader>cr', function()

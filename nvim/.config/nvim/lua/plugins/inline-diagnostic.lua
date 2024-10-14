@@ -1,6 +1,7 @@
 return {
   'rachartier/tiny-inline-diagnostic.nvim',
   event = 'VeryLazy', -- Or `LspAttach`
+  -- enabled = false,
   config = function()
     require('tiny-inline-diagnostic').setup {
       hi = {
@@ -14,7 +15,7 @@ return {
         softwrap = 30,
 
         -- If multiple diagnostics are under the cursor, display all of them.
-        multiple_diag_under_cursor = true,
+        multiple_diag_under_cursor = false,
 
         -- Enable diagnostic message on all lines.
         multilines = true,
@@ -25,23 +26,12 @@ return {
       signs = {
         left = ' ',
         right = ' ',
-        diag = ' ⚠',
+        diag = '',
         arrow = '    ',
         up_arrow = '    ',
         vertical = '',
         vertical_end = '',
       },
     }
-
-    vim.diagnostic.config {
-      virtual_text = false,
-    }
   end,
 }
--- return {
---   'dgagn/diagflow.nvim',
---   event = 'LspAttach',
---   opts = {
---     scope = 'line',
---   },
--- }
