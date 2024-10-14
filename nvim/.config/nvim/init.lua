@@ -684,7 +684,7 @@ require('lazy').setup({
       require('mini.trailspace').setup()
       require('mini.move').setup()
       require('mini.indentscope').setup {
-        symbol = '│ ',
+        symbol = '│',
         options = {
           try_as_border = true,
         },
