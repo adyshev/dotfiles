@@ -3,7 +3,7 @@ export PATH="$HOME/bin:/opt/homebrew/bin:${GOPATH}/bin:/usr/local/bin:${PATH}"
 
 export FZF_BASE="/opt/homebrew/opt/fzf"
 export LANG="en_US.UTF-8"
-export TERM="screen-256color"
+export TERM="xterm-256color"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -59,3 +59,13 @@ source ~/.fzf.zsh
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+### lyft_localdevtools_shell_rc start
+### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
+    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
+fi
+### lyft_localdevtools_shell_rc end
+
+### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
+eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"

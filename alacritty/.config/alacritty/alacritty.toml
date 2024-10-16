@@ -13,10 +13,10 @@ ipc_socket = true
 save_to_clipboard = true
 
 [font]
-size = 16
+size = 17
 
 [env]
-TERM = "screen-256color"
+TERM = "xterm-256color"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font Mono"
@@ -24,6 +24,16 @@ style = "Regular"
 
 [mouse]
 hide_when_typing = true
+
+[cursor]
+vi_mode_style = "Block"
+blink_interval = 500
+unfocused_hollow = true
+thickness = 0.15
+
+[cursor.style]
+shape = "Beam"
+blinking = "Always"
 
 [window]
 decorations = "buttonless"
