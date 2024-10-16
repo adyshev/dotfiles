@@ -52,7 +52,8 @@ y = 5
 program = "/bin/zsh"
 args = ["-l", "-c", "/opt/homebrew/bin/tmux new-session -A -D -s default"]
 
-[[keyboard.bindings]]
-action = "None"
-key = "t"
-mods = "Super"
+[keyboard]
+bindings = [
+    # ⌘ + enter puts window in macOS full screen
+    { key = "Enter", mods = "Command", action = "ToggleFullscreen"},
+]
