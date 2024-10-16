@@ -4,7 +4,7 @@ require 'autocmds'
 
 -- Diagnostic
 vim.diagnostic.config {
-  virtual_text = true,
+  virtual_text = false,
   severity_sort = true,
   underline = false,
   signs = false,
