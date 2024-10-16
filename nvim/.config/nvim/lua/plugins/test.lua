@@ -13,7 +13,7 @@ return {
   },
   config = function()
     require('neotest').setup {
-      status = { virtual_text = false },
+      status = { virtual_text = true },
       output = { open_on_run = true },
       quickfix = {
         open = function()

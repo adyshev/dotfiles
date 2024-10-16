@@ -4,10 +4,10 @@ require 'autocmds'
 
 -- Diagnostic
 vim.diagnostic.config {
-  virtual_text = false,
+  virtual_text = true,
   severity_sort = true,
   underline = false,
-  signs = true,
+  signs = false,
   float = {
     border = 'rounded',
   },

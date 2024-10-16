@@ -19,14 +19,14 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
---   desc = 'Redraw the cursorline when navigating around the buffer',
---   callback = function()
---     if vim.wo.cursorline then
---       vim.cmd 'redraw'
---     end
---   end,
--- })
+vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+  desc = 'Redraw the cursorline when navigating around the buffer',
+  callback = function()
+    if vim.wo.cursorline then
+      vim.cmd 'redraw'
+    end
+  end,
+})
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   pattern = { '*.txt', '*.md', '*.norg' },
