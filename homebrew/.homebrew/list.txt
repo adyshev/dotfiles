@@ -14,7 +14,6 @@ neovim
 node
 yarn
 font-hack-nerd-font
-font-iosevka-nerd-font
 font-jetbrains-mono-nerd-font
 openjdk
 python@3.10
@@ -28,11 +27,10 @@ sqlite
 telnet
 thefuck
 tldr
-tmux
 tree
 urlview
 wget
 zsh
-alacritty
+wezterm
 rectangle
 whichspace
