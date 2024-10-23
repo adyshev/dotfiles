@@ -2,7 +2,6 @@ bat
 btop
 cowsay
 diff-so-fancy
-exa
 fd
 figlet
 fzf
