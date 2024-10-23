@@ -111,7 +111,7 @@ vim.api.nvim_create_autocmd('FileType', {
   end,
 })
 
--- Show/Close diacnostic messages onhover
+-- Show/Close diagnostic messages
 vim.api.nvim_create_autocmd({ 'CursorHold' }, {
   pattern = '*',
   callback = function()

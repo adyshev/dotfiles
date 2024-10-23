@@ -1,6 +1,5 @@
 export GOPATH="${HOME}/go"
 export PATH="$HOME/bin:/opt/homebrew/bin:${GOPATH}/bin:/usr/local/bin:${PATH}"
-
 export FZF_BASE="/opt/homebrew/opt/fzf"
 export LANG="en_US.UTF-8"
 export TERM="xterm-256color"
@@ -17,18 +16,16 @@ bindkey '\t\t' autosuggest-accept
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'
-alias ll="ls -la --color=auto"
-alias ls="ls --color=auto"
-alias cat="bat"
-alias v='nvim'
-alias n='nvim'
+alias ll="lsd -lAh --color=always"
+alias ls="lsd --color=always"
+alias cat='bat'
 alias diff="diff-so-fancy"
 alias mc="SHELL=/bin/bash mc --skin=gruvbox"
 alias fk="fuck"
 
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 3
-defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain InitialKeyRepeat -int 20
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
@@ -59,13 +56,3 @@ source ~/.fzf.zsh
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-### lyft_localdevtools_shell_rc start
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
-fi
-### lyft_localdevtools_shell_rc end
-
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"

@@ -12,12 +12,12 @@ else
 	export EDITOR='nvim'
 fi
 
-export TERM='screen-256color'
+export TERM='xterm-256color'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'
-alias ll="ls -la --color=auto"
-alias ls="ls --color=auto"
+alias ll="lsd -lAh --color=always"
+alias ls="lsd --color=always"
 alias cat="bat"
 alias v='nvim'
 alias diff="diff-so-fancy"
@@ -50,3 +50,8 @@ eval "$(/opt/homebrew/bin/thefuck --alias)"
 eval "$(oh-my-posh init bash --config "$HOME/.config/ohmyposh/config.toml")"
 
 source ~/.fzf.bash
+
+. "$HOME/.atuin/bin/env"
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"

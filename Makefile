@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := all
-.PHONY:all shell alacritty rectangle nvim tmux homebrew
+.PHONY:all shell alacritty rectangle nvim tmux homebrew bat btop lazygit lsd wezterm
 
-all: alacritty rectangle shell homebrew tmux nvim
+all: alacritty rectangle shell homebrew tmux nvim bat btop lazygit lsd wezterm
 
 shell:
 	@echo "Installing Shell..."
@@ -31,6 +31,26 @@ nvim:
 tmux:
 	@echo "Installing Tmux..."
 	@stow tmux
+
+bat:
+	@echo "Installing Bat..."
+	@stow bat
+
+btop:
+	@echo "Installing Btop..."
+	@stow btop
+
+lazygit:
+	@echo "Installing Lazygit..."
+	@stow lazygit
+
+lsd:
+	@echo "Installing Lsd..."
+	@stow lsd
+
+wezterm:
+	@echo "Installing Wezterm..."
+	@stow wezterm
 
 homebrew:
 	@echo "Installing homebrew..."

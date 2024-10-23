@@ -6,8 +6,8 @@ require 'autocmds'
 vim.diagnostic.config {
   virtual_text = false,
   severity_sort = true,
-  underline = false,
-  signs = false,
+  underline = true,
+  signs = true,
   float = {
     border = 'rounded',
   },
@@ -934,6 +934,13 @@ ______________________________
           component_separators = '',
         },
         sections = {
+          lualine_y = {
+            {
+              'datetime',
+              -- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
+              style = '%a %e %b, %H:%M',
+            },
+          },
           lualine_c = {
             '%=', -- make the indicator center
             {
