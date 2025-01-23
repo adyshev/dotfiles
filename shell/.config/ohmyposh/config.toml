@@ -1,9 +1,22 @@
-#:schema https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
-
-version = 2
-final_space = true
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
-auto_upgrade = true
+version = 3
+final_space = true
+
+[palette]
+  green = '#A9B665'
+  grey = '#6c6c6c'
+  orange = '#E78A4E'
+  yellow = '#D8A657'
+
+[secondary_prompt]
+  template = '❯❯ '
+  foreground = 'magenta'
+  background = 'transparent'
+
+[transient_prompt]
+  template = '❯ '
+  background = 'transparent'
+  foreground_templates = ['{{if gt .Code 0}}red{{end}}', '{{if eq .Code 0}}magenta{{end}}']
 
 [[blocks]]
   type = 'prompt'
@@ -11,57 +24,68 @@ auto_upgrade = true
   newline = true
 
   [[blocks.segments]]
+    template = '{{ .Path }} '
+    foreground = 'blue'
+    background = 'transparent'
     type = 'path'
     style = 'plain'
-    background = 'transparent'
-    foreground = 'blue'
-    template = '{{ .Path }} '
 
     [blocks.segments.properties]
+      cache_duration = 'none'
       style = 'full'
 
   [[blocks.segments]]
-    type = "go"
-    style = "plain"
-    foreground = "p:grey"
-    background = "transparent"
-    template = "Go {{ .Full }} "
-
-  [[blocks.segments]]
-    type = "python"
-    style = "plain"
-    home_enabled = true
-    foreground = "p:grey"
-    background = "tanparent"
-    template = "Py {{ .Full }} "
-
-  [[blocks.segments]]
-    type = "lua"
-    style = "plain"
-    foreground = "p:grey"
-    background = "transparent"
-    template = "Lua {{ .Full }} "
-
-  [[blocks.segments]]
-    type = 'git'
+    template = 'Go {{ .Full }} '
+    foreground = 'p:grey'
+    background = 'transparent'
+    type = 'go'
     style = 'plain'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+
+  [[blocks.segments]]
+    template = 'Py {{ .Full }} '
+    foreground = 'p:grey'
+    background = 'tanparent'
+    type = 'python'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+
+  [[blocks.segments]]
+    template = 'Lua {{ .Full }} '
+    foreground = 'p:grey'
+    background = 'transparent'
+    type = 'lua'
+    style = 'plain'
+
+    [blocks.segments.properties]
+      cache_duration = 'none'
+
+  [[blocks.segments]]
+    template = '{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }}<p:green>{{ if gt .Behind 0 }} ⇣{{ end }}{{ if gt .Ahead 0 }} ⇡{{ end }}</> '
     foreground = 'p:green'
     background = 'transparent'
-    template = '{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }}<p:green>{{ if gt .Behind 0 }} ⇣{{ end }}{{ if gt .Ahead 0 }} ⇡{{ end }}</> '
+    type = 'git'
+    style = 'plain'
 
     [blocks.segments.properties]
       branch_icon = ''
+      cache_duration = 'none'
       commit_icon = '@'
       fetch_status = true
 
   [[blocks.segments]]
-    type = 'executiontime'
-    style = 'plain'
+    template = '{{ .FormattedMs }}'
     foreground = 'yellow'
     background = 'transparent'
-    template = '{{ .FormattedMs }}'
+    type = 'executiontime'
+    style = 'plain'
 
     [blocks.segments.properties]
+      cache_duration = 'none'
       threshold = 5000
 
 [[blocks]]
@@ -70,27 +94,11 @@ auto_upgrade = true
   newline = true
 
   [[blocks.segments]]
+    template = '❯'
+    foreground = 'magenta'
+    background = 'transparent'
     type = 'text'
     style = 'plain'
-    background = 'transparent'
-    foreground = 'magenta'
-    template = '❯'
 
-[transient_prompt]
-  foreground_templates = [
-    "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}magenta{{end}}",
-  ]
-  background = 'transparent'
-  template = '❯ '
-
-[secondary_prompt]
-  foreground = 'magenta'
-  background = 'transparent'
-  template = '❯❯ '
-
-[palette]
-grey = '#6c6c6c'
-green = '#A9B665'
-yellow = '#D8A657'
-orange = '#E78A4E'
+    [blocks.segments.properties]
+      cache_duration = 'none'
