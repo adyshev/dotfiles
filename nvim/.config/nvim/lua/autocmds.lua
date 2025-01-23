@@ -134,6 +134,11 @@ vim.api.nvim_create_autocmd({ 'CursorHold' }, {
   end,
 })
 
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'python', 'golang', 'lua', 'gitignore', '*.json', '*.toml', '*.yaml', 'makefile' },
+  command = 'setlocal nospell',
+})
+
 -- Disable commenting new lines
 vim.cmd 'autocmd BufEnter * set formatoptions-=cro'
 vim.cmd 'autocmd BufEnter * setlocal formatoptions-=cro'

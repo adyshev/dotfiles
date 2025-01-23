@@ -8,6 +8,14 @@ shell:
 	@mkdir -p ~/.local/share/mc
 	@stow shell
 
+aerospace:
+	@echo "Installing Aerospace"
+	@stow alacritty
+
+skhd:
+	@echo "Installing Skhd"
+	@stow skhd
+
 alacritty:
 	@echo "Installing Alacritty..."
 	@stow alacritty
