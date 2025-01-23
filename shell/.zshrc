@@ -56,3 +56,6 @@ source ~/.fzf.zsh
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/adyshev/.cache/lm-studio/bin"

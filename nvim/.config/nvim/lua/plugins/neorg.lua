@@ -138,6 +138,8 @@ return {
   lazy = false,
   dependencies = neorg_dependencies,
   keys = lazy_loading_keymaps,
+  build = ':Neorg sync-parsers',
+  run = ':Neorg sync-parsers',
   config = function()
     require('neorg').setup {
       load = module_list,

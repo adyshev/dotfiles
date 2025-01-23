@@ -1,5 +1,6 @@
 console_title_template = '{{ .Shell }} in {{ .Folder }}'
 version = 3
+auto_upgrade = true
 final_space = true
 
 [palette]
@@ -24,68 +25,56 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
+    style = 'plain'
     template = '{{ .Path }} '
     foreground = 'blue'
     background = 'transparent'
     type = 'path'
-    style = 'plain'
 
     [blocks.segments.properties]
-      cache_duration = 'none'
       style = 'full'
 
   [[blocks.segments]]
+    style = 'plain'
     template = 'Go {{ .Full }} '
     foreground = 'p:grey'
     background = 'transparent'
     type = 'go'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      cache_duration = 'none'
 
   [[blocks.segments]]
+    style = 'plain'
     template = 'Py {{ .Full }} '
     foreground = 'p:grey'
     background = 'tanparent'
     type = 'python'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      cache_duration = 'none'
 
   [[blocks.segments]]
+    style = 'plain'
     template = 'Lua {{ .Full }} '
     foreground = 'p:grey'
     background = 'transparent'
     type = 'lua'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      cache_duration = 'none'
 
   [[blocks.segments]]
+    style = 'plain'
     template = '{{ .HEAD }}{{ if or (.Working.Changed) (.Staging.Changed) }}*{{ end }}<p:green>{{ if gt .Behind 0 }} ⇣{{ end }}{{ if gt .Ahead 0 }} ⇡{{ end }}</> '
     foreground = 'p:green'
     background = 'transparent'
     type = 'git'
-    style = 'plain'
 
     [blocks.segments.properties]
       branch_icon = ''
-      cache_duration = 'none'
       commit_icon = '@'
       fetch_status = true
 
   [[blocks.segments]]
+    style = 'plain'
     template = '{{ .FormattedMs }}'
     foreground = 'yellow'
     background = 'transparent'
     type = 'executiontime'
-    style = 'plain'
 
     [blocks.segments.properties]
-      cache_duration = 'none'
       threshold = 5000
 
 [[blocks]]
@@ -94,11 +83,8 @@ final_space = true
   newline = true
 
   [[blocks.segments]]
+    style = 'plain'
     template = '❯'
     foreground = 'magenta'
     background = 'transparent'
     type = 'text'
-    style = 'plain'
-
-    [blocks.segments.properties]
-      cache_duration = 'none'

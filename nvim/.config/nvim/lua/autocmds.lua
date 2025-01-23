@@ -134,11 +134,10 @@ vim.api.nvim_create_autocmd({ 'CursorHold' }, {
   end,
 })
 
--- Restore Beam '|' cursor
--- vim.cmd [[augroup RestoreCursorShapeOnExit
---     autocmd!
---     autocmd VimLeave * set guicursor=a:ver25
--- augroup END]]
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'python', 'golang', 'lua', 'gitignore', '*.json', '*.toml', '*.yaml', 'makefile' },
+  command = 'setlocal nospell',
+})
 
 -- Disable commenting new lines
 vim.cmd 'autocmd BufEnter * set formatoptions-=cro'

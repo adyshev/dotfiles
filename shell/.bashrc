@@ -50,3 +50,6 @@ eval "$(/opt/homebrew/bin/thefuck --alias)"
 eval "$(oh-my-posh init bash --config "$HOME/.config/ohmyposh/config.toml")"
 
 source ~/.fzf.bash
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/adyshev/.cache/lm-studio/bin"
