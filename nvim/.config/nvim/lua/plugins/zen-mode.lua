@@ -37,11 +37,11 @@ return {
         tmux = { enabled = true },
         alacritty = {
           enabled = true,
-          font = 18,
+          font = 16,
         },
         kitty = {
           enabled = true,
-          font = 18, -- font size increment
+          font = 16, -- font size increment
         },
       },
     }

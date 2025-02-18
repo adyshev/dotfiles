@@ -49,11 +49,11 @@ require('lazy').setup({
       -- Document existing key chains
       require('which-key').add {
         { '<leader>f', group = '[f]Find' },
-        { '<leader>d', group = '[d]Debug' },
-        { '<leader>t', group = '[t]Test' },
+        -- { '<leader>d', group = '[d]Debug' },
+        -- { '<leader>t', group = '[t]Test' },
         { '<leader>c', group = '[c]Code' },
-        { '<leader>s', group = '[s]Sessions' },
-        { '<leader>n', group = '[n]Notes' },
+        -- { '<leader>s', group = '[s]Sessions' },
+        -- { '<leader>n', group = '[n]Notes' },
         { '<leader>o', group = '[o]Options' },
       }
       -- Main
@@ -141,7 +141,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fs', ':Telescope search_history<CR>', { desc = '[s]Find Search History' })
       vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', { desc = '[t]Find TODO' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
-      vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Find Notes' })
+      -- vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Find Notes' })
       vim.keymap.set('n', '<leader>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[b]File Browser' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
@@ -557,7 +557,7 @@ require('lazy').setup({
               nvim_lua = '[Lua]',
               path = '[Path]',
               emoji = '[Emoji]',
-              neorg = '[Neorg]',
+              -- neorg = '[Neorg]',
               spell = '[Spell]',
               latex_symbols = '[LaTeX]',
             })[entry.source.name]
@@ -592,7 +592,7 @@ require('lazy').setup({
 
       cmp.setup.filetype('norg', {
         sources = {
-          { name = 'neorg' },
+          -- { name = 'neorg' },
           { name = 'luasnip' },
           {
             name = 'spell',
@@ -685,7 +685,7 @@ require('lazy').setup({
   {
     'echasnovski/mini.nvim',
     config = function()
-      require('mini.surround').setup()
+      -- require('mini.surround').setup()
       require('mini.operators').setup()
       require('mini.trailspace').setup()
       require('mini.move').setup()
@@ -703,7 +703,7 @@ require('lazy').setup({
       local my_items = {
         starter.sections.builtin_actions(),
         starter.sections.telescope(),
-        { name = 'Find In Notes', action = ':Telescope live_grep search_dirs={"~/neorg/"}', section = 'Telescope' },
+        -- { name = 'Find In Notes', action = ':Telescope live_grep search_dirs={"~/neorg/"}', section = 'Telescope' },
         starter.sections.recent_files(10, false),
       }
       starter.setup {

@@ -136,6 +136,7 @@ local module_list = {
 return {
   'nvim-neorg/neorg',
   lazy = false,
+  enabled = false,
   dependencies = neorg_dependencies,
   keys = lazy_loading_keymaps,
   build = ':Neorg sync-parsers',

@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-.PHONY:all shell alacritty rectangle nvim tmux homebrew bat btop lazygit lsd wezterm
+.PHONY:all shell alacritty rectangle nvim tmux homebrew bat btop lazygit lsd wezterm yazi
 
 all: alacritty rectangle shell homebrew tmux nvim bat btop lazygit lsd wezterm
 
