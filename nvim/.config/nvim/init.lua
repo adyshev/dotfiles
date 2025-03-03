@@ -51,10 +51,10 @@ require('lazy').setup({
         { '<leader>f', group = '[f]Find' },
         -- { '<leader>d', group = '[d]Debug' },
         -- { '<leader>t', group = '[t]Test' },
-        { '<leader>c', group = '[c]Code' },
+        -- { '<leader>c', group = '[c]Code' },
         -- { '<leader>s', group = '[s]Sessions' },
         -- { '<leader>n', group = '[n]Notes' },
-        { '<leader>o', group = '[o]Options' },
+        -- { '<leader>o', group = '[o]Options' },
       }
       -- Main
       vim.keymap.set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[q]Close Buffer' })
@@ -67,17 +67,17 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>-', '<C-W>s', { desc = '[-]Horisontal split' })
       vim.keymap.set('n', '<leader>|', '<C-W>v', { desc = '[|]Vertical split' })
 
-      -- Code
-      vim.keymap.set('n', '<leader>cr', function()
-        return ':IncRename ' .. vim.fn.expand '<cword>'
-      end, { expr = true, desc = '[r]Rename' })
-      vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[c]Code Action' })
+      -- -- Code
+      -- vim.keymap.set('n', '<leader>cr', function()
+      --   return ':IncRename ' .. vim.fn.expand '<cword>'
+      -- end, { expr = true, desc = '[r]Rename' })
+      -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[c]Code Action' })
 
       -- Options
-      vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
-      vim.keymap.set('n', '<leader>oC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
-      vim.keymap.set('n', '<leader>oX', '<cmd>lua vim.diagnostic.enable(false)<cr>', { desc = '[X]Disable diagnostic messages' })
-      vim.keymap.set('n', '<leader>ox', '<cmd>lua vim.diagnostic.enable(true)<cr>', { desc = '[x]Enable diagnostic messages' })
+      -- vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
+      -- vim.keymap.set('n', '<leader>oC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
+      -- vim.keymap.set('n', '<leader>oX', '<cmd>lua vim.diagnostic.enable(false)<cr>', { desc = '[X]Disable diagnostic messages' })
+      -- vim.keymap.set('n', '<leader>ox', '<cmd>lua vim.diagnostic.enable(true)<cr>', { desc = '[x]Enable diagnostic messages' })
     end,
   },
   {
@@ -94,7 +94,7 @@ require('lazy').setup({
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-      { 'nvim-telescope/telescope-file-browser.nvim' },
+      -- { 'nvim-telescope/telescope-file-browser.nvim' },
       { 'smartpde/telescope-recent-files' },
       {
         'nvim-telescope/telescope-symbols.nvim',
@@ -124,15 +124,15 @@ require('lazy').setup({
           recent_files = {
             only_cwd = true,
           },
-          file_browser = {
-            hidden = { file_browser = true, folder_browser = true },
-          },
+          -- file_browser = {
+          --   hidden = { file_browser = true, folder_browser = true },
+          -- },
         },
       }
 
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension, 'file-browser')
+      -- pcall(require('telescope').load_extension, 'file-browser')
       pcall(require('telescope').load_extension, 'recent_files')
 
       local builtin = require 'telescope.builtin'
@@ -142,7 +142,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', { desc = '[t]Find TODO' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
       -- vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Find Notes' })
-      vim.keymap.set('n', '<leader>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[b]File Browser' })
+      -- vim.keymap.set('n', '<leader>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[b]File Browser' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[f]Find Files' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[w]Find current Word' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[g]Find by Grep' })
@@ -221,11 +221,11 @@ require('lazy').setup({
             })
           end
 
-          if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            map('<leader>oh', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
-            end, '[h]Toggle Inlay Hints')
-          end
+          -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+          --   map('<leader>oh', function()
+          --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
+          --   end, '[h]Toggle Inlay Hints')
+          -- end
         end,
       })
 
@@ -736,7 +736,7 @@ ______________________________
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    -- dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     build = ':TSUpdate',
     opts = {
       ensure_installed = {
@@ -768,64 +768,64 @@ ______________________________
         -- disable_virtual_text = true,
       },
       indent = { enable = true, disable = { 'ruby' } },
-      incremental_selection = {
-        enable = true,
-        keymaps = {
-          init_selection = '<c-space>',
-          node_incremental = '<c-space>',
-          scope_incremental = '<c-s>',
-          node_decremental = '<c-backspace>',
-        },
-      },
-      textobjects = {
-        select = {
-          enable = true,
-          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-          keymaps = {
-            -- You can use the capture groups defined in textobjects.scm
-            ['aa'] = '@parameter.outer',
-            ['ia'] = '@parameter.inner',
-            ['af'] = '@function.outer',
-            ['if'] = '@function.inner',
-            ['ac'] = '@class.outer',
-            ['ic'] = '@class.inner',
-            ['ii'] = '@conditional.inner',
-            ['ai'] = '@conditional.outer',
-            ['il'] = '@loop.inner',
-            ['al'] = '@loop.outer',
-            ['at'] = '@comment.outer',
-          },
-        },
-        move = {
-          enable = true,
-          set_jumps = true, -- whether to set jumps in the jumplist
-          goto_next_start = {
-            [']f'] = '@function.outer',
-            [']]'] = '@class.outer',
-          },
-          goto_next_end = {
-            [']F'] = '@function.outer',
-            [']['] = '@class.outer',
-          },
-          goto_previous_start = {
-            ['[f'] = '@function.outer',
-            ['[['] = '@class.outer',
-          },
-          goto_previous_end = {
-            ['[F'] = '@function.outer',
-            ['[]'] = '@class.outer',
-          },
-        },
-        swap = {
-          enable = true,
-          swap_next = {
-            ['<leader>a'] = '@parameter.inner',
-          },
-          swap_previous = {
-            ['<leader>A'] = '@parameter.inner',
-          },
-        },
-      },
+      -- incremental_selection = {
+      --   enable = true,
+      --   keymaps = {
+      --     init_selection = '<c-space>',
+      --     node_incremental = '<c-space>',
+      --     scope_incremental = '<c-s>',
+      --     node_decremental = '<c-backspace>',
+      --   },
+      -- },
+      -- textobjects = {
+      --   select = {
+      --     enable = true,
+      --     lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+      --     keymaps = {
+      --       -- You can use the capture groups defined in textobjects.scm
+      --       ['aa'] = '@parameter.outer',
+      --       ['ia'] = '@parameter.inner',
+      --       ['af'] = '@function.outer',
+      --       ['if'] = '@function.inner',
+      --       ['ac'] = '@class.outer',
+      --       ['ic'] = '@class.inner',
+      --       ['ii'] = '@conditional.inner',
+      --       ['ai'] = '@conditional.outer',
+      --       ['il'] = '@loop.inner',
+      --       ['al'] = '@loop.outer',
+      --       ['at'] = '@comment.outer',
+      --     },
+      --   },
+      --   move = {
+      --     enable = true,
+      --     set_jumps = true, -- whether to set jumps in the jumplist
+      --     goto_next_start = {
+      --       [']f'] = '@function.outer',
+      --       [']]'] = '@class.outer',
+      --     },
+      --     goto_next_end = {
+      --       [']F'] = '@function.outer',
+      --       [']['] = '@class.outer',
+      --     },
+      --     goto_previous_start = {
+      --       ['[f'] = '@function.outer',
+      --       ['[['] = '@class.outer',
+      --     },
+      --     goto_previous_end = {
+      --       ['[F'] = '@function.outer',
+      --       ['[]'] = '@class.outer',
+      --     },
+      --   },
+      --   swap = {
+      --     enable = true,
+      --     swap_next = {
+      --       ['<leader>a'] = '@parameter.inner',
+      --     },
+      --     swap_previous = {
+      --       ['<leader>A'] = '@parameter.inner',
+      --     },
+      --   },
+      -- },
     },
     config = function(_, opts)
       require('nvim-treesitter.install').prefer_git = true
@@ -833,7 +833,7 @@ ______________________________
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
-  { 'JoosepAlviste/nvim-ts-context-commentstring' },
+  -- { 'JoosepAlviste/nvim-ts-context-commentstring' },
   {
     'nmac427/guess-indent.nvim',
     config = function()
