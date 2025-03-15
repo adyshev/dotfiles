@@ -16,6 +16,7 @@ bindkey '\t\t' autosuggest-accept
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'
+alias n='neovim'
 alias ll="lsd -lAh --color=always"
 alias ls="lsd --color=always"
 alias cat='bat'

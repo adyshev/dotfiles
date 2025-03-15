@@ -51,7 +51,7 @@ require('lazy').setup({
         { '<leader>f', group = '[f]Find' },
         -- { '<leader>d', group = '[d]Debug' },
         -- { '<leader>t', group = '[t]Test' },
-        -- { '<leader>c', group = '[c]Code' },
+        { '<leader>c', group = '[c]Code' },
         -- { '<leader>s', group = '[s]Sessions' },
         -- { '<leader>n', group = '[n]Notes' },
         -- { '<leader>o', group = '[o]Options' },
@@ -140,6 +140,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fh', ':Telescope command_history<CR>', { desc = '[h]Find Command History' })
       vim.keymap.set('n', '<leader>fs', ':Telescope search_history<CR>', { desc = '[s]Find Search History' })
       vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', { desc = '[t]Find TODO' })
+      vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>')
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
       -- vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Find Notes' })
       -- vim.keymap.set('n', '<leader>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[b]File Browser' })
@@ -194,6 +195,10 @@ require('lazy').setup({
           map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
           map('gR', require('telescope.builtin').lsp_references, 'Goto Reference')
           map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
+          map('<space>cr', vim.lsp.buf.rename, 'Rename')
+          map('<space>cf', function()
+            vim.lsp.buf.format { async = true }
+          end, 'Format')
 
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
