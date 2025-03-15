@@ -140,7 +140,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>fh', ':Telescope command_history<CR>', { desc = '[h]Find Command History' })
       vim.keymap.set('n', '<leader>fs', ':Telescope search_history<CR>', { desc = '[s]Find Search History' })
       vim.keymap.set('n', '<leader>ft', ':TodoTelescope<CR>', { desc = '[t]Find TODO' })
-      vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>')
+      vim.keymap.set('n', '<leader>fd', '<cmd>Telescope diagnostics<cr>', { desc = '[d] Find Diagnostics' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[k]Find Keymaps' })
       -- vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Find Notes' })
       -- vim.keymap.set('n', '<leader>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[b]File Browser' })
@@ -195,10 +195,10 @@ require('lazy').setup({
           map('gd', require('telescope.builtin').lsp_definitions, 'Goto Definition')
           map('gR', require('telescope.builtin').lsp_references, 'Goto Reference')
           map('gD', vim.lsp.buf.declaration, 'Goto Declaration')
-          map('<space>cr', vim.lsp.buf.rename, 'Rename')
+          map('<space>cr', vim.lsp.buf.rename, '[r]Rename')
           map('<space>cf', function()
             vim.lsp.buf.format { async = true }
-          end, 'Format')
+          end, '[f]Format')
 
           -- When you move your cursor, the highlights will be cleared (the second autocommand).
           local client = vim.lsp.get_client_by_id(event.data.client_id)
@@ -226,11 +226,11 @@ require('lazy').setup({
             })
           end
 
-          -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-          --   map('<leader>oh', function()
-          --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
-          --   end, '[h]Toggle Inlay Hints')
-          -- end
+          if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+            map('<leader>ch', function()
+              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
+            end, '[h]Toggle Inlay Hints')
+          end
         end,
       })
 
@@ -741,7 +741,7 @@ ______________________________
   },
   {
     'nvim-treesitter/nvim-treesitter',
-    -- dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
+    dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects' },
     build = ':TSUpdate',
     opts = {
       ensure_installed = {
@@ -782,55 +782,56 @@ ______________________________
       --     node_decremental = '<c-backspace>',
       --   },
       -- },
-      -- textobjects = {
-      --   select = {
-      --     enable = true,
-      --     lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      --     keymaps = {
-      --       -- You can use the capture groups defined in textobjects.scm
-      --       ['aa'] = '@parameter.outer',
-      --       ['ia'] = '@parameter.inner',
-      --       ['af'] = '@function.outer',
-      --       ['if'] = '@function.inner',
-      --       ['ac'] = '@class.outer',
-      --       ['ic'] = '@class.inner',
-      --       ['ii'] = '@conditional.inner',
-      --       ['ai'] = '@conditional.outer',
-      --       ['il'] = '@loop.inner',
-      --       ['al'] = '@loop.outer',
-      --       ['at'] = '@comment.outer',
-      --     },
-      --   },
-      --   move = {
-      --     enable = true,
-      --     set_jumps = true, -- whether to set jumps in the jumplist
-      --     goto_next_start = {
-      --       [']f'] = '@function.outer',
-      --       [']]'] = '@class.outer',
-      --     },
-      --     goto_next_end = {
-      --       [']F'] = '@function.outer',
-      --       [']['] = '@class.outer',
-      --     },
-      --     goto_previous_start = {
-      --       ['[f'] = '@function.outer',
-      --       ['[['] = '@class.outer',
-      --     },
-      --     goto_previous_end = {
-      --       ['[F'] = '@function.outer',
-      --       ['[]'] = '@class.outer',
-      --     },
-      --   },
-      --   swap = {
-      --     enable = true,
-      --     swap_next = {
-      --       ['<leader>a'] = '@parameter.inner',
-      --     },
-      --     swap_previous = {
-      --       ['<leader>A'] = '@parameter.inner',
-      --     },
-      --   },
-      -- },
+      textobjects = {
+        select = {
+          enable = true,
+          lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+          keymaps = {
+            -- You can use the capture groups defined in textobjects.scm
+            ['aa'] = '@parameter.outer',
+            ['ia'] = '@parameter.inner',
+            ['af'] = '@function.outer',
+            ['if'] = '@function.inner',
+            ['ac'] = '@class.outer',
+            ['ic'] = '@class.inner',
+            ['ii'] = '@conditional.inner',
+            ['ai'] = '@conditional.outer',
+            ['il'] = '@loop.inner',
+            ['al'] = '@loop.outer',
+            ['at'] = '@comment.outer',
+          },
+          include_surrounding_whitespace = false,
+        },
+        move = {
+          enable = true,
+          set_jumps = true, -- whether to set jumps in the jumplist
+          goto_next_start = {
+            [']f'] = '@function.outer',
+            [']]'] = '@class.outer',
+          },
+          goto_next_end = {
+            [']F'] = '@function.outer',
+            [']['] = '@class.outer',
+          },
+          goto_previous_start = {
+            ['[f'] = '@function.outer',
+            ['[['] = '@class.outer',
+          },
+          goto_previous_end = {
+            ['[F'] = '@function.outer',
+            ['[]'] = '@class.outer',
+          },
+        },
+        swap = {
+          enable = true,
+          swap_next = {
+            ['<leader>a'] = '@parameter.inner',
+          },
+          swap_previous = {
+            ['<leader>A'] = '@parameter.inner',
+          },
+        },
+      },
     },
     config = function(_, opts)
       require('nvim-treesitter.install').prefer_git = true
