@@ -16,7 +16,7 @@ bindkey '\t\t' autosuggest-accept
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'
-alias n='neovim'
+alias v='nvim'
 alias ll="lsd -lAh --color=always"
 alias ls="lsd --color=always"
 alias cat='bat'
@@ -58,15 +58,9 @@ source ~/.fzf.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/adyshev/.cache/lm-studio/bin"
-
-### lyft_localdevtools_shell_rc start
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
-fi
-### lyft_localdevtools_shell_rc end
-
-### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
-eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
+printf "\e[?2004l"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/adyshev/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions

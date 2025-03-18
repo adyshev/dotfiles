@@ -301,7 +301,39 @@ require('lazy').setup({
         templ = {
           filetypes = { 'templ' },
         },
-        cssls = {},
+        tailwindcss = {
+          settings = {
+            tailwindCSS = {
+              classAttributes = { 'class', 'className', 'class:list', 'classList', 'ngClass' },
+              includeLanguages = {
+                eelixir = 'html-eex',
+                eruby = 'erb',
+                htmlangular = 'html',
+                templ = 'html',
+              },
+              lint = {
+                cssConflict = 'warning',
+                invalidApply = 'error',
+                invalidConfigPath = 'error',
+                invalidScreen = 'error',
+                invalidTailwindDirective = 'error',
+                invalidVariant = 'error',
+                recommendedVariantOrder = 'warning',
+              },
+              validate = true,
+            },
+          },
+        },
+        cssls = {
+          settings = {
+            css = {
+              validate = true,
+              lint = {
+                unknownAtRules = 'ignore',
+              },
+            },
+          },
+        },
         sqls = {},
         htmx = {},
         html = {
@@ -343,6 +375,8 @@ require('lazy').setup({
         'yamlfmt',
         'vale',
         'tflint',
+        'cssls',
+        'tailwindcss',
         'markdownlint',
         'markdown-toc',
       })
@@ -770,7 +804,7 @@ ______________________________
       },
       matchup = {
         enable = true,
-        -- disable_virtual_text = true,
+        disable_virtual_text = true,
       },
       indent = { enable = true, disable = { 'ruby' } },
       -- incremental_selection = {
@@ -846,12 +880,12 @@ ______________________________
       require('guess-indent').setup {}
     end,
   },
-  {
-    'andymass/vim-matchup',
-    setup = function()
-      vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-    end,
-  },
+  -- {
+  --   'andymass/vim-matchup',
+  --   setup = function()
+  --     vim.g.matchup_matchparen_offscreen = { method = 'popup' }
+  --   end,
+  -- },
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',

@@ -136,7 +136,7 @@ vim.api.nvim_create_autocmd({ 'CursorHold' }, {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'python', 'golang', 'lua', 'gitignore', '*.json', '*.toml', '*.yaml', 'makefile' },
+  pattern = { 'python', '*.go', '*.lua', 'gitignore', '*.json', '*.toml', '*.yaml', 'makefile' },
   command = 'setlocal nospell',
 })
 
