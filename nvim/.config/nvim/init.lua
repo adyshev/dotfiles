@@ -804,7 +804,9 @@ ______________________________
       },
       matchup = {
         enable = true,
-        disable_virtual_text = true,
+        disable = { 'ruby' },
+        disable_virtual_text = false,
+        include_match_words = true,
       },
       indent = { enable = true, disable = { 'ruby' } },
       -- incremental_selection = {
@@ -873,19 +875,13 @@ ______________________________
       require('nvim-treesitter.configs').setup(opts)
     end,
   },
-  -- { 'JoosepAlviste/nvim-ts-context-commentstring' },
+  { 'JoosepAlviste/nvim-ts-context-commentstring' },
   {
     'nmac427/guess-indent.nvim',
     config = function()
       require('guess-indent').setup {}
     end,
   },
-  -- {
-  --   'andymass/vim-matchup',
-  --   setup = function()
-  --     vim.g.matchup_matchparen_offscreen = { method = 'popup' }
-  --   end,
-  -- },
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',

@@ -38,7 +38,7 @@ vim.opt.tabstop = indent
 vim.opt.termguicolors = true
 vim.opt.timeoutlen = 300
 vim.opt.undofile = true
-vim.opt.updatetime = 200
+vim.opt.updatetime = 100
 vim.opt.wildmode = 'longest:full,full'
 vim.opt.clipboard = 'unnamedplus'
 
