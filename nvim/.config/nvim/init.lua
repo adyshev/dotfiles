@@ -961,9 +961,7 @@ ______________________________
                     end
                 end
             end
-
             local custom_gruvbox = require("lualine.themes.gruvbox-material")
-            -- custom_gruvbox.normal.a.bg = '#32302F'
             custom_gruvbox.normal.b.bg = "#32302F"
             custom_gruvbox.normal.c.bg = "#282828"
             custom_gruvbox.insert.b.bg = "#32302F"
@@ -981,7 +979,7 @@ ______________________________
                     -- section_separators = '',
                     component_separators = "",
                 },
-                extensions = { "oil", "quickfix", "trouble" },
+                extensions = { "oil", "trouble" },
                 sections = {
                     lualine_c = {
                         {
