@@ -29,7 +29,7 @@ return {
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
             callback = function()
-                Snacks.toggle.option("spell", { name = "[s]Spelling" }):map("<leader>os")
+                Snacks.toggle.option("spell", { name = "Spelling" }):map("<leader>os")
                 Snacks.toggle.inlay_hints():map("<leader>oh")
                 Snacks.toggle.indent():map("<leader>og")
                 Snacks.toggle.option("conceallevel", { off = 0, on = vim.o.conceallevel > 0 and vim.o.conceallevel or 2 }):map("<leader>oc")
