@@ -18,7 +18,7 @@ return {
           -- relativenumber = false, -- disable relative numbers
           cursorline = false, -- disable cursorline
           cursorcolumn = false, -- disable cursor column
-          -- foldcolumn = "0", -- disable fold column
+          foldcolumn = '0', -- disable fold column
           -- list = false, -- disable whitespace characters
         },
       },
@@ -35,13 +35,13 @@ return {
         },
         gitsigns = { enabled = true },
         tmux = { enabled = true },
-        alacritty = {
-          enabled = true,
-          font = 16,
-        },
         kitty = {
           enabled = true,
-          font = 16, -- font size increment
+          font = 17, -- font size increment
+        },
+        wezterm = {
+          enabled = true,
+          font = '+2', -- font size increment
         },
       },
     }

@@ -54,7 +54,7 @@ require('lazy').setup({
         { '<leader>c', group = '[c]Code' },
         -- { '<leader>s', group = '[s]Sessions' },
         -- { '<leader>n', group = '[n]Notes' },
-        -- { '<leader>o', group = '[o]Options' },
+        { '<leader>o', group = '[o]Options' },
       }
       -- Main
       vim.keymap.set('n', '<leader>q', '<cmd>bd<CR>', { desc = '[q]Close Buffer' })
@@ -226,11 +226,11 @@ require('lazy').setup({
             })
           end
 
-          if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-            map('<leader>ch', function()
-              vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
-            end, '[h]Toggle Inlay Hints')
-          end
+          -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+          --   map('<leader>oh', function()
+          --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
+          --   end, '[h]Toggle Inlay Hints')
+          -- end
         end,
       })
 
@@ -728,15 +728,15 @@ require('lazy').setup({
       require('mini.operators').setup()
       require('mini.trailspace').setup()
       require('mini.move').setup()
-      require('mini.indentscope').setup {
-        symbol = '│',
-        options = {
-          try_as_border = true,
-        },
-        draw = {
-          animation = require('mini.indentscope').gen_animation.none(),
-        },
-      }
+      -- require('mini.indentscope').setup {
+      --   symbol = '│',
+      --   options = {
+      --     try_as_border = true,
+      --   },
+      --   draw = {
+      --     animation = require('mini.indentscope').gen_animation.none(),
+      --   },
+      -- }
       -- INFO: Mini-starter page configuration
       local starter = require 'mini.starter'
       local my_items = {
@@ -882,32 +882,32 @@ ______________________________
       require('guess-indent').setup {}
     end,
   },
-  {
-    'lukas-reineke/indent-blankline.nvim',
-    main = 'ibl',
-    opts = {
-      indent = {
-        char = '│',
-        tab_char = '│',
-      },
-      scope = { show_start = false, show_end = false },
-      exclude = {
-        filetypes = {
-          'help',
-          'alpha',
-          'dashboard',
-          'neo-tree',
-          'Trouble',
-          'trouble',
-          'lazy',
-          'mason',
-          'notify',
-          'toggleterm',
-          'lazyterm',
-        },
-      },
-    },
-  },
+  -- {
+  --   'lukas-reineke/indent-blankline.nvim',
+  --   main = 'ibl',
+  --   opts = {
+  --     indent = {
+  --       char = '│',
+  --       tab_char = '│',
+  --     },
+  --     scope = { show_start = false, show_end = false },
+  --     exclude = {
+  --       filetypes = {
+  --         'help',
+  --         'alpha',
+  --         'dashboard',
+  --         'neo-tree',
+  --         'Trouble',
+  --         'trouble',
+  --         'lazy',
+  --         'mason',
+  --         'notify',
+  --         'toggleterm',
+  --         'lazyterm',
+  --       },
+  --     },
+  --   },
+  -- },
   {
     'lewis6991/gitsigns.nvim',
     event = 'BufReadPre',
@@ -956,7 +956,7 @@ ______________________________
       -- custom_gruvbox.insert.c.bg = '#282828'
       -- custom_gruvbox.visual.b.bg = '#32302F'
       -- custom_gruvbox.visual.c.bg = '#282828'
-      custom_gruvbox.replace.b.bg = '#32302F'
+      -- custom_gruvbox.replace.b.bg = '#32302F'
       custom_gruvbox.replace.c.bg = '#282828'
       custom_gruvbox.command.b.bg = '#32302F'
       custom_gruvbox.command.c.bg = '#282828'

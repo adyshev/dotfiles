@@ -1,6 +1,5 @@
 return {
   'mrjones2014/smart-splits.nvim',
-  -- enabled = false,
   config = function()
     require('smart-splits').setup()
 
@@ -16,9 +15,9 @@ return {
     vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
 
     -- swapping buffers between windows
-    vim.keymap.set('n', '<leader><leader>h', require('smart-splits').swap_buf_left)
-    vim.keymap.set('n', '<leader><leader>j', require('smart-splits').swap_buf_down)
-    vim.keymap.set('n', '<leader><leader>k', require('smart-splits').swap_buf_up)
-    vim.keymap.set('n', '<leader><leader>l', require('smart-splits').swap_buf_right)
+    vim.keymap.set('n', '<A-]>', require('smart-splits').swap_buf_right)
+    vim.keymap.set('n', '<A-[>', require('smart-splits').swap_buf_left)
+    vim.keymap.set('n', '<A-S-]>', require('smart-splits').swap_buf_down)
+    vim.keymap.set('n', '<A-S-[>', require('smart-splits').swap_buf_up)
   end,
 }

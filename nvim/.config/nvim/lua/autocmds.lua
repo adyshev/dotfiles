@@ -29,7 +29,7 @@ vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { '*.txt', '*.md', '*.norg' },
+  pattern = { '*.md' },
   callback = function()
     vim.opt.expandtab = true
     vim.opt.tabstop = 2
@@ -60,16 +60,16 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
   desc = 'Python specific settings',
 })
 
-local file_exists_and_is_empty = function(filepath)
-  local file = io.open(filepath, 'r') -- Open the file in read mode
-  if file ~= nil then
-    local content = file:read '*all' -- Read the entire content of the file
-    file:close() -- Close the file
-    return content == '' -- Check if the content is empty
-  else
-    return false
-  end
-end
+-- local file_exists_and_is_empty = function(filepath)
+--   local file = io.open(filepath, 'r') -- Open the file in read mode
+--   if file ~= nil then
+--     local content = file:read '*all' -- Read the entire content of the file
+--     file:close() -- Close the file
+--     return content == '' -- Check if the content is empty
+--   else
+--     return false
+--   end
+-- end
 
 -- vim.api.nvim_create_autocmd({ 'BufNew', 'BufNewFile' }, {
 --   callback = function(args)
@@ -92,25 +92,25 @@ end
 --   pattern = { '**/neorg/personal/*.norg' },
 -- })
 
-vim.api.nvim_create_autocmd('FileType', {
-  pattern = {
-    'help',
-    'alpha',
-    'dashboard',
-    'neo-tree',
-    'Trouble',
-    'trouble',
-    'lazy',
-    'oil',
-    'mason',
-    'notify',
-    'toggleterm',
-    'lazyterm',
-  },
-  callback = function()
-    vim.b.miniindentscope_disable = true
-  end,
-})
+-- vim.api.nvim_create_autocmd('FileType', {
+--   pattern = {
+--     'help',
+--     'alpha',
+--     'dashboard',
+--     'neo-tree',
+--     'Trouble',
+--     'trouble',
+--     'lazy',
+--     'oil',
+--     'mason',
+--     'notify',
+--     'toggleterm',
+--     'lazyterm',
+--   },
+--   callback = function()
+--     vim.b.miniindentscope_disable = true
+--   end,
+-- })
 
 -- Show/Close diagnostic messages
 vim.api.nvim_create_autocmd({ 'CursorHold' }, {
