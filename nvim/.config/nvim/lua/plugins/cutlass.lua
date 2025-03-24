@@ -1,7 +1,7 @@
 return {
-  'gbprod/cutlass.nvim',
-  opts = {
-    cut_key = 'c',
-    override_del = true,
-  },
+    "gbprod/cutlass.nvim",
+    opts = {
+        cut_key = "c",
+        override_del = true,
+    },
 }
