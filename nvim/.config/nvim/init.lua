@@ -94,7 +94,7 @@ require("lazy").setup({
                 end,
             },
             { "nvim-telescope/telescope-ui-select.nvim" },
-            -- { 'nvim-telescope/telescope-file-browser.nvim' },
+            { "nvim-telescope/telescope-file-browser.nvim" },
             { "smartpde/telescope-recent-files" },
             {
                 "nvim-telescope/telescope-symbols.nvim",
@@ -124,15 +124,15 @@ require("lazy").setup({
                     recent_files = {
                         only_cwd = true,
                     },
-                    -- file_browser = {
-                    --   hidden = { file_browser = true, folder_browser = true },
-                    -- },
+                    file_browser = {
+                        hidden = { file_browser = true, folder_browser = true },
+                    },
                 },
             })
 
             pcall(require("telescope").load_extension, "fzf")
             pcall(require("telescope").load_extension, "ui-select")
-            -- pcall(require('telescope').load_extension, 'file-browser')
+            pcall(require("telescope").load_extension, "file-browser")
             pcall(require("telescope").load_extension, "recent_files")
 
             local builtin = require("telescope.builtin")
@@ -143,7 +143,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "[d] Find Diagnostics" })
             vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[k]Find Keymaps" })
             -- vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Find Notes' })
-            -- vim.keymap.set('n', '<leader>fb', ':Telescope file_browser path=%:p:h select_buffer=true<CR>', { desc = '[b]File Browser' })
+            vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { desc = "[b]File Browser" })
             vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[f]Find Files" })
             vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[w]Find current Word" })
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[g]Find by Grep" })
