@@ -1,5 +1,6 @@
 {
   "LuaSnip": { "branch": "master", "commit": "c9b9a22904c97d0eb69ccb9bab76037838326817" },
+  "auto-cmdheight.nvim": { "branch": "main", "commit": "f0565f28e159d49c7719098a34b891691b73ecfc" },
   "auto-save.nvim": { "branch": "main", "commit": "29f793a3a7f98129387590269ffe3ad61ab5e509" },
   "barbecue": { "branch": "main", "commit": "cd7e7da622d68136e13721865b4d919efd6325ed" },
   "better-escape.nvim": { "branch": "master", "commit": "9738a470d93e2e52815bc46b4042372ca198cbd6" },
