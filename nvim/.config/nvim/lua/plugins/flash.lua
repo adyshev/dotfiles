@@ -4,9 +4,6 @@ return {
     enabled = true,
     ---@type Flash.Config
     opts = {
-        jump = {
-            autojump = true,
-        },
         modes = {
             char = { jump_labels = true },
             search = { enabled = true },
@@ -25,8 +22,6 @@ return {
   -- stylua: ignore
   keys = {
     { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter({ jump = { pos = "start" }, label = { before = true, after = false } }) end, desc = "Flash Treesitter" },
-    { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    }
+  }
 ,
 }
