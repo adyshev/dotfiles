@@ -214,12 +214,20 @@ if.app-id ='com.apple.Music'
 run = ['move-node-to-workspace 5']
 
 [[on-window-detected]]
-if.app-id ='com.apple.finder'
+if.app-id ='com.culturedcode.ThingsMac'
+run = ['move-node-to-workspace 6']
+
+[[on-window-detected]]
+if.app-id ='com.apple.iCal'
 run = ['move-node-to-workspace 6']
 
 [[on-window-detected]]
 if.app-id ='com.tinyspeck.slackmacgap'
 run = ['move-node-to-workspace 7']
+
+[[on-window-detected]]
+if.app-id ='com.apple.finder'
+run = ['layout floating']
 
 [[on-window-detected]]
 if.app-id ='com.apple.MobileSMS'
@@ -233,13 +241,6 @@ run = ['layout floating']
 if.app-id ='com.apple.stocks'
 run = ['layout floating']
 
-[[on-window-detected]]
-if.app-id ='com.culturedcode.ThingsMac'
-run = ['layout floating']
-
-[[on-window-detected]]
-if.app-id ='com.apple.iCal'
-run = ['layout floating']
 
 # force certain workspaces to certain monitors
 [workspace-to-monitor-force-assignment]

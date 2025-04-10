@@ -29,12 +29,8 @@ map("n", "<Home>", "gg^")
 map("n", "<End>", "G$")
 map("i", "<Home>", "<C-O>gg^")
 map("i", "<End>", "<C-O>G$")
-
--- Allow clipboard copy paste in neovim
-vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
-vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+map("n", "Y", "yy")
+map("n", "Q", "<cmd>qa<cr>")
 
 -- Buffers
 map("n", "<S-h>", "<CMD>bprev<CR>", opts)
@@ -50,3 +46,9 @@ map("n", "<C-d>", "YP", opts)
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)
+
+-- Allow clipboard copy paste in neovim
+vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("t", "<D-v>", "<C-R>+", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("v", "<D-v>", "<C-R>+", { noremap = true, silent = true })

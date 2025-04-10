@@ -57,9 +57,16 @@ vim.g.loaded_ruby_provider = 0
 
 vim.g.loaded_matchit = 1
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+vim.lsp.handlers["textDocument/hover"] = function()
+    vim.lsp.buf.hover({
+        border = "rounded",
+    })
+end
+
+vim.lsp.handlers["textDocument/signatureHelp"] = function()
+    vim.lsp.buf.hover({
+        border = "rounded",
+    })
+end
 
 vim.cmd([[noremap ; :]])
-vim.cmd([[command! Qa :qa]])
-vim.cmd([[command! Q :q]])

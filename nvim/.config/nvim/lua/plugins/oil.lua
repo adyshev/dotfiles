@@ -60,7 +60,7 @@ return {
                     ["\\"] = "actions.parent",
                     ["-"] = false,
                     ["_"] = false,
-                    ["`"] = { "actions.cd", mode = "n" },
+                    ["|"] = { "actions.cd", mode = "n" },
                     ["~"] = false,
                     ["gs"] = false, -- 'actions.change_sort',
                     ["gx"] = false, -- 'actions.open_external',
