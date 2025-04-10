@@ -31,6 +31,7 @@ map("i", "<Home>", "<C-O>gg^")
 map("i", "<End>", "<C-O>G$")
 map("n", "Y", "yy")
 map("n", "Q", "<cmd>qa<cr>")
+map("n", "cc", "yydd")
 
 -- Buffers
 map("n", "<S-h>", "<CMD>bprev<CR>", opts)

@@ -4,11 +4,12 @@ return {
     enabled = true,
     ---@type Flash.Config
     opts = {
+        jump = {
+            autojump = true,
+        },
         modes = {
-            char = {
-                enabled = false,
-            },
-            search = { enabled = false },
+            char = { jump_labels = true },
+            search = { enabled = true },
         },
         exclude = {
             "NeogitStatus",
@@ -23,11 +24,9 @@ return {
     },
   -- stylua: ignore
   keys = {
-    { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-    { "F", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
+    { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
+    { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter({ jump = { pos = "start" }, label = { before = true, after = false } }) end, desc = "Flash Treesitter" },
     { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-    { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-    { "<C-f>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-  }
+    }
 ,
 }

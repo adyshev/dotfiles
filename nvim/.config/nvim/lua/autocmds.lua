@@ -135,6 +135,12 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
     end,
 })
 
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.highlight.on_yank({ higroup = "Search" })
+    end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "python", "golang", "lua", "gitignore", "*.json", "*.toml", "*.yaml", "makefile" },
     command = "setlocal nospell",

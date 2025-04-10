@@ -96,12 +96,6 @@ require("lazy").setup({
             { "nvim-telescope/telescope-ui-select.nvim" },
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "smartpde/telescope-recent-files" },
-            {
-                "nvim-telescope/telescope-symbols.nvim",
-                config = function()
-                    vim.keymap.set("n", "<leader>fy", "<cmd>Telescope symbols<cr>", { desc = "[y]Find Symbols" })
-                end,
-            },
             { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
         },
         config = function()
@@ -137,14 +131,16 @@ require("lazy").setup({
 
             local builtin = require("telescope.builtin")
             vim.keymap.set("n", "<leader>f?", builtin.help_tags, { desc = "[?]Find Help" })
-            vim.keymap.set("n", "<leader>fh", ":Telescope command_history<CR>", { desc = "[h]Find Command History" })
-            vim.keymap.set("n", "<leader>fs", ":Telescope search_history<CR>", { desc = "[s]Find Search History" })
+            vim.keymap.set("n", "<leader>fc", ":Telescope command_history<CR>", { desc = "[c]Find Command History" })
+            vim.keymap.set("n", "<leader>fh", ":Telescope search_history<CR>", { desc = "[h]Find Search History" })
             vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "[t]Find TODO" })
-            vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "[d] Find Diagnostics" })
+            vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "[d]Find Diagnostics" })
             vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[k]Find Keymaps" })
             -- vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Find Notes' })
             vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { desc = "[b]File Browser" })
             vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[f]Find Files" })
+            vim.keymap.set("n", "<leader>fr", builtin.registers, { desc = "[r]Find Registers" })
+            vim.keymap.set("n", "<leader>fs", builtin.spell_suggest, { desc = "[S]Spell Suggestions" })
             vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[w]Find current Word" })
             vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[g]Find by Grep" })
             vim.keymap.set("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = "[ ]Find Recent files" })
