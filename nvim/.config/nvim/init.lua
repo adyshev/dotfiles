@@ -987,8 +987,8 @@ ______________________________
             custom_gruvbox.visual.c.bg = "#282828"
             custom_gruvbox.command.b.bg = "#32302F"
             custom_gruvbox.command.c.bg = "#282828"
-            custom_gruvbox.inactive.b.bg = "#32302F"
-            custom_gruvbox.inactive.c.bg = "#282828"
+            -- custom_gruvbox.inactive.b.bg = "#32302F"
+            -- custom_gruvbox.inactive.c.bg = "#282828"
 
             require("lualine").setup({
                 options = {
