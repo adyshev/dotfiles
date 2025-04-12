@@ -29,8 +29,13 @@ map("n", "<Home>", "gg^")
 map("n", "<End>", "G$")
 map("i", "<Home>", "<C-O>gg^")
 map("i", "<End>", "<C-O>G$")
-map("n", "Y", "yy")
 map("n", "Q", "<cmd>qa<cr>")
+
+-- Navigation
+map("n", "<C-d>", "<C-d>zz", opts)
+map("n", "<C-u>", "<C-u>zz", opts)
+map("n", "<C-f>", "<C-f>zz", opts)
+map("n", "<C-b>", "<C-b>zz", opts)
 
 -- Buffers
 map("n", "<S-h>", "<CMD>bprev<CR>", opts)
@@ -42,7 +47,7 @@ map("n", "<M-y>", "ggVGy", opts)
 -- Select all
 map("n", "<M-a>", "ggVG", opts)
 -- Duplicate line
-map("n", "<C-d>", "YP", opts)
+map("n", "<C-c>", "YP", opts)
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)

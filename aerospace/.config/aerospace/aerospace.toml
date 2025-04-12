@@ -116,10 +116,12 @@ alt-comma = 'focus-monitor next'
 alt-period = 'focus-monitor prev'
 
 # See: https://nikitabobko.github.ioeAeroSpace/commands#layout
-alt-e = 'layout tiles horizontal vertical'
-# alt-comma = 'layout accordion horizontal vertical'
+alt-leftSquareBracket = 'layout tiles horizontal vertical'
+alt-rightSquareBracket = 'layout accordion horizontal vertical'
+
 alt-f = 'fullscreen'
 # alt-y = ['focus right', 'join-with down', 'layout tiles horizontal']
+
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
 alt-h = 'focus left'
 alt-j = 'focus down'
@@ -137,16 +139,16 @@ alt-shift-minus = 'resize smart -50'
 alt-shift-equal = 'resize smart +50'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#workspace
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
+alt-1 = ['layout tiles horizontal','workspace 1']
+alt-2 = ['layout tiles horizontal','workspace 2']
+alt-3 = ['layout tiles horizontal','workspace 3']
+alt-4 = ['layout tiles horizontal','workspace 4']
+alt-5 = ['layout tiles horizontal','workspace 5']
 alt-6 = ['layout accordion horizontal','workspace 6']
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
-alt-0 = 'workspace 0'
+alt-7 = ['layout tiles horizontal','workspace 7']
+alt-8 = ['layout tiles horizontal','workspace 8']
+alt-9 = ['layout tiles horizontal','workspace 9']
+alt-0 = ['layout tiles horizontal','workspace 0']
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = 'move-node-to-workspace 1'
