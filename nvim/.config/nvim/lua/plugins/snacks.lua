@@ -4,6 +4,7 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = {
+        animate = { enabled = true },
         bigfile = { enabled = true },
         indent = {
             enabled = true,
@@ -11,6 +12,7 @@ return {
                 enabled = false,
             },
         },
+        rename = { enabled = true },
         input = { enabled = true },
         notifier = { enabled = true },
         notify = { enabled = true },

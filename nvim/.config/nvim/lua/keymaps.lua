@@ -30,6 +30,7 @@ map("n", "<End>", "G$")
 map("i", "<Home>", "<C-O>gg^")
 map("i", "<End>", "<C-O>G$")
 map("n", "Q", "<cmd>qa<cr>")
+map("n", "Y", "^y$")
 
 -- Navigation
 map("n", "<C-d>", "<C-d>zz", opts)
