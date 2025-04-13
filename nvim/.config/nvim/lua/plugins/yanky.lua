@@ -25,8 +25,8 @@ return {
         { "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put and Indent Left" },
         { ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
         { "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put Before and Indent Left" },
-        { "<c-p>", "<Plug>(YankyPreviousEntry)", desc = "Previous Yank entry" },
-        { "<c-n>", "<Plug>(YankyNextEntry)", desc = "Next Yank entry" },
+        { "<c-y>", "<Plug>(YankyPreviousEntry)", desc = "Previous Yank entry" },
+        { "<c-u>", "<Plug>(YankyNextEntry)", desc = "Next Yank entry" },
     },
     config = function()
         local utils = require("yanky.utils")
