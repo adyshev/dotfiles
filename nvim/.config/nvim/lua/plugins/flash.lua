@@ -6,7 +6,6 @@ return {
     opts = {
         modes = {
             char = { jump_labels = true },
-            search = { enabled = true },
         },
         exclude = {
             "NeogitStatus",
