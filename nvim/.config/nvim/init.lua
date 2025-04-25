@@ -48,7 +48,7 @@ require("lazy").setup({
 
             -- Document existing key chains
             require("which-key").add({
-                { "<leader>f", group = "[f]Find" },
+                { "<leader>s", group = "[s]Search" },
                 -- { '<leader>d', group = '[d]Debug' },
                 -- { '<leader>t', group = '[t]Test' },
                 { "<leader>c", group = "[c]Code" },
@@ -130,32 +130,32 @@ require("lazy").setup({
             pcall(require("telescope").load_extension, "recent_files")
 
             local builtin = require("telescope.builtin")
-            vim.keymap.set("n", "<leader>f?", builtin.help_tags, { desc = "[?]Find Help" })
-            vim.keymap.set("n", "<leader>fc", ":Telescope command_history<CR>", { desc = "[c]Find Command History" })
-            vim.keymap.set("n", "<leader>fh", ":Telescope search_history<CR>", { desc = "[h]Find Search History" })
-            vim.keymap.set("n", "<leader>ft", ":TodoTelescope<CR>", { desc = "[t]Find TODO" })
-            vim.keymap.set("n", "<leader>fd", "<cmd>Telescope diagnostics<cr>", { desc = "[d]Find Diagnostics" })
-            vim.keymap.set("n", "<leader>fk", builtin.keymaps, { desc = "[k]Find Keymaps" })
-            -- vim.keymap.set('n', '<leader>fn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Find Notes' })
-            vim.keymap.set("n", "<leader>fb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { desc = "[b]File Browser" })
-            vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[f]Find Files" })
-            vim.keymap.set("n", "<leader>fr", builtin.registers, { desc = "[r]Find Registers" })
-            vim.keymap.set("n", "<leader>fs", builtin.spell_suggest, { desc = "[S]Spell Suggestions" })
-            vim.keymap.set("n", "<leader>fw", builtin.grep_string, { desc = "[w]Find current Word" })
-            vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "[g]Find by Grep" })
-            vim.keymap.set("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = "[ ]Find Recent files" })
-            vim.keymap.set("n", "<leader>fo", builtin.buffers, { desc = "[o]Find open buffers" })
+            vim.keymap.set("n", "<leader>s?", builtin.help_tags, { desc = "[?]Search Help" })
+            vim.keymap.set("n", "<leader>sc", ":Telescope command_history<CR>", { desc = "[c]Search Command History" })
+            vim.keymap.set("n", "<leader>sh", ":Telescope search_history<CR>", { desc = "[h]Search Search History" })
+            vim.keymap.set("n", "<leader>st", ":TodoTelescope<CR>", { desc = "[t]Search TODO" })
+            vim.keymap.set("n", "<leader>sd", "<cmd>Telescope diagnostics<cr>", { desc = "[d]Search Diagnostics" })
+            vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[k]Search Keymaps" })
+            -- vim.keymap.set('n', '<leader>sn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Search Notes' })
+            vim.keymap.set("n", "<leader>sb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { desc = "[b]File Browser" })
+            vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[f]Search Files" })
+            vim.keymap.set("n", "<leader>sr", builtin.registers, { desc = "[r]Search Registers" })
+            vim.keymap.set("n", "<leader>ss", builtin.spell_suggest, { desc = "[S]Spell Suggestions" })
+            vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[w]Search current Word" })
+            vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[g]Search by Grep" })
+            vim.keymap.set("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = "[ ]Search Recent files" })
+            vim.keymap.set("n", "<leader>so", builtin.buffers, { desc = "[o]Search open buffers" })
 
-            vim.keymap.set("n", "<leader>f/", function()
+            vim.keymap.set("n", "<leader>s/", function()
                 builtin.live_grep({
                     grep_open_files = true,
                     prompt_title = "Live Grep in Open Files",
                 })
-            end, { desc = "[/]Find in Open Files" })
+            end, { desc = "[/]Search in Open Files" })
 
-            vim.keymap.set("n", "<leader>fc", function()
+            vim.keymap.set("n", "<leader>sc", function()
                 builtin.find_files({ cwd = vim.fn.stdpath("config") })
-            end, { desc = "[c]Find Neovim config files" })
+            end, { desc = "[c]Search Neovim config files" })
         end,
     },
     {
