@@ -1,5 +1,6 @@
 return {
     "voldikss/vim-floaterm",
+    enabled = false,
     keys = {
         { "<leader>t", "<cmd>FloatermToggle<cr>", desc = "[t]Terminal" },
         { "<leader>t", "<C-\\><C-n><cmd>FloatermToggle<cr>", desc = "[t]Close Terminal", mode = "t" },
