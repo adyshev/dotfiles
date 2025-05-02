@@ -4,7 +4,6 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = {
-        animate = { enabled = true },
         bigfile = { enabled = true },
         indent = {
             enabled = true,
@@ -18,53 +17,10 @@ return {
         notify = { enabled = true },
         quickfile = { enabled = true },
         words = { enabled = true },
-        zen = {
-            toggles = {
-                dim = false,
-                git_signs = false,
-                mini_diff_signs = false,
-                diagnostics = false,
-                inlay_hints = false,
-            },
-            show = {
-                statusline = false, -- can only be shown when using the global statusline
-                tabline = false,
-            },
-            zoom = {
-                toggles = {},
-                show = { statusline = true, tabline = true },
-                win = {
-                    backdrop = false,
-                    width = 0, -- full width
-                },
-            },
-        },
         styles = {
             zen = {
-                enter = true,
-                fixbuf = false,
-                minimal = false,
                 width = 130,
-                height = 0,
                 backdrop = { transparent = false, blend = 99 },
-                keys = { q = false },
-                zindex = 40,
-                wo = {
-                    winhighlight = "NormalFloat:Normal",
-                },
-                w = {
-                    snacks_main = true,
-                },
-            },
-            zoom_indicator = {
-                text = "▍ zoom  󰊓  ",
-                minimal = true,
-                enter = false,
-                focusable = false,
-                height = 1,
-                row = 0,
-                col = -1,
-                backdrop = false,
             },
         },
     },

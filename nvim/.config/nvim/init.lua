@@ -369,12 +369,12 @@ require("lazy").setup({
                 "jq",
                 "jsonlint",
                 "yamlfmt",
-                "vale",
-                "tflint",
+                -- "vale",
+                -- "tflint",
                 "cssls",
                 "tailwindcss",
-                "markdownlint",
-                "markdown-toc",
+                -- "markdownlint",
+                -- "markdown-toc",
             })
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -424,12 +424,12 @@ require("lazy").setup({
         config = function()
             local lint = require("lint")
             lint.linters_by_ft = {
-                markdown = { "markdownlint" },
+                -- markdown = { "markdownlint" },
                 python = { "mypy" },
                 json = { "jsonlint" },
-                rst = { "vale" },
-                terraform = { "tflint" },
-                text = { "vale" },
+                -- rst = { "vale" },
+                -- terraform = { "tflint" },
+                -- text = { "vale" },
             }
 
             lint.linters.mypy.args = {
@@ -981,8 +981,8 @@ ______________________________
             local custom_gruvbox = require("lualine.themes.gruvbox-material")
             custom_gruvbox.normal.b.bg = "#32302F"
             custom_gruvbox.normal.c.bg = "#282828"
-            custom_gruvbox.insert.b.bg = "#32302F"
-            custom_gruvbox.insert.c.bg = "#282828"
+            -- custom_gruvbox.insert.b.bg = "#32302F"
+            -- custom_gruvbox.insert.c.bg = "#282828"
             custom_gruvbox.visual.b.bg = "#32302F"
             custom_gruvbox.visual.c.bg = "#282828"
             custom_gruvbox.command.b.bg = "#32302F"
