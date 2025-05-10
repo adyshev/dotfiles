@@ -40,9 +40,9 @@ return {
             bottom_search = true,
             command_palette = false,
             long_message_to_split = true,
-            inc_rename = true,
+            inc_rename = false,
             lsp_doc_border = true,
-            cmdline_output_to_split = true,
+            cmdline_output_to_split = false,
         },
         documentation = {
             view = "hover",
@@ -116,6 +116,16 @@ return {
                 view = "mini",
             },
         },
+        views = {
+            split = {
+                win_options = { wrap = false },
+                size = 16,
+                close = { keys = { "q", "<CR>", "<Esc>" } },
+            },
+            popup = {
+                win_options = { wrap = false },
+            },
+        },
         messages = {
             enabled = true,
             view = "notify",
@@ -123,6 +133,14 @@ return {
             view_warn = "notify",
             view_history = "messages",
             view_search = false,
+        },
+        popupmenu = {
+            enabled = true, -- enables the Noice popupmenu UI
+            ---@type 'nui'|'cmp'
+            backend = "cmp", -- backend to use to show regular cmdline completions
+            ---@type NoicePopupmenuItemKind|false
+            -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
+            kind_icons = {}, -- set to `false` to disable icons
         },
     },
     config = function(_, opts)

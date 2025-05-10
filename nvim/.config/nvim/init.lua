@@ -293,7 +293,7 @@ require("lazy").setup({
                         },
                     },
                 },
-                marksman = {},
+                -- marksman = {},
                 templ = {
                     filetypes = { "templ" },
                 },
@@ -354,6 +354,9 @@ require("lazy").setup({
                     border = "rounded",
                     width = 0.8,
                     height = 0.8,
+                },
+                registries = {
+                    "github:mason-org/mason-registry",
                 },
             })
 
@@ -625,24 +628,24 @@ require("lazy").setup({
                 }),
             })
 
-            cmp.setup.filetype("norg", {
-                sources = {
-                    -- { name = 'neorg' },
-                    { name = "luasnip" },
-                    {
-                        name = "spell",
-                        option = {
-                            keyword_length = 4,
-                            keep_all_entries = false,
-                            enable_in_context = function()
-                                return true
-                            end,
-                            preselect_correct_word = false,
-                        },
-                    },
-                    { name = "emoji" },
-                },
-            })
+            -- cmp.setup.filetype("norg", {
+            --     sources = {
+            --         -- { name = 'neorg' },
+            --         { name = "luasnip" },
+            --         {
+            --             name = "spell",
+            --             option = {
+            --                 keyword_length = 4,
+            --                 keep_all_entries = false,
+            --                 enable_in_context = function()
+            --                     return true
+            --                 end,
+            --                 preselect_correct_word = false,
+            --             },
+            --         },
+            --         { name = "emoji" },
+            --     },
+            -- })
 
             cmp.setup.filetype("lua", {
                 sources = {
@@ -653,8 +656,9 @@ require("lazy").setup({
                 },
             })
 
-            cmp.setup.filetype({ "markdown", "text" }, {
+            cmp.setup.filetype({ "markdown" }, {
                 sources = {
+                    { name = "render-markdown" },
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
                     { name = "buffer" },
@@ -700,6 +704,15 @@ require("lazy").setup({
         end,
     },
     {
+        "MeanderingProgrammer/render-markdown.nvim",
+        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
+        config = function()
+            require("render-markdown").setup({
+                completions = { lsp = { enabled = true } },
+            })
+        end,
+    },
+    {
         "folke/todo-comments.nvim",
         config = function()
             require("todo-comments").setup({ signs = false })
@@ -721,7 +734,7 @@ require("lazy").setup({
         "echasnovski/mini.nvim",
         config = function()
             -- require('mini.surround').setup()
-            require("mini.operators").setup()
+            -- require("mini.operators").setup()
             require("mini.trailspace").setup()
             require("mini.move").setup({
                 -- Module mappings. Use `''` (empty string) to disable one.
@@ -822,7 +835,7 @@ ______________________________
             matchup = {
                 enable = true,
                 disable = { "ruby" },
-                disable_virtual_text = false,
+                disable_virtual_text = true,
                 include_match_words = true,
             },
             indent = { enable = true, disable = { "ruby" } },
