@@ -994,8 +994,8 @@ ______________________________
             local custom_gruvbox = require("lualine.themes.gruvbox-material")
             custom_gruvbox.normal.b.bg = "#32302F"
             custom_gruvbox.normal.c.bg = "#282828"
-            -- custom_gruvbox.insert.b.bg = "#32302F"
-            -- custom_gruvbox.insert.c.bg = "#282828"
+            custom_gruvbox.insert.b.bg = "#32302F"
+            custom_gruvbox.insert.c.bg = "#282828"
             custom_gruvbox.visual.b.bg = "#32302F"
             custom_gruvbox.visual.c.bg = "#282828"
             custom_gruvbox.command.b.bg = "#32302F"
