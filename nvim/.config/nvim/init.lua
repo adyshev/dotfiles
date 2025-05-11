@@ -337,16 +337,7 @@ require("lazy").setup({
                 },
                 jsonls = {},
                 yamlls = {},
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            completion = {
-                                callSnippet = "Replace",
-                            },
-                            diagnostics = { disable = { "missing-fields" }, globals = { "vim" } },
-                        },
-                    },
-                },
+                lua_ls = {},
             }
             require("lspconfig.ui.windows").default_options.border = "rounded"
             require("mason").setup({
