@@ -136,17 +136,17 @@ config.keys = {
 	},
 	-- Horizontal split
 	{
-		key = "-",
-		mods = "LEADER",
+		key = "_",
+		mods = "LEADER|SHIFT",
 		action = act.SplitPane({
 			direction = "Down",
 			size = { Percent = 50 },
 		}),
 	},
 	{
-		key = "x",
+		key = "d",
 		mods = "LEADER",
-		action = act.CloseCurrentTab({ confirm = true }),
+		action = wezterm.action.CloseCurrentPane({ confirm = false }),
 	},
 	{
 		-- Vi mode
@@ -160,8 +160,6 @@ config.keys = {
 		mods = "LEADER",
 		action = act.PaneSelect({ mode = "SwapWithActiveKeepFocus" }),
 	},
-	{ key = "[", mods = "LEADER", action = act.ActivateTabRelative(-1) },
-	{ key = "]", mods = "LEADER", action = act.ActivateTabRelative(1) },
 }
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
