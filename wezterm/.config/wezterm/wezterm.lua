@@ -160,6 +160,22 @@ config.keys = {
 		mods = "LEADER",
 		action = act.PaneSelect({ mode = "SwapWithActiveKeepFocus" }),
 	},
+	{
+		key = "h",
+		mods = "LEADER",
+		action = act.AdjustPaneSize({ "Left", 5 }),
+	},
+	{
+		key = "j",
+		mods = "LEADER",
+		action = act.AdjustPaneSize({ "Down", 5 }),
+	},
+	{ key = "k", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
+	{
+		key = "l",
+		mods = "LEADER",
+		action = act.AdjustPaneSize({ "Right", 5 }),
+	},
 }
 
 wezterm.on("user-var-changed", function(window, pane, name, value)

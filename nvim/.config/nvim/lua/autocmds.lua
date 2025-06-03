@@ -19,6 +19,22 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- :h restore-cursor
+local function RestoreCursorPosition()
+    if vim.buftype == "terminal" then
+        return
+    end
+    local ft = vim.bo.filetype
+    if not (ft:match("commit") or ft:match("rebase")) and vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+        vim.cmd('normal! g`"')
+    end
+end
+
+vim.api.nvim_create_autocmd({ "BufRead" }, {
+    pattern = "*",
+    callback = RestoreCursorPosition,
+})
+
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     desc = "Redraw the cursorline when navigating around the buffer",
     callback = function()
@@ -153,6 +169,20 @@ vim.api.nvim_create_autocmd("User", {
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "python", "golang", "lua", "gitignore", "*.json", "*.toml", "*.yaml", "makefile" },
     command = "setlocal nospell",
+})
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    callback = function()
+        local args = vim.v.argv
+        -- skip program name, look for first non-option arg
+        for i = 2, #args do
+            local arg = args[i]
+            if not arg:match("^%-") and vim.fn.isdirectory(arg) == 1 then
+                vim.cmd("cd " .. vim.fn.fnameescape(arg))
+                break
+            end
+        end
+    end,
 })
 
 -- Disable commenting new lines

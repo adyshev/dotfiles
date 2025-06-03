@@ -83,6 +83,7 @@ return {
             { filter = { event = "msg_show", find = "^:!make" }, skip = true },
             { filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
             { filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
+            { filter = { event = "msg_show", find = "E486: Pattern not found:" }, skip = true },
             {
                 filter = {
                     event = "lsp",
@@ -129,8 +130,8 @@ return {
         messages = {
             enabled = true,
             view = "notify",
-            view_error = "notify",
-            view_warn = "notify",
+            view_error = "messages",
+            view_warn = "mini",
             view_history = "messages",
             view_search = false,
         },

@@ -143,7 +143,12 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>ss", builtin.spell_suggest, { desc = "[S]Spell Suggestions" })
             vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[w]Search current Word" })
             vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[g]Search by Grep" })
-            vim.keymap.set("n", "<leader><leader>", [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]], { desc = "[ ]Search Recent files" })
+            vim.keymap.set(
+                "n",
+                "<leader><leader>",
+                [[<cmd>lua require('telescope').extensions.recent_files.pick()<CR>]],
+                { desc = "[ ]Search Recent files", noremap = true, silent = true }
+            )
             vim.keymap.set("n", "<leader>so", builtin.buffers, { desc = "[o]Search open buffers" })
 
             vim.keymap.set("n", "<leader>s/", function()
@@ -731,16 +736,16 @@ require("lazy").setup({
                 -- Module mappings. Use `''` (empty string) to disable one.
                 mappings = {
                     -- Move visual selection in Visual mode. Defaults are Alt (Meta) + hjkl.
-                    left = "<C-h>",
-                    right = "<C-l>",
-                    down = "<C-j>",
-                    up = "<C-k>",
+                    left = "<M-h>",
+                    right = "<M-l>",
+                    down = "<M-j>",
+                    up = "<M-k>",
 
                     -- Move current line in Normal mode
-                    line_left = "<C-h>",
-                    line_right = "<C-l>",
-                    line_down = "<C-j>",
-                    line_up = "<C-k>",
+                    line_left = "<M-h>",
+                    line_right = "<M-l>",
+                    line_down = "<M-j>",
+                    line_up = "<M-k>",
                 },
 
                 -- Options which control moving behavior
