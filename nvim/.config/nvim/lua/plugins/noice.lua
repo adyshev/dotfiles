@@ -132,7 +132,7 @@ return {
             view = "notify",
             view_error = "messages",
             view_warn = "mini",
-            view_history = "messages",
+            view_history = "split",
             view_search = false,
         },
         popupmenu = {

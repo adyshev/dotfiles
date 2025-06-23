@@ -704,6 +704,7 @@ require("lazy").setup({
         dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
         config = function()
             require("render-markdown").setup({
+                latex = { enabled = false },
                 completions = { lsp = { enabled = true } },
             })
         end,
@@ -729,7 +730,21 @@ require("lazy").setup({
     {
         "echasnovski/mini.nvim",
         config = function()
-            -- require('mini.surround').setup()
+            -- require("mini.ai").setup()
+            -- require("mini.animate").setup()
+            require("mini.surround").setup({
+                mappings = {
+                    add = "gsa", -- Add surrounding in Normal and Visual modes
+                    delete = "gsd", -- Delete surrounding
+                    find = "gsf", -- Find surrounding (to the right)
+                    find_left = "gsF", -- Find surrounding (to the left)
+                    highlight = "gsh", -- Highlight surrounding
+                    replace = "gsr", -- Replace surrounding
+                    update_n_lines = "gsn", -- Update `n_lines`
+                    suffix_last = "", -- Suffix to search with "prev" method
+                    suffix_next = "", -- Suffix to search with "next" method
+                },
+            })
             -- require("mini.operators").setup()
             require("mini.trailspace").setup()
             require("mini.move").setup({
@@ -822,6 +837,8 @@ ______________________________
                 "vim",
                 "vimdoc",
                 "query",
+                "scss",
+                "svelte",
             },
             auto_install = true,
             highlight = {

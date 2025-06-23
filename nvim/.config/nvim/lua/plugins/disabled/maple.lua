@@ -1,5 +1,6 @@
 return {
     "forest-nvim/maple.nvim",
+    enabled = false,
     config = function()
         require("maple").setup({
             -- Appearance
