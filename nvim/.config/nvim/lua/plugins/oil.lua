@@ -33,7 +33,7 @@ end
 return {
     {
         "stevearc/oil.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons", "benomahony/oil-git.nvim" },
         lazy = false,
         init = function()
             local oil_open_folder = function(path)

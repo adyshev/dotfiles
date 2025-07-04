@@ -20,20 +20,20 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 -- :h restore-cursor
-local function RestoreCursorPosition()
-    if vim.buftype == "terminal" then
-        return
-    end
-    local ft = vim.bo.filetype
-    if not (ft:match("commit") or ft:match("rebase")) and vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
-        vim.cmd('normal! g`"')
-    end
-end
-
-vim.api.nvim_create_autocmd({ "BufRead" }, {
-    pattern = "*",
-    callback = RestoreCursorPosition,
-})
+-- local function RestoreCursorPosition()
+--     if vim.buftype == "terminal" then
+--         return
+--     end
+--     local ft = vim.bo.filetype
+--     if not (ft:match("commit") or ft:match("rebase")) and vim.fn.line("'\"") > 1 and vim.fn.line("'\"") <= vim.fn.line("$") then
+--         vim.cmd('normal! g`"')
+--     end
+-- end
+--
+-- vim.api.nvim_create_autocmd({ "BufRead" }, {
+--     pattern = "*",
+--     callback = RestoreCursorPosition,
+-- })
 
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
     desc = "Redraw the cursorline when navigating around the buffer",
