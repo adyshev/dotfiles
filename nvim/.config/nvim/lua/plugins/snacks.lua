@@ -11,6 +11,8 @@ return {
                 enabled = false,
             },
         },
+        image = {},
+        scroll = {},
         rename = { enabled = true },
         input = { enabled = true },
         notifier = { enabled = true },
