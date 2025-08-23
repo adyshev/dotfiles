@@ -1008,7 +1008,8 @@ ______________________________
                     end
                 end
             end
-            local custom_gruvbox = require("lualine.themes.gruvbox-material")
+            -- local custom_gruvbox = require("lualine.themes.gruvbox-material")
+            local custom_gruvbox = require("lualine.themes.gruvbox")
             custom_gruvbox.normal.b.bg = "#32302F"
             custom_gruvbox.normal.c.bg = "#282828"
             custom_gruvbox.insert.b.bg = "#32302F"
@@ -1017,8 +1018,8 @@ ______________________________
             custom_gruvbox.visual.c.bg = "#282828"
             custom_gruvbox.command.b.bg = "#32302F"
             custom_gruvbox.command.c.bg = "#282828"
-            -- custom_gruvbox.inactive.b.bg = "#32302F"
-            -- custom_gruvbox.inactive.c.bg = "#282828"
+            custom_gruvbox.inactive.b.bg = "#32302F"
+            custom_gruvbox.inactive.c.bg = "#282828"
 
             require("lualine").setup({
                 options = {
