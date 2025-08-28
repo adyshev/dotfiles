@@ -26,29 +26,6 @@ return {
             },
         },
     },
-    keys = {
-        {
-            "<leader>Z",
-            function()
-                Snacks.zen.zoom()
-            end,
-            desc = "[Z]Toggle Zoom",
-        },
-        {
-            "<leader>z",
-            function()
-                Snacks.zen()
-            end,
-            desc = "Toggle Zen Mode",
-        },
-        {
-            "<c-/>",
-            function()
-                Snacks.terminal()
-            end,
-            desc = "Toggle Terminal",
-        },
-    },
     init = function()
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
@@ -65,4 +42,27 @@ return {
             end,
         })
     end,
+    keys = {
+        {
+            "<leader>Z",
+            function()
+                Snacks.zen.zoom()
+            end,
+            desc = "[Z]Toggle Zoom",
+        },
+        {
+            "<leader>z",
+            function()
+                Snacks.zen()
+            end,
+            desc = "[z]Toggle Zen Mode",
+        },
+        {
+            "<c-/>",
+            function()
+                Snacks.terminal()
+            end,
+            desc = "Toggle Terminal",
+        },
+    },
 }
