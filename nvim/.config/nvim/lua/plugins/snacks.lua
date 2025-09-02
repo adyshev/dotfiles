@@ -11,14 +11,13 @@ return {
                 enabled = false,
             },
         },
-        image = {},
-        scroll = {},
+        image = { enabled = true },
+        -- scroll = {},
         rename = { enabled = true },
         input = { enabled = true },
         notifier = { enabled = true },
         notify = { enabled = true },
         quickfile = { enabled = true },
-        words = { enabled = true },
         styles = {
             zen = {
                 width = 130,
