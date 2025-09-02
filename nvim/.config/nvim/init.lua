@@ -58,12 +58,12 @@ require("lazy").setup({
             })
             -- Main
             vim.keymap.set("n", "<leader>q", "<cmd>bd<CR>", { desc = "[q]Close Buffer" })
-            vim.keymap.set(
-                "n",
-                "<leader>e",
-                ":lua vim.diagnostic.open_float(nil, {focusable=false, scope='line', close_events = { 'CursorMoved', 'CursorMovedI', 'BufHidden', 'InsertCharPre', 'WinLeave'}})<CR>",
-                { desc = "[e]Line Diagnostic" }
-            )
+            -- vim.keymap.set(
+            --     "n",
+            --     "<leader>e",
+            --     ":lua vim.diagnostic.open_float(nil, {focusable=false, scope='line', close_events = { 'CursorMoved', 'CursorMovedI', 'BufHidden', 'InsertCharPre', 'WinLeave'}})<CR>",
+            --     { desc = "[e]Line Diagnostic" }
+            -- )
             vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "[-]Horisontal split" })
             vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "[|]Vertical split" })
 

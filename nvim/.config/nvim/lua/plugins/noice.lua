@@ -120,7 +120,7 @@ return {
         views = {
             split = {
                 win_options = { wrap = false },
-                size = 16,
+                size = 8,
                 close = { keys = { "q", "<CR>", "<Esc>" } },
             },
             popup = {
