@@ -1,9 +1,5 @@
 return {
     "folke/noice.nvim",
-    dependencies = {
-        "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify",
-    },
     opts = {
         lsp = {
             signature = {
@@ -131,9 +127,6 @@ return {
                 win_options = { wrap = false },
                 size = 8,
                 close = { keys = { "q", "<CR>", "<Esc>" } },
-            },
-            popup = {
-                win_options = { wrap = false },
             },
         },
         messages = {
