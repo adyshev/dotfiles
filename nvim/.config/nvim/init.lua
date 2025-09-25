@@ -94,7 +94,7 @@ require("lazy").setup({
                 end,
             },
             { "nvim-telescope/telescope-ui-select.nvim" },
-            { "nvim-telescope/telescope-file-browser.nvim" },
+            -- { "nvim-telescope/telescope-file-browser.nvim" },
             { "smartpde/telescope-recent-files" },
             { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
         },
@@ -118,29 +118,31 @@ require("lazy").setup({
                     recent_files = {
                         only_cwd = true,
                     },
-                    file_browser = {
-                        hidden = { file_browser = true, folder_browser = true },
-                    },
+                    -- file_browser = {
+                    --     hidden = { file_browser = true, folder_browser = true },
+                    -- },
                 },
             })
 
             pcall(require("telescope").load_extension, "fzf")
             pcall(require("telescope").load_extension, "ui-select")
-            pcall(require("telescope").load_extension, "file-browser")
+            pcall(require("telescope").load_extension, "noice")
+            -- pcall(require("telescope").load_extension, "file-browser")
             pcall(require("telescope").load_extension, "recent_files")
 
             local builtin = require("telescope.builtin")
             vim.keymap.set("n", "<leader>s?", builtin.help_tags, { desc = "[?]Search Help" })
             vim.keymap.set("n", "<leader>sc", ":Telescope command_history<CR>", { desc = "[c]Search Command History" })
             vim.keymap.set("n", "<leader>sh", ":Telescope search_history<CR>", { desc = "[h]Search Search History" })
+            vim.keymap.set("n", "<leader>se", ":Telescope noice<CR>", { desc = "[e]Search Noice" })
             vim.keymap.set("n", "<leader>st", ":TodoTelescope<CR>", { desc = "[t]Search TODO" })
             vim.keymap.set("n", "<leader>sd", "<cmd>Telescope diagnostics<cr>", { desc = "[d]Search Diagnostics" })
             vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[k]Search Keymaps" })
             -- vim.keymap.set('n', '<leader>sn', ':Telescope live_grep search_dirs={"~/neorg/"}<CR>', { desc = '[n]Search Notes' })
-            vim.keymap.set("n", "<leader>sb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { desc = "[b]File Browser" })
+            -- vim.keymap.set("n", "<leader>e", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { desc = "[e]File Browser" })
             vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[f]Search Files" })
             vim.keymap.set("n", "<leader>sr", builtin.registers, { desc = "[r]Search Registers" })
-            vim.keymap.set("n", "<leader>ss", builtin.spell_suggest, { desc = "[S]Spell Suggestions" })
+            vim.keymap.set("n", "<leader>ss", builtin.spell_suggest, { desc = "[s]Seach Spell Suggestions" })
             vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[w]Search current Word" })
             vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[g]Search by Grep" })
             vim.keymap.set(
@@ -151,16 +153,16 @@ require("lazy").setup({
             )
             vim.keymap.set("n", "<leader>so", builtin.buffers, { desc = "[o]Search open buffers" })
 
-            vim.keymap.set("n", "<leader>s/", function()
+            vim.keymap.set("n", "<leader>sO", function()
                 builtin.live_grep({
                     grep_open_files = true,
                     prompt_title = "Live Grep in Open Files",
                 })
             end, { desc = "[/]Search in Open Files" })
 
-            vim.keymap.set("n", "<leader>sc", function()
+            vim.keymap.set("n", "<leader>sn", function()
                 builtin.find_files({ cwd = vim.fn.stdpath("config") })
-            end, { desc = "[c]Search Neovim config files" })
+            end, { desc = "[n]Search Neovim config files" })
         end,
     },
     {
@@ -196,6 +198,7 @@ require("lazy").setup({
                     map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
                     map("gR", require("telescope.builtin").lsp_references, "Goto Reference")
                     map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+
                     map("<space>cr", vim.lsp.buf.rename, "[r]Rename")
                     map("<space>cf", function()
                         vim.lsp.buf.format({ async = true })
@@ -875,6 +878,8 @@ ______________________________
                         ["ia"] = "@parameter.inner",
                         ["af"] = "@function.outer",
                         ["if"] = "@function.inner",
+                        ["i{"] = "@block.inner",
+                        ["a{"] = "@block.outer",
                         ["ac"] = "@class.outer",
                         ["ic"] = "@class.inner",
                         ["ii"] = "@conditional.inner",
@@ -905,15 +910,15 @@ ______________________________
                         ["[]"] = "@class.outer",
                     },
                 },
-                swap = {
-                    enable = true,
-                    swap_next = {
-                        ["<leader>a"] = "@parameter.inner",
-                    },
-                    swap_previous = {
-                        ["<leader>A"] = "@parameter.inner",
-                    },
-                },
+                -- swap = {
+                --     enable = true,
+                --     swap_previous = {
+                --         ["<leader>A"] = "@parameter.inner",
+                --     },
+                --     swap_next = {
+                --         ["<leader>a"] = "@parameter.inner",
+                --     },
+                -- },
             },
         },
         config = function(_, opts)

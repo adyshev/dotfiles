@@ -9,9 +9,9 @@ return {
             desc = "[x]Diagnostics",
         },
         {
-            "<leader>r",
+            "<leader>cq",
             "<cmd>Trouble qflist toggle<cr>",
-            desc = "[r]Quickfix List",
+            desc = "[q]Quickfix List",
         },
     },
 }

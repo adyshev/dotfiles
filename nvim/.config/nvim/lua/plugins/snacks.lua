@@ -11,12 +11,14 @@ return {
                 enabled = false,
             },
         },
+        -- words = { enabled = true },
         image = { enabled = true },
         -- scroll = {},
         rename = { enabled = true },
         input = { enabled = true },
         notifier = { enabled = true },
-        notify = { enabled = true },
+        -- picker = { enabled = true },
+        -- notify = { enabled = true },
         quickfile = { enabled = true },
         styles = {
             zen = {
@@ -56,12 +58,12 @@ return {
             end,
             desc = "[z]Toggle Zen Mode",
         },
-        {
-            "<c-/>",
-            function()
-                Snacks.terminal()
-            end,
-            desc = "Toggle Terminal",
-        },
+        -- {
+        --     "<c-/>",
+        --     function()
+        --         Snacks.terminal()
+        --     end,
+        --     desc = "Toggle Terminal",
+        -- },
     },
 }

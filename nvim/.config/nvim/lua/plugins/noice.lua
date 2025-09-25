@@ -66,6 +66,21 @@ return {
             {
                 filter = {
                     event = "msg_show",
+                    kind = "",
+                    find = "written",
+                },
+                opts = { skip = true },
+            },
+            {
+                filter = {
+                    event = "msg_show",
+                    kind = "search_count",
+                },
+                opts = { skip = true },
+            },
+            {
+                filter = {
+                    event = "msg_show",
                     any = {
                         { find = "%d+L, %d+B" },
                         { find = "; after #%d+" },
@@ -80,6 +95,7 @@ return {
             { filter = { event = "msg_show", find = "^%s*at process.processTicksAndRejections" }, skip = true },
             { filter = { event = "notify", find = "No code actions available" }, skip = true },
             { filter = { event = "msg_show", find = "^[/?]." }, skip = true },
+            { filter = { event = "msg_show", kind = "" }, skip = true },
             { filter = { event = "msg_show", find = "^:!make" }, skip = true },
             { filter = { event = "msg_show", find = "^%(%d+ of %d+%):" }, skip = true },
             { filter = { event = "msg_show", find = "E211: File .* no longer available" }, skip = true },
@@ -90,13 +106,6 @@ return {
                     kind = "progress",
                 },
                 opts = { skip = true },
-            },
-            {
-                filter = {
-                    event = "msg_show",
-                    kind = "",
-                },
-                view = "mini",
             },
             {
                 filter = {
@@ -146,9 +155,5 @@ return {
     },
     config = function(_, opts)
         require("noice").setup(opts)
-
-        vim.keymap.set("n", "<leader>l", function()
-            require("noice").cmd("history")
-        end, { desc = "[l]Noice History" })
     end,
 }

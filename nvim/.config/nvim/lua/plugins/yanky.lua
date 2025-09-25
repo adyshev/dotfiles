@@ -4,11 +4,11 @@ return {
     enabled = true,
     keys = {
         {
-            "<leader>y",
+            "<leader>sy",
             function()
                 require("telescope").extensions.yank_history.yank_history({})
             end,
-            desc = "[y]Open Yank History",
+            desc = "[y]Search Yank History",
         },
         { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
         { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Yanked Text After Cursor" },
