@@ -1,13 +1,3 @@
-# themes from https://github.com/alacritty/alacritty-theme
-
-import = [
-    # "~/.config/alacritty/themes/themes/one_dark.toml"
-    # "~/.config/alacritty/themes/themes/remedy_dark.toml"
-    "~/.config/alacritty/themes/gruvbox_material_medium_dark.toml"
-    # "~/.config/alacritty/themes/themes/dark_pastels.toml"
-]
-
-ipc_socket = true
 
 [selection]
 save_to_clipboard = true
@@ -48,7 +38,7 @@ lines = 30
 x = 5
 y = 5
 
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 args = ["-l", "-c", "/opt/homebrew/bin/tmux new-session -A -D -s default"]
 
@@ -57,3 +47,17 @@ bindings = [
     # ⌘ + enter puts window in macOS full screen
     { key = "Enter", mods = "Command", action = "ToggleFullscreen"},
 ]
+
+[general]
+
+ipc_socket = true
+# themes from https://github.com/alacritty/alacritty-theme
+
+import = [
+    # "~/.config/alacritty/themes/themes/one_dark.toml"
+    # "~/.config/alacritty/themes/themes/remedy_dark.toml"
+    "~/.config/alacritty/themes/gruvbox_material_medium_dark.toml"
+    # "~/.config/alacritty/themes/themes/dark_pastels.toml"
+]
+
+[terminal]
