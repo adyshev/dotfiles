@@ -45,7 +45,15 @@ map("n", "<M-a>", "ggVG", opts)
 map("n", "<C-d>", "YP", opts)
 
 -- Clear search with <esc>
-map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)
+-- map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)
+
+vim.keymap.set("n", "<esc>", function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_config(win).relative == "win" then
+            vim.api.nvim_win_close(win, false)
+        end
+    end
+end)
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
