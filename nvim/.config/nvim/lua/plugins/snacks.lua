@@ -16,6 +16,7 @@ return {
         -- scroll = {},
         rename = { enabled = true },
         input = { enabled = true },
+        -- scratch = { enabled = true },
         notifier = { enabled = true },
         -- picker = { enabled = true },
         -- notify = { enabled = true },
@@ -58,6 +59,7 @@ return {
             end,
             desc = "[z]Toggle Zen Mode",
         },
+        --
         -- {
         --     "<c-/>",
         --     function()

@@ -120,49 +120,49 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 --   pattern = { '**/neorg/personal/*.norg' },
 -- })
 
--- vim.api.nvim_create_autocmd('FileType', {
---   pattern = {
---     'help',
---     'alpha',
---     'dashboard',
---     'neo-tree',
---     'Trouble',
---     'trouble',
---     'lazy',
---     'oil',
---     'mason',
---     'notify',
---     'toggleterm',
---     'lazyterm',
---   },
---   callback = function()
---     vim.b.miniindentscope_disable = true
---   end,
--- })
-
--- Show/Close diagnostic messages
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
-    pattern = "*",
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = {
+        "help",
+        "alpha",
+        "dashboard",
+        "neo-tree",
+        "Trouble",
+        "trouble",
+        "lazy",
+        "oil",
+        "mason",
+        "notify",
+        "toggleterm",
+        "lazyterm",
+    },
     callback = function()
-        for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-            if vim.api.nvim_win_get_config(winid).zindex then
-                return
-            end
-        end
-        vim.diagnostic.open_float({
-            scope = "line",
-            focusable = false,
-            close_events = {
-                "CursorMoved",
-                "CursorMovedI",
-                "BufHidden",
-                "InsertCharPre",
-                "WinLeave",
-            },
-        })
+        vim.b.miniindentscope_disable = true
     end,
 })
 
+-- Show/Close diagnostic messages
+-- vim.api.nvim_create_autocmd({ "CursorHold" }, {
+--     pattern = "*",
+--     callback = function()
+--         for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+--             if vim.api.nvim_win_get_config(winid).zindex then
+--                 return
+--             end
+--         end
+--         vim.diagnostic.open_float({
+--             scope = "line",
+--             focusable = false,
+--             close_events = {
+--                 "CursorMoved",
+--                 "CursorMovedI",
+--                 "BufHidden",
+--                 "InsertCharPre",
+--                 "WinLeave",
+--             },
+--         })
+--     end,
+-- })
+--
 vim.api.nvim_create_autocmd("User", {
     pattern = "OilActionsPost",
     callback = function(event)
@@ -196,6 +196,10 @@ vim.api.nvim_create_autocmd("VimEnter", {
         end
     end,
 })
+
+-- Cursor look
+vim.api.nvim_set_hl(0, "TerminalCursorShape", { fg = "NONE", bg = "NONE", blend = 0, underline = true })
+vim.cmd("autocmd TermEnter * setlocal winhighlight=TermCursor:TerminalCursorShape")
 
 -- Disable commenting new lines
 vim.cmd("autocmd BufEnter * set formatoptions-=cro")

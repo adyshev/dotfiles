@@ -4,10 +4,22 @@ require("autocmds")
 
 -- Diagnostic
 vim.diagnostic.config({
-    virtual_text = false,
+    virtual_text = {
+        spacing = 2,
+        prefix = "●",
+    },
     severity_sort = true,
-    underline = true,
-    signs = true,
+    underline = false,
+    signs = {
+        text = {
+            -- Alas nerdfont icons don't render properly on Medium!
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.HINT] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+        },
+    },
+    update_in_insert = false,
     float = {
         border = "rounded",
     },
@@ -36,6 +48,25 @@ if not vim.loop.fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+local open_float_diagnostic = function()
+    for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+        if vim.api.nvim_win_get_config(winid).zindex then
+            return
+        end
+    end
+    vim.diagnostic.open_float({
+        scope = "line",
+        focusable = false,
+        close_events = {
+            "CursorMoved",
+            "CursorMovedI",
+            "BufHidden",
+            "InsertCharPre",
+            "WinLeave",
+        },
+    })
+end
+
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
     -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
@@ -58,12 +89,7 @@ require("lazy").setup({
             })
             -- Main
             vim.keymap.set("n", "<leader>q", "<cmd>bd<CR>", { desc = "[q]Close Buffer" })
-            -- vim.keymap.set(
-            --     "n",
-            --     "<leader>e",
-            --     ":lua vim.diagnostic.open_float(nil, {focusable=false, scope='line', close_events = { 'CursorMoved', 'CursorMovedI', 'BufHidden', 'InsertCharPre', 'WinLeave'}})<CR>",
-            --     { desc = "[e]Line Diagnostic" }
-            -- )
+            vim.keymap.set("n", "<leader>e", open_float_diagnostic, { desc = "[e]Line Diagnostic" })
             vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "[-]Horisontal split" })
             vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "[|]Vertical split" })
 
@@ -363,6 +389,7 @@ require("lazy").setup({
             vim.list_extend(ensure_installed, {
                 "stylua",
                 "black",
+                "bandit",
                 "mypy",
                 "isort",
                 "goimports",
@@ -427,7 +454,7 @@ require("lazy").setup({
             local lint = require("lint")
             lint.linters_by_ft = {
                 -- markdown = { "markdownlint" },
-                python = { "mypy" },
+                python = { "mypy", "bandit" },
                 json = { "jsonlint" },
                 -- rst = { "vale" },
                 -- terraform = { "tflint" },
@@ -855,7 +882,7 @@ ______________________________
             matchup = {
                 enable = true,
                 disable = { "ruby" },
-                disable_virtual_text = true,
+                disable_virtual_text = false,
                 include_match_words = true,
             },
             indent = { enable = true, disable = { "ruby" } },
