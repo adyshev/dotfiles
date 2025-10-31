@@ -12,7 +12,7 @@ else
 	export EDITOR='nvim'
 fi
 
-export TERM='xterm-256color'
+export TERM='screen-256color'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'
@@ -57,7 +57,7 @@ export PATH="$PATH:/Users/adyshev/.cache/lm-studio/bin"
 ### lyft_localdevtools_shell_rc start
 ### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
 if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then
-    source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
+	source "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh"
 fi
 ### lyft_localdevtools_shell_rc end
 

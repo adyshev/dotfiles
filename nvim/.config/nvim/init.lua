@@ -873,6 +873,7 @@ ______________________________
                 "latex",
                 "scss",
                 "svelte",
+                "javascript",
             },
             auto_install = true,
             highlight = {
