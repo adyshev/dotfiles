@@ -1,6 +1,7 @@
 return {
     "linux-cultist/venv-selector.nvim",
-    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim", "mfussenegger/nvim-dap-python" },
+    dependencies = { "neovim/nvim-lspconfig", "nvim-telescope/telescope.nvim" },
+    ft = "python", -- Load when opening Python files
     config = function()
         require("venv-selector").setup({
             -- Your options go here
@@ -8,7 +9,6 @@ return {
             -- auto_refresh = false
         })
     end,
-    event = "VeryLazy", -- Optional: needed only if you want to type `:VenvSelect` without a keymapping
     keys = {
         { "<leader>v", "<cmd>VenvSelect<cr>", desc = "[v]Venv Selector" },
     },

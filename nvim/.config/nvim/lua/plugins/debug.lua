@@ -9,7 +9,8 @@
 return {
     -- NOTE: Yes, you can install new plugins here!
     "mfussenegger/nvim-dap",
-    enabled = false,
+    event = "VeryLazy",
+    enabled = true,
     -- NOTE: And you can specify dependencies as well
     dependencies = {
         -- Creates a beautiful debugger UI
@@ -34,13 +35,13 @@ return {
             { "<leader>dl", dap.step_over, desc = "[l]Debug: Step Next" },
             { "<leader>dh", dap.step_back, desc = "[h]Debug: Step Prev" },
             { "<leader>dk", dap.step_out, desc = "[k]Debug: Step Out" },
-            { "<leader>b", dap.toggle_breakpoint, desc = "[b]Debug: Toggle Breakpoint" },
+            { "<leader>db", dap.toggle_breakpoint, desc = "[b]Debug: Toggle Breakpoint" },
             {
-                "<leader>B",
+                "<leader>ds",
                 function()
                     dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
                 end,
-                desc = "[B]Debug: Set Breakpoint",
+                desc = "[s]Debug: Set Breakpoint",
             },
             -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
             { "<leader>du", dapui.toggle, desc = "[u]Debug: Toggle Debug UI" },

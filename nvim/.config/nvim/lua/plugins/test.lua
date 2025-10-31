@@ -1,6 +1,6 @@
 return {
     "nvim-neotest/neotest",
-    enabled = false,
+    enabled = true,
     event = "VeryLazy",
     dependencies = {
         "nvim-neotest/nvim-nio",
