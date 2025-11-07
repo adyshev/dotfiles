@@ -55,6 +55,16 @@ vim.keymap.set("n", "<esc>", function()
     end
 end)
 
+vim.keymap.set("n", "<esc>", function()
+    for _, win in ipairs(vim.api.nvim_list_wins()) do
+        if vim.api.nvim_win_get_config(win).relative == "win" then
+            vim.api.nvim_win_close(win, false)
+        end
+    end
+end)
+
+
+
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })
 vim.api.nvim_set_keymap("!", "<D-v>", "<C-R>+", { noremap = true, silent = true })

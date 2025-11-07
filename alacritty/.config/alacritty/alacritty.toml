@@ -3,14 +3,26 @@
 save_to_clipboard = true
 
 [font]
-size = 17
+size = 14
 
 [env]
 TERM = "screen-256color"
 
 [font.normal]
-family = "JetBrainsMono Nerd Font Mono"
+family = "Berkeley Mono TX-02"
 style = "Regular"
+
+[font.bold]
+family = "Berkeley Mono TX-02"
+style = "Bold"
+
+[font.italic]
+family = "Berkeley Mono TX-02"
+style = "Italic"
+
+[font.bold_italic]
+family = "Berkeley Mono TX-02"
+style = "Bold Italic"
 
 [mouse]
 hide_when_typing = true
