@@ -1,28 +1,28 @@
-
 [selection]
 save_to_clipboard = true
 
 [font]
-size = 14
+size = 16
 
-[env]
-TERM = "screen-256color"
+[font.offset]
+x = 0 # For letter spacing (optional)
+y = 2 # For line spacing
 
 [font.normal]
-family = "Berkeley Mono TX-02"
-style = "Regular"
+family = "TX-02"
+style = "Mono Regular"
 
 [font.bold]
-family = "Berkeley Mono TX-02"
-style = "Bold"
+family = "TX-02"
+style = "Mono Bold"
 
 [font.italic]
-family = "Berkeley Mono TX-02"
-style = "Italic"
+family = "TX-02"
+style = "Mono Italic"
 
 [font.bold_italic]
-family = "Berkeley Mono TX-02"
-style = "Bold Italic"
+family = "TX-02"
+style = "Mono Bold Italic"
 
 [mouse]
 hide_when_typing = true

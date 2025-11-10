@@ -92,7 +92,6 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>e", open_float_diagnostic, { desc = "[e]Line Diagnostic" })
             vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "[-]Horisontal split" })
             vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "[|]Vertical split" })
-
             -- -- Code
             -- vim.keymap.set('n', '<leader>cr', function()
             --   return ':IncRename ' .. vim.fn.expand '<cword>'
