@@ -2,27 +2,27 @@
 save_to_clipboard = true
 
 [font]
-size = 14
+size = 16
 
 [font.offset]
 x = 1 # For letter spacing (optional)
-y = 0 # For line spacing
+y = 2 # For line spacing
 
 [font.normal]
 family = "IoskeleyMono Nerd Font"
-style = "Regular"
+style = "Light"
 
 [font.bold]
 family = "IoskeleyMono Nerd Font"
-style = "Bold"
+style = "Medium"
 
 [font.italic]
 family = "IoskeleyMono Nerd Font"
-style = "Italic"
+style = "Light Italic"
 
 [font.bold_italic]
 family = "IoskeleyMono Nerd Font"
-style = "Bold Italic"
+style = "Medium Italic"
 
 # [font.normal]
 # family = "Iosevka Nerd Font Mono"
