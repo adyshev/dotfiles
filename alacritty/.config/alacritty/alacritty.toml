@@ -57,7 +57,7 @@ args = ["-l", "-c", "/opt/homebrew/bin/tmux new-session -A -D -s default"]
 [keyboard]
 bindings = [
     # ⌘ + enter puts window in macOS full screen
-    { key = "Enter", mods = "Command", action = "ToggleMaximized"},
+    { key = "Enter", mods = "Control", action = "ToggleMaximized"},
 ]
 
 [general]
