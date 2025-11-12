@@ -24,38 +24,6 @@ style = "Light Italic"
 family = "IoskeleyMono Nerd Font"
 style = "Medium Italic"
 
-# [font.normal]
-# family = "Iosevka Nerd Font Mono"
-# style = "Regular"
-#
-# [font.bold]
-# family = "Iosevka Nerd Font Mono"
-# style = "Bold"
-#
-# [font.italic]
-# family = "Iosevka Nerd Font Mono"
-# style = "Italic"
-#
-# [font.bold_italic]
-# family = "Iosevka Nerd Font Mono"
-# style = "Bold Italic"
-
-# [font.normal]
-# family = "MesloLGS Nerd Font Mono"
-# style = "Regular"
-#
-# [font.bold]
-# family = "MesloLGS Nerd Font Mono"
-# style = "Bold"
-#
-# [font.italic]
-# family = "MesloLGS Nerd Font Mono"
-# style = "Italic"
-#
-# [font.bold_italic]
-# family = "MesloLGS Nerd Font Mono"
-# style = "Bold Italic"
-
 [mouse]
 hide_when_typing = true
 
