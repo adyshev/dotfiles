@@ -5,8 +5,8 @@ save_to_clipboard = true
 size = 16
 
 [font.offset]
-x = 0 # For letter spacing (optional)
-y = 0 # For line spacing
+x = 1 # For letter spacing (optional)
+y = 1 # For line spacing
 
 [font.normal]
 family = "IoskeleyMono Nerd Font"
