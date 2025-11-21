@@ -11,19 +11,43 @@ return {
                 enabled = false,
             },
         },
-        -- words = { enabled = true },
+        words = { enabled = true },
         image = { enabled = true },
-        -- scroll = {},
+        scroll = { enabled = tuue },
         rename = { enabled = true },
         input = { enabled = true },
-        -- scratch = { enabled = true },
+        scratch = { enabled = true },
         notifier = { enabled = true },
         -- picker = { enabled = true },
         -- notify = { enabled = true },
         quickfile = { enabled = true },
+        zen = {
+            toggles = {
+                dim = true,
+                git_signs = false,
+                mini_diff_signs = false,
+                diagnostics = false,
+                inlay_hints = false,
+            },
+            zoom = {
+                toggles = {
+                    dim = false,
+                    git_signs = false,
+                    mini_diff_signs = false,
+                    diagnostics = true,
+                    inlay_hints = false,
+                },
+                center = false,
+                show = { statusline = false, tabline = false },
+                win = {
+                    backdrop = false,
+                    width = 0, -- full width
+                },
+            },
+        },
         styles = {
             zen = {
-                width = 130,
+                width = 120,
                 backdrop = { transparent = false, blend = 99 },
             },
         },
@@ -58,6 +82,36 @@ return {
                 Snacks.zen()
             end,
             desc = "[z]Toggle Zen Mode",
+        },
+        {
+            "]]",
+            function()
+                Snacks.words.jump(vim.v.count1)
+            end,
+            desc = "Next Reference",
+            mode = { "n", "t" },
+        },
+        {
+            "[[",
+            function()
+                Snacks.words.jump(-vim.v.count1)
+            end,
+            desc = "Prev Reference",
+            mode = { "n", "t" },
+        },
+        {
+            "<leader>n",
+            function()
+                Snacks.scratch()
+            end,
+            desc = "[n]Toggle Scratch Buffer",
+        },
+        {
+            "<leader>N",
+            function()
+                Snacks.scratch.select()
+            end,
+            desc = "[N]Select Scratch Buffer",
         },
         --
         -- {
