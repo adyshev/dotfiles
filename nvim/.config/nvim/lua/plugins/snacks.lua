@@ -13,7 +13,7 @@ return {
         },
         words = { enabled = true },
         image = { enabled = true },
-        scroll = { enabled = tuue },
+        -- scroll = { enabled = true },
         rename = { enabled = true },
         input = { enabled = true },
         scratch = { enabled = true },
