@@ -56,8 +56,10 @@ args = ["-l", "-c", "/opt/homebrew/bin/tmux new-session -A -D -s default"]
 
 [keyboard]
 bindings = [
-    # ⌘ + enter puts window in macOS full screen
-    { key = "Enter", mods = "Control", action = "ToggleMaximized"},
+  # ⌘ + enter puts window in macOS full screen
+  { key = "Enter", mods = "Control", action = "ToggleMaximized" },
+  { key = "C", mods = "Control", action = "Copy" },
+  { key = "V", mods = "Control", action = "Paste" },
 ]
 
 [general]
@@ -66,10 +68,10 @@ ipc_socket = true
 # themes from https://github.com/alacritty/alacritty-theme
 
 import = [
-    # "~/.config/alacritty/themes/themes/one_dark.toml"
-    # "~/.config/alacritty/themes/themes/remedy_dark.toml"
-    "~/.config/alacritty/themes/gruvbox_material_medium_dark.toml"
-    # "~/.config/alacritty/themes/themes/dark_pastels.toml"
+  # "~/.config/alacritty/themes/themes/one_dark.toml"
+  # "~/.config/alacritty/themes/themes/remedy_dark.toml"
+  "~/.config/alacritty/themes/gruvbox_material_medium_dark.toml",
+  # "~/.config/alacritty/themes/themes/dark_pastels.toml"
 ]
 
 [terminal]

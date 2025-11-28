@@ -371,6 +371,7 @@ require("lazy").setup({
                 jsonls = {},
                 yamlls = {},
                 lua_ls = {},
+                taplo = {},
             }
             require("lspconfig.ui.windows").default_options.border = "rounded"
             require("mason").setup({
@@ -391,6 +392,7 @@ require("lazy").setup({
                 "bandit",
                 "mypy",
                 "isort",
+                "taplo",
                 "goimports",
                 "shfmt",
                 "prettier",

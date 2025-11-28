@@ -1,7 +1,7 @@
 local indent = 2
 
 vim.schedule(function()
-    vim.o.clipboard = "unnamedplus"
+    vim.opt.clipboard = "unnamedplus"
 end)
 
 vim.o.spellfile = os.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
