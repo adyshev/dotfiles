@@ -5,23 +5,23 @@ save_to_clipboard = true
 size = 16
 
 [font.offset]
-x = 1 # For letter spacing (optional)
-y = 1 # For line spacing
+x = 0 # For letter spacing (optional)
+y = 0 # For line spacing
 
 [font.normal]
-family = "IoskeleyMono Nerd Font"
-style = "Light"
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
 
 [font.bold]
-family = "IoskeleyMono Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Medium"
 
 [font.italic]
-family = "IoskeleyMono Nerd Font"
-style = "Light Italic"
+family = "JetBrainsMono Nerd Font"
+style = "Regular Italic"
 
 [font.bold_italic]
-family = "IoskeleyMono Nerd Font"
+family = "JetBrainsMono Nerd Font"
 style = "Medium Italic"
 
 [mouse]
@@ -52,12 +52,13 @@ y = 5
 
 [terminal.shell]
 program = "/bin/zsh"
-args = ["-l", "-c", "/opt/homebrew/bin/tmux new-session -A -D -s default"]
+args = ["-l", "-c", "/opt/homebrew/bin/tmux -L new-session"]
 
 [keyboard]
 bindings = [
   # ⌘ + enter puts window in macOS full screen
   { key = "Enter", mods = "Control", action = "ToggleMaximized" },
+  { key = "Enter", mods = "Control|Shift", action = "ToggleFullscreen" },
   { key = "C", mods = "Control", action = "Copy" },
   { key = "V", mods = "Control", action = "Paste" },
 ]
