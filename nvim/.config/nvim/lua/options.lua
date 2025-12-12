@@ -10,6 +10,7 @@ vim.o.shortmess = "filnxtToOFWIcC"
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.smartcase = true
+vim.o.winborder = "rounded"
 vim.o.smartindent = true
 vim.o.signcolumn = "yes"
 vim.o.updatetime = 250

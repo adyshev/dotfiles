@@ -389,7 +389,7 @@ require("lazy").setup({
             vim.list_extend(ensure_installed, {
                 "stylua",
                 "black",
-                "bandit",
+                -- "bandit",
                 "mypy",
                 "isort",
                 "taplo",
@@ -399,8 +399,8 @@ require("lazy").setup({
                 "jq",
                 "jsonlint",
                 "yamlfmt",
-                -- "vale",
-                -- "tflint",
+                "vale",
+                "tflint",
                 "cssls",
                 "tailwindcss",
                 -- "markdownlint",
@@ -455,11 +455,12 @@ require("lazy").setup({
             local lint = require("lint")
             lint.linters_by_ft = {
                 -- markdown = { "markdownlint" },
-                python = { "mypy", "bandit" },
+                python = { "mypy" },
+                -- python = { "mypy", "bandit" },
                 json = { "jsonlint" },
-                -- rst = { "vale" },
-                -- terraform = { "tflint" },
-                -- text = { "vale" },
+                rst = { "vale" },
+                terraform = { "tflint" },
+                text = { "vale" },
             }
 
             lint.linters.mypy.args = {
