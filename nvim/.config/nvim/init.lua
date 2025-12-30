@@ -282,6 +282,8 @@ require("lazy").setup({
                         },
                     },
                 },
+                svelte = {},
+                ts_ls = {},
                 pyright = {
                     capabilities = {
                         textDocument = {
@@ -434,6 +436,9 @@ require("lazy").setup({
             end,
             formatters_by_ft = {
                 lua = { "stylua" },
+                svelte = { "prettier" },
+                typescript = { "prettier" },
+                javascript = { "prettier" },
                 python = { "isort", "black" },
                 go = { "goimports", "gofmt" },
                 json = { "prettier" },
@@ -875,6 +880,7 @@ ______________________________
                 "scss",
                 "svelte",
                 "javascript",
+                "typescript",
             },
             auto_install = true,
             highlight = {

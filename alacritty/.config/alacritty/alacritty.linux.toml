@@ -1,0 +1,78 @@
+[selection]
+save_to_clipboard = true
+
+[font]
+size = 16
+
+[font.offset]
+x = 0 # For letter spacing (optional)
+y = 0 # For line spacing
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Medium"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Regular Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Medium Italic"
+
+[mouse]
+hide_when_typing = true
+
+[cursor]
+vi_mode_style = "Block"
+blink_interval = 500
+unfocused_hollow = true
+thickness = 0.15
+
+[cursor.style]
+shape = "Beam"
+blinking = "Always"
+
+[window]
+decorations = "buttonless"
+startup_mode = "Windowed"
+option_as_alt = "Both"
+
+[window.dimensions]
+columns = 110
+lines = 30
+
+[window.padding]
+x = 5
+y = 5
+
+[terminal.shell]
+program = "/bin/zsh"
+args = ["-l", "-c", "/usr/bin/tmux -L new-session"]
+
+[keyboard]
+bindings = [
+  # ⌘ + enter puts window in macOS full screen
+  { key = "Enter", mods = "Control", action = "ToggleMaximized" },
+  { key = "Enter", mods = "Control|Shift", action = "ToggleFullscreen" },
+  # { key = "C", mods = "Control", action = "Copy" },
+  # { key = "V", mods = "Control", action = "Paste" },
+]
+
+[general]
+
+ipc_socket = true
+# themes from https://github.com/alacritty/alacritty-theme
+
+import = [
+  # "~/.config/alacritty/themes/themes/one_dark.toml"
+  # "~/.config/alacritty/themes/themes/remedy_dark.toml"
+  "~/.config/alacritty/themes/gruvbox_material_medium_dark.toml",
+  # "~/.config/alacritty/themes/themes/dark_pastels.toml"
+]
+
+[terminal]
