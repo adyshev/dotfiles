@@ -149,13 +149,11 @@ config.keys = {
 		action = wezterm.action.CloseCurrentPane({ confirm = false }),
 	},
 	{
-		-- Vi mode
 		key = "v",
 		mods = "LEADER",
 		action = wezterm.action.ActivateCopyMode,
 	},
 	{
-		-- |
 		key = "s",
 		mods = "LEADER",
 		action = act.PaneSelect({ mode = "SwapWithActiveKeepFocus" }),
@@ -176,7 +174,35 @@ config.keys = {
 		mods = "LEADER",
 		action = act.AdjustPaneSize({ "Right", 5 }),
 	},
+	{
+		key = "c",
+		mods = "LEADER",
+		action = act.SpawnTab("CurrentPaneDomain"),
+	},
+	{
+		key = "p",
+		mods = "LEADER",
+		action = act.ActivateTabRelative(-1),
+	},
+	{
+		key = "n",
+		mods = "LEADER",
+		action = act.ActivateTabRelative(1),
+	},
+	{
+		key = "x",
+		mods = "LEADER",
+		action = wezterm.action.CloseCurrentTab({ confirm = true }),
+	},
 }
+
+for i = 1, 9 do
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "LEADER",
+		action = act.ActivateTab(i - 1),
+	})
+end
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
 	local overrides = window:get_config_overrides() or {}

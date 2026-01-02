@@ -1,6 +1,7 @@
 local indent = 2
 
 vim.o.spellfile = os.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
+vim.opt.swapfile = false
 vim.o.formatoptions = "jcroqlnt"
 vim.o.shortmess = "filnxtToOFWIcC"
 vim.o.breakindent = true

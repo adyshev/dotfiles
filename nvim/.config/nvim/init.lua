@@ -21,7 +21,11 @@ vim.diagnostic.config({
     },
     update_in_insert = false,
     float = {
+        focusable = false,
+        style = "minimal",
         border = "rounded",
+        header = "",
+        prefix = "",
     },
 })
 
@@ -121,6 +125,7 @@ require("lazy").setup({
             { "nvim-telescope/telescope-ui-select.nvim" },
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "smartpde/telescope-recent-files" },
+            { "axkirillov/telescope-changed-files" },
             { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
         },
         config = function()
@@ -154,10 +159,12 @@ require("lazy").setup({
             pcall(require("telescope").load_extension, "noice")
             pcall(require("telescope").load_extension, "file-browser")
             pcall(require("telescope").load_extension, "recent_files")
+            pcall(require("telescope").load_extension, "changed_files")
 
             local builtin = require("telescope.builtin")
             vim.keymap.set("n", "<leader>s?", builtin.help_tags, { desc = "[?]Search Help" })
-            vim.keymap.set("n", "<leader>sc", ":Telescope command_history<CR>", { desc = "[c]Search Command History" })
+            vim.keymap.set("n", "<leader>sm", ":Telescope command_history<CR>", { desc = "[m]Search Command History" })
+            vim.keymap.set("n", "<leader>sc", ":Telescope changed_files<CR>", { desc = "[c]Search Changed Files" })
             vim.keymap.set("n", "<leader>sh", ":Telescope search_history<CR>", { desc = "[h]Search Search History" })
             vim.keymap.set("n", "<leader>se", ":Telescope noice<CR>", { desc = "[e]Search Noice" })
             vim.keymap.set("n", "<leader>st", ":TodoTelescope<CR>", { desc = "[t]Search TODO" })
@@ -192,8 +199,23 @@ require("lazy").setup({
     },
     {
         "neovim/nvim-lspconfig",
+        opts = {
+            diagnostics = {
+                float = {
+                    border = "rounded",
+                },
+            },
+        },
         dependencies = {
-            { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+            {
+                "williamboman/mason.nvim",
+                config = true,
+                opts = {
+                    ui = {
+                        border = "rounded",
+                    },
+                },
+            }, -- NOTE: Must be loaded before dependants
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             {
@@ -768,6 +790,7 @@ require("lazy").setup({
         config = function()
             -- require("mini.ai").setup()
             -- require("mini.animate").setup()
+            -- require("mini/notify").setup()
             require("mini.surround").setup({
                 mappings = {
                     add = "gsa", -- Add surrounding in Normal and Visual modes
