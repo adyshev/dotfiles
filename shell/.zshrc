@@ -53,8 +53,6 @@ source ~/.fzf.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# printf "\e[?2004l"
-
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/adyshev/.docker/completions $fpath)
 autoload -Uz compinit
