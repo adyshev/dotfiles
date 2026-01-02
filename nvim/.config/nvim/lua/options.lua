@@ -5,6 +5,7 @@ vim.opt.swapfile = false
 vim.o.formatoptions = "jcroqlnt"
 vim.o.shortmess = "filnxtToOFWIcC"
 vim.o.breakindent = true
+vim.opt.winborder = "rounded"
 vim.o.undofile = true
 vim.o.smartcase = true
 vim.o.smartindent = true
