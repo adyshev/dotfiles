@@ -51,8 +51,8 @@ x = 5
 y = 5
 
 [terminal.shell]
-program = "/bin/zsh"
-args = ["-l", "-c", "/usr/bin/tmux -L new-session"]
+program = "/usr/bin/tmux"
+args = ["new-session", "-A", "-D", "-s", "main"]
 
 [keyboard]
 bindings = [
