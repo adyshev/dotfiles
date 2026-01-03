@@ -38,9 +38,9 @@ shape = "Beam"
 blinking = "Always"
 
 [window]
-decorations = "buttonless"
-startup_mode = "Windowed"
 option_as_alt = "Both"
+decorations = "None"
+startup_mode = "Maximized"
 
 [window.dimensions]
 columns = 110
