@@ -1,13 +1,11 @@
 local indent = 2
 
-vim.schedule(function()
-    vim.opt.clipboard = "unnamedplus"
-end)
-
 vim.o.spellfile = os.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
+vim.opt.swapfile = false
 vim.o.formatoptions = "jcroqlnt"
 vim.o.shortmess = "filnxtToOFWIcC"
 vim.o.breakindent = true
+vim.opt.winborder = "rounded"
 vim.o.undofile = true
 vim.o.smartcase = true
 vim.o.winborder = "rounded"
@@ -28,6 +26,7 @@ vim.o.number = true
 vim.o.relativenumber = true
 vim.o.mouse = "a"
 vim.o.showmode = false
+vim.opt.clipboard = "unnamedplus"
 vim.opt.wrap = false
 vim.opt.cmdheight = 0
 vim.opt.completeopt = "menuone,noselect"

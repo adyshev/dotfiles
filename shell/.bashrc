@@ -51,9 +51,6 @@ eval "$(oh-my-posh init bash --config "$HOME/.config/ohmyposh/config.toml")"
 
 source ~/.fzf.bash
 
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/adyshev/.cache/lm-studio/bin"
-
 ### lyft_localdevtools_shell_rc start
 ### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup
 if [[ -f "/opt/homebrew/Library/Taps/lyft/homebrew-localdevtools/scripts/shell_rc.sh" ]]; then

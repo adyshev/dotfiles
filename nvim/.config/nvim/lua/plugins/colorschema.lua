@@ -47,6 +47,7 @@ return {
             })
 
             vim.cmd.colorscheme("gruvbox-material")
+            vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "#32302F" })
         end,
     },
     -- {

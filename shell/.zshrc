@@ -24,11 +24,6 @@ alias diff="diff-so-fancy"
 alias mc="SHELL=/bin/bash mc --skin=gruvbox"
 alias fk="fuck"
 
-# Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 3
-defaults write NSGlobalDomain InitialKeyRepeat -int 20
-defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
-
 # find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
 fif() {
     if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
@@ -58,7 +53,6 @@ source ~/.fzf.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-printf "\e[?2004l"
 # The following lines have been added by Docker Desktop to enable Docker CLI completions.
 fpath=(/Users/adyshev/.docker/completions $fpath)
 autoload -Uz compinit

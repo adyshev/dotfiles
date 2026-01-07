@@ -21,7 +21,11 @@ vim.diagnostic.config({
     },
     update_in_insert = false,
     float = {
+        focusable = false,
+        style = "minimal",
         border = "rounded",
+        header = "",
+        prefix = "",
     },
 })
 
@@ -121,6 +125,7 @@ require("lazy").setup({
             { "nvim-telescope/telescope-ui-select.nvim" },
             { "nvim-telescope/telescope-file-browser.nvim" },
             { "smartpde/telescope-recent-files" },
+            { "axkirillov/telescope-changed-files" },
             { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
         },
         config = function()
@@ -154,10 +159,12 @@ require("lazy").setup({
             pcall(require("telescope").load_extension, "noice")
             pcall(require("telescope").load_extension, "file-browser")
             pcall(require("telescope").load_extension, "recent_files")
+            pcall(require("telescope").load_extension, "changed_files")
 
             local builtin = require("telescope.builtin")
             vim.keymap.set("n", "<leader>s?", builtin.help_tags, { desc = "[?]Search Help" })
-            vim.keymap.set("n", "<leader>sc", ":Telescope command_history<CR>", { desc = "[c]Search Command History" })
+            vim.keymap.set("n", "<leader>sm", ":Telescope command_history<CR>", { desc = "[m]Search Command History" })
+            vim.keymap.set("n", "<leader>sc", ":Telescope changed_files<CR>", { desc = "[c]Search Changed Files" })
             vim.keymap.set("n", "<leader>sh", ":Telescope search_history<CR>", { desc = "[h]Search Search History" })
             vim.keymap.set("n", "<leader>se", ":Telescope noice<CR>", { desc = "[e]Search Noice" })
             vim.keymap.set("n", "<leader>st", ":TodoTelescope<CR>", { desc = "[t]Search TODO" })
@@ -192,8 +199,23 @@ require("lazy").setup({
     },
     {
         "neovim/nvim-lspconfig",
+        opts = {
+            diagnostics = {
+                float = {
+                    border = "rounded",
+                },
+            },
+        },
         dependencies = {
-            { "williamboman/mason.nvim", config = true }, -- NOTE: Must be loaded before dependants
+            {
+                "williamboman/mason.nvim",
+                config = true,
+                opts = {
+                    ui = {
+                        border = "rounded",
+                    },
+                },
+            }, -- NOTE: Must be loaded before dependants
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
             {
@@ -282,6 +304,8 @@ require("lazy").setup({
                         },
                     },
                 },
+                svelte = {},
+                ts_ls = {},
                 pyright = {
                     capabilities = {
                         textDocument = {
@@ -403,7 +427,7 @@ require("lazy").setup({
                 "tflint",
                 "cssls",
                 "tailwindcss",
-                -- "markdownlint",
+                "markdownlint",
                 -- "markdown-toc",
             })
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
@@ -434,6 +458,9 @@ require("lazy").setup({
             end,
             formatters_by_ft = {
                 lua = { "stylua" },
+                svelte = { "prettier" },
+                typescript = { "prettier" },
+                javascript = { "prettier" },
                 python = { "isort", "black" },
                 go = { "goimports", "gofmt" },
                 json = { "prettier" },
@@ -454,7 +481,7 @@ require("lazy").setup({
         config = function()
             local lint = require("lint")
             lint.linters_by_ft = {
-                -- markdown = { "markdownlint" },
+                markdown = { "markdownlint", "vale" },
                 python = { "mypy" },
                 -- python = { "mypy", "bandit" },
                 json = { "jsonlint" },
@@ -764,6 +791,7 @@ require("lazy").setup({
         config = function()
             -- require("mini.ai").setup()
             -- require("mini.animate").setup()
+            -- require("mini/notify").setup()
             require("mini.surround").setup({
                 mappings = {
                     add = "gsa", -- Add surrounding in Normal and Visual modes
@@ -876,6 +904,7 @@ ______________________________
                 "scss",
                 "svelte",
                 "javascript",
+                "typescript",
             },
             auto_install = true,
             highlight = {
@@ -889,15 +918,15 @@ ______________________________
                 include_match_words = true,
             },
             indent = { enable = true, disable = { "ruby" } },
-            -- incremental_selection = {
-            --   enable = true,
-            --   keymaps = {
-            --     init_selection = '<c-space>',
-            --     node_incremental = '<c-space>',
-            --     scope_incremental = '<c-s>',
-            --     node_decremental = '<c-backspace>',
-            --   },
-            -- },
+            incremental_selection = {
+                enable = true,
+                keymaps = {
+                    init_selection = "<c-space>",
+                    node_incremental = "<c-space>",
+                    scope_incremental = "<c-s>",
+                    node_decremental = "<c-backspace>",
+                },
+            },
             textobjects = {
                 select = {
                     enable = true,

@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+
 local act = wezterm.action
 local mux = wezterm.mux
 local config = {}
@@ -11,17 +12,17 @@ end
 -- for example, this selects a Bold, Italic font variant.
 config.font = wezterm.font_with_fallback({
 	{ family = "JetBrainsMono Nerd Font" },
-	{ family = "Hacker Nerd Font" },
+	{ family = "Hack Nerd Font" },
 })
 
 -- disable ligatures
 config.window_decorations = "RESIZE"
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
--- config.enable_tab_bar = false
+config.enable_tab_bar = true
 
-config.font_size = 17.0
-config.line_height = 1.1
+config.font_size = 16.0
+-- config.line_height = 1.1
 
 config.front_end = "WebGpu"
 config.webgpu_force_fallback_adapter = false
@@ -149,34 +150,60 @@ config.keys = {
 		action = wezterm.action.CloseCurrentPane({ confirm = false }),
 	},
 	{
-		-- Vi mode
 		key = "v",
 		mods = "LEADER",
 		action = wezterm.action.ActivateCopyMode,
 	},
 	{
-		-- |
-		key = "s",
+		key = "o",
 		mods = "LEADER",
 		action = act.PaneSelect({ mode = "SwapWithActiveKeepFocus" }),
 	},
 	{
 		key = "h",
 		mods = "LEADER",
-		action = act.AdjustPaneSize({ "Left", 5 }),
+		action = act.AdjustPaneSize({ "Left", 3 }),
 	},
 	{
 		key = "j",
 		mods = "LEADER",
-		action = act.AdjustPaneSize({ "Down", 5 }),
+		action = act.AdjustPaneSize({ "Down", 3 }),
 	},
-	{ key = "k", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 5 }) },
+	{ key = "k", mods = "LEADER", action = act.AdjustPaneSize({ "Up", 3 }) },
 	{
 		key = "l",
 		mods = "LEADER",
-		action = act.AdjustPaneSize({ "Right", 5 }),
+		action = act.AdjustPaneSize({ "Right", 3 }),
+	},
+	{
+		key = "c",
+		mods = "LEADER",
+		action = act.SpawnTab("CurrentPaneDomain"),
+	},
+	{
+		key = "p",
+		mods = "LEADER",
+		action = act.ActivateTabRelative(-1),
+	},
+	{
+		key = "n",
+		mods = "LEADER",
+		action = act.ActivateTabRelative(1),
+	},
+	{
+		key = "x",
+		mods = "LEADER",
+		action = act.CloseCurrentTab({ confirm = true }),
 	},
 }
+
+for i = 1, 9 do
+	table.insert(config.keys, {
+		key = tostring(i),
+		mods = "LEADER",
+		action = act.ActivateTab(i - 1),
+	})
+end
 
 wezterm.on("user-var-changed", function(window, pane, name, value)
 	local overrides = window:get_config_overrides() or {}
