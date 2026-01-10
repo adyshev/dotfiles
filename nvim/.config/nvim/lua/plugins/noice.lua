@@ -1,5 +1,13 @@
 return {
     "folke/noice.nvim",
+    dependencies = {
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        "MunifTanjim/nui.nvim",
+        -- OPTIONAL:
+        --   `nvim-notify` is only needed, if you want to use the notification view.
+        --   If not available, we use `mini` as the fallback
+        "rcarriga/nvim-notify",
+    },
     opts = {
         lsp = {
             signature = {
@@ -14,7 +22,7 @@ return {
             },
         },
         progress = {
-            enabled = true,
+            enabled = false,
         },
         signature = {
             enabled = true,
@@ -125,6 +133,10 @@ return {
                 win_options = { wrap = false },
                 size = 8,
                 close = { keys = { "q", "<CR>", "<Esc>" } },
+            },
+            mini = {
+                position = "bottom-right",
+                timeout = 3000,
             },
         },
         messages = {

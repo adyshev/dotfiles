@@ -790,7 +790,7 @@ require("lazy").setup({
         "echasnovski/mini.nvim",
         config = function()
             -- require("mini.ai").setup()
-            -- require("mini.animate").setup()
+            require("mini.animate").setup()
             -- require("mini/notify").setup()
             require("mini.surround").setup({
                 mappings = {
