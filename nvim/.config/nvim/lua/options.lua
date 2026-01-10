@@ -72,4 +72,4 @@ vim.lsp.handlers["textDocument/signatureHelp"] = function()
     })
 end
 
-vim.cmd([[noremap ; :]])
+-- vim.cmd([[noremap ; :]])
