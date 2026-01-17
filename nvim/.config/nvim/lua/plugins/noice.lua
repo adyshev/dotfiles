@@ -139,6 +139,9 @@ return {
                 timeout = 3000,
             },
         },
+        cmdline = {
+            view = "cmdline",
+        },
         messages = {
             -- NOTE: If you enable messages, then the cmdline is enabled automatically.
             -- This is a current Neovim limitation.
@@ -158,7 +161,7 @@ return {
         --     view_search = false,
         -- },
         popupmenu = {
-            enabled = true, -- enables the Noice popupmenu UI
+            enabled = false, -- enables the Noice popupmenu UI
             backend = "cmp", -- backend to use to show regular cmdline completions
             -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
             kind_icons = {}, -- set to `false` to disable icons

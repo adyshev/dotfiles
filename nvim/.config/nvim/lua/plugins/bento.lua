@@ -4,7 +4,7 @@ return {
     opts = {
         ui = {
             floating = {
-                position = "top-right", -- See position options below
+                position = "middle-right", -- See position options below
                 offset_x = 0, -- Horizontal offset from position
                 offset_y = 1, -- Vertical offset from position
                 dash_char = "─", -- Character for collapsed dashes

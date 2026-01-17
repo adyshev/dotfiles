@@ -21,7 +21,7 @@ vim.o.inccommand = "split"
 vim.o.list = true
 vim.o.confirm = true
 vim.o.cursorline = true
-vim.o.scrolloff = 10
+-- vim.o.scrolloff = 10
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.mouse = "a"
@@ -42,8 +42,9 @@ vim.opt.pumheight = 10
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 vim.opt.shiftround = true
 vim.opt.shiftwidth = indent
-vim.opt.sidescrolloff = 8
+-- vim.opt.sidescrolloff = 8
 vim.opt.tabstop = indent
+vim.o.showtabline = 0
 vim.opt.termguicolors = true
 vim.opt.wildmode = "longest:full,full"
 
@@ -71,5 +72,3 @@ vim.lsp.handlers["textDocument/signatureHelp"] = function()
         border = "rounded",
     })
 end
-
--- vim.cmd([[noremap ; :]])

@@ -218,16 +218,18 @@ require("lazy").setup({
             }, -- NOTE: Must be loaded before dependants
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
-            {
-                "j-hui/fidget.nvim",
-                opts = {
-                    notification = {
-                        window = {
-                            winblend = 0,
-                        },
-                    },
-                },
-            },
+            -- {
+            --     "j-hui/fidget.nvim",
+            --     opts = {
+            --         notification = {
+            --             override_vim_notify = true,
+            --             window = {
+            --                 blend = 0,
+            --                 relative = "editor",
+            --             },
+            --         },
+            --     },
+            -- },
             { "folke/neodev.nvim", opts = {} },
         },
         config = function()
@@ -569,7 +571,6 @@ require("lazy").setup({
             "hrsh7th/cmp-nvim-lsp-document-symbol",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
             "hrsh7th/cmp-emoji",
             "f3fora/cmp-spell",
@@ -732,15 +733,14 @@ require("lazy").setup({
                 },
             })
 
-            cmp.setup.cmdline({ "/", "?" }, {
+            cmp.setup.cmdline("?", {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
-                    { name = "nvim_lsp_document_symbol" },
                     { name = "buffer" },
                 },
-                view = {
-                    entries = { name = "wildmenu", separator = " ⇨ " },
-                },
+                -- view = {
+                --     entries = { name = "wildmenu", separator = " " },
+                -- },
             })
 
             cmp.setup.cmdline(":", {
@@ -750,9 +750,9 @@ require("lazy").setup({
                 }, {
                     {
                         name = "cmdline",
-                        option = {
-                            ignore_cmds = { "Man", "!" },
-                        },
+                        -- option = {
+                        --     ignore_cmds = { "Man", "!" },
+                        -- },
                     },
                 }),
             })
@@ -790,8 +790,8 @@ require("lazy").setup({
         "echasnovski/mini.nvim",
         config = function()
             -- require("mini.ai").setup()
-            require("mini.animate").setup()
             -- require("mini/notify").setup()
+            -- require("mini.animate").setup()
             require("mini.surround").setup({
                 mappings = {
                     add = "gsa", -- Add surrounding in Normal and Visual modes

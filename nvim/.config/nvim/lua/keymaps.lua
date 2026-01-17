@@ -33,9 +33,9 @@ map("n", "Q", "<cmd>qa<cr>")
 map("n", "Y", "^y$")
 
 -- Buffers
-map("n", "<S-h>", "<CMD>bprev<CR>", opts)
-map("n", "<S-j>", "<Nop>", opts)
-map("n", "<S-l>", "<CMD>bnext<CR>", opts)
+-- map("n", "<S-h>", "<CMD>bprev<CR>", opts)
+-- map("n", "<S-j>", "<Nop>", opts)
+-- map("n", "<S-l>", "<CMD>bnext<CR>", opts)
 
 -- Yank all
 map("n", "<M-y>", "ggVGy", opts)

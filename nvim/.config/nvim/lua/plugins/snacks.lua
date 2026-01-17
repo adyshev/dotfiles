@@ -2,8 +2,12 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-    ---@type snacks.Config
     opts = {
+        -- animate = {
+        --     duration = 20, -- ms per step
+        --     easing = "linear",
+        --     fps = 120, -- frames per second. Global setting for all animations
+        -- },
         bigfile = { enabled = true },
         indent = {
             enabled = true,
@@ -18,7 +22,7 @@ return {
         input = { enabled = true },
         scratch = { enabled = true },
         notifier = { enabled = true },
-        -- picker = { enabled = true },
+        -- picker = { ui_select = true },
         -- notify = { enabled = true },
         quickfile = { enabled = true },
         zen = {
@@ -53,6 +57,7 @@ return {
         },
     },
     init = function()
+        vim.ui.select = true
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
             callback = function()
