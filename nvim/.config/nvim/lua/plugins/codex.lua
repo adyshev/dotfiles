@@ -8,7 +8,7 @@ return {
             function()
                 require("codex").toggle()
             end,
-            desc = "[c]Toggle Codex popup or side-panel",
+            desc = "[c] Codex",
             mode = { "n", "t" },
         },
     },

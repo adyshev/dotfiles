@@ -87,7 +87,7 @@ require("lazy").setup({
                 { "<leader>d", group = "[d]Debug" },
                 { "<leader>t", group = "[t]Test" },
                 { "<leader>c", group = "[c]Code" },
-                -- { '<leader>s', group = '[s]Sessions' },
+                { "<leader>g", group = "[g]Git" },
                 -- { '<leader>n', group = '[n]Notes' },
                 { "<leader>o", group = "[o]Options" },
             })
@@ -96,11 +96,12 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>e", open_float_diagnostic, { desc = "[e]Line Diagnostic" })
             vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "[-]Horisontal split" })
             vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "[|]Vertical split" })
-            -- -- Code
-            -- vim.keymap.set('n', '<leader>cr', function()
-            --   return ':IncRename ' .. vim.fn.expand '<cword>'
-            -- end, { expr = true, desc = '[r]Rename' })
-            -- vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = '[c]Code Action' })
+
+            vim.keymap.set("n", "<leader>cr", function()
+                return ":IncRename " .. vim.fn.expand("<cword>")
+            end, { expr = true, desc = "[r]Code Rename" })
+
+            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[a]Code Action" })
 
             -- Options
             -- vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
@@ -218,18 +219,25 @@ require("lazy").setup({
             }, -- NOTE: Must be loaded before dependants
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
-            -- {
-            --     "j-hui/fidget.nvim",
-            --     opts = {
-            --         notification = {
-            --             override_vim_notify = true,
-            --             window = {
-            --                 blend = 0,
-            --                 relative = "editor",
-            --             },
-            --         },
-            --     },
-            -- },
+            {
+                "j-hui/fidget.nvim",
+                event = "VeryLazy",
+                config = function()
+                    require("fidget").setup({
+                        -- your other options
+                        notification = {
+                            -- override_vim_notify = true,
+                            window = {
+                                winblend = 0,
+                                relative = "editor",
+                                avoid = { "Oil" },
+                            },
+                        },
+                    })
+                    -- Explicitly set vim.notify to fidget.notify
+                    -- vim.notify = require("fidget").notify
+                end,
+            },
             { "folke/neodev.nvim", opts = {} },
         },
         config = function()
@@ -248,7 +256,8 @@ require("lazy").setup({
                     map("gR", require("telescope.builtin").lsp_references, "Goto Reference")
                     map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
-                    map("<space>cr", vim.lsp.buf.rename, "[r]Rename")
+                    -- map("<space>cr", vim.lsp.buf.rename, "[r]Rename")
+
                     map("<space>cf", function()
                         vim.lsp.buf.format({ async = true })
                     end, "[f]Format")

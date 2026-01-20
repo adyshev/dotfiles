@@ -3,11 +3,11 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
-        -- animate = {
-        --     duration = 20, -- ms per step
-        --     easing = "linear",
-        --     fps = 120, -- frames per second. Global setting for all animations
-        -- },
+        animate = {
+            duration = 20, -- ms per step
+            easing = "linear",
+            fps = 120, -- frames per second. Global setting for all animations
+        },
         bigfile = { enabled = true },
         indent = {
             enabled = true,
@@ -22,8 +22,8 @@ return {
         input = { enabled = true },
         scratch = { enabled = true },
         notifier = { enabled = true },
-        -- picker = { ui_select = true },
-        -- notify = { enabled = true },
+        picker = { ui_select = true },
+        notify = { enabled = true },
         quickfile = { enabled = true },
         zen = {
             toggles = {
@@ -117,6 +117,55 @@ return {
                 Snacks.scratch.select()
             end,
             desc = "[N]Select Scratch Buffer",
+        },
+        {
+            "<leader>gb",
+            function()
+                Snacks.picker.git_branches()
+            end,
+            desc = "Git Branches",
+        },
+        {
+            "<leader>gl",
+            function()
+                Snacks.picker.git_log()
+            end,
+            desc = "Git Log",
+        },
+        {
+            "<leader>gL",
+            function()
+                Snacks.picker.git_log_line()
+            end,
+            desc = "Git Log Line",
+        },
+        {
+            "<leader>gs",
+            function()
+                Snacks.picker.git_status()
+            end,
+            desc = "Git Status",
+        },
+        {
+            "<leader>gS",
+            function()
+                Snacks.picker.git_stash()
+            end,
+            desc = "Git Stash",
+        },
+        {
+            "<leader>gd",
+            function()
+                Snacks.picker.git_diff()
+            end,
+            desc = "Git Diff (Hunks)",
+        },
+        {
+            "<leader>gf",
+            function()
+                Snacks.picker.git_log_file()
+            end,
+            desc = "Git Log File",
         },
         --
         -- {
