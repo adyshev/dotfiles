@@ -175,7 +175,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>sb", ":Telescope file_browser path=%:p:h select_buffer=true<CR>", { desc = "[b]File Browser" })
             vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[f]Search Files" })
             vim.keymap.set("n", "<leader>sr", builtin.registers, { desc = "[r]Search Registers" })
-            vim.keymap.set("n", "<leader>ss", builtin.spell_suggest, { desc = "[s]Seach Spell Suggestions" })
+            vim.keymap.set("n", "<leader>sl", builtin.spell_suggest, { desc = "[l]Seach Spell Suggestions" })
             vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[w]Search current Word" })
             vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[g]Search by Grep" })
             vim.keymap.set(
@@ -250,11 +250,11 @@ require("lazy").setup({
                     map("K", vim.lsp.buf.hover, "Hover Documentation")
 
                     -- GoTo operator
-                    map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-                    map("gT", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
-                    map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
-                    map("gR", require("telescope.builtin").lsp_references, "Goto Reference")
-                    map("gD", vim.lsp.buf.declaration, "Goto Declaration")
+                    -- map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
+                    -- map("gT", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
+                    -- map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
+                    -- map("gR", require("telescope.builtin").lsp_references, "Goto Reference")
+                    -- map("gD", vim.lsp.buf.declaration, "Goto Declaration")
 
                     -- map("<space>cr", vim.lsp.buf.rename, "[r]Rename")
 
