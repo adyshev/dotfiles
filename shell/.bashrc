@@ -1,7 +1,7 @@
 export PS1=':\w\$ '
 export GOPATH="${HOME}/go"
 export PATH="$HOME/bin:/opt/homebrew/bin:${GOPATH}/bin:/usr/local/bin:${PATH}"
-
+export TERM="screen-256color"
 export FZF_BASE="/opt/homebrew/opt/fzf"
 export LANG=en_US.UTF-8
 
@@ -12,7 +12,6 @@ else
 	export EDITOR='nvim'
 fi
 
-export TERM='screen-256color'
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'

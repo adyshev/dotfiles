@@ -16,6 +16,7 @@ return {
             },
         },
         words = { enabled = true },
+        -- image = { enabled = true }, // doesn't work in allacritty.
         image = { enabled = true },
         -- scroll = { enabled = true },
         rename = { enabled = true },

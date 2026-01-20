@@ -193,6 +193,7 @@ require("lazy").setup({
                 })
             end, { desc = "[/]Search in Open Files" })
 
+
             vim.keymap.set("n", "<leader>sn", function()
                 builtin.find_files({ cwd = vim.fn.stdpath("config") })
             end, { desc = "[n]Search Neovim config files" })
