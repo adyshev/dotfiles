@@ -6,6 +6,7 @@ font-thicken = true
 font-thicken-strength = 0
 font-size = 16
 command = /bin/zsh -c "tmux new -A -s default"
+maximize = true
 copy-on-select = true
 confirm-close-surface=false
 quit-after-last-window-closed = true
@@ -22,5 +23,5 @@ macos-titlebar-style = hidden
 
 # keybind = performable:ctrl+c=copy_to_clipboard
 # keybind = performable:ctrl+v=paste_from_clipboard
-# keybind = global:alt+enter=toggle_fullscreen
+keybind = global:alt+enter=toggle_maximize
 
