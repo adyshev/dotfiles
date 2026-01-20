@@ -19,6 +19,14 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
+    callback = function()
+        if vim.bo.filetype == "" then
+            vim.bo.commentstring = "# %s"
+        end
+    end,
+})
+
 -- :h restore-cursor
 -- local function RestoreCursorPosition()
 --     if vim.buftype == "terminal" then

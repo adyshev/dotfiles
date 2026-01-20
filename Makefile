@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := all
-.PHONY:all shell alacritty rectangle nvim tmux homebrew bat btop lazygit lsd wezterm yazi aerospace
+.PHONY:all shell alacritty ghostty rectangle nvim tmux homebrew bat btop lazygit lsd wezterm yazi aerospace
 
-all: aerospace alacritty rectangle shell homebrew tmux nvim bat btop lazygit lsd wezterm
+all: aerospace alacritty ghostty rectangle shell homebrew tmux nvim bat btop lazygit lsd wezterm
 
 shell:
 	@echo "Installing Shell..."
@@ -11,6 +11,10 @@ shell:
 aerospace:
 	@echo "Installing Aerospace"
 	@stow aerospace
+
+ghostty:
+	@echo "Installing Ghostty"
+	@stow ghostty
 
 skhd:
 	@echo "Installing Skhd"
