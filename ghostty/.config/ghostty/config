@@ -1,4 +1,5 @@
-theme = gruvbox-material-medium-dark
+# theme = gruvbox-material-medium-dark
+theme = Gruvbox Material Dark
 
 adjust-cell-height = 0%
 font-family = "JetBrainsMono Nerd Font"

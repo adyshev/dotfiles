@@ -3,6 +3,9 @@ return {
     priority = 1000,
     lazy = false,
     opts = {
+        colorscheme = {
+            enabled = true,
+        },
         animate = {
             duration = 20, -- ms per step
             easing = "linear",
