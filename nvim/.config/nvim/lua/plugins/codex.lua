@@ -8,7 +8,7 @@ return {
             function()
                 require("codex").toggle()
             end,
-            desc = "[c] Codex",
+            desc = "[c]Codex",
             mode = { "n", "t" },
         },
     },

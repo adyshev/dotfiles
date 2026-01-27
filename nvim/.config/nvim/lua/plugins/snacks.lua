@@ -109,18 +109,18 @@ return {
             mode = { "n", "t" },
         },
         {
-            "<leader>n",
+            "<leader>.",
             function()
                 Snacks.scratch()
             end,
-            desc = "[n]Toggle Scratch Buffer",
+            desc = "[.]Toggle Scratch Buffer",
         },
         {
-            "<leader>N",
+            "<leader>>",
             function()
                 Snacks.scratch.select()
             end,
-            desc = "[N]Select Scratch Buffer",
+            desc = "[>]Select Scratch Buffer",
         },
         {
             "<leader>gb",
@@ -234,6 +234,34 @@ return {
                 Snacks.picker.lsp_workspace_symbols()
             end,
             desc = "[S]LSP Workspace Symbols",
+        },
+        {
+            "<leader>gi",
+            function()
+                Snacks.picker.gh_issue()
+            end,
+            desc = "GitHub Issues (open)",
+        },
+        {
+            "<leader>gI",
+            function()
+                Snacks.picker.gh_issue({ state = "all" })
+            end,
+            desc = "GitHub Issues (all)",
+        },
+        {
+            "<leader>gp",
+            function()
+                Snacks.picker.gh_pr()
+            end,
+            desc = "GitHub Pull Requests (open)",
+        },
+        {
+            "<leader>gP",
+            function()
+                Snacks.picker.gh_pr({ state = "all" })
+            end,
+            desc = "GitHub Pull Requests (all)",
         },
         --
         -- {
