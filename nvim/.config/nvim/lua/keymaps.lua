@@ -37,6 +37,10 @@ map("n", "Y", "^y$")
 -- map("n", "<S-j>", "<Nop>", opts)
 -- map("n", "<S-l>", "<CMD>bnext<CR>", opts)
 
+-- Centralized
+map("n", "n", "nzzzv", opts)
+map("n", "N", "Nzzzv", opts)
+
 -- Yank all
 map("n", "<M-y>", "ggVGy", opts)
 -- Select all
