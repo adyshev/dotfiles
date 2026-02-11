@@ -93,6 +93,7 @@ require("lazy").setup({
             })
             -- Main
             vim.keymap.set("n", "<leader>q", "<cmd>bd<CR>", { desc = "[q]Close Buffer" })
+            vim.keymap.set("n", "<leader>p", ":ProjectTelescope<CR>", { desc = "[p]Projects" })
             vim.keymap.set("n", "<leader>e", open_float_diagnostic, { desc = "[e]Line Diagnostic" })
             vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "[-]Horisontal split" })
             vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "[|]Vertical split" })
@@ -161,6 +162,7 @@ require("lazy").setup({
             pcall(require("telescope").load_extension, "file-browser")
             pcall(require("telescope").load_extension, "recent_files")
             pcall(require("telescope").load_extension, "changed_files")
+            pcall(require("telescope").load_extension, "projects")
 
             local builtin = require("telescope.builtin")
             vim.keymap.set("n", "<leader>s?", builtin.help_tags, { desc = "[?]Search Help" })
@@ -192,7 +194,6 @@ require("lazy").setup({
                     prompt_title = "Live Grep in Open Files",
                 })
             end, { desc = "[/]Search in Open Files" })
-
 
             vim.keymap.set("n", "<leader>sn", function()
                 builtin.find_files({ cwd = vim.fn.stdpath("config") })
@@ -853,6 +854,7 @@ require("lazy").setup({
             local my_items = {
                 starter.sections.builtin_actions(),
                 starter.sections.telescope(),
+                { name = "Recent Projects", action = "ProjectRecents", section = "Projects" }, -- `:ProjectRecents`
                 -- { name = 'Find In Notes', action = ':Telescope live_grep search_dirs={"~/neorg/"}', section = 'Telescope' },
                 starter.sections.recent_files(10, false),
             }
