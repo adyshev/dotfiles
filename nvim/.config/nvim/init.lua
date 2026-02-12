@@ -226,9 +226,8 @@ require("lazy").setup({
                 event = "VeryLazy",
                 config = function()
                     require("fidget").setup({
-                        -- your other options
                         notification = {
-                            -- override_vim_notify = true,
+                            override_vim_notify = false,
                             window = {
                                 winblend = 0,
                                 relative = "editor",
@@ -236,8 +235,6 @@ require("lazy").setup({
                             },
                         },
                     })
-                    -- Explicitly set vim.notify to fidget.notify
-                    -- vim.notify = require("fidget").notify
                 end,
             },
             { "folke/neodev.nvim", opts = {} },
