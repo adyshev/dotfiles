@@ -46,7 +46,7 @@ vim.opt.tabstop = indent
 vim.o.showtabline = 0
 vim.opt.termguicolors = true
 vim.opt.wildmode = "longest:full,full"
-
+-- vim.o.confirm = false
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.loaded_netrwPlugin = 0

@@ -28,6 +28,7 @@ return {
         notifier = { enabled = true },
         picker = { ui_select = true },
         notify = { enabled = true },
+        -- scope = { enabled = true },
         quickfile = { enabled = true },
         zen = {
             toggles = {
@@ -205,12 +206,12 @@ return {
             desc = "Goto [D]eclaration",
         },
         {
-            "gr",
+            "gf",
             function()
                 Snacks.picker.lsp_references()
             end,
             nowait = true,
-            desc = "[r]References",
+            desc = "[f]References",
         },
         {
             "gI",

@@ -1,8 +1,7 @@
 return {
     "folke/flash.nvim",
     event = "VeryLazy",
-    enabled = true,
-    ---@type Flash.Config
+    enabled = false,
     opts = {
         modes = {
             char = { jump_labels = true },
@@ -18,9 +17,14 @@ return {
             end,
         },
     },
-  -- stylua: ignore
-  keys = {
-    { "<leader>f", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "[f]Flash" },
-}
-,
+    keys = {
+        {
+            "<leader>f",
+            mode = { "n", "x", "o" },
+            function()
+                require("lua.plugins.disabled.flash").jump()
+            end,
+            desc = "[f]Flash",
+        },
+    },
 }
