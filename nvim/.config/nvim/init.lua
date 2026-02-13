@@ -930,6 +930,13 @@ ______________________________
                         ["il"] = "@loop.inner",
                         ["al"] = "@loop.outer",
                         ["at"] = "@comment.outer",
+                        ["iF"] = {
+                            python = "(function_definition) @function",
+                            cpp = "(function_definition) @function",
+                            c = "(function_definition) @function",
+                            java = "(method_declaration) @function",
+                            go = "(method_declaration) @function",
+                        },
                     },
                     include_surrounding_whitespace = false,
                 },
@@ -953,15 +960,15 @@ ______________________________
                         ["[C"] = "@class.outer",
                     },
                 },
-                -- swap = {
-                --     enable = true,
-                --     swap_previous = {
-                --         ["<leader>A"] = "@parameter.inner",
-                --     },
-                --     swap_next = {
-                --         ["<leader>a"] = "@parameter.inner",
-                --     },
-                -- },
+                swap = {
+                    enable = true,
+                    swap_previous = {
+                        ["<leader>cP"] = "@parameter.inner",
+                    },
+                    swap_next = {
+                        ["<leader>cp"] = "@parameter.inner",
+                    },
+                },
             },
         },
         config = function(_, opts)
