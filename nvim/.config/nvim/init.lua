@@ -103,12 +103,6 @@ require("lazy").setup({
             end, { expr = true, desc = "[r]Code Rename" })
 
             vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "[a]Code Action" })
-
-            -- Options
-            -- vim.keymap.set('n', '<leader>oc', '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = '[c]Enable completion' })
-            -- vim.keymap.set('n', '<leader>oC', '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = '[C]Disable completion' })
-            -- vim.keymap.set('n', '<leader>oX', '<cmd>lua vim.diagnostic.enable(false)<cr>', { desc = '[X]Disable diagnostic messages' })
-            -- vim.keymap.set('n', '<leader>ox', '<cmd>lua vim.diagnostic.enable(true)<cr>', { desc = '[x]Enable diagnostic messages' })
         end,
     },
     {
@@ -216,6 +210,7 @@ require("lazy").setup({
                 opts = {
                     ui = {
                         border = "rounded",
+                        backdrop = 100,
                     },
                 },
             }, -- NOTE: Must be loaded before dependants
@@ -247,16 +242,6 @@ require("lazy").setup({
                         vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
                     end
                     map("K", vim.lsp.buf.hover, "Hover Documentation")
-
-                    -- GoTo operator
-                    -- map("gI", require("telescope.builtin").lsp_implementations, "Goto Implementation")
-                    -- map("gT", require("telescope.builtin").lsp_type_definitions, "Goto Type Definition")
-                    -- map("gd", require("telescope.builtin").lsp_definitions, "Goto Definition")
-                    -- map("gR", require("telescope.builtin").lsp_references, "Goto Reference")
-                    -- map("gD", vim.lsp.buf.declaration, "Goto Declaration")
-
-                    -- map("<space>cr", vim.lsp.buf.rename, "[r]Rename")
-
                     map("<space>cf", function()
                         vim.lsp.buf.format({ async = true })
                     end, "[f]Format")
@@ -408,16 +393,6 @@ require("lazy").setup({
                 taplo = {},
             }
             require("lspconfig.ui.windows").default_options.border = "rounded"
-            require("mason").setup({
-                ui = {
-                    border = "rounded",
-                    width = 0.8,
-                    height = 0.8,
-                },
-                registries = {
-                    "github:mason-org/mason-registry",
-                },
-            })
 
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
@@ -1207,6 +1182,7 @@ ______________________________
     },
     ui = {
         border = "rounded",
+        backdrop = 100,
         size = {
             width = 0.8,
             height = 0.8,

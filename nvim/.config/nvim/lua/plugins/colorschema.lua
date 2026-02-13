@@ -46,6 +46,9 @@ return {
                 end,
             })
 
+            vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "#282828", nocombine = true })
+            vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#ebdbb3", bg = "#282828", nocombine = true })
+
             vim.cmd.colorscheme("gruvbox-material")
             vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "#32302F" })
         end,

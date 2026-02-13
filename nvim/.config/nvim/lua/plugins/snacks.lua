@@ -4,8 +4,9 @@ return {
     lazy = false,
     opts = {
         colorscheme = {
-            enabled = true,
+            enabled = false,
         },
+        dim = { enabled = false },
         animate = {
             duration = 20, -- ms per step
             easing = "linear",
@@ -56,6 +57,25 @@ return {
             zen = {
                 width = 120,
                 backdrop = { transparent = false, blend = 99 },
+            },
+            float = {
+                position = "float",
+                backdrop = false,
+                height = 0.9,
+                width = 0.9,
+                zindex = 50,
+            },
+            scratch = {
+                width = 100,
+                height = 30,
+                bo = { buftype = "", buflisted = false, bufhidden = "hide", swapfile = false },
+                minimal = false,
+                noautocmd = false,
+                -- position = "right",
+                zindex = 20,
+                wo = { winhighlight = "NormalFloat:Normal" },
+                footer_keys = true,
+                border = true,
             },
         },
     },

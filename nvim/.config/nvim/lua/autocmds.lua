@@ -96,38 +96,6 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
     desc = "Python specific settings",
 })
 
--- local file_exists_and_is_empty = function(filepath)
---   local file = io.open(filepath, 'r') -- Open the file in read mode
---   if file ~= nil then
---     local content = file:read '*all' -- Read the entire content of the file
---     file:close() -- Close the file
---     return content == '' -- Check if the content is empty
---   else
---     return false
---   end
--- end
-
--- vim.api.nvim_create_autocmd({ 'BufNew', 'BufNewFile' }, {
---   callback = function(args)
---     vim.schedule(function()
---       if args.event == 'BufNewFile' or (args.event == 'BufNew' and file_exists_and_is_empty(args.file)) then
---         vim.api.nvim_cmd({ cmd = 'Neorg', args = { 'templates', 'fload', 'journal' } }, {})
---       end
---     end)
---   end,
---   pattern = '**/journal/years/*/*/*.norg',
--- })
---
--- vim.api.nvim_create_autocmd('BufNewFile', {
---   command = 'Neorg templates fload work',
---   pattern = { '**/neorg/work/*.norg' },
--- })
---
--- vim.api.nvim_create_autocmd('BufNewFile', {
---   command = 'Neorg templates fload personal',
---   pattern = { '**/neorg/personal/*.norg' },
--- })
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = {
         "help",
