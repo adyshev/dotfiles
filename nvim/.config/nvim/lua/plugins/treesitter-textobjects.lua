@@ -42,16 +42,16 @@ return {
         -- You can use the capture groups defined in `textobjects.scm`
         vim.keymap.set({ "x", "o" }, "am", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
-        end)
+        end, { desc = "[m] Select Function outer" })
         vim.keymap.set({ "x", "o" }, "im", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
-        end)
+        end, { desc = "[m] Select Function inner" })
         vim.keymap.set({ "x", "o" }, "ac", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
-        end)
+        end, { desc = "[c] Select Class outer" })
         vim.keymap.set({ "x", "o" }, "ic", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
-        end)
+        end, { desc = "[c] Select Function inner" })
 
         -- Swap
         vim.keymap.set("n", "<leader>cp", function()
@@ -65,37 +65,41 @@ return {
         -- Move
         vim.keymap.set({ "n", "x", "o" }, "]m", function()
             require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
-        end)
+        end, { desc = "Goto Next Start Function outer" })
+
         vim.keymap.set({ "n", "x", "o" }, "]]", function()
             require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
-        end)
+        end, { desc = "Goto Next Start Class outer" })
 
         vim.keymap.set({ "n", "x", "o" }, "]M", function()
             require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
-        end)
+        end, { desc = "Goto Next End Function outer" })
+
         vim.keymap.set({ "n", "x", "o" }, "][", function()
             require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
-        end)
+        end, { desc = "Goto Next End Class outer" })
 
         vim.keymap.set({ "n", "x", "o" }, "[m", function()
             require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
-        end)
+        end, { desc = "Goto Previous Start Function outer" })
+
         vim.keymap.set({ "n", "x", "o" }, "[[", function()
             require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
-        end)
+        end, { desc = "Goto Previous Start Class outer" })
 
         vim.keymap.set({ "n", "x", "o" }, "[M", function()
             require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
-        end)
+        end, { desc = "Goto Previous End Function outer" })
+
         vim.keymap.set({ "n", "x", "o" }, "[]", function()
             require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
-        end)
+        end, { desc = "Goto Previous End Class outer" })
 
         local ts_repeat_move = require("nvim-treesitter-textobjects.repeatable_move")
 
         -- Repeat movement with ; and ,
         -- ensure ; goes forward and , goes backward regardless of the last direction
-        vim.keymap.set({ "n", "x", "o" }, ">", ts_repeat_move.repeat_last_move_next)
-        vim.keymap.set({ "n", "x", "o" }, "<", ts_repeat_move.repeat_last_move_previous)
+        vim.keymap.set({ "n", "x", "o" }, ">", ts_repeat_move.repeat_last_move_next, { desc = "[>]Repeat last move next" })
+        vim.keymap.set({ "n", "x", "o" }, "<", ts_repeat_move.repeat_last_move_previous, { desc = "[<]Repeat last move previous" })
     end,
 }
