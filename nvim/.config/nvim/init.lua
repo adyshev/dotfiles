@@ -449,7 +449,7 @@ require("lazy").setup({
                 python = { "isort", "black" },
                 go = { "goimports", "gofmt" },
                 json = { "prettier" },
-                markdown = { "prettier" },
+                -- markdown = { "prettier" },
                 sh = { "shfmt" },
                 yaml = { "yamlfmt" },
             },
@@ -466,7 +466,7 @@ require("lazy").setup({
         config = function()
             local lint = require("lint")
             lint.linters_by_ft = {
-                markdown = { "markdownlint", "vale" },
+                -- markdown = { "markdownlint", "vale" },
                 python = { "mypy" },
                 -- python = { "mypy", "bandit" },
                 json = { "jsonlint" },
