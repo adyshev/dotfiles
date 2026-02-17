@@ -412,7 +412,7 @@ require("lazy").setup({
                 "tflint",
                 "cssls",
                 "tailwindcss",
-                "markdownlint",
+                -- "markdownlint",
                 -- "markdown-toc",
             })
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
