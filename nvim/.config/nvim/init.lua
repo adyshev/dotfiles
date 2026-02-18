@@ -95,7 +95,7 @@ require("lazy").setup({
             vim.keymap.set("n", "<leader>q", "<cmd>bd<CR>", { desc = "[q]Close Buffer" })
             vim.keymap.set("n", "<leader>p", ":ProjectTelescope<CR>", { desc = "[p]Projects" })
             vim.keymap.set("n", "<leader>e", open_float_diagnostic, { desc = "[e]Line Diagnostic" })
-            vim.keymap.set("n", "<leader>-", "<C-W>s", { desc = "[-]Horisontal split" })
+            vim.keymap.set("n", "<leader>_", "<C-W>s", { desc = "[_]Horisontal split" })
             vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "[|]Vertical split" })
 
             vim.keymap.set("n", "<leader>cr", function()
