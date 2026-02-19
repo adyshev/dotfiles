@@ -1,55 +1,77 @@
 return {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    config = function()
-        local configs = require("nvim-treesitter.config")
+    {
+        "nvim-treesitter/nvim-treesitter",
+        branch = "main",
+        lazy = false,
+        build = ":TSUpdate",
+        config = function()
+            require("nvim-treesitter").setup({
+                install_dir = vim.fn.stdpath("data") .. "/site",
+            })
 
-        configs.setup({
-            ensure_installed = {
+            local parsers = {
                 "bash",
                 "c",
-                "python",
-                "go",
-                "rust",
-                "diff",
-                "html",
-                "regex",
-                "templ",
-                "json",
-                "yaml",
                 "css",
+                "diff",
+                "editorconfig",
+                "zsh",
+                "git_config",
+                "git_rebase",
+                "gitattributes",
+                "gitcommit",
+                "gitignore",
+                "go",
+                "html",
+                "javascript",
+                "jsdoc",
+                "json",
+                "latex",
                 "lua",
                 "luadoc",
+                "make",
                 "markdown",
-                "vim",
-                "vimdoc",
+                "markdown_inline",
+                "python",
                 "query",
-                "typst",
-                "latex",
+                "regex",
+                "rust",
                 "scss",
                 "svelte",
-                "javascript",
+                "templ",
+                "toml",
+                "tsx",
                 "typescript",
-            },
-            auto_install = true,
-            sync_install = false,
-            highlight = { enable = true },
-            matchup = {
-                enable = true,
-                enable_quotes = true,
-                disable_virtual_text = false,
-                include_match_words = true,
-            },
-            indent = { enable = true },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "<c-space>",
-                    node_incremental = "<c-space>",
-                    scope_incremental = false,
-                    node_decremental = "<bs>",
+                "typst",
+                "vim",
+                "vimdoc",
+                "xml",
+                "yaml",
+            }
+
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "LazyDone",
+                once = true,
+                callback = function()
+                    require("nvim-treesitter").install(parsers)
+                end,
+            })
+
+            require("treesitter-modules").setup({
+                auto_install = true,
+                incremental_selection = {
+                    enable = true,
+                    -- set value to `false` to disable individual mapping
+                    -- node_decremental captures both node_incremental and scope_incremental
+                    keymaps = {
+                        init_selection = "<c-space>",
+                        node_incremental = "<c-space>",
+                        scope_incremental = false,
+                        node_decremental = "<BS>",
+                    },
                 },
-            },
-        })
-    end,
+            })
+        end,
+    },
+    { "MeanderingProgrammer/treesitter-modules.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" } },
 }

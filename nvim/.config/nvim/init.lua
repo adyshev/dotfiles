@@ -667,25 +667,6 @@ require("lazy").setup({
                 }),
             })
 
-            -- cmp.setup.filetype("norg", {
-            --     sources = {
-            --         -- { name = 'neorg' },
-            --         { name = "luasnip" },
-            --         {
-            --             name = "spell",
-            --             option = {
-            --                 keyword_length = 4,
-            --                 keep_all_entries = false,
-            --                 enable_in_context = function()
-            --                     return true
-            --                 end,
-            --                 preselect_correct_word = false,
-            --             },
-            --         },
-            --         { name = "emoji" },
-            --     },
-            -- })
-
             cmp.setup.filetype("lua", {
                 sources = {
                     { name = "nvim_lsp" },
@@ -738,16 +719,6 @@ require("lazy").setup({
                         -- },
                     },
                 }),
-            })
-        end,
-    },
-    {
-        "MeanderingProgrammer/render-markdown.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
-        config = function()
-            require("render-markdown").setup({
-                latex = { enabled = false },
-                completions = { lsp = { enabled = true } },
             })
         end,
     },
