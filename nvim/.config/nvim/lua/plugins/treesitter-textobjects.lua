@@ -42,25 +42,25 @@ return {
         -- You can use the capture groups defined in `textobjects.scm`
         vim.keymap.set({ "x", "o" }, "am", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@function.outer", "textobjects")
-        end, { desc = "[m] Select Function outer" })
+        end, { desc = "function outer" })
         vim.keymap.set({ "x", "o" }, "im", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@function.inner", "textobjects")
-        end, { desc = "[m] Select Function inner" })
+        end, { desc = "function inner" })
         vim.keymap.set({ "x", "o" }, "ac", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@class.outer", "textobjects")
-        end, { desc = "[c] Select Class outer" })
+        end, { desc = "class outer" })
         vim.keymap.set({ "x", "o" }, "ic", function()
             require("nvim-treesitter-textobjects.select").select_textobject("@class.inner", "textobjects")
-        end, { desc = "[c] Select Function inner" })
+        end, { desc = "class inner" })
 
         -- Swap
-        vim.keymap.set("n", "<leader>cp", function()
+        vim.keymap.set("n", "<leader>a", function()
             require("nvim-treesitter-textobjects.swap").swap_next("@parameter.inner")
-        end, { desc = "[p]Swap with next parameter" })
+        end, { desc = "[a]Swap with next parameter" })
 
-        vim.keymap.set("n", "<leader>cP", function()
+        vim.keymap.set("n", "<leader>A", function()
             require("nvim-treesitter-textobjects.swap").swap_previous("@parameter.outer")
-        end, { desc = "[P]Swap with prev parameter" })
+        end, { desc = "[A]Swap with prev parameter" })
 
         -- Move
         vim.keymap.set({ "n", "x", "o" }, "]m", function()
