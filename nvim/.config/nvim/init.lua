@@ -668,44 +668,20 @@ require("lazy").setup({
                 }),
             })
 
-            cmp.setup.filetype("lua", {
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "nvim_lua" },
-                    { name = "luasnip" },
-                    { name = "emoji" },
-                },
-            })
-
-            cmp.setup.filetype({ "markdown" }, {
-                sources = {
-                    { name = "render-markdown" },
-                    { name = "nvim_lsp" },
-                    { name = "luasnip" },
+            cmp.setup.filetype("gitcommit", {
+                sources = cmp.config.sources({
+                    { name = "git" },
+                }, {
                     { name = "buffer" },
-                    {
-                        name = "spell",
-                        option = {
-                            keyword_length = 4,
-                            keep_all_entries = false,
-                            enable_in_context = function()
-                                return true
-                            end,
-                            preselect_correct_word = false,
-                        },
-                    },
-                    { name = "emoji" },
-                },
+                }),
             })
+            require("cmp_git").setup()
 
-            cmp.setup.cmdline("?", {
+            cmp.setup.cmdline({ "/", "?" }, {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
                     { name = "buffer" },
                 },
-                -- view = {
-                --     entries = { name = "wildmenu", separator = " " },
-                -- },
             })
 
             cmp.setup.cmdline(":", {
@@ -713,14 +689,20 @@ require("lazy").setup({
                 sources = cmp.config.sources({
                     { name = "path" },
                 }, {
-                    {
-                        name = "cmdline",
-                        -- option = {
-                        --     ignore_cmds = { "Man", "!" },
-                        -- },
-                    },
+                    { name = "cmdline" },
                 }),
+                matching = { disallow_symbol_nonprefix_matching = false },
             })
+        end,
+    },
+    {
+        "petertriho/cmp-git",
+        dependencies = { "hrsh7th/nvim-cmp" },
+        opts = {
+            -- options go here
+        },
+        init = function()
+            table.insert(require("cmp").get_config().sources, { name = "git" })
         end,
     },
     {

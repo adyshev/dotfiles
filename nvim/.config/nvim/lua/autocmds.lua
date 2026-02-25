@@ -27,6 +27,32 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     end,
 })
 
+local function lualine_hide()
+    local ok, lualine = pcall(require, "lualine")
+    if ok then
+        lualine.hide({ unhide = false })
+    end
+end
+
+local function lualine_show()
+    local ok, lualine = pcall(require, "lualine")
+    if ok then
+        lualine.hide({ unhide = true })
+    end
+end
+
+vim.api.nvim_create_autocmd("CmdlineEnter", {
+    callback = function()
+        lualine_hide()
+    end,
+})
+
+vim.api.nvim_create_autocmd("CmdlineLeave", {
+    callback = function()
+        lualine_show()
+    end,
+})
+
 -- :h restore-cursor
 -- local function RestoreCursorPosition()
 --     if vim.buftype == "terminal" then

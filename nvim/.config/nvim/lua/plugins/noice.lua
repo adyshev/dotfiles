@@ -137,6 +137,7 @@ return {
             },
         },
         cmdline = {
+            -- view = "cmdline_popup",
             view = "cmdline",
         },
         notify = {
