@@ -50,6 +50,7 @@ map("n", "<C-d>", "YP", opts)
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)
+vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true })
 
 -- Allow clipboard copy paste in neovim
 vim.api.nvim_set_keymap("", "<D-v>", "+p<CR>", { noremap = true, silent = true })

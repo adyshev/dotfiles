@@ -67,7 +67,7 @@ vim.lsp.handlers["textDocument/hover"] = function()
 end
 
 vim.lsp.handlers["textDocument/signatureHelp"] = function()
-    vim.lsp.buf.hover({
+    vim.lsp.buf.signature_help({
         border = "rounded",
     })
 end

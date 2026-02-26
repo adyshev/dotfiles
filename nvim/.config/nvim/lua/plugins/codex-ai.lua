@@ -1,14 +1,15 @@
 return {
     "kkrampis/codex.nvim",
     lazy = true,
+    enabled = false,
     cmd = { "Codex", "CodexToggle" }, -- Optional: Load only on command execution
     keys = {
         {
-            "<leader>cc", -- Change this to your preferred keybinding
+            "<leader>ce", -- Change this to your preferred keybinding
             function()
                 require("codex").toggle()
             end,
-            desc = "[c]Codex",
+            desc = "[e]Codex",
             mode = { "n", "t" },
         },
     },
