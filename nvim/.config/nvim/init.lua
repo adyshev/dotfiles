@@ -79,7 +79,11 @@ require("lazy").setup({
         "folke/which-key.nvim",
         event = "VimEnter",
         config = function()
-            require("which-key").setup()
+            require("which-key").setup({
+                win = {
+                    border = { "─", "─", "─", " ", " ", " ", " ", " " },
+                },
+            })
 
             -- Document existing key chains
             require("which-key").add({

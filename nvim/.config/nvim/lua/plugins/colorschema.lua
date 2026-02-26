@@ -80,7 +80,7 @@ return {
                     hl(0, "NoiceCmdlineIcon", { fg = orange })
 
                     -- WhichKey
-                    local whichkey_bg = "#32302f"
+                    local whichkey_bg = bg0
                     hl(0, "WhichKeyNormal", { bg = whichkey_bg })
                     hl(0, "WhichKeyBorder", { bg = whichkey_bg, fg = grey1 })
                     hl(0, "WhichKeyTitle", { bg = whichkey_bg, fg = yellow, bold = true })
