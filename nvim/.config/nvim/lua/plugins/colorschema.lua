@@ -80,7 +80,14 @@ return {
                     hl(0, "NoiceCmdlineIcon", { fg = orange })
 
                     -- WhichKey
-                    hl(0, "WhichKeyNormal", { bg = bg1 })
+                    local whichkey_bg = "#32302f"
+                    hl(0, "WhichKeyNormal", { bg = whichkey_bg })
+                    hl(0, "WhichKeyBorder", { bg = whichkey_bg, fg = grey1 })
+                    hl(0, "WhichKeyTitle", { bg = whichkey_bg, fg = yellow, bold = true })
+                    hl(0, "WhichKeyDesc", { fg = fg0 })
+                    hl(0, "WhichKeyGroup", { fg = aqua })
+                    hl(0, "WhichKeySeparator", { fg = grey1 })
+                    hl(0, "WhichKeyValue", { fg = grey1 })
 
                     -- Blink completion
                     local bg3 = p.bg3[1]
