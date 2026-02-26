@@ -57,7 +57,7 @@ return {
         opts = {
             ensure_installed = parsers,
             -- fold = { enable = true },
-            -- highlight = { enable = true },
+            highlight = { enable = true },
             -- indent = { enable = true },
             incremental_selection = {
                 enable = true,

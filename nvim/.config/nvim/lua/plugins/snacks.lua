@@ -12,6 +12,45 @@ return {
             easing = "linear",
             fps = 120, -- frames per second. Global setting for all animations
         },
+        dashboard = {
+            enabled = true,
+            preset = {
+                header = [[
+______________________________
+< MAY THE FORCE BE WITH YOU! >
+------------------------------
+        \   ^__^
+         \  (oo)\_______
+            (__)\       )\/\
+                ||----w |
+                ||     ||
+                ]],
+                keys = {
+                    { icon = "  ", key = "e", desc = "New File", action = ":enew" },
+                    { icon = "  ", key = "q", desc = "Quit", action = ":qa" },
+                },
+            },
+            formats = {
+                key = { "[%s]" },
+            },
+            sections = {
+                { section = "header" },
+                { section = "keys", padding = 1 },
+                {
+                    icon = "  ",
+                    title = "Projects",
+                    section = "projects",
+                    limit = 5,
+                    padding = 1,
+                    action = function(dir)
+                        vim.cmd.cd(dir)
+                        require("oil").open(dir)
+                    end,
+                },
+                { icon = "  ", title = "Recent Files", section = "recent_files", limit = 10, padding = 1 },
+                { section = "startup" },
+            },
+        },
         bigfile = { enabled = true },
         indent = {
             enabled = true,

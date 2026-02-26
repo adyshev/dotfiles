@@ -607,7 +607,23 @@ require("lazy").setup({
                     suffix_next = "", -- Suffix to search with "next" method
                 },
             })
+            vim.g.minitrailspace_disable = true
             require("mini.trailspace").setup()
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "SnacksDashboardOpened",
+                once = true,
+                callback = function()
+                    vim.g.minitrailspace_disable = false
+                    MiniTrailspace.unhighlight()
+                end,
+            })
+            vim.api.nvim_create_autocmd("BufReadPost", {
+                once = true,
+                callback = function()
+                    vim.g.minitrailspace_disable = false
+                    MiniTrailspace.highlight()
+                end,
+            })
             require("mini.move").setup({
                 -- Module mappings. Use `''` (empty string) to disable one.
                 mappings = {
@@ -630,33 +646,7 @@ require("lazy").setup({
                     reindent_linewise = false,
                 },
             })
-            -- INFO: Mini-starter page configuration
-            local starter = require("mini.starter")
-            local my_items = {
-                starter.sections.builtin_actions(),
-                { name = "Recent Projects", action = "lua Snacks.picker.projects()", section = "Projects" },
-                starter.sections.recent_files(10, false),
-            }
-            starter.setup({
-                evaluate_single = true,
-                header = [[
-______________________________
-< MAY THE FORCE BE WITH YOU! >
-------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-        ]],
-                items = my_items,
-                content_hooks = {
-                    starter.gen_hook.adding_bullet(),
-                    starter.gen_hook.indexing("all", { "Builtin actions" }),
-                    starter.gen_hook.padding(5, 2),
-                    starter.gen_hook.aligning("center", "center"),
-                },
-            })
+            -- mini.starter replaced by Snacks.dashboard
             -- INFO: Miscellaneous useful functions
             local minimisc = require("mini.misc")
             minimisc.setup()
