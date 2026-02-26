@@ -2,6 +2,7 @@ return {
     "gutsavgupta/nvim-gemini-companion",
     dependencies = { "nvim-lua/plenary.nvim" },
     event = "VeryLazy",
+    enabled = false,
     config = function()
         require("gemini").setup()
     end,

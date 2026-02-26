@@ -235,6 +235,15 @@ require("lazy").setup({
             { "folke/neodev.nvim", opts = {} },
         },
         config = function()
+            local default_publish = vim.lsp.handlers["textDocument/publishDiagnostics"]
+            vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
+                local client = vim.lsp.get_client_by_id(ctx.client_id)
+                if client and client.name == "pyright" then
+                    return
+                end
+                default_publish(err, result, ctx, config)
+            end
+
             vim.api.nvim_create_autocmd("LspAttach", {
                 group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
                 callback = function(event)
@@ -246,7 +255,6 @@ require("lazy").setup({
                         vim.lsp.buf.format({ async = true })
                     end, "[f]Format")
 
-                    -- When you move your cursor, the highlights will be cleared (the second autocommand).
                     local client = vim.lsp.get_client_by_id(event.data.client_id)
 
                     if client and client.server_capabilities.documentHighlightProvider then
@@ -302,15 +310,9 @@ require("lazy").setup({
                 svelte = {},
                 ts_ls = {},
                 pyright = {
-                    capabilities = {
-                        textDocument = {
-                            publishDiagnostics = {
-                                tagSupport = {
-                                    valueSet = { 2 },
-                                },
-                            },
-                        },
-                    },
+                    on_init = function(client)
+                        client.server_capabilities.diagnosticProvider = nil
+                    end,
                     settings = {
                         pyright = {
                             disableOrganizeImports = true,
@@ -320,15 +322,10 @@ require("lazy").setup({
                             analysis = {
                                 autoImportCompletions = true,
                                 autoSearchPaths = true,
-                                diagnosticMode = "workspace",
+                                diagnosticMode = "off",
                                 useLibraryCodeForTypes = true,
-                                -- diagnosticSeverityOverrides = {
-                                -- https://github.com/microsoft/pyright/blob/main/docs/configuration.md#type-check-diagnostics-settings
-                                -- reportUndefinedVariable = 'none',
-                                -- reportAttributeAccessIssue = 'none',
-                                -- },
-                                ignore = { "*" }, -- Using Ruff
-                                typeCheckingMode = "off", -- Using mypy
+                                ignore = { "*" },
+                                typeCheckingMode = "off",
                             },
                         },
                     },
