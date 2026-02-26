@@ -20,9 +20,9 @@ return {
             },
         })
 
-        vim.keymap.set("n", "[c", function()
+        vim.keymap.set("n", "[b", function()
             require("barbecue.ui").navigate(-2)
-        end, { silent = true, desc = "Go to parent context" })
+        end, { silent = true, desc = "Go to parent breadcrumb" })
 
         vim.api.nvim_create_autocmd({
             "WinScrolled", -- or WinResized on NVIM-v0.9 and higher

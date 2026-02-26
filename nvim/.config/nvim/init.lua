@@ -46,7 +46,7 @@ vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning
 
 -- Lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
+if not vim.uv.fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
     vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 end ---@diagnostic disable-next-line: undefined-field
@@ -88,7 +88,6 @@ require("lazy").setup({
                 { "<leader>t", group = "[t]Test" },
                 { "<leader>c", group = "[c]Code" },
                 { "<leader>g", group = "[g]Git" },
-                -- { '<leader>n', group = '[n]Notes' },
                 { "<leader>o", group = "[o]Options" },
             })
             -- Main
@@ -107,7 +106,9 @@ require("lazy").setup({
                                     local orig_notify = ca_util.notify
                                     ca_util.notify = function() end
                                     pcall(vim.api.nvim_buf_delete, st.bufnr, { force = true })
-                                    vim.defer_fn(function() ca_util.notify = orig_notify end, 200)
+                                    vim.defer_fn(function()
+                                        ca_util.notify = orig_notify
+                                    end, 200)
                                 end
                                 st.win, st.bufnr, st.job_id = nil, nil, nil
                             end
@@ -175,14 +176,20 @@ require("lazy").setup({
 
             local default_publish = vim.lsp.handlers["textDocument/publishDiagnostics"]
             vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
-                if is_pyright(ctx) then return end
+                if is_pyright(ctx) then
+                    return
+                end
                 default_publish(err, result, ctx, config)
             end
 
             local default_pull = vim.lsp.handlers["textDocument/diagnostic"]
             vim.lsp.handlers["textDocument/diagnostic"] = function(err, result, ctx, config)
-                if is_pyright(ctx) then return end
-                if default_pull then default_pull(err, result, ctx, config) end
+                if is_pyright(ctx) then
+                    return
+                end
+                if default_pull then
+                    default_pull(err, result, ctx, config)
+                end
             end
 
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -195,7 +202,6 @@ require("lazy").setup({
                     map("<space>cf", function()
                         vim.lsp.buf.format({ async = true })
                     end, "[f]Format")
-
                 end,
             })
 
@@ -388,38 +394,6 @@ require("lazy").setup({
                 "--non-interactive",
                 "--ignore-missing-imports",
             }
-            --
-            -- To allow other plugins to add linters to require('lint').linters_by_ft,
-            -- instead set linters_by_ft like this:
-            --
-            -- lint.linters_by_ft = lint.linters_by_ft or {}
-            -- lint.linters_by_ft['markdown'] = { 'markdownlint' }
-            -- lint.linters_by_ft['python'] = { 'mypy', 'flake8' }
-            --
-            -- However, note that this will enable a set of default linters,
-            -- which will cause errors unless these tools are available:
-            -- {
-            --   clojure = { "clj-kondo" },
-            --   dockerfile = { "hadolint" },
-            --   inko = { "inko" },
-            --   janet = { "janet" },
-            --   json = { "jsonlint" },
-            --   markdown = { "vale" },
-            --   rst = { "vale" },
-            --   ruby = { "ruby" },
-            --   terraform = { "tflint" },
-            --   text = { "vale" }
-            -- }
-            --
-            -- You can disable the default linters by setting their filetypes to nil:
-            -- lint.linters_by_ft['dockerfile'] = nil
-            -- lint.linters_by_ft['json'] = nil
-            -- lint.linters_by_ft['markdown'] = nil
-            -- lint.linters_by_ft['terraform'] = nil
-            -- lint.linters_by_ft['inko'] = nil
-            -- lint.linters_by_ft['janet'] = nil
-            -- lint.linters_by_ft['ruby'] = nil
-            -- lint.linters_by_ft['clojure'] = nil
 
             local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
             vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
@@ -566,15 +540,6 @@ require("lazy").setup({
                 }),
             })
 
-            cmp.setup.filetype("gitcommit", {
-                sources = cmp.config.sources({
-                    { name = "git" },
-                }, {
-                    { name = "buffer" },
-                }),
-            })
-            require("cmp_git").setup()
-
             cmp.setup.cmdline({ "/", "?" }, {
                 mapping = cmp.mapping.preset.cmdline(),
                 sources = {
@@ -596,11 +561,16 @@ require("lazy").setup({
     {
         "petertriho/cmp-git",
         dependencies = { "hrsh7th/nvim-cmp" },
-        opts = {
-            -- options go here
-        },
-        init = function()
-            table.insert(require("cmp").get_config().sources, { name = "git" })
+        ft = "gitcommit",
+        config = function()
+            require("cmp_git").setup()
+            require("cmp").setup.filetype("gitcommit", {
+                sources = require("cmp").config.sources({
+                    { name = "git" },
+                }, {
+                    { name = "buffer" },
+                }),
+            })
         end,
     },
     {
@@ -624,9 +594,6 @@ require("lazy").setup({
     {
         "echasnovski/mini.nvim",
         config = function()
-            -- require("mini.ai").setup()
-            -- require("mini/notify").setup()
-            -- require("mini.animate").setup()
             require("mini.surround").setup({
                 mappings = {
                     add = "gsa", -- Add surrounding in Normal and Visual modes
@@ -640,7 +607,6 @@ require("lazy").setup({
                     suffix_next = "", -- Suffix to search with "next" method
                 },
             })
-            -- require("mini.operators").setup()
             require("mini.trailspace").setup()
             require("mini.move").setup({
                 -- Module mappings. Use `''` (empty string) to disable one.
@@ -664,15 +630,6 @@ require("lazy").setup({
                     reindent_linewise = false,
                 },
             })
-            -- require('mini.indentscope').setup {
-            --   symbol = '│',
-            --   options = {
-            --     try_as_border = true,
-            --   },
-            --   draw = {
-            --     animation = require('mini.indentscope').gen_animation.none(),
-            --   },
-            -- }
             -- INFO: Mini-starter page configuration
             local starter = require("mini.starter")
             local my_items = {
@@ -708,33 +665,6 @@ ______________________________
             minimisc.setup_restore_cursor()
         end,
     },
-    { "JoosepAlviste/nvim-ts-context-commentstring" },
-    -- {
-    --   'lukas-reineke/indent-blankline.nvim',
-    --   main = 'ibl',
-    --   opts = {
-    --     indent = {
-    --       char = '│',
-    --       tab_char = '│',
-    --     },
-    --     scope = { show_start = false, show_end = false },
-    --     exclude = {
-    --       filetypes = {
-    --         'help',
-    --         'alpha',
-    --         'dashboard',
-    --         'neo-tree',
-    --         'Trouble',
-    --         'trouble',
-    --         'lazy',
-    --         'mason',
-    --         'notify',
-    --         'toggleterm',
-    --         'lazyterm',
-    --       },
-    --     },
-    --   },
-    -- },
     {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",

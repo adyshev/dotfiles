@@ -67,7 +67,7 @@ return {
             require("nvim-treesitter-textobjects.move").goto_next_start("@function.outer", "textobjects")
         end, { desc = "Goto Next Start Function outer" })
 
-        vim.keymap.set({ "n", "x", "o" }, "]]", function()
+        vim.keymap.set({ "n", "x", "o" }, "]c", function()
             require("nvim-treesitter-textobjects.move").goto_next_start("@class.outer", "textobjects")
         end, { desc = "Goto Next Start Class outer" })
 
@@ -75,7 +75,7 @@ return {
             require("nvim-treesitter-textobjects.move").goto_next_end("@function.outer", "textobjects")
         end, { desc = "Goto Next End Function outer" })
 
-        vim.keymap.set({ "n", "x", "o" }, "][", function()
+        vim.keymap.set({ "n", "x", "o" }, "]C", function()
             require("nvim-treesitter-textobjects.move").goto_next_end("@class.outer", "textobjects")
         end, { desc = "Goto Next End Class outer" })
 
@@ -83,7 +83,7 @@ return {
             require("nvim-treesitter-textobjects.move").goto_previous_start("@function.outer", "textobjects")
         end, { desc = "Goto Previous Start Function outer" })
 
-        vim.keymap.set({ "n", "x", "o" }, "[[", function()
+        vim.keymap.set({ "n", "x", "o" }, "[c", function()
             require("nvim-treesitter-textobjects.move").goto_previous_start("@class.outer", "textobjects")
         end, { desc = "Goto Previous Start Class outer" })
 
@@ -91,7 +91,7 @@ return {
             require("nvim-treesitter-textobjects.move").goto_previous_end("@function.outer", "textobjects")
         end, { desc = "Goto Previous End Function outer" })
 
-        vim.keymap.set({ "n", "x", "o" }, "[]", function()
+        vim.keymap.set({ "n", "x", "o" }, "[C", function()
             require("nvim-treesitter-textobjects.move").goto_previous_end("@class.outer", "textobjects")
         end, { desc = "Goto Previous End Class outer" })
 

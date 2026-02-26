@@ -88,7 +88,6 @@ return {
         },
     },
     init = function()
-        vim.ui.select = true
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
             callback = function()
@@ -410,13 +409,5 @@ return {
             end,
             desc = "GitHub Pull Requests (all)",
         },
-        --
-        -- {
-        --     "<c-/>",
-        --     function()
-        --         Snacks.terminal()
-        --     end,
-        --     desc = "Toggle Terminal",
-        -- },
     },
 }

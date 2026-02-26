@@ -5,7 +5,6 @@ vim.opt.swapfile = false
 vim.o.formatoptions = "jcroqlnt"
 vim.o.shortmess = "filnxtToOFWIcC"
 vim.o.breakindent = true
-vim.opt.winborder = "rounded"
 vim.o.undofile = true
 vim.o.smartcase = true
 vim.o.winborder = "rounded"
@@ -19,7 +18,6 @@ vim.o.splitright = true
 vim.o.ignorecase = true
 vim.o.inccommand = "split"
 vim.o.list = true
-vim.o.confirm = true
 vim.o.cursorline = true
 vim.opt.scrolloff = 999
 vim.o.number = true
@@ -57,8 +55,6 @@ vim.g.loaded_netrw_gitignore = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
-
-vim.g.loaded_matchit = 1
 
 vim.lsp.handlers["textDocument/hover"] = function()
     vim.lsp.buf.hover({
