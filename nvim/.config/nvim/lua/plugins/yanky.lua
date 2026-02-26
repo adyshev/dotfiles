@@ -6,7 +6,19 @@ return {
         {
             "<leader>sy",
             function()
-                require("telescope").extensions.yank_history.yank_history({})
+                local history = require("yanky.history")
+                local items = history.all()
+                local display = {}
+                for i, item in ipairs(items) do
+                    display[i] = table.concat(item.regcontents, "\\n")
+                end
+                vim.ui.select(display, { prompt = "Yank History" }, function(_, idx)
+                    if idx then
+                        local entry = items[idx]
+                        vim.fn.setreg(vim.v.register ~= "" and vim.v.register or '"', entry.regcontents, entry.regtype)
+                        vim.api.nvim_put(entry.regcontents, entry.regtype, true, true)
+                    end
+                end)
             end,
             desc = "[y]Search Yank History",
         },
@@ -29,9 +41,6 @@ return {
         -- { "<c-u>", "<Plug>(YankyNextEntry)", desc = "Next Yank entry" },
     },
     config = function()
-        local utils = require("yanky.utils")
-        local mapping = require("yanky.telescope.mapping")
-
         require("yanky").setup({
             highlight = {
                 on_put = true,
@@ -52,25 +61,6 @@ return {
             },
             system_clipboard = {
                 sync_with_ring = true,
-            },
-            picker = {
-                telescope = {
-                    mappings = {
-                        default = mapping.put("p"),
-                        i = {
-                            ["<c-g>"] = mapping.put("p"),
-                            ["<c-k>"] = mapping.put("P"),
-                            ["<c-x>"] = mapping.delete(),
-                            ["<c-r>"] = mapping.set_register(utils.get_default_register()),
-                        },
-                        n = {
-                            p = mapping.put("p"),
-                            P = mapping.put("P"),
-                            d = mapping.delete(),
-                            r = mapping.set_register(utils.get_default_register()),
-                        },
-                    },
-                },
             },
         })
     end,

@@ -39,18 +39,62 @@ return {
                 group = vim.api.nvim_create_augroup("custom_highlights_gruvboxmaterial", {}),
                 pattern = "gruvbox-material",
                 callback = function()
-                    local config = vim.fn["gruvbox_material#get_configuration"]()
-                    local palette = vim.fn["gruvbox_material#get_palette"](config.background, config.foreground, config.colors_override)
+                    local cfg = vim.fn["gruvbox_material#get_configuration"]()
+                    local p = vim.fn["gruvbox_material#get_palette"](cfg.background, cfg.foreground, cfg.colors_override)
                     local set_hl = vim.fn["gruvbox_material#highlight"]
-                    set_hl("CursorLineNr", palette.orange, palette.none)
+
+                    set_hl("CursorLineNr", p.orange, p.none)
+
+                    local bg0 = p.bg0[1]
+                    local bg1 = p.bg1[1]
+                    local fg0 = p.fg0[1]
+                    local grey1 = p.grey1[1]
+                    local orange = p.orange[1]
+                    local yellow = p.yellow[1]
+                    local aqua = p.aqua[1]
+
+                    local hl = vim.api.nvim_set_hl
+
+                    -- Snacks picker windows
+                    hl(0, "SnacksPicker", { bg = bg0, fg = fg0 })
+                    hl(0, "SnacksPickerBorder", { fg = grey1, bg = bg0 })
+                    hl(0, "SnacksPickerTitle", { fg = yellow, bg = bg0, bold = true })
+                    hl(0, "SnacksPickerFooter", { fg = grey1, bg = bg0 })
+
+                    -- List
+                    hl(0, "SnacksPickerList", { bg = bg0, fg = fg0 })
+                    hl(0, "SnacksPickerListBorder", { fg = grey1, bg = bg0 })
+                    hl(0, "SnacksPickerListCursorLine", { bg = bg1 })
+
+                    -- Input
+                    hl(0, "SnacksPickerInput", { bg = bg0, fg = fg0 })
+                    hl(0, "SnacksPickerInputBorder", { fg = grey1, bg = bg0 })
+                    hl(0, "SnacksPickerInputSearch", { fg = orange })
+
+                    -- Preview
+                    hl(0, "SnacksPickerPreview", { bg = bg0, fg = fg0 })
+                    hl(0, "SnacksPickerPreviewBorder", { fg = grey1, bg = bg0 })
+
+                    -- Content highlights (the green culprits)
+                    hl(0, "SnacksPickerMatch", { fg = orange, bold = true })
+                    hl(0, "SnacksPickerPrompt", { fg = orange })
+                    hl(0, "SnacksPickerSpecial", { fg = yellow })
+                    hl(0, "SnacksPickerLabel", { fg = yellow })
+                    hl(0, "SnacksPickerSpinner", { fg = yellow })
+                    hl(0, "SnacksPickerIcon", { fg = aqua })
+                    hl(0, "SnacksPickerSelected", { fg = orange })
+                    hl(0, "SnacksPickerToggle", { fg = aqua, bg = bg1 })
+                    hl(0, "SnacksPickerTotals", { fg = grey1 })
+
+                    -- Notifier
+                    hl(0, "SnacksNotifierHistory", { bg = bg0, fg = fg0 })
+
+                    -- WhichKey
+                    hl(0, "WhichKeyNormal", { bg = bg1 })
                 end,
             })
 
-            vim.api.nvim_set_hl(0, "SnacksPicker", { bg = "#282828", nocombine = true })
-            vim.api.nvim_set_hl(0, "SnacksPickerBorder", { fg = "#ebdbb3", bg = "#282828", nocombine = true })
-
             vim.cmd.colorscheme("gruvbox-material")
-            vim.api.nvim_set_hl(0, "WhichKeyNormal", { bg = "#32302F" })
         end,
     },
     -- {

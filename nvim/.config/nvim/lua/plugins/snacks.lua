@@ -21,12 +21,19 @@ return {
         },
         words = { enabled = true },
         image = { enabled = true }, -- doesn't work in allacritty.
-        scroll = { enabled = true },
+        scroll = { enabled = false },
         rename = { enabled = true },
         input = { enabled = true },
         scratch = { enabled = true },
         notifier = { enabled = true },
-        picker = { ui_select = true },
+        picker = {
+            ui_select = true,
+            sources = {
+                projects = {
+                    dev = { "~/src" },
+                },
+            },
+        },
         notify = { enabled = true },
         -- scope = { enabled = true },
         quickfile = { enabled = true },
@@ -111,6 +118,126 @@ return {
                 Snacks.zen()
             end,
             desc = "[z]Toggle Zen Mode",
+        },
+        {
+            "<leader>s?",
+            function()
+                Snacks.picker.help()
+            end,
+            desc = "[?]Search Help",
+        },
+        {
+            "<leader>sm",
+            function()
+                Snacks.picker.command_history()
+            end,
+            desc = "[m]Search Command History",
+        },
+        {
+            "<leader>sh",
+            function()
+                Snacks.picker.search_history()
+            end,
+            desc = "[h]Search Search History",
+        },
+        {
+            "<leader>se",
+            function()
+                Snacks.picker.notifications()
+            end,
+            desc = "[e]Search Notifications",
+        },
+        {
+            "<leader>st",
+            function()
+                Snacks.picker.todo_comments()
+            end,
+            desc = "[t]Search TODO",
+        },
+        {
+            "<leader>sd",
+            function()
+                Snacks.picker.diagnostics()
+            end,
+            desc = "[d]Search Diagnostics",
+        },
+        {
+            "<leader>sk",
+            function()
+                Snacks.picker.keymaps()
+            end,
+            desc = "[k]Search Keymaps",
+        },
+        {
+            "<leader>sf",
+            function()
+                Snacks.picker.files({ hidden = true, ignored = false })
+            end,
+            desc = "[f]Search Files",
+        },
+        {
+            "<leader>sr",
+            function()
+                Snacks.picker.registers()
+            end,
+            desc = "[r]Search Registers",
+        },
+        {
+            "<leader>sl",
+            function()
+                Snacks.picker.spelling()
+            end,
+            desc = "[l]Search Spell Suggestions",
+        },
+        {
+            "<leader>sw",
+            function()
+                Snacks.picker.grep_word()
+            end,
+            desc = "[w]Search current Word",
+            mode = { "n", "x" },
+        },
+        {
+            "<leader>sg",
+            function()
+                Snacks.picker.grep({ hidden = true })
+            end,
+            desc = "[g]Search by Grep",
+        },
+        {
+            "<leader><leader>",
+            function()
+                Snacks.picker.recent()
+            end,
+            desc = "[ ]Search Recent files",
+        },
+        {
+            "<leader>so",
+            function()
+                Snacks.picker.buffers()
+            end,
+            desc = "[o]Search open buffers",
+        },
+        {
+            "<leader>sb",
+            function()
+                Snacks.picker.explorer()
+            end,
+            desc = "[b]File Browser",
+        },
+        {
+            "<leader>sO",
+            function()
+                Snacks.picker.grep({ buf = true })
+            end,
+            desc = "[O]Search in Open Files",
+        },
+        {
+            "<leader>sn",
+            function()
+                Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+            end,
+            desc = "[n]Search Neovim config files",
         },
         {
             "]]",
