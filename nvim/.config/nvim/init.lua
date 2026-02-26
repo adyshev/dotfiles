@@ -235,13 +235,21 @@ require("lazy").setup({
             { "folke/neodev.nvim", opts = {} },
         },
         config = function()
+            local function is_pyright(ctx)
+                local client = vim.lsp.get_client_by_id(ctx.client_id)
+                return client and client.name == "pyright"
+            end
+
             local default_publish = vim.lsp.handlers["textDocument/publishDiagnostics"]
             vim.lsp.handlers["textDocument/publishDiagnostics"] = function(err, result, ctx, config)
-                local client = vim.lsp.get_client_by_id(ctx.client_id)
-                if client and client.name == "pyright" then
-                    return
-                end
+                if is_pyright(ctx) then return end
                 default_publish(err, result, ctx, config)
+            end
+
+            local default_pull = vim.lsp.handlers["textDocument/diagnostic"]
+            vim.lsp.handlers["textDocument/diagnostic"] = function(err, result, ctx, config)
+                if is_pyright(ctx) then return end
+                if default_pull then default_pull(err, result, ctx, config) end
             end
 
             vim.api.nvim_create_autocmd("LspAttach", {
@@ -322,9 +330,8 @@ require("lazy").setup({
                             analysis = {
                                 autoImportCompletions = true,
                                 autoSearchPaths = true,
-                                diagnosticMode = "off",
                                 useLibraryCodeForTypes = true,
-                                ignore = { "*" },
+                                diagnosticMode = "off",
                                 typeCheckingMode = "off",
                             },
                         },
