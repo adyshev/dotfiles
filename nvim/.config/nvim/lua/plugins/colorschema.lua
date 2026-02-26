@@ -81,6 +81,43 @@ return {
 
                     -- WhichKey
                     hl(0, "WhichKeyNormal", { bg = bg1 })
+
+                    -- Blink completion
+                    local bg3 = p.bg3[1]
+                    local green = p.green[1]
+                    local blue = p.blue[1]
+                    local purple = p.purple[1]
+                    local red = p.red[1]
+
+                    hl(0, "BlinkCmpMenu", { bg = bg0, fg = fg0 })
+                    hl(0, "BlinkCmpMenuBorder", { bg = bg0, fg = grey1 })
+                    hl(0, "BlinkCmpMenuSelection", { bg = bg3 })
+                    hl(0, "BlinkCmpLabel", { fg = fg0 })
+                    hl(0, "BlinkCmpLabelMatch", { fg = orange, bold = true })
+                    hl(0, "BlinkCmpLabelDeprecated", { fg = grey1, strikethrough = true })
+                    hl(0, "BlinkCmpKind", { fg = aqua })
+                    hl(0, "BlinkCmpKindFunction", { fg = green })
+                    hl(0, "BlinkCmpKindMethod", { fg = green })
+                    hl(0, "BlinkCmpKindVariable", { fg = blue })
+                    hl(0, "BlinkCmpKindField", { fg = blue })
+                    hl(0, "BlinkCmpKindProperty", { fg = blue })
+                    hl(0, "BlinkCmpKindClass", { fg = yellow })
+                    hl(0, "BlinkCmpKindStruct", { fg = yellow })
+                    hl(0, "BlinkCmpKindInterface", { fg = yellow })
+                    hl(0, "BlinkCmpKindModule", { fg = yellow })
+                    hl(0, "BlinkCmpKindKeyword", { fg = red })
+                    hl(0, "BlinkCmpKindSnippet", { fg = purple })
+                    hl(0, "BlinkCmpKindText", { fg = aqua })
+                    hl(0, "BlinkCmpKindConstant", { fg = orange })
+                    hl(0, "BlinkCmpKindEnum", { fg = yellow })
+                    hl(0, "BlinkCmpKindEnumMember", { fg = aqua })
+                    hl(0, "BlinkCmpKindValue", { fg = orange })
+                    hl(0, "BlinkCmpSource", { fg = grey1 })
+                    hl(0, "BlinkCmpDoc", { bg = bg0, fg = fg0 })
+                    hl(0, "BlinkCmpDocBorder", { bg = bg0, fg = grey1 })
+                    hl(0, "BlinkCmpDocCursorLine", { bg = bg1 })
+                    hl(0, "BlinkCmpSignatureHelp", { bg = bg0, fg = fg0 })
+                    hl(0, "BlinkCmpSignatureHelpBorder", { bg = bg0, fg = grey1 })
                 end,
             })
 

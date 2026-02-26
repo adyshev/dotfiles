@@ -206,7 +206,7 @@ require("lazy").setup({
             })
 
             local capabilities = vim.lsp.protocol.make_client_capabilities()
-            capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+            capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
 
             local servers = {
                 gopls = {
@@ -404,6 +404,7 @@ require("lazy").setup({
             })
         end,
     },
+    --[[ nvim-cmp removed — replaced by blink.cmp (plugins/blink-cmp.lua)
     { -- Autocompletion
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -558,21 +559,7 @@ require("lazy").setup({
             })
         end,
     },
-    {
-        "petertriho/cmp-git",
-        dependencies = { "hrsh7th/nvim-cmp" },
-        ft = "gitcommit",
-        config = function()
-            require("cmp_git").setup()
-            require("cmp").setup.filetype("gitcommit", {
-                sources = require("cmp").config.sources({
-                    { name = "git" },
-                }, {
-                    { name = "buffer" },
-                }),
-            })
-        end,
-    },
+    cmp-git removed — replaced by blink-cmp-git ]]
     {
         "folke/todo-comments.nvim",
         config = function()
@@ -674,12 +661,8 @@ require("lazy").setup({
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
-        dependencies = { "hrsh7th/nvim-cmp" },
         config = function()
             require("nvim-autopairs").setup({})
-            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-            local cmp = require("cmp")
-            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
         end,
     },
     {
