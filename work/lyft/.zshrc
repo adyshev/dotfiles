@@ -2,7 +2,6 @@ export GOPATH="${HOME}/go"
 export PATH="$HOME/bin:/opt/homebrew/bin:/Applications/Ghostty.app/Contents/MacOS:${GOPATH}/bin:/usr/local/bin:${PATH}"
 export FZF_BASE="/opt/homebrew/opt/fzf"
 export LANG="en_US.UTF-8"
-export TERM="screen-256color"
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
