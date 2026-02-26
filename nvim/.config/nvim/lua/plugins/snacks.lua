@@ -33,6 +33,46 @@ return {
                     dev = { "~/src" },
                 },
             },
+            actions = {
+                tmux_left = function()
+                    vim.fn.system("tmux select-pane -L")
+                end,
+                tmux_right = function()
+                    vim.fn.system("tmux select-pane -R")
+                end,
+                tmux_down = function()
+                    vim.fn.system("tmux select-pane -D")
+                end,
+                tmux_up = function()
+                    vim.fn.system("tmux select-pane -U")
+                end,
+            },
+            win = {
+                input = {
+                    keys = {
+                        ["<C-h>"] = { "tmux_left", mode = { "n", "i" } },
+                        ["<C-l>"] = { "tmux_right", mode = { "n", "i" } },
+                        ["<C-j>"] = { "tmux_down", mode = { "n", "i" } },
+                        ["<C-k>"] = { "tmux_up", mode = { "n", "i" } },
+                    },
+                },
+                list = {
+                    keys = {
+                        ["<C-h>"] = { "tmux_left" },
+                        ["<C-l>"] = { "tmux_right" },
+                        ["<C-j>"] = { "tmux_down" },
+                        ["<C-k>"] = { "tmux_up" },
+                    },
+                },
+                preview = {
+                    keys = {
+                        ["<C-h>"] = { "tmux_left" },
+                        ["<C-l>"] = { "tmux_right" },
+                        ["<C-j>"] = { "tmux_down" },
+                        ["<C-k>"] = { "tmux_up" },
+                    },
+                },
+            },
         },
         notify = { enabled = true },
         -- scope = { enabled = true },

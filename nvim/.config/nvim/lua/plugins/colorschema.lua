@@ -76,6 +76,9 @@ return {
                     -- Notifier
                     hl(0, "SnacksNotifierHistory", { bg = bg0, fg = fg0 })
 
+                    -- Noice cmdline
+                    hl(0, "NoiceCmdlineIcon", { fg = orange })
+
                     -- WhichKey
                     hl(0, "WhichKeyNormal", { bg = bg1 })
                 end,
