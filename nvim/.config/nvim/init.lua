@@ -71,6 +71,75 @@ local open_float_diagnostic = function()
     })
 end
 
+-- Pre-configure colorscheme variables (applied before lazy loads gruvbox-material)
+vim.g.gruvbox_material_enable_italic = 1
+vim.g.gruvbox_material_enable_bold = 0
+vim.g.gruvbox_material_background = "medium"
+vim.g.gruvbox_material_foreground = "mix"
+vim.g.gruvbox_material_float_style = "dim"
+vim.g.gruvbox_material_colors_override = {
+    bg0 = { "#282828", "235" },
+    bg3 = { "#484545", "237" },
+    bg_dim = { "#282828", "235" },
+}
+-- Add to rtp so lazy's install.colorscheme can find it
+local gruvbox_path = vim.fn.stdpath("data") .. "/lazy/gruvbox-material"
+if vim.uv.fs_stat(gruvbox_path) then
+    vim.opt.rtp:prepend(gruvbox_path)
+end
+
+-- Restore dashboard/Oil after Lazy install window is closed
+vim.api.nvim_create_autocmd("User", {
+    pattern = "VeryLazy",
+    once = true,
+    callback = function()
+        local buf = vim.api.nvim_get_current_buf()
+        local has_lazy_win = false
+        for _, win in ipairs(vim.api.nvim_list_wins()) do
+            local b = vim.api.nvim_win_get_buf(win)
+            if vim.bo[b].filetype == "lazy" then
+                has_lazy_win = true
+                break
+            end
+        end
+        if not has_lazy_win then
+            return
+        end
+        vim.api.nvim_create_autocmd("WinClosed", {
+            callback = function()
+                vim.schedule(function()
+                    local has_lazy = false
+                    for _, win in ipairs(vim.api.nvim_list_wins()) do
+                        local b = vim.api.nvim_win_get_buf(win)
+                        if vim.bo[b].filetype == "lazy" then
+                            has_lazy = true
+                            break
+                        end
+                    end
+                    if has_lazy then
+                        return
+                    end
+                    local cur = vim.api.nvim_get_current_buf()
+                    local lines = vim.api.nvim_buf_get_lines(cur, 0, -1, false)
+                    local is_empty = #lines <= 1 and (lines[1] or "") == ""
+                    if not is_empty then
+                        return
+                    end
+                    for i = 2, #vim.v.argv do
+                        local arg = vim.v.argv[i]
+                        if not arg:match("^%-") and vim.fn.isdirectory(arg) == 1 then
+                            require("oil").open(arg)
+                            return
+                        end
+                    end
+                    Snacks.dashboard()
+                end)
+                return true
+            end,
+        })
+    end,
+})
+
 -- NOTE: Here is where you install your plugins.
 require("lazy").setup({
     -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
@@ -639,6 +708,9 @@ require("lazy").setup({
     },
     { import = "plugins" },
 }, {
+    install = {
+        colorscheme = { "gruvbox-material" },
+    },
     change_detection = {
         notify = false,
     },
@@ -684,4 +756,5 @@ require("lazy").setup({
         },
     },
 })
+
 -- vim: ts=2 sts=2 sw=2

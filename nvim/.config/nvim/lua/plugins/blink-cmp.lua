@@ -7,6 +7,7 @@ return {
             "Kaiser-Yang/blink-cmp-git",
             dependencies = { "nvim-lua/plenary.nvim" },
         },
+        "ribru17/blink-cmp-spell",
     },
     version = "*",
     ---@module 'blink.cmp'
@@ -40,6 +41,7 @@ return {
                                     buffer = "[Buffer]",
                                     path = "[Path]",
                                     git = "[Git]",
+                                    spell = "[Spell]",
                                 }
                                 return map[ctx.source_id] or ("[" .. ctx.source_id .. "]")
                             end,
@@ -61,12 +63,17 @@ return {
             default = { "lsp", "snippets", "buffer", "path" },
             per_filetype = {
                 gitcommit = { "git", "buffer" },
+                markdown = { "lsp", "snippets", "spell", "buffer", "path" },
             },
             providers = {
                 git = {
                     module = "blink-cmp-git",
                     name = "Git",
                     enabled = true,
+                },
+                spell = {
+                    module = "blink-cmp-spell",
+                    name = "Spell",
                 },
             },
         },
