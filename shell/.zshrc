@@ -3,6 +3,16 @@ export PATH="$HOME/bin:/opt/homebrew/bin:${GOPATH}/bin:/usr/local/bin:${PATH}"
 export FZF_BASE="/opt/homebrew/opt/fzf"
 export LANG="en_US.UTF-8"
 
+# Some environments (CI/headless/IDE terminals) export TERM=dumb.
+# That breaks tmux/neovim terminfo and causes :checkhealth warnings.
+if [[ -o interactive && "$TERM" == "dumb" ]]; then
+  if [[ -n "$TMUX" ]]; then
+    export TERM="tmux-256color"
+  else
+    export TERM="xterm-256color"
+  fi
+fi
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
