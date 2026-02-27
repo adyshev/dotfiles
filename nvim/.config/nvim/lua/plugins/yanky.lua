@@ -6,19 +6,40 @@ return {
         {
             "<leader>sy",
             function()
-                local history = require("yanky.history")
-                local items = history.all()
-                local display = {}
-                for i, item in ipairs(items) do
-                    display[i] = table.concat(item.regcontents, "\\n")
+                local ok, history = pcall(require, "yanky.history")
+                if not ok then
+                    vim.notify("yanky not available", vim.log.levels.WARN)
+                    return
                 end
-                vim.ui.select(display, { prompt = "Yank History" }, function(_, idx)
-                    if idx then
-                        local entry = items[idx]
-                        vim.fn.setreg(vim.v.register ~= "" and vim.v.register or '"', entry.regcontents, entry.regtype)
-                        vim.api.nvim_put(entry.regcontents, entry.regtype, true, true)
-                    end
-                end)
+                local entries = history.all()
+                if not entries or #entries == 0 then
+                    vim.notify("Yank history is empty", vim.log.levels.INFO)
+                    return
+                end
+                local items = {}
+                for i, entry in ipairs(entries) do
+                    local text = type(entry.regcontents) == "table"
+                        and table.concat(entry.regcontents, " ")
+                        or tostring(entry.regcontents)
+                    items[i] = {
+                        text = text,
+                        entry = entry,
+                    }
+                end
+                Snacks.picker({
+                    title = "Yank History",
+                    items = items,
+                    format = "text",
+                    confirm = function(picker, item)
+                        picker:close()
+                        if item then
+                            local e = item.entry
+                            local contents = type(e.regcontents) == "table" and e.regcontents or { e.regcontents }
+                            vim.fn.setreg('"', contents, e.regtype)
+                            vim.api.nvim_put(contents, e.regtype, true, true)
+                        end
+                    end,
+                })
             end,
             desc = "[y]Search Yank History",
         },
@@ -45,7 +66,7 @@ return {
             highlight = {
                 on_put = true,
                 on_yank = true,
-                timer = 150,
+                timer = 200,
             },
             preserve_cursor_position = {
                 enabled = true,

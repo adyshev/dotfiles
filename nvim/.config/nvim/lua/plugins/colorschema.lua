@@ -39,6 +39,11 @@ return {
                     local orange = p.orange[1]
                     local yellow = p.yellow[1]
                     local aqua = p.aqua[1]
+                    local bg3 = p.bg3[1]
+                    local green = p.green[1]
+                    local blue = p.blue[1]
+                    local purple = p.purple[1]
+                    local red = p.red[1]
 
                     local hl = vim.api.nvim_set_hl
 
@@ -84,6 +89,10 @@ return {
                     -- Noice cmdline
                     hl(0, "NoiceCmdlineIcon", { fg = orange })
 
+                    -- Yank highlight
+                    hl(0, "YankyYanked", { bg = green, fg = bg0 })
+                    hl(0, "YankyPut", { bg = red, fg = bg0 })
+
                     -- WhichKey
                     local whichkey_bg = bg0
                     hl(0, "WhichKeyNormal", { bg = whichkey_bg })
@@ -93,13 +102,6 @@ return {
                     hl(0, "WhichKeyGroup", { fg = aqua })
                     hl(0, "WhichKeySeparator", { fg = grey1 })
                     hl(0, "WhichKeyValue", { fg = grey1 })
-
-                    -- Blink completion
-                    local bg3 = p.bg3[1]
-                    local green = p.green[1]
-                    local blue = p.blue[1]
-                    local purple = p.purple[1]
-                    local red = p.red[1]
 
                     hl(0, "BlinkCmpMenu", { bg = bg0, fg = fg0 })
                     hl(0, "BlinkCmpMenuBorder", { bg = bg0, fg = grey1 })
