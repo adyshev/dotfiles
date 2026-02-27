@@ -25,6 +25,7 @@ return {
   MAY THE FORCE BE WITH YOU!]],
                 keys = {
                     { icon = "  ", key = "e", desc = "New File", action = ":enew" },
+                    { icon = "  ", key = "n", desc = "Notes", action = ":e ~/.notes/todo.md" },
                     { icon = "  ", key = "q", desc = "Quit", action = ":qa" },
                 },
             },
