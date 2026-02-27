@@ -141,3 +141,109 @@ vim.api.nvim_create_autocmd("BufEnter", {
         vim.opt_local.formatoptions:remove({ "c", "r", "o" })
     end,
 })
+
+-- Prevent interaction with underlying windows while a float is focused
+local _focused_float = nil
+local _backdrop_win = nil
+local _backdrop_buf = nil
+
+vim.api.nvim_set_hl(0, "FloatBackdrop", { bg = "#000000" })
+
+local function show_backdrop()
+    if _backdrop_win and vim.api.nvim_win_is_valid(_backdrop_win) then
+        return
+    end
+    _backdrop_buf = vim.api.nvim_create_buf(false, true)
+    vim.bo[_backdrop_buf].bufhidden = "wipe"
+    _backdrop_win = vim.api.nvim_open_win(_backdrop_buf, false, {
+        relative = "editor",
+        width = vim.o.columns,
+        height = vim.o.lines,
+        row = 0,
+        col = 0,
+        style = "minimal",
+        focusable = false,
+        zindex = 1,
+        border = "none",
+    })
+    vim.wo[_backdrop_win].winblend = 30
+    vim.wo[_backdrop_win].winhighlight = "Normal:FloatBackdrop"
+end
+
+local function hide_backdrop()
+    if _backdrop_win and vim.api.nvim_win_is_valid(_backdrop_win) then
+        vim.api.nvim_win_close(_backdrop_win, true)
+    end
+    _backdrop_win = nil
+    _backdrop_buf = nil
+end
+
+vim.api.nvim_create_autocmd("WinEnter", {
+    desc = "Track focused floating window and show backdrop",
+    callback = function()
+        local win = vim.api.nvim_get_current_win()
+        local config = vim.api.nvim_win_get_config(win)
+        if config.relative ~= "" then
+            _focused_float = win
+            show_backdrop()
+        else
+            _focused_float = nil
+            hide_backdrop()
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd("WinClosed", {
+    desc = "Clean up backdrop when float closes",
+    callback = function(event)
+        local closed_win = tonumber(event.match)
+        if closed_win == _focused_float then
+            _focused_float = nil
+            hide_backdrop()
+        end
+    end,
+})
+
+vim.api.nvim_create_autocmd("WinLeave", {
+    desc = "Prevent focus from escaping floating windows to underlying buffer",
+    callback = function()
+        local leaving_win = vim.api.nvim_get_current_win()
+        local config = vim.api.nvim_win_get_config(leaving_win)
+        if config.relative == "" then
+            return
+        end
+        vim.schedule(function()
+            if not vim.api.nvim_win_is_valid(leaving_win) then
+                return
+            end
+            local landed_win = vim.api.nvim_get_current_win()
+            local landed_config = vim.api.nvim_win_get_config(landed_win)
+            if landed_config.relative == "" then
+                vim.api.nvim_set_current_win(leaving_win)
+            end
+        end)
+    end,
+})
+
+local function mouse_guard(key)
+    return function()
+        if _focused_float and vim.api.nvim_win_is_valid(_focused_float) then
+            local mouse = vim.fn.getmousepos()
+            if mouse.winid ~= 0 then
+                local target_cfg = vim.api.nvim_win_get_config(mouse.winid)
+                if target_cfg.relative == "" or mouse.winid == _backdrop_win then
+                    return ""
+                end
+            end
+        end
+        return key
+    end
+end
+
+local guarded_events = {
+    "<ScrollWheelUp>", "<ScrollWheelDown>", "<ScrollWheelLeft>", "<ScrollWheelRight>",
+    "<LeftMouse>", "<2-LeftMouse>", "<3-LeftMouse>", "<RightMouse>",
+}
+for _, ev in ipairs(guarded_events) do
+    vim.keymap.set({ "n", "i", "v" }, ev, mouse_guard(ev), { expr = true, desc = "Guard mouse while float is focused" })
+end
