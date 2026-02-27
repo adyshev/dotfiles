@@ -15,7 +15,7 @@ local function open_notes()
     local buf = vim.fn.bufnr(todo_file, true)
     vim.bo[buf].swapfile = false
 
-    local width = math.floor(vim.o.columns * 0.8)
+    local width = math.floor(vim.o.columns * 0.9)
     local height = math.floor(vim.o.lines * 0.8)
 
     todo_win = vim.api.nvim_open_win(buf, true, {
