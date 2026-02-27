@@ -1,5 +1,6 @@
 # Hide the personal data
 !.exists
+notes/.notes/*.*
 nvim/.config/nvim/lazy-lock.json
 .DS_Store
 *.log
