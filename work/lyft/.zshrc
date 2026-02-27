@@ -13,6 +13,11 @@ if [[ -o interactive && "$TERM" == "dumb" ]]; then
   fi
 fi
 
+# Ghostty + tmux: let Snacks.image know the outer terminal supports kitty graphics.
+if [[ -n "$TMUX" ]]; then
+  export SNACKS_GHOSTTY=1
+fi
+
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
@@ -66,13 +71,6 @@ source ~/.fzf.zsh
 
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-printf "\e[?2004l"
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/adyshev/.docker/completions $fpath)
-autoload -Uz compinit
-compinit
-# End of Docker CLI completions
 
 ### lyft_localdevtools_shell_rc start
 ### DO NOT REMOVE: automatically installed as part of Lyft local dev tool setup

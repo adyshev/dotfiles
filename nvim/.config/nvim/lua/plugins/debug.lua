@@ -9,7 +9,7 @@
 return {
     -- NOTE: Yes, you can install new plugins here!
     "mfussenegger/nvim-dap",
-    event = "VeryLazy",
+    lazy = true,
     enabled = true,
     -- NOTE: And you can specify dependencies as well
     dependencies = {
@@ -26,25 +26,23 @@ return {
         "mfussenegger/nvim-dap-python",
     },
     keys = function(_, keys)
-        local dap = require("dap")
-        local dapui = require("dapui")
         return {
             -- Basic debugging keymaps, feel free to change to your liking!
-            { "<leader>dd", dap.continue, desc = "[d]Debug: Start/Continue" },
-            { "<leader>dj", dap.step_into, desc = "[j]Debug: Step Into" },
-            { "<leader>dl", dap.step_over, desc = "[l]Debug: Step Next" },
-            { "<leader>dh", dap.step_back, desc = "[h]Debug: Step Prev" },
-            { "<leader>dk", dap.step_out, desc = "[k]Debug: Step Out" },
-            { "<leader>db", dap.toggle_breakpoint, desc = "[b]Debug: Toggle Breakpoint" },
+            { "<leader>dd", function() require("dap").continue() end, desc = "[d]Debug: Start/Continue" },
+            { "<leader>dj", function() require("dap").step_into() end, desc = "[j]Debug: Step Into" },
+            { "<leader>dl", function() require("dap").step_over() end, desc = "[l]Debug: Step Next" },
+            { "<leader>dh", function() require("dap").step_back() end, desc = "[h]Debug: Step Prev" },
+            { "<leader>dk", function() require("dap").step_out() end, desc = "[k]Debug: Step Out" },
+            { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "[b]Debug: Toggle Breakpoint" },
             {
                 "<leader>ds",
                 function()
-                    dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+                    require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
                 end,
                 desc = "[s]Debug: Set Breakpoint",
             },
             -- Toggle to see last session result. Without this, you can't see session output in case of unhandled exception.
-            { "<leader>du", dapui.toggle, desc = "[u]Debug: Toggle Debug UI" },
+            { "<leader>du", function() require("dapui").toggle() end, desc = "[u]Debug: Toggle Debug UI" },
             unpack(keys),
         }
     end,
