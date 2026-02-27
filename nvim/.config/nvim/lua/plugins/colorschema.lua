@@ -43,13 +43,13 @@ return {
                     local hl = vim.api.nvim_set_hl
 
                     -- Snacks picker windows
-                    hl(0, "SnacksPicker", { bg = bg0, fg = fg0 })
+                    hl(0, "SnacksPicker", { bg = bg0, fg = fg0, italic = false })
                     hl(0, "SnacksPickerBorder", { fg = grey1, bg = bg0 })
                     hl(0, "SnacksPickerTitle", { fg = yellow, bg = bg0, bold = true })
                     hl(0, "SnacksPickerFooter", { fg = grey1, bg = bg0 })
 
                     -- List
-                    hl(0, "SnacksPickerList", { bg = bg0, fg = fg0 })
+                    hl(0, "SnacksPickerList", { bg = bg0, fg = fg0, italic = false })
                     hl(0, "SnacksPickerListBorder", { fg = grey1, bg = bg0 })
                     hl(0, "SnacksPickerListCursorLine", { bg = bg1 })
 
@@ -62,16 +62,21 @@ return {
                     hl(0, "SnacksPickerPreview", { bg = bg0, fg = fg0 })
                     hl(0, "SnacksPickerPreviewBorder", { fg = grey1, bg = bg0 })
 
-                    -- Content highlights (the green culprits)
-                    hl(0, "SnacksPickerMatch", { fg = orange, bold = true })
+                    -- Content highlights
+                    hl(0, "SnacksPickerMatch", { fg = orange, bold = true, italic = false })
                     hl(0, "SnacksPickerPrompt", { fg = orange })
-                    hl(0, "SnacksPickerSpecial", { fg = yellow })
-                    hl(0, "SnacksPickerLabel", { fg = yellow })
+                    hl(0, "SnacksPickerSpecial", { fg = yellow, italic = false })
+                    hl(0, "SnacksPickerLabel", { fg = yellow, italic = false })
                     hl(0, "SnacksPickerSpinner", { fg = yellow })
                     hl(0, "SnacksPickerIcon", { fg = aqua })
                     hl(0, "SnacksPickerSelected", { fg = orange })
                     hl(0, "SnacksPickerToggle", { fg = aqua, bg = bg1 })
                     hl(0, "SnacksPickerTotals", { fg = grey1 })
+                    hl(0, "SnacksPickerDir", { fg = grey1, italic = false })
+                    hl(0, "SnacksPickerFile", { fg = fg0, italic = false })
+                    hl(0, "SnacksPickerComment", { fg = grey1, italic = false })
+                    hl(0, "SnacksPickerIdx", { fg = grey1, italic = false })
+                    hl(0, "SnacksPickerRow", { fg = fg0, italic = false })
 
                     -- Notifier
                     hl(0, "SnacksNotifierHistory", { bg = bg0, fg = fg0 })

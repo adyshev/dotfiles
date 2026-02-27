@@ -316,9 +316,8 @@ require("lazy").setup({
                 "stylua",
                 "black",
                 "reorder-python-imports",
-                -- "bandit",
+                "bandit",
                 "mypy",
-                -- "isort",
                 "taplo",
                 "goimports",
                 "shfmt",
@@ -330,8 +329,6 @@ require("lazy").setup({
                 "tflint",
                 "cssls",
                 "tailwindcss",
-                -- "markdownlint",
-                -- "markdown-toc",
             })
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -385,8 +382,8 @@ require("lazy").setup({
             local lint = require("lint")
             lint.linters_by_ft = {
                 -- markdown = { "markdownlint", "vale" },
-                python = { "mypy" },
-                -- python = { "mypy", "bandit" },
+                python = { "mypy", "bandit" },
+                -- python = { "mypy" },
                 json = { "jsonlint" },
                 rst = { "vale" },
                 terraform = { "tflint" },
@@ -408,162 +405,6 @@ require("lazy").setup({
             })
         end,
     },
-    --[[ nvim-cmp removed — replaced by blink.cmp (plugins/blink-cmp.lua)
-    { -- Autocompletion
-        "hrsh7th/nvim-cmp",
-        event = "InsertEnter",
-        dependencies = {
-            {
-                "L3MON4D3/LuaSnip",
-                opts = {
-                    history = true,
-                    region_check_events = "InsertEnter",
-                    delete_check_events = "TextChanged,InsertLeave",
-                },
-                build = (function()
-                    if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then
-                        return
-                    end
-                    return "make install_jsregexp"
-                end)(),
-                dependencies = {
-                    {
-                        "rafamadriz/friendly-snippets",
-                        config = function()
-                            require("luasnip.loaders.from_vscode").lazy_load()
-                        end,
-                    },
-                },
-            },
-            "saadparwaiz1/cmp_luasnip",
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-cmdline",
-            "lukas-reineke/cmp-under-comparator",
-        },
-        config = function()
-            local cmp = require("cmp")
-            local luasnip = require("luasnip")
-            local kind_icons = {
-                Text = "",
-                Method = "󰆧",
-                Function = "󰊕",
-                Constructor = "",
-                Field = "󰇽",
-                Variable = "󰂡",
-                Class = "󰠱",
-                Interface = "",
-                Module = "",
-                Property = "󰜢",
-                Unit = "",
-                Value = "󰎠",
-                Enum = "",
-                Keyword = "󰌋",
-                Snippet = "",
-                Color = "󰏘",
-                File = "󰈙",
-                Reference = "",
-                Folder = "󰉋",
-                EnumMember = "",
-                Constant = "󰏿",
-                Struct = "",
-                Event = "",
-                Operator = "󰆕",
-                TypeParameter = "󰅲",
-            }
-
-            luasnip.config.setup({})
-            vim.api.nvim_set_hl(0, "CmpItemKindText", { fg = "#7DAEA3" })
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        luasnip.lsp_expand(args.body)
-                    end,
-                },
-                window = {
-                    completion = cmp.config.window.bordered({
-                        border = "rounded",
-                        winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
-                    }),
-                    documentation = cmp.config.window.bordered({
-                        border = "rounded",
-                        winhighlight = "Normal:Normal,FloatBorder:BorderBG,CursorLine:PmenuSel,Search:None",
-                    }),
-                },
-                sorting = {
-                    comparators = {
-                        cmp.config.compare.offset,
-                        cmp.config.compare.exact,
-                        cmp.config.compare.score,
-                        cmp.config.compare.recently_used,
-                        require("cmp-under-comparator").under,
-                        cmp.config.compare.kind,
-                        cmp.config.compare.sort_text,
-                        cmp.config.compare.length,
-                        cmp.config.compare.order,
-                    },
-                },
-                formatting = {
-                    fields = { "kind", "abbr", "menu" },
-                    format = function(entry, vim_item)
-                        -- Kind icons
-                        vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
-                        vim_item.menu = ({
-                            buffer = "[Buffer]",
-                            nvim_lsp = "[LSP]",
-                            luasnip = "[LuaSnip]",
-                            nvim_lua = "[Lua]",
-                            path = "[Path]",
-                        })[entry.source.name]
-                        return vim_item
-                    end,
-                },
-                completion = { completeopt = "menu,menuone,noinsert,noselect" },
-                mapping = cmp.mapping.preset.insert({
-                    -- Disable navigation using arrows within autocomplete windows
-                    ["<Down>"] = cmp.mapping(function(fallback)
-                        cmp.close()
-                        fallback()
-                    end, { "i" }),
-                    ["<Up>"] = cmp.mapping(function(fallback)
-                        cmp.close()
-                        fallback()
-                    end, { "i" }),
-
-                    ["<C-Space>"] = cmp.mapping.complete({}),
-                    ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                    ["<Tab>"] = cmp.mapping.select_next_item(),
-                    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
-                }),
-
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
-                    { name = "luasnip" },
-                }, {
-                    { name = "buffer" },
-                }),
-            })
-
-            cmp.setup.cmdline({ "/", "?" }, {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = {
-                    { name = "buffer" },
-                },
-            })
-
-            cmp.setup.cmdline(":", {
-                mapping = cmp.mapping.preset.cmdline(),
-                sources = cmp.config.sources({
-                    { name = "path" },
-                }, {
-                    { name = "cmdline" },
-                }),
-                matching = { disallow_symbol_nonprefix_matching = false },
-            })
-        end,
-    },
-    cmp-git removed — replaced by blink-cmp-git ]]
     {
         "folke/todo-comments.nvim",
         config = function()
