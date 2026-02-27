@@ -170,7 +170,7 @@ require("lazy").setup({
                     confirm = function(picker, item)
                         picker:close()
                         if item and item.file then
-                            vim.cmd.cd(item.file)
+                            local project_dir = item.file
                             local ca = package.loaded["cursor-agent"]
                             if ca and ca._term_state then
                                 local st = ca._term_state
@@ -185,7 +185,16 @@ require("lazy").setup({
                                 end
                                 st.win, st.bufnr, st.job_id = nil, nil, nil
                             end
-                            require("oil").open(item.file)
+                            Snacks.picker.files({
+                                cwd = project_dir,
+                                hidden = true,
+                                ignored = false,
+                                on_close = function()
+                                    vim.schedule(function()
+                                        vim.cmd.cd(project_dir)
+                                    end)
+                                end,
+                            })
                         end
                     end,
                 })
@@ -551,7 +560,6 @@ require("lazy").setup({
             -- INFO: Miscellaneous useful functions
             local minimisc = require("mini.misc")
             minimisc.setup()
-            minimisc.setup_auto_root()
             minimisc.setup_termbg_sync()
             minimisc.setup_restore_cursor()
         end,
