@@ -164,19 +164,6 @@ return {
             },
         },
     },
-    config = function(_, opts)
-        require("snacks").setup(opts)
-        -- Ensure these are wired even in headless sessions (no UIEnter).
-        if opts.input and opts.input.enabled then
-            Snacks.input.enable()
-        end
-        if opts.picker and opts.picker.ui_select then
-            Snacks.picker.setup()
-        end
-        if opts.dashboard and opts.dashboard.enabled then
-            Snacks.dashboard.setup()
-        end
-    end,
     init = function()
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",

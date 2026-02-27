@@ -13,11 +13,6 @@ if [[ -o interactive && "$TERM" == "dumb" ]]; then
   fi
 fi
 
-# Ghostty + tmux: let Snacks.image know the outer terminal supports kitty graphics.
-if [[ -n "$TMUX" ]]; then
-  export SNACKS_GHOSTTY=1
-fi
-
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
