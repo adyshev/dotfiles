@@ -16,15 +16,13 @@ return {
             enabled = true,
             preset = {
                 header = [[
-______________________________
-< MAY THE FORCE BE WITH YOU! >
-------------------------------
-        \   ^__^
-         \  (oo)\_______
-            (__)\       )\/\
-                ||----w |
-                ||     ||
-                ]],
+███╗   ██╗███████╗ ██████╗ ██╗   ██╗██╗███╗   ███╗
+████╗  ██║██╔════╝██╔═══██╗██║   ██║██║████╗ ████║
+██╔██╗ ██║█████╗  ██║   ██║██║   ██║██║██╔████╔██║
+██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
+██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
+╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
+  MAY THE FORCE BE WITH YOU!]],
                 keys = {
                     { icon = "  ", key = "e", desc = "New File", action = ":enew" },
                     { icon = "  ", key = "q", desc = "Quit", action = ":qa" },
@@ -285,9 +283,9 @@ ______________________________
         {
             "<leader><leader>",
             function()
-                Snacks.picker.recent()
+                Snacks.picker.recent({ filter = { cwd = true } })
             end,
-            desc = "[ ]Search Recent files",
+            desc = "[ ]Search Recent files (cwd)",
         },
         {
             "<leader>so",
