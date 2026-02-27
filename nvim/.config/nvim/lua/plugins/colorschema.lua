@@ -93,6 +93,11 @@ return {
                     hl(0, "YankyYanked", { bg = green, fg = bg0 })
                     hl(0, "YankyPut", { bg = red, fg = bg0 })
 
+                    -- Substitute highlight
+                    hl(0, "SubstituteSubstituted", { bg = orange, fg = bg0 })
+                    hl(0, "SubstituteRange", { bg = orange, fg = bg0 })
+                    hl(0, "SubstituteExchange", { bg = orange, fg = bg0 })
+
                     -- WhichKey
                     local whichkey_bg = bg0
                     hl(0, "WhichKeyNormal", { bg = whichkey_bg })

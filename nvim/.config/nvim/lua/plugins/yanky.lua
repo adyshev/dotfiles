@@ -18,9 +18,7 @@ return {
                 end
                 local items = {}
                 for i, entry in ipairs(entries) do
-                    local text = type(entry.regcontents) == "table"
-                        and table.concat(entry.regcontents, " ")
-                        or tostring(entry.regcontents)
+                    local text = type(entry.regcontents) == "table" and table.concat(entry.regcontents, " ") or tostring(entry.regcontents)
                     items[i] = {
                         text = text,
                         entry = entry,
@@ -36,7 +34,8 @@ return {
                             local e = item.entry
                             local contents = type(e.regcontents) == "table" and e.regcontents or { e.regcontents }
                             vim.fn.setreg('"', contents, e.regtype)
-                            vim.api.nvim_put(contents, e.regtype, true, true)
+                            vim.fn.setreg("+", contents, e.regtype)
+                            vim.notify("Yanked to register", vim.log.levels.INFO)
                         end
                     end,
                 })
@@ -66,7 +65,7 @@ return {
             highlight = {
                 on_put = true,
                 on_yank = true,
-                timer = 200,
+                timer = 180,
             },
             preserve_cursor_position = {
                 enabled = true,
