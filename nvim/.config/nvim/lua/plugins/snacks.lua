@@ -253,6 +253,13 @@ return {
             desc = "[f]Search Files",
         },
         {
+            "<leader>sc",
+            function()
+                Snacks.picker.git_diff({ layout = "default" })
+            end,
+            desc = "[c]Search Changed Files (git)",
+        },
+        {
             "<leader>sr",
             function()
                 Snacks.picker.registers()
