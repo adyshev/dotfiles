@@ -1,10 +1,8 @@
-# theme = gruvbox-material-medium-dark
-theme = Gruvbox Material Dark
+theme = gruvbox-material-medium-dark
 
 adjust-cell-height = 0%
 font-family = "JetBrainsMono Nerd Font"
-font-thicken = true
-font-thicken-strength = 0
+font-thicken = false
 font-size = 16
 command = /bin/zsh -i -c "tmux new -A -s default"
 maximize = true

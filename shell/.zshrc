@@ -1,17 +1,29 @@
 export GOPATH="${HOME}/go"
-export PATH="$HOME/bin:/opt/homebrew/bin:${GOPATH}/bin:/usr/local/bin:${PATH}"
+export PATH="$HOME/bin:$HOME/.local/bin:/opt/homebrew/bin:${GOPATH}/bin:/usr/local/bin:${PATH}"
 export FZF_BASE="/opt/homebrew/opt/fzf"
 export LANG="en_US.UTF-8"
+
+# History
+export HISTSIZE=50000
+export SAVEHIST=50000
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt SHARE_HISTORY
+setopt HIST_REDUCE_BLANKS
 
 # Some environments (CI/headless/IDE terminals) export TERM=dumb.
 # That breaks tmux/neovim terminfo and causes :checkhealth warnings.
 if [[ -o interactive && "$TERM" == "dumb" ]]; then
   if [[ -n "$TMUX" ]]; then
     export TERM="tmux-256color"
-    export SNACKS_GHOSTTY=1
   else
     export TERM="xterm-256color"
   fi
+fi
+
+# Always set SNACKS_GHOSTTY when running inside tmux (Ghostty is the outer terminal)
+if [[ -n "$TMUX" ]]; then
+  export SNACKS_GHOSTTY=1
 fi
 
 # Preferred editor for local and remote sessions
@@ -23,7 +35,7 @@ fi
 
 
 
-bindkey '\t\t' autosuggest-accept
+bindkey '^[[C' autosuggest-accept  # Right arrow accepts autosuggestion
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
@@ -52,7 +64,7 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
-eval "$(/opt/homebrew/bin/thefuck --alias)"
+fk() { eval "$(/opt/homebrew/bin/thefuck --alias fk)" && fk "$@"; unset -f fk; }
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/config.toml")"
@@ -65,8 +77,7 @@ source ~/.fzf.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
-# The following lines have been added by Docker Desktop to enable Docker CLI completions.
-fpath=(/Users/adyshev/.docker/completions $fpath)
+# Docker CLI completions
+fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit
-compinit
-# End of Docker CLI completions
+compinit -C

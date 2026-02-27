@@ -140,9 +140,7 @@ vim.api.nvim_create_autocmd("User", {
     end,
 })
 
--- NOTE: Here is where you install your plugins.
 require("lazy").setup({
-    -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
     "tpope/vim-sleuth",
     {
         "folke/which-key.nvim",
@@ -448,7 +446,8 @@ require("lazy").setup({
     },
     {
         "stevearc/conform.nvim",
-        lazy = false,
+        event = { "BufWritePre" },
+        cmd = { "ConformInfo" },
         opts = {
             notify_on_error = true,
             format_on_save = function(bufnr)
