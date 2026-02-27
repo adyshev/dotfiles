@@ -69,7 +69,9 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = "*",
     callback = function()
-        require("mini.trailspace").trim()
+        if vim.bo.buftype == "" then
+            require("mini.trailspace").trim()
+        end
     end,
     desc = "Trim spaces",
 })

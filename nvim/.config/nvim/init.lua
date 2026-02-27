@@ -584,6 +584,7 @@ require("lazy").setup({
             -- INFO: Miscellaneous useful functions
             local minimisc = require("mini.misc")
             minimisc.setup()
+            minimisc.setup_auto_root()
             minimisc.setup_termbg_sync()
             minimisc.setup_restore_cursor()
         end,
