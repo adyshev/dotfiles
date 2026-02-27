@@ -8,6 +8,7 @@ export LANG="en_US.UTF-8"
 if [[ -o interactive && "$TERM" == "dumb" ]]; then
   if [[ -n "$TMUX" ]]; then
     export TERM="tmux-256color"
+    export SNACKS_GHOSTTY=1
   else
     export TERM="xterm-256color"
   fi

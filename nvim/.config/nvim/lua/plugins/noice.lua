@@ -70,7 +70,8 @@ return {
         },
         popupmenu = {
             enabled = true, -- enables the Noice popupmenu UI
-            backend = "cmp", -- backend to use to show regular cmdline completions
+            backend = "native",
+            -- backend = "cmp", -- backend to use to show regular cmdline completions
             -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
             kind_icons = {}, -- set to `false` to disable icons
         },
