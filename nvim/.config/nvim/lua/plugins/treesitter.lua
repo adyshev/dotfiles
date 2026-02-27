@@ -37,6 +37,7 @@ local parsers = {
     "vimdoc",
     "xml",
     "yaml",
+    "vue",
 }
 
 return {

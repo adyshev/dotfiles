@@ -347,6 +347,20 @@ require("lazy").setup({
                     filetypes = { "templ" },
                 },
                 tailwindcss = {
+                    filetypes = {
+                        "html",
+                        "css",
+                        "scss",
+                        "sass",
+                        "less",
+                        "javascript",
+                        "javascriptreact",
+                        "typescript",
+                        "typescriptreact",
+                        "svelte",
+                        "vue",
+                        "templ",
+                    },
                     settings = {
                         tailwindCSS = {
                             classAttributes = { "class", "className", "class:list", "classList", "ngClass" },
@@ -380,7 +394,16 @@ require("lazy").setup({
                     },
                 },
                 sqls = {},
-                htmx = {},
+                htmx = {
+                    filetypes = {
+                        "html",
+                        "javascriptreact",
+                        "typescriptreact",
+                        "svelte",
+                        "vue",
+                        "templ",
+                    },
+                },
                 html = {
                     filetypes = { "html" },
                 },

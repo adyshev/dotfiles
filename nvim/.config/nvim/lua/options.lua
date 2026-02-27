@@ -54,6 +54,31 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
+do
+    local validate = vim.validate
+    vim.validate = function(...)
+        if select("#", ...) == 1 and type((...)) == "table" then
+            local type_map = {
+                n = "number",
+                s = "string",
+                t = "table",
+                b = "boolean",
+                f = "function",
+                c = "callable",
+            }
+            for name, spec in pairs((...)) do
+                local validator = spec[2]
+                if type(validator) == "string" then
+                    validator = type_map[validator] or validator
+                end
+                validate(name, spec[1], validator, spec[3])
+            end
+            return
+        end
+        return validate(...)
+    end
+end
+
 vim.lsp.handlers["textDocument/hover"] = function()
     vim.lsp.buf.hover({
         border = "rounded",
