@@ -142,6 +142,22 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end,
 })
 
+vim.api.nvim_create_autocmd("RecordingEnter", {
+    desc = "Notify when macro recording starts",
+    callback = function()
+        local reg = vim.fn.reg_recording()
+        Snacks.notify("Recording @" .. reg, { title = "Macro" })
+    end,
+})
+
+vim.api.nvim_create_autocmd("RecordingLeave", {
+    desc = "Notify when macro recording stops",
+    callback = function()
+        local reg = vim.fn.reg_recording()
+        Snacks.notify("Recorded @" .. reg, { title = "Macro" })
+    end,
+})
+
 -- Prevent interaction with underlying windows while a float is focused
 local _focused_float = nil
 local _backdrop_win = nil
@@ -166,7 +182,7 @@ local function show_backdrop()
         zindex = 1,
         border = "none",
     })
-    vim.wo[_backdrop_win].winblend = 30
+    vim.wo[_backdrop_win].winblend = 20
     vim.wo[_backdrop_win].winhighlight = "Normal:FloatBackdrop"
 end
 
@@ -201,27 +217,6 @@ vim.api.nvim_create_autocmd("WinClosed", {
             _focused_float = nil
             hide_backdrop()
         end
-    end,
-})
-
-vim.api.nvim_create_autocmd("WinLeave", {
-    desc = "Prevent focus from escaping floating windows to underlying buffer",
-    callback = function()
-        local leaving_win = vim.api.nvim_get_current_win()
-        local config = vim.api.nvim_win_get_config(leaving_win)
-        if config.relative == "" then
-            return
-        end
-        vim.schedule(function()
-            if not vim.api.nvim_win_is_valid(leaving_win) then
-                return
-            end
-            local landed_win = vim.api.nvim_get_current_win()
-            local landed_config = vim.api.nvim_win_get_config(landed_win)
-            if landed_config.relative == "" then
-                vim.api.nvim_set_current_win(leaving_win)
-            end
-        end)
     end,
 })
 

@@ -25,16 +25,25 @@ local function open_notes()
         col = math.floor((vim.o.columns - width) / 2),
         row = math.floor((vim.o.lines - height) / 2),
         border = "rounded",
+        title = { { " TODO ", "SnacksPickerTitle" } },
+        title_pos = "center",
+        footer = { { " <C-q> Quit ", "SnacksPickerFooter" } },
+        footer_pos = "center",
     })
 
-    vim.keymap.set("n", "q", function()
+    vim.wo[todo_win].winhighlight = "FloatBorder:SnacksPickerBorder,NormalFloat:Normal"
+
+    local function close_todo()
         if vim.bo[buf].modified then
-            vim.notify("Save your changes first", vim.log.levels.WARN)
+            Snacks.notify.warn("Save your changes first")
         else
             vim.api.nvim_win_close(todo_win, true)
             todo_win = nil
         end
-    end, { buffer = buf, silent = true })
+    end
+
+    vim.keymap.set("n", "<C-q>", close_todo, { buffer = buf, silent = true })
+    vim.keymap.set("i", "<C-q>", close_todo, { buffer = buf, silent = true })
 end
 
 vim.api.nvim_create_user_command("Td", open_notes, {})
