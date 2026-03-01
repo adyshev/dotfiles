@@ -42,11 +42,11 @@ return {
             AttachFileBrowser("oil", oil_open_folder)
         end,
         config = function()
-            require("oil").setup({
+            local oil = require("oil")
+            oil.setup({
                 default_file_explorer = true,
                 delete_to_trash = true,
                 skip_confirm_for_simple_edits = true,
-                confirmation = false,
                 columns = { "icon" },
                 keymaps = {
                     ["g?"] = false,
@@ -80,6 +80,12 @@ return {
                     winblend = 0,
                 },
             })
+
+            local orig_save = oil.save
+            oil.save = function(opts, cb)
+                opts = vim.tbl_extend("force", opts or {}, { confirm = false })
+                return orig_save(opts, cb)
+            end
         end,
         keys = {
             { "\\", "<cmd>Oil<cr>", mode = "n", desc = "Open Filesystem" },
