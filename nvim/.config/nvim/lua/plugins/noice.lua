@@ -77,6 +77,8 @@ return {
         },
         routes = {
             { filter = { event = "msg_show", find = "E21" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "E37" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "E162" }, opts = { skip = true } },
             { filter = { event = "msg_show", find = "E20" }, opts = { skip = true } },
             { filter = { event = "msg_show", find = "E23" }, opts = { skip = true } },
             { filter = { event = "msg_show", find = "E348" }, opts = { skip = true } },

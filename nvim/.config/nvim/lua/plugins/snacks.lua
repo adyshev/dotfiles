@@ -225,6 +225,59 @@ return {
             desc = "[e]Search Notifications",
         },
         {
+            "<leader>sn",
+            function()
+                local has_noice, manager = pcall(require, "noice.message.manager")
+                if not has_noice then
+                    vim.notify("Noice is not loaded", vim.log.levels.WARN)
+                    return
+                end
+                local messages = manager.get({}, { sort = true, history = true })
+                local dominated = { error = true, warn = true }
+                local items = {}
+                for i = #messages, 1, -1 do
+                    local msg = messages[i]
+                    local dominated_level = dominated[msg.level]
+                    local is_notify = msg.event == "notify"
+                    local is_lua_error = msg.kind == "lua_error" or msg.kind == "echoerr"
+                    if dominated_level or is_notify or is_lua_error then
+                        local text = msg:content()
+                        if text and text ~= "" then
+                            local lines = vim.split(text, "\n")
+                            table.insert(items, {
+                                text = lines[1],
+                                preview = { text = text },
+                                level = msg.level,
+                                kind = msg.kind,
+                                event = msg.event,
+                            })
+                        end
+                    end
+                end
+                local level_hl = {
+                    error = "DiagnosticError",
+                    warn = "DiagnosticWarn",
+                    info = "DiagnosticInfo",
+                    debug = "DiagnosticHint",
+                }
+                Snacks.picker({
+                    title = "Noice Messages",
+                    items = items,
+                    format = function(item)
+                        local ret = {}
+                        if item.level and item.level ~= "" then
+                            ret[#ret + 1] = { " " .. item.level .. " ", level_hl[item.level] or "Comment" }
+                            ret[#ret + 1] = { " " }
+                        end
+                        ret[#ret + 1] = { item.text }
+                        return ret
+                    end,
+                    preview = "preview",
+                })
+            end,
+            desc = "[n]Search Noice Messages",
+        },
+        {
             "<leader>st",
             function()
                 Snacks.picker.todo_comments()
@@ -317,11 +370,11 @@ return {
             desc = "[O]Search in Open Files",
         },
         {
-            "<leader>sn",
+            "<leader>sv",
             function()
                 Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
             end,
-            desc = "[n]Search Neovim config files",
+            desc = "[v]Search Neovim config files",
         },
         {
             "]]",
