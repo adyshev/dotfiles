@@ -200,6 +200,11 @@ vim.api.nvim_create_autocmd("WinEnter", {
         local win = vim.api.nvim_get_current_win()
         local config = vim.api.nvim_win_get_config(win)
         if config.relative ~= "" then
+            local buf = vim.api.nvim_win_get_buf(win)
+            local ft = vim.bo[buf].filetype
+            if ft == "WhichKey" or ft == "noice" then
+                return
+            end
             _focused_float = win
             show_backdrop()
         else

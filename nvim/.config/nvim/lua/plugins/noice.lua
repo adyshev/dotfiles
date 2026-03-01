@@ -75,6 +75,18 @@ return {
             -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
             kind_icons = {}, -- set to `false` to disable icons
         },
+        routes = {
+            { filter = { event = "msg_show", find = "E21" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "E20" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "E23" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "E348" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "E353" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "E508" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "Already at oldest change" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "Already at newest change" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "search hit TOP" }, opts = { skip = true } },
+            { filter = { event = "msg_show", find = "search hit BOTTOM" }, opts = { skip = true } },
+        },
     },
     config = function(_, opts)
         require("noice").setup(opts)

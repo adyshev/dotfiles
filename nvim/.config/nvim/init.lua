@@ -147,6 +147,7 @@ require("lazy").setup({
         event = "VimEnter",
         config = function()
             require("which-key").setup({
+                delay = 350,
                 win = {
                     border = { "─", "─", "─", " ", " ", " ", " ", " " },
                 },
