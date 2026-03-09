@@ -1,3 +1,5 @@
+local tmux = require("utils.tmux")
+
 return {
     "folke/snacks.nvim",
     priority = 1000,
@@ -73,16 +75,16 @@ return {
             },
             actions = {
                 tmux_left = function()
-                    vim.fn.system("tmux select-pane -L")
+                    tmux.select_pane("-L")
                 end,
                 tmux_right = function()
-                    vim.fn.system("tmux select-pane -R")
+                    tmux.select_pane("-R")
                 end,
                 tmux_down = function()
-                    vim.fn.system("tmux select-pane -D")
+                    tmux.select_pane("-D")
                 end,
                 tmux_up = function()
-                    vim.fn.system("tmux select-pane -U")
+                    tmux.select_pane("-U")
                 end,
             },
             win = {

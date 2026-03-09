@@ -1,7 +1,9 @@
+local tmux = require("utils.tmux")
+
 local function tmux_navigate(direction, tmux_flag)
     return function()
         if vim.api.nvim_win_get_config(0).relative ~= "" then
-            vim.fn.system("tmux select-pane " .. tmux_flag)
+            tmux.select_pane(tmux_flag)
         else
             vim.cmd("TmuxNavigate" .. direction)
         end

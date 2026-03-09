@@ -1,7 +1,7 @@
 return {
     "kkrampis/codex.nvim",
     lazy = true,
-    enabled = true,
+    enabled = false,
     cmd = { "Codex", "CodexToggle" }, -- Optional: Load only on command execution
     keys = {
         {

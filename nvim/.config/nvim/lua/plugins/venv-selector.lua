@@ -1,7 +1,7 @@
 return {
     "linux-cultist/venv-selector.nvim",
     dependencies = { "neovim/nvim-lspconfig" },
-    ft = "python", -- Load when opening Python files
+    event = "VimEnter",
     config = function()
         require("venv-selector").setup({
             -- Your options go here

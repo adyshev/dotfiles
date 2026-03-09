@@ -690,7 +690,7 @@ require("lazy").setup({
                                 return ""
                             end,
                             on_click = function(clicks, button, modifiers)
-                                local winid = vim.fn.getqflist(vim.api.nvim_get_current_win()).winid
+                                local winid = vim.fn.getloclist(0, { winid = 0 }).winid
                                 if winid == 0 then
                                     vim.cmd.lopen()
                                 else
