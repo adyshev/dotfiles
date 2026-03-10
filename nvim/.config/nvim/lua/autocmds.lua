@@ -53,15 +53,15 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    pattern = { "*.md" },
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "markdown" },
     callback = function()
-        vim.opt.expandtab = true
-        vim.opt.tabstop = 2
-        vim.opt.softtabstop = 2
-        vim.opt.shiftwidth = 2
-        vim.opt.spell = true
-        vim.opt.spelllang = { "en_us" }
+        vim.opt_local.expandtab = true
+        vim.opt_local.tabstop = 2
+        vim.opt_local.softtabstop = 2
+        vim.opt_local.shiftwidth = 2
+        vim.opt_local.spell = true
+        vim.opt_local.spelllang = { "en_us" }
     end,
     desc = "Enable spell checking for certain file types",
 })
@@ -82,19 +82,22 @@ vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         local venv = vim.fn.findfile("pyproject.toml", vim.fn.getcwd() .. ";")
         if venv ~= "" then
-            require("venv-selector").retrieve_from_cache()
+            local ok, venv_selector = pcall(require, "venv-selector")
+            if ok then
+                venv_selector.retrieve_from_cache()
+            end
         end
     end,
     once = true,
 })
 
-vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
-    pattern = { "*.py" },
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = { "python" },
     callback = function()
-        vim.opt.tabstop = 4 -- Number of spaces tabs count for
-        vim.opt.colorcolumn = "120" -- Ruler at column number
-        vim.opt.shiftwidth = 2 -- Size of an indent
-        vim.opt.softtabstop = 4
+        vim.opt_local.tabstop = 4
+        vim.opt_local.colorcolumn = "120"
+        vim.opt_local.shiftwidth = 4
+        vim.opt_local.softtabstop = 4
     end,
     desc = "Python specific settings",
 })
