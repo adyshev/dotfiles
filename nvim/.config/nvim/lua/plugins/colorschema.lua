@@ -86,6 +86,11 @@ return {
                     -- Notifier
                     hl(0, "SnacksNotifierHistory", { bg = bg0, fg = fg0 })
 
+                    -- Disable LSP reference highlights (snacks.words jump only)
+                    hl(0, "LspReferenceText", {})
+                    -- hl(0, "LspReferenceRead", {})
+                    -- hl(0, "LspReferenceWrite", {})
+
                     -- Noice cmdline
                     hl(0, "NoiceCmdlineIcon", { fg = orange })
 

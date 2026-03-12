@@ -19,10 +19,6 @@ map("i", "<End>", "<C-O>G$")
 map("n", "Q", "<cmd>qa<cr>")
 map("n", "Y", "^y$")
 
--- Centralized
-map("n", "n", "nzzzv", opts)
-map("n", "N", "Nzzzv", opts)
-
 -- Yank all
 map("n", "<M-y>", "ggVGy", opts)
 -- Select all
