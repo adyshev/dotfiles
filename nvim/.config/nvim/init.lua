@@ -464,7 +464,7 @@ require("lazy").setup({
                 svelte = { "prettier" },
                 typescript = { "prettier" },
                 javascript = { "prettier" },
-                python = { "black", "reorder-python-imports" },
+                python = { "reorder-python-imports", "black" },
                 go = { "goimports", "gofmt" },
                 json = { "prettier" },
                 -- markdown = { "prettier" },
@@ -484,18 +484,16 @@ require("lazy").setup({
         config = function()
             local lint = require("lint")
             lint.linters_by_ft = {
-                -- markdown = { "markdownlint", "vale" },
+                -- markdown = { "markdownlint" },
                 python = { "mypy", "bandit" },
                 -- python = { "mypy" },
                 json = { "jsonlint" },
                 rst = { "vale" },
+                html = { "vale" },
                 terraform = { "tflint" },
-                text = { "vale" },
             }
 
             lint.linters.mypy.args = {
-                "--install-types",
-                "--non-interactive",
                 "--ignore-missing-imports",
             }
 
