@@ -58,10 +58,15 @@ vim.g.loaded_ruby_provider = 0
 -- (lualine/utils/fn_store.lua). Shim until lualine ships a fix.
 do
     local _validate = vim.validate
+    local type_map = { n = "number", s = "string", t = "table", b = "boolean", f = "function", c = "callable" }
     vim.validate = function(opt, ...)
         if type(opt) == "table" and select("#", ...) == 0 then
             for name, spec in pairs(opt) do
-                _validate(name, spec[1], spec[2], spec[3])
+                local validator = spec[2]
+                if type(validator) == "string" then
+                    validator = type_map[validator] or validator
+                end
+                _validate(name, spec[1], validator, spec[3])
             end
         else
             _validate(opt, ...)
