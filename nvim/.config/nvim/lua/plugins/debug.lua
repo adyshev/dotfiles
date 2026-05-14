@@ -26,8 +26,6 @@ return {
         "mfussenegger/nvim-dap-python",
     },
     keys = function(_, keys)
-        local dap = require("dap")
-        local dapui = require("dapui")
         return {
             -- Basic debugging keymaps, feel free to change to your liking!
             {
