@@ -17,12 +17,16 @@ map("n", "<End>", "G$")
 map("i", "<Home>", "<C-O>gg^", opts)
 map("i", "<End>", "<C-O>G$")
 map("n", "Q", "<cmd>qa<cr>")
--- Yank all
-map("n", "<M-y>", "ggVGy", opts)
+-- Yank all (remap so yanky's y is used)
+map("n", "<M-y>", "ggVGy", { silent = true })
 -- Select all
 map("n", "<M-a>", "ggVG", opts)
--- Duplicate line
-map("n", "<M-d>", "YP", opts)
+-- Duplicate line (explicit: yank line, paste above)
+map("n", "<M-d>", function()
+    local line = vim.api.nvim_get_current_line()
+    local row = vim.api.nvim_win_get_cursor(0)[1]
+    vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, { line })
+end, { silent = true })
 
 -- Clear search with <esc>
 map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)

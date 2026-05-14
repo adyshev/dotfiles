@@ -94,8 +94,8 @@ return {
         local dap = require("dap")
         local dapui = require("dapui")
 
-        vim.fn.sign_define("DapBreakpoint", { text = "🔴", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" })
-        vim.fn.sign_define("DapStopped", { text = "👉", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
+        vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DapBreakpoint", linehl = "DapBreakpoint", numhl = "DapBreakpoint" })
+        vim.fn.sign_define("DapStopped", { text = "", texthl = "DapStopped", linehl = "DapStopped", numhl = "DapStopped" })
 
         require("mason-nvim-dap").setup({
             -- Makes a best effort to setup the various debuggers with
@@ -160,8 +160,8 @@ return {
 
         require("dap-python").setup("python")
         require("dap-python").resolve_python = function()
-            local venv_python = require("venv-selector").venv()
-            return venv_python or vim.fn.exepath("python3") or "python"
+            local python = require("venv-selector").python()
+            return python or vim.fn.exepath("python3") or "python"
         end
     end,
 }
