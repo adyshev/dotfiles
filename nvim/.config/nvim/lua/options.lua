@@ -54,4 +54,17 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-
+-- lualine still uses the old vim.validate({name={value,type}}) table style
+-- (lualine/utils/fn_store.lua). Shim until lualine ships a fix.
+do
+    local _validate = vim.validate
+    vim.validate = function(opt, ...)
+        if type(opt) == "table" and select("#", ...) == 0 then
+            for name, spec in pairs(opt) do
+                _validate(name, spec[1], spec[2], spec[3])
+            end
+        else
+            _validate(opt, ...)
+        end
+    end
+end
