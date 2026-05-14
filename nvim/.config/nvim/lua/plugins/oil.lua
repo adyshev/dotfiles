@@ -1,6 +1,6 @@
 local api = vim.api
 
-function AttachFileBrowser(plugin_name, plugin_open)
+local function AttachFileBrowser(plugin_name, plugin_open)
     local previous_buffer_name
     api.nvim_create_autocmd("BufEnter", {
         group = api.nvim_create_augroup("UserUtilsCustomAutocmds", { clear = true }), -- I use the same group for all my autocmds. To create one: vim.api.nvim_create_augroup("CustomAutocmdGroupName", { clear = true })

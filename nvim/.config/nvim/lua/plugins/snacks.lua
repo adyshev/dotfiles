@@ -60,7 +60,7 @@ return {
             },
         },
         words = { enabled = true },
-        image = { enabled = true }, -- doesn't work in allacritty.
+        image = { enabled = false },
         scroll = { enabled = false },
         rename = { enabled = true },
         input = { enabled = true },

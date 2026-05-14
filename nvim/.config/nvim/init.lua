@@ -30,10 +30,11 @@ vim.diagnostic.config({
 })
 
 local diagnostic_goto = function(next, severity)
-    local go = next and vim.diagnostic.goto_next or vim.diagnostic.goto_prev
-    severity = severity and vim.diagnostic.severity[severity] or nil
     return function()
-        go({ severity = severity })
+        vim.diagnostic.jump({
+            count = next and 1 or -1,
+            severity = severity and vim.diagnostic.severity[severity] or nil,
+        })
     end
 end
 
@@ -429,8 +430,6 @@ require("lazy").setup({
                 "yamlfmt",
                 "vale",
                 "tflint",
-                "cssls",
-                "tailwindcss",
             })
             require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
