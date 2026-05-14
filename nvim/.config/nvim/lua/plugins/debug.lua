@@ -159,5 +159,9 @@ return {
         })
 
         require("dap-python").setup("python")
+        require("dap-python").resolve_python = function()
+            local venv_python = require("venv-selector").venv()
+            return venv_python or vim.fn.exepath("python3") or "python"
+        end
     end,
 }

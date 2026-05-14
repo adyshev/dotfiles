@@ -205,7 +205,7 @@ vim.api.nvim_create_autocmd("WinEnter", {
         if config.relative ~= "" then
             local buf = vim.api.nvim_win_get_buf(win)
             local ft = vim.bo[buf].filetype
-            if ft == "WhichKey" or ft == "noice" then
+            if ft == "WhichKey" or ft == "noice" or vim.startswith(ft, "snacks") then
                 return
             end
             _focused_float = win

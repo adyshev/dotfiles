@@ -43,6 +43,7 @@ return {
             desc = "[y]Search Yank History",
         },
         { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
+        { "Y", "^<Plug>(YankyYank)$", mode = "n", desc = "Yank to end of line" },
         { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Yanked Text After Cursor" },
         { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put Yanked Text Before Cursor" },
         { "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put Yanked Text After Selection" },

@@ -21,7 +21,7 @@ return {
             adapters = {
                 require("neotest-python"),
                 require("neotest-go")({
-                    args = { "-v", "-race", "-count=1", "-timeout=60s", "-coverprofile=" .. vim.fn.getcwd() .. "/coverage.out" },
+                    args = { "-v", "-race", "-count=1", "-timeout=60s", "-coverprofile=coverage.out" },
                     recursive_run = true,
                 }),
             },

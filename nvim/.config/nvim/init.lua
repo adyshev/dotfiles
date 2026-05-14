@@ -412,8 +412,6 @@ require("lazy").setup({
                 lua_ls = {},
                 taplo = {},
             }
-            require("lspconfig.ui.windows").default_options.border = "rounded"
-
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
                 "stylua",

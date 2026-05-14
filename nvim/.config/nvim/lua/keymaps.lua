@@ -17,8 +17,6 @@ map("n", "<End>", "G$")
 map("i", "<Home>", "<C-O>gg^", opts)
 map("i", "<End>", "<C-O>G$")
 map("n", "Q", "<cmd>qa<cr>")
-map("n", "Y", "^y$")
-
 -- Yank all
 map("n", "<M-y>", "ggVGy", opts)
 -- Select all
