@@ -7,7 +7,7 @@ return {
             anti_conceal = {
                 enabled = false,
             },
-            completions = { lsp = { enabled = true } },
+            completions = { blink = { enabled = true } },
         })
     end,
 }

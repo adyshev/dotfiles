@@ -13,6 +13,7 @@ vim.filetype.add({
     },
     extension = {
         gotmpl = "gotmpl",
+        mdx = "mdx",
         templ = "templ",
     },
 })
