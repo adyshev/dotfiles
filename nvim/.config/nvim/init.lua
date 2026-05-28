@@ -622,7 +622,7 @@ require("lazy").setup({
     },
     {
         "nvim-lualine/lualine.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons", "archibate/lualine-time" },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             local function count_items(qf_list)
                 if #qf_list > 0 then
@@ -723,13 +723,6 @@ require("lazy").setup({
                             no_harpoon = "Harpoon not loaded",
                         },
                     },
-                    -- lualine_y = {
-                    --     {
-                    --         "datetime",
-                    --         -- options: default, us, uk, iso, or your own format string ("%H:%M", etc..)
-                    --         style = "%a %e %b, %H:%M",
-                    --     },
-                    -- },
                     lualine_z = {
                         { "location" },
                         { "searchcount" },

@@ -1,3 +1,15 @@
+local gh_authenticated
+
+local function github_command()
+    if vim.fn.executable("gh") ~= 1 then
+        return "curl"
+    end
+    if gh_authenticated == nil then
+        gh_authenticated = vim.fn.system({ "gh", "auth", "status" }) ~= nil and vim.v.shell_error == 0
+    end
+    return gh_authenticated and "gh" or "curl"
+end
+
 return {
     "saghen/blink.cmp",
     event = { "InsertEnter", "CmdlineEnter" },
@@ -71,6 +83,46 @@ return {
                     module = "blink-cmp-git",
                     name = "Git",
                     enabled = true,
+                    opts = {
+                        git_centers = {
+                            github = {
+                                issue = {
+                                    get_command = function()
+                                        return github_command()
+                                    end,
+                                    get_token = function()
+                                        return vim.env.GH_TOKEN or ""
+                                    end,
+                                },
+                                pull_request = {
+                                    get_command = function()
+                                        return github_command()
+                                    end,
+                                    get_token = function()
+                                        return vim.env.GH_TOKEN or ""
+                                    end,
+                                },
+                                mention = {
+                                    get_command = function()
+                                        return github_command()
+                                    end,
+                                    get_token = function()
+                                        return vim.env.GH_TOKEN or ""
+                                    end,
+                                    get_documentation = function(item)
+                                        local doc = require("blink-cmp-git.default.github").mention.get_documentation(item)
+                                        doc.get_command = function()
+                                            return github_command()
+                                        end
+                                        doc.get_token = function()
+                                            return vim.env.GH_TOKEN or ""
+                                        end
+                                        return doc
+                                    end,
+                                },
+                            },
+                        },
+                    },
                 },
                 spell = {
                     module = "blink-cmp-spell",

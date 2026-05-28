@@ -4,7 +4,6 @@ local parsers = {
     "css",
     "diff",
     "editorconfig",
-    "zsh",
     "fish",
     "git_config",
     "git_rebase",
@@ -40,6 +39,26 @@ local parsers = {
     "vue",
 }
 
+local module_config = {
+    ensure_installed = parsers,
+    -- fold = { enable = true },
+    highlight = { enable = true },
+    -- indent = { enable = true },
+    incremental_selection = {
+        enable = true,
+        -- set value to `false` to disable individual mapping
+        -- node_decremental captures both node_incremental and scope_incremental
+        keymaps = {
+            init_selection = "<c-space>",
+            node_incremental = "<c-space>",
+            scope_incremental = false,
+            node_decremental = "<BS>",
+        },
+    },
+}
+
+local parser_install_dir = vim.fn.stdpath("data") .. "/site"
+
 return {
     {
         "nvim-treesitter/nvim-treesitter",
@@ -48,29 +67,13 @@ return {
         build = ":TSUpdate",
         config = function()
             require("nvim-treesitter").setup({
-                install_dir = vim.fn.stdpath("data") .. "/site",
+                install_dir = parser_install_dir,
             })
         end,
     },
     {
         "MeanderingProgrammer/treesitter-modules.nvim",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
-        opts = {
-            ensure_installed = parsers,
-            -- fold = { enable = true },
-            highlight = { enable = true },
-            -- indent = { enable = true },
-            incremental_selection = {
-                enable = true,
-                -- set value to `false` to disable individual mapping
-                -- node_decremental captures both node_incremental and scope_incremental
-                keymaps = {
-                    init_selection = "<c-space>",
-                    node_incremental = "<c-space>",
-                    scope_incremental = false,
-                    node_decremental = "<BS>",
-                },
-            },
-        },
+        opts = module_config,
     },
 }
