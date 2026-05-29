@@ -55,6 +55,12 @@ eval "$(thefuck --alias)"
 eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/config.toml")"
 eval "$(zoxide init zsh)"
 
+# Avoid slow PackageKit command-not-found lookups on typos.
+command_not_found_handler() {
+  print -u2 "zsh: $1: command not found"
+  return 127
+}
+
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.fzf.zsh
 

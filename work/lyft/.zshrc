@@ -90,3 +90,9 @@ export PATH="$PATH:/Users/odyshev/.cache/lm-studio/bin"
 
 # Keep the shell line editor in emacs mode even if a plugin enables vi mode.
 bindkey -e
+
+# Avoid slow Homebrew/system command-not-found hooks on typos.
+command_not_found_handler() {
+  print -u2 "zsh: $1: command not found"
+  return 127
+}
