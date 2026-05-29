@@ -33,8 +33,6 @@ else
     export EDITOR='nvim'
 fi
 
-
-
 bindkey '^[[C' autosuggest-accept  # Right arrow accepts autosuggestion
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '

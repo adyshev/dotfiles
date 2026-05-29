@@ -1,5 +1,5 @@
 .DEFAULT_GOAL := all
-.PHONY:all shell alacritty ghostty rectangle nvim tmux homebrew bat btop lazygit lsd wezterm yazi aerospace notes
+.PHONY:all shell shell_linux alacritty ghostty rectangle nvim tmux homebrew bat btop lazygit lsd wezterm yazi aerospace notes
 
 all: aerospace alacritty ghostty rectangle shell homebrew tmux nvim bat btop lazygit lsd wezterm
 
@@ -7,6 +7,11 @@ shell:
 	@echo "Installing Shell..."
 	@mkdir -p ~/.local/share/mc
 	@stow shell
+
+shell_linux:
+	@echo "Installing Shell for Linux..."
+	@mkdir -p ~/.local/share/mc
+	@stow shell_linux
 
 aerospace:
 	@echo "Installing Aerospace"
