@@ -1,5 +1,7 @@
 local indent = 2
 
+require("utils.clipboard").setup()
+
 vim.o.spellfile = os.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
 vim.opt.swapfile = false
 vim.o.formatoptions = "jcroqlnt"

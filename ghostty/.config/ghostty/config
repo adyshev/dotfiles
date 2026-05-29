@@ -1,16 +1,15 @@
 theme = gruvbox-material-medium-dark
-
 adjust-cell-height = 0%
 font-family = "JetBrainsMono Nerd Font"
 font-thicken = false
-font-size = 17
-command = /bin/zsh -i -c "tmux new -A -s default"
+font-size = 14
+command = /bin/zsh -i -c "tmux new-session"
 maximize = true
 copy-on-select = true
 confirm-close-surface=false
 quit-after-last-window-closed = true
 mouse-hide-while-typing = true
-window-decoration = true
+window-decoration = false
 window-save-state = always
 window-padding-balance = true
 window-padding-x = 5
@@ -23,4 +22,3 @@ macos-titlebar-style = hidden
 # keybind = performable:ctrl+c=copy_to_clipboard
 # keybind = performable:ctrl+v=paste_from_clipboard
 keybind = global:alt+enter=toggle_maximize
-

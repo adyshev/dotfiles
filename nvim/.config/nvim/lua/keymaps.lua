@@ -33,7 +33,9 @@ map({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", opts)
 vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { noremap = true })
 
 -- Allow clipboard copy paste in neovim
-map("n", "<D-v>", '"+P', opts)
-map("i", "<D-v>", "<C-r>+", opts)
-map("v", "<D-v>", '"+P', opts)
-map("t", "<D-v>", "<C-R>+", opts)
+if vim.fn.has("mac") == 1 then
+    map("n", "<D-v>", '"+P', opts)
+    map("i", "<D-v>", "<C-r>+", opts)
+    map("v", "<D-v>", '"+P', opts)
+    map("t", "<D-v>", "<C-R>+", opts)
+end

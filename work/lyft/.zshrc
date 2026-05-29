@@ -87,3 +87,6 @@ eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/odyshev/.cache/lm-studio/bin"
+
+# Keep the shell line editor in emacs mode even if a plugin enables vi mode.
+bindkey -e

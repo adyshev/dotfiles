@@ -81,3 +81,6 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fpath=($HOME/.docker/completions $fpath)
 autoload -Uz compinit
 compinit -C
+
+# Keep the shell line editor in emacs mode even if a plugin enables vi mode.
+bindkey -e
