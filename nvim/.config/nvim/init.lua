@@ -1,6 +1,7 @@
 require("options")
 require("keymaps")
 require("autocmds")
+require("utils.notes").setup()
 
 -- Diagnostic
 vim.diagnostic.config({
@@ -171,20 +172,6 @@ require("lazy").setup({
                         picker:close()
                         if item and item.file then
                             local project_dir = item.file
-                            local ca = package.loaded["cursor-agent"]
-                            if ca and ca._term_state then
-                                local st = ca._term_state
-                                if st.bufnr and vim.api.nvim_buf_is_valid(st.bufnr) then
-                                    local ca_util = require("cursor-agent.util")
-                                    local orig_notify = ca_util.notify
-                                    ca_util.notify = function() end
-                                    pcall(vim.api.nvim_buf_delete, st.bufnr, { force = true })
-                                    vim.defer_fn(function()
-                                        ca_util.notify = orig_notify
-                                    end, 200)
-                                end
-                                st.win, st.bufnr, st.job_id = nil, nil, nil
-                            end
                             Snacks.picker.files({
                                 cwd = project_dir,
                                 hidden = true,
@@ -275,7 +262,7 @@ require("lazy").setup({
             end
 
             vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+                group = vim.api.nvim_create_augroup("user-lsp-attach", { clear = true }),
                 callback = function(event)
                     local map = function(keys, func, desc)
                         vim.keymap.set("n", keys, func, { buffer = event.buf, desc = desc })
@@ -512,7 +499,6 @@ require("lazy").setup({
             require("todo-comments").setup({ signs = false })
             vim.keymap.set("n", "]t", function()
                 require("todo-comments").jump_next()
-                -- require("todo-comments").jump_next({keywords = { "ERROR", "WARNING" }})
             end, { desc = "Next todo comment" })
 
             vim.keymap.set("n", "[t", function()
@@ -579,8 +565,6 @@ require("lazy").setup({
                     reindent_linewise = false,
                 },
             })
-            -- mini.starter replaced by Snacks.dashboard
-            -- INFO: Miscellaneous useful functions
             local minimisc = require("mini.misc")
             minimisc.setup()
             minimisc.setup_auto_root()
@@ -637,7 +621,6 @@ require("lazy").setup({
                     end
                 end
             end
-            -- local custom_gruvbox = require("lualine.themes.gruvbox-material")
             local custom_gruvbox = require("lualine.themes.gruvbox")
             custom_gruvbox.normal.b.bg = "#32302F"
             custom_gruvbox.normal.c.bg = "#282828"

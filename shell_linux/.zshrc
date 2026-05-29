@@ -1,5 +1,5 @@
 export LANG="en_US.UTF-8"
-export TERM="screen-256color"
+export TERM="tmux-256color"
 export PATH="$HOME/bin:${GOPATH}/bin:/usr/local/bin:${PATH}"
 
 

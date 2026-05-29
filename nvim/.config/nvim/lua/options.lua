@@ -46,32 +46,33 @@ vim.opt.wildmode = "longest:full,full"
 vim.o.confirm = false
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.g.loaded_netrwPlugin = 0
-vim.g.loaded_netrw = 0
-vim.g.loaded_netrwSettings = 0
-vim.g.loaded_netrwFileHandlers = 0
-vim.g.loaded_netrw_gitignore = 0
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwSettings = 1
+vim.g.loaded_netrwFileHandlers = 1
+vim.g.loaded_netrw_gitignore = 1
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
--- lualine still uses the old vim.validate({name={value,type}}) table style
--- (lualine/utils/fn_store.lua). Shim until lualine ships a fix.
+-- lualine still calls the deprecated vim.validate({ name = { value, type } }) form.
 do
-    local _validate = vim.validate
-    local type_map = { n = "number", s = "string", t = "table", b = "boolean", f = "function", c = "callable" }
-    vim.validate = function(opt, ...)
-        if type(opt) == "table" and select("#", ...) == 0 then
-            for name, spec in pairs(opt) do
-                local validator = spec[2]
-                if type(validator) == "string" then
-                    validator = type_map[validator] or validator
+    local validate = vim.validate
+    local aliases = { n = "number", s = "string", t = "table", b = "boolean", f = "function", c = "callable" }
+
+    vim.validate = function(name, value, validator, optional_or_msg, ...)
+        if type(name) == "table" and value == nil and validator == nil and optional_or_msg == nil and select("#", ...) == 0 then
+            for key, spec in pairs(name) do
+                local expected = spec[2]
+                if type(expected) == "string" then
+                    expected = aliases[expected] or expected
                 end
-                _validate(name, spec[1], validator, spec[3])
+                validate(key, spec[1], expected, spec[3])
             end
-        else
-            _validate(opt, ...)
+            return
         end
+
+        return validate(name, value, validator, optional_or_msg, ...)
     end
 end

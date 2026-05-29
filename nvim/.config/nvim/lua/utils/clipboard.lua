@@ -37,11 +37,11 @@ function M.setup()
         copy = { "wl-copy", "--foreground", "--type", "text/plain" }
         paste = { "wl-paste", "--no-newline" }
         name = "wl-clipboard"
-    elseif executable("xclip") then
+    elseif (vim.env.DISPLAY or vim.env.XAUTHORITY) and executable("xclip") then
         copy = { "xclip", "-quiet", "-i", "-selection", "clipboard" }
         paste = { "xclip", "-quiet", "-o", "-selection", "clipboard" }
         name = "xclip"
-    elseif executable("xsel") then
+    elseif (vim.env.DISPLAY or vim.env.XAUTHORITY) and executable("xsel") then
         copy = { "xsel", "--clipboard", "--input" }
         paste = { "xsel", "--clipboard", "--output" }
         name = "xsel"
