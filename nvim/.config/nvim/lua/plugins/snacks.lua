@@ -24,7 +24,7 @@ return {
 ██║╚██╗██║██╔══╝  ██║   ██║╚██╗ ██╔╝██║██║╚██╔╝██║
 ██║ ╚████║███████╗╚██████╔╝ ╚████╔╝ ██║██║ ╚═╝ ██║
 ╚═╝  ╚═══╝╚══════╝ ╚═════╝   ╚═══╝  ╚═╝╚═╝     ╚═╝
-  MAY THE FORCE BE WITH YOU!]],
+MAY THE FORCE BE WITH YOU!]],
                 keys = {
                     { icon = "  ", key = "e", desc = "New File", action = ":enew" },
                     { icon = "  ", key = "n", desc = "Notes", action = ":e ~/.notes/todo.md" },
@@ -60,7 +60,7 @@ return {
             },
         },
         words = { enabled = true },
-        image = { enabled = false },
+        image = { enabled = true, math = { enabled = false } },
         scroll = { enabled = false },
         rename = { enabled = true },
         input = { enabled = true },
