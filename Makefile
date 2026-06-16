@@ -1,83 +1,29 @@
 .DEFAULT_GOAL := all
-.PHONY:all shell shell_linux alacritty ghostty rectangle nvim tmux homebrew bat btop lazygit lsd wezterm yazi aerospace notes
 
-all: aerospace alacritty ghostty rectangle shell homebrew tmux nvim bat btop lazygit lsd wezterm
+PACKAGES := aerospace alacritty bat btop ghostty homebrew kitty lazygit lsd nvim raycast rectangle shell shell_linux skhd tmux wezterm yazi
 
-shell:
-	@echo "Installing Shell..."
-	@mkdir -p ~/.local/share/mc
-	@stow shell
+.PHONY: all list restow unstow $(PACKAGES)
 
-shell_linux:
-	@echo "Installing Shell for Linux..."
-	@mkdir -p ~/.local/share/mc
-	@stow shell_linux
+all: $(PACKAGES)
 
-aerospace:
-	@echo "Installing Aerospace"
-	@stow aerospace
+list:
+	@printf '%s\n' $(PACKAGES)
 
-notes:
-	@echo "Installing Notes"
-	@stow notes
+restow:
+	@test -n "$(target)" || (echo "Usage: make restow target=<package>" && exit 1)
+	@echo "Restowing $(target)..."
+	@stow --restow $(target)
 
-ghostty:
-	@echo "Installing Ghostty"
-	@stow ghostty
-
-skhd:
-	@echo "Installing Skhd"
-	@stow skhd
-
-alacritty:
-	@echo "Installing Alacritty..."
-	@stow alacritty
-
-rectangle:
-	@echo "Install Rectangle..."
-	@stow rectangle
-
-yazi:
-	@echo "Install Yazi..."
-	@stow yazi
-
-kitty:
-	@echo "Install Kitty..."
-	@stow kitty
-
-nvim:
-	@echo "Installing Nvim..."
-	@stow nvim
-
-tmux:
-	@echo "Installing Tmux..."
-	@stow tmux
-
-bat:
-	@echo "Installing Bat..."
-	@stow bat
-
-btop:
-	@echo "Installing Btop..."
-	@stow btop
-
-lazygit:
-	@echo "Installing Lazygit..."
-	@stow lazygit
-
-lsd:
-	@echo "Installing Lsd..."
-	@stow lsd
-
-wezterm:
-	@echo "Installing Wezterm..."
-	@stow wezterm
-
-homebrew:
-	@echo "Installing homebrew..."
-	@stow homebrew
-	@xargs brew install --adopt < ~/.homebrew/list.txt
-
-rm:
-	@echo "Removing all symlinks..."
+unstow:
+	@test -n "$(target)" || (echo "Usage: make unstow target=<package>" && exit 1)
+	@echo "Unstowing $(target)..."
 	@stow --delete $(target)
+
+shell shell_linux:
+	@echo "Installing $@..."
+	@mkdir -p ~/.local/share/mc
+	@stow $@
+
+$(filter-out shell shell_linux,$(PACKAGES)):
+	@echo "Installing $@..."
+	@stow $@
