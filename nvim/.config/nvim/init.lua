@@ -199,6 +199,7 @@ require("lazy").setup({
     },
     {
         "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
         opts = {
             diagnostics = {
                 float = {

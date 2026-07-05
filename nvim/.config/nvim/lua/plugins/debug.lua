@@ -3,13 +3,13 @@ return {
     lazy = true,
     enabled = true,
     dependencies = {
-        "rcarriga/nvim-dap-ui",
-        "nvim-neotest/nvim-nio",
-        "theHamsta/nvim-dap-virtual-text",
-        "williamboman/mason.nvim",
-        "jay-babu/mason-nvim-dap.nvim",
-        "leoluz/nvim-dap-go",
-        "mfussenegger/nvim-dap-python",
+        { "rcarriga/nvim-dap-ui", lazy = true },
+        { "nvim-neotest/nvim-nio", lazy = true },
+        { "theHamsta/nvim-dap-virtual-text", lazy = true },
+        { "williamboman/mason.nvim", lazy = true },
+        { "jay-babu/mason-nvim-dap.nvim", lazy = true },
+        { "leoluz/nvim-dap-go", lazy = true },
+        { "mfussenegger/nvim-dap-python", lazy = true },
     },
     keys = function(_, keys)
         return {
