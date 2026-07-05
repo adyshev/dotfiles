@@ -69,7 +69,7 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = "*",
     callback = function()
-        if vim.bo.buftype == "" then
+        if vim.bo.buftype == "" and vim.bo.modifiable and not vim.bo.readonly then
             require("mini.trailspace").trim()
         end
     end,

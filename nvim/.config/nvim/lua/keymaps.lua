@@ -2,11 +2,20 @@ local map = vim.keymap.set
 
 local opts = { noremap = true, silent = true }
 
+local function can_edit_buffer()
+    return vim.bo.modifiable and not vim.bo.readonly
+end
+
 map("t", "<C-t>", "<C-\\><C-n>", opts)
 map("n", "vv", "^v$", opts)
 map("n", "q:", ":", opts)
 map("i", "<C-v>", "<C-r>+", opts)
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", opts)
+map({ "i", "x", "n", "s" }, "<C-s>", function()
+    if vim.bo.buftype == "" then
+        vim.cmd.write()
+    end
+    return "<esc>"
+end, { expr = true, noremap = true, silent = true })
 map({ "n", "v" }, "<Space>", "<Nop>", opts)
 map("n", "<PageDown>", "1000<C-D>0")
 map("n", "<PageUp>", "1000<C-U>0")
@@ -23,6 +32,9 @@ map("n", "<M-y>", "ggVGy", { silent = true })
 map("n", "<M-a>", "ggVG", opts)
 -- Duplicate line (explicit: yank line, paste above)
 map("n", "<M-d>", function()
+    if not can_edit_buffer() then
+        return
+    end
     local line = vim.api.nvim_get_current_line()
     local row = vim.api.nvim_win_get_cursor(0)[1]
     vim.api.nvim_buf_set_lines(0, row - 1, row - 1, false, { line })

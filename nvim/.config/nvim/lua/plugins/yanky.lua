@@ -1,3 +1,17 @@
+local function can_edit_buffer()
+    return vim.bo.modifiable and not vim.bo.readonly
+end
+
+local function feed_plug(plug)
+    return function()
+        if not can_edit_buffer() then
+            return
+        end
+        local key = vim.api.nvim_replace_termcodes("<Plug>(" .. plug .. ")", true, false, true)
+        vim.api.nvim_feedkeys(key, "m", false)
+    end
+end
+
 return {
     "gbprod/yanky.nvim",
     lazy = false,
@@ -44,12 +58,12 @@ return {
         },
         { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
         { "Y", "^<Plug>(YankyYank)$", mode = "n", desc = "Yank to end of line" },
-        { "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Yanked Text After Cursor" },
-        { "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put Yanked Text Before Cursor" },
-        { "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put Yanked Text After Selection" },
-        { "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" }, desc = "Put Yanked Text Before Selection" },
-        { "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },
-        { "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put Indented Before Cursor (Linewise)" },
+        { "p", feed_plug("YankyPutAfter"), mode = { "n", "x" }, desc = "Put Yanked Text After Cursor" },
+        { "P", feed_plug("YankyPutBefore"), mode = { "n", "x" }, desc = "Put Yanked Text Before Cursor" },
+        { "gp", feed_plug("YankyGPutAfter"), mode = { "n", "x" }, desc = "Put Yanked Text After Selection" },
+        { "gP", feed_plug("YankyGPutBefore"), mode = { "n", "x" }, desc = "Put Yanked Text Before Selection" },
+        { "]p", feed_plug("YankyPutIndentAfterLinewise"), desc = "Put Indented After Cursor (Linewise)" },
+        { "[p", feed_plug("YankyPutIndentBeforeLinewise"), desc = "Put Indented Before Cursor (Linewise)" },
         -- { "[y", "<Plug>(YankyCycleForward)", desc = "Cycle Forward Through Yank History" },
         -- { "]y", "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
         -- { "]P", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },

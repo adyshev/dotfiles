@@ -2,12 +2,27 @@ return {
     "gbprod/substitute.nvim",
     enabled = true,
     config = function()
-        require("substitute").setup({
+        local substitute = require("substitute")
+
+        substitute.setup({
             on_substitute = require("yanky.integration").substitute(),
         })
-        vim.keymap.set("n", "s", require("substitute").operator, { noremap = true })
-        vim.keymap.set("n", "ss", require("substitute").line, { noremap = true })
-        vim.keymap.set("n", "S", require("substitute").eol, { noremap = true })
-        vim.keymap.set("x", "s", require("substitute").visual, { noremap = true })
+
+        local function can_substitute()
+            return vim.bo.modifiable and not vim.bo.readonly
+        end
+
+        local function guarded(action)
+            return function()
+                if can_substitute() then
+                    action()
+                end
+            end
+        end
+
+        vim.keymap.set("n", "s", guarded(substitute.operator), { noremap = true })
+        vim.keymap.set("n", "ss", guarded(substitute.line), { noremap = true })
+        vim.keymap.set("n", "S", guarded(substitute.eol), { noremap = true })
+        vim.keymap.set("x", "s", guarded(substitute.visual), { noremap = true })
     end,
 }
