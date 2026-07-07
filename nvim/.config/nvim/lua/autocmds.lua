@@ -1,4 +1,12 @@
 -- Autocommands
+--
+-- This file holds editor-wide event hooks. Plugin-specific autocommands stay
+-- with their plugin specs unless they coordinate behavior across plugins.
+
+-- `q:` opens the command-line window, which is rarely intentional in this
+-- workflow. `keymaps.lua` maps `q:` back to `:`, but this guard also catches
+-- accidental command-window entry from other paths and immediately returns to
+-- the normal command line.
 vim.api.nvim_create_autocmd("CmdWinEnter", {
     pattern = "*",
     callback = function()
@@ -10,6 +18,9 @@ vim.api.nvim_create_autocmd("CmdWinEnter", {
     end,
 })
 
+-- Common utility buffers should behave like transient panels: no buffer list
+-- entry and a single-key close action. This keeps help/checkhealth/qf windows
+-- easy to dismiss without affecting normal file buffers.
 vim.api.nvim_create_autocmd("FileType", {
     desc = "Close some filtypes simply by pressing 'q'",
     pattern = { "checkhealth", "help", "lspinfo", "man", "notify", "qf", "query", "lazygit" },
@@ -19,6 +30,9 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
+-- For buffers with no detected filetype, use shell-style comments. This gives
+-- plugins that depend on `commentstring` a sane default for scratch files and
+-- extensionless config files.
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     callback = function()
         if vim.bo.filetype == "" then
@@ -27,6 +41,9 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
     end,
 })
 
+-- Hide lualine while the command line is active. With cmdheight=0 and Noice,
+-- the command area is compact; hiding the statusline reduces visual overlap
+-- and restores it immediately after command-line mode exits.
 local function lualine_hide()
     local ok, lualine = pcall(require, "lualine")
     if ok then
@@ -53,6 +70,8 @@ vim.api.nvim_create_autocmd("CmdlineLeave", {
     end,
 })
 
+-- Markdown is written with two-space indentation and spell checking. This is
+-- intentionally filetype-local so source code keeps its own indentation rules.
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "markdown" },
     callback = function()
@@ -66,6 +85,9 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Enable spell checking for certain file types",
 })
 
+-- Trim trailing whitespace just before writing real, editable file buffers.
+-- The modifiable/readonly checks prevent plugin stack traces in help, picker,
+-- Oil, terminal, and other special buffers.
 vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     pattern = "*",
     callback = function()
@@ -76,6 +98,9 @@ vim.api.nvim_create_autocmd({ "BufWritePre" }, {
     desc = "Trim spaces",
 })
 
+-- If the current project has a pyproject.toml, ask venv-selector to restore the
+-- last selected virtualenv. The pcall keeps startup clean on machines where the
+-- plugin has not loaded yet or no Python workflow is active.
 vim.api.nvim_create_autocmd("VimEnter", {
     desc = "Auto select virtualenv Nvim open",
     pattern = "*",
@@ -91,6 +116,8 @@ vim.api.nvim_create_autocmd("VimEnter", {
     once = true,
 })
 
+-- Python defaults differ from the global two-space settings. Keep the 120
+-- column marker aligned with the formatter/linter settings in the LSP config.
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "python" },
     callback = function()
@@ -102,6 +129,8 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Python specific settings",
 })
 
+-- Oil emits this event after file operations. Forward renames to Snacks so LSP
+-- clients and open buffers can update references after a file is moved.
 vim.api.nvim_create_autocmd("User", {
     pattern = "OilActionsPost",
     callback = function(event)
@@ -113,11 +142,15 @@ vim.api.nvim_create_autocmd("User", {
     end,
 })
 
+-- Spell checking is useful in prose but noisy in code and config files.
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "python", "go", "lua", "gitignore", "json", "toml", "yaml", "make" },
     command = "setlocal nospell",
 })
 
+-- When Neovim is opened with a directory argument, switch the working directory
+-- to that path. This makes picker, Oil, and relative commands operate from the
+-- project root the terminal launched.
 vim.api.nvim_create_autocmd("VimEnter", {
     callback = function()
         local args = vim.v.argv
@@ -132,6 +165,8 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end,
 })
 
+-- Terminal buffers use a separate cursor highlight. This makes terminal mode
+-- visible without changing the global cursor configuration.
 vim.api.nvim_set_hl(0, "TerminalCursorShape", { fg = "NONE", bg = "NONE", blend = 0, underline = true })
 vim.api.nvim_create_autocmd("TermEnter", {
     desc = "Terminal cursor shape",
@@ -140,6 +175,9 @@ vim.api.nvim_create_autocmd("TermEnter", {
     end,
 })
 
+-- Avoid automatically continuing comment leaders after pressing Enter or `o`.
+-- This is applied on BufEnter because some filetype plugins reset
+-- `formatoptions` after the buffer is created.
 vim.api.nvim_create_autocmd("BufEnter", {
     desc = "Disable commenting new lines",
     callback = function()
@@ -147,6 +185,8 @@ vim.api.nvim_create_autocmd("BufEnter", {
     end,
 })
 
+-- Surface macro recording state through Snacks notifications. Neovim's native
+-- recording indicator can be easy to miss with a minimal statusline.
 vim.api.nvim_create_autocmd("RecordingEnter", {
     desc = "Notify when macro recording starts",
     callback = function()
@@ -164,6 +204,11 @@ vim.api.nvim_create_autocmd("RecordingLeave", {
 })
 
 -- Prevent interaction with underlying windows while a float is focused
+--
+-- Many UI plugins open floating windows that do not fully block mouse input to
+-- windows behind them. The backdrop window and mouse guards below make focused
+-- floats behave more like modals: clicks/scrolls outside the float are ignored
+-- until focus returns to a normal window.
 local _focused_float = nil
 local _backdrop_win = nil
 local _backdrop_buf = nil
@@ -171,6 +216,8 @@ local _backdrop_buf = nil
 vim.api.nvim_set_hl(0, "FloatBackdrop", { bg = "#000000" })
 
 local function show_backdrop()
+    -- Reuse an existing backdrop if the current float changes focus without
+    -- closing the old window.
     if _backdrop_win and vim.api.nvim_win_is_valid(_backdrop_win) then
         return
     end
@@ -192,6 +239,8 @@ local function show_backdrop()
 end
 
 local function hide_backdrop()
+    -- Backdrop buffers are scratch buffers with bufhidden=wipe, so closing the
+    -- window is enough to clean up both UI and buffer state.
     if _backdrop_win and vim.api.nvim_win_is_valid(_backdrop_win) then
         vim.api.nvim_win_close(_backdrop_win, true)
     end
@@ -232,6 +281,8 @@ vim.api.nvim_create_autocmd("WinClosed", {
 
 local function mouse_guard(key)
     return function()
+        -- If a float is focused, suppress mouse events aimed at normal windows
+        -- or the backdrop. Mouse events inside another float are still allowed.
         if _focused_float and vim.api.nvim_win_is_valid(_focused_float) then
             local mouse = vim.fn.getmousepos()
             if mouse.winid ~= 0 then

@@ -1,7 +1,13 @@
 local indent = 2
 
+-- Configure the system clipboard before setting `clipboard=unnamedplus`.
+-- The helper picks the best provider for the current host: pbcopy on macOS,
+-- wl-clipboard on Wayland, xclip/xsel on X11, and OSC52 as a fallback.
 require("utils.clipboard").setup()
 
+-- Editing model
+-- Keep buffers responsive and persistent without producing swap files in each
+-- project. Undo history is stored in Neovim's undo directory instead.
 vim.o.spellfile = os.getenv("HOME") .. "/.config/nvim/spell/en.utf-8.add"
 vim.opt.swapfile = false
 vim.o.formatoptions = "jcroqlnt"
@@ -9,6 +15,11 @@ vim.o.shortmess = "filnxtToOFWIcC"
 vim.o.breakindent = true
 vim.o.undofile = true
 vim.o.smartcase = true
+
+-- Window and UI defaults
+-- These are global defaults; filetype-specific overrides live in ftplugin or
+-- autocmds. `laststatus=0` is intentional because lualine is hidden outside
+-- focused editing contexts in this setup.
 vim.o.winborder = "rounded"
 vim.o.smartindent = true
 vim.o.signcolumn = "yes"
@@ -37,6 +48,9 @@ vim.opt.laststatus = 0
 vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 vim.opt.pumblend = 10
 vim.opt.pumheight = 10
+
+-- Session files should remember layout and working directory, but not options
+-- that are already controlled by this config.
 vim.opt.sessionoptions = { "buffers", "curdir", "tabpages", "winsize" }
 vim.opt.shiftround = true
 vim.opt.shiftwidth = indent
@@ -44,19 +58,30 @@ vim.opt.tabstop = indent
 vim.o.showtabline = 0
 vim.opt.wildmode = "longest:full,full"
 vim.o.confirm = false
+
+-- Leader keys must be set before plugins define mappings.
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- Oil is the file explorer, so disable netrw early to avoid duplicate file
+-- browser autocommands and startup work.
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 vim.g.loaded_netrw_gitignore = 1
+
+-- Disable language providers that this config does not use. This removes
+-- checkhealth noise and avoids probing runtimes on every startup.
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
 -- lualine still calls the deprecated vim.validate({ name = { value, type } }) form.
+-- Neovim 0.12 tightened `vim.validate`; this compatibility shim accepts the
+-- legacy table form and forwards all modern calls unchanged. Keep it scoped and
+-- minimal so it can be removed once lualine no longer needs it.
 do
     local validate = vim.validate
     local aliases = { n = "number", s = "string", t = "table", b = "boolean", f = "function", c = "callable" }

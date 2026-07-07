@@ -8,6 +8,9 @@ return {
             on_substitute = require("yanky.integration").substitute(),
         })
 
+        -- Substitute edits the buffer directly. Guard the mappings so pressing
+        -- `s` in special buffers does not trigger "Buffer is not modifiable"
+        -- stack traces from the plugin internals.
         local function can_substitute()
             return vim.bo.modifiable and not vim.bo.readonly
         end

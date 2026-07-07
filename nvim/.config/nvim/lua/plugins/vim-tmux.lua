@@ -1,5 +1,8 @@
 local tmux = require("utils.tmux")
 
+-- vim-tmux-navigator handles normal editor windows. Floating windows are
+-- different: plugin commands often do not know how to leave them cleanly, so in
+-- that case call tmux directly and move to the neighboring pane.
 local function tmux_navigate(direction, tmux_flag)
     return function()
         if vim.api.nvim_win_get_config(0).relative ~= "" then

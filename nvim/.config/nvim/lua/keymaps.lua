@@ -2,14 +2,21 @@ local map = vim.keymap.set
 
 local opts = { noremap = true, silent = true }
 
+-- Several mappings below edit the current buffer directly. Always check
+-- modifiability first so the same mappings are harmless in special buffers
+-- such as help, Oil, pickers, dashboards, terminals, and quickfix windows.
 local function can_edit_buffer()
     return vim.bo.modifiable and not vim.bo.readonly
 end
 
+-- Basic terminal/editor ergonomics.
 map("t", "<C-t>", "<C-\\><C-n>", opts)
 map("n", "vv", "^v$", opts)
 map("n", "q:", ":", opts)
 map("i", "<C-v>", "<C-r>+", opts)
+
+-- Save only real file buffers. In nofile/help/plugin buffers, `<C-s>` should
+-- exit insert/select mode but avoid triggering write errors.
 map({ "i", "x", "n", "s" }, "<C-s>", function()
     if vim.bo.buftype == "" then
         vim.cmd.write()
@@ -26,6 +33,7 @@ map("n", "<End>", "G$")
 map("i", "<Home>", "<C-O>gg^", opts)
 map("i", "<End>", "<C-O>G$")
 map("n", "Q", "<cmd>qa<cr>")
+
 -- Yank all (remap so yanky's y is used)
 map("n", "<M-y>", "ggVGy", { silent = true })
 -- Select all

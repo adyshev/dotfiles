@@ -1,5 +1,9 @@
 local gh_authenticated
 
+-- blink-cmp-git can query GitHub either through `gh` or raw curl. Prefer `gh`
+-- when it is installed and authenticated because it reuses the user's normal
+-- GitHub CLI login on both macOS and Linux. Cache the auth check so completion
+-- does not shell out repeatedly while typing.
 local function github_command()
     if vim.fn.executable("gh") ~= 1 then
         return "curl"
@@ -84,6 +88,8 @@ return {
                     name = "Git",
                     enabled = true,
                     opts = {
+                        -- Keep the token fallback for machines where `gh` is
+                        -- unavailable, such as fresh installs or remote hosts.
                         git_centers = {
                             github = {
                                 issue = {

@@ -3,7 +3,10 @@ require("keymaps")
 require("autocmds")
 require("utils.notes").setup()
 
--- Diagnostic
+-- Global diagnostic UI
+-- Keep inline diagnostics compact and sorted by severity. Most detailed
+-- inspection happens through floating diagnostics or Trouble, so underlines are
+-- disabled to reduce visual noise while editing.
 vim.diagnostic.config({
     virtual_text = {
         spacing = 2,
@@ -39,6 +42,8 @@ local diagnostic_goto = function(next, severity)
     end
 end
 
+-- Diagnostic navigation is defined before plugins so it is always available,
+-- even if lazy.nvim has not finished installing or loading.
 vim.keymap.set("n", "]d", diagnostic_goto(true), { desc = "Next Diagnostic message" })
 vim.keymap.set("n", "[d", diagnostic_goto(false), { desc = "Previous Diagnostic message" })
 vim.keymap.set("n", "]e", diagnostic_goto(true, "ERROR"), { desc = "Next Error" })
@@ -46,7 +51,9 @@ vim.keymap.set("n", "[e", diagnostic_goto(false, "ERROR"), { desc = "Prev Error"
 vim.keymap.set("n", "]w", diagnostic_goto(true, "WARN"), { desc = "Next Warning" })
 vim.keymap.set("n", "[w", diagnostic_goto(false, "WARN"), { desc = "Prev Warning" })
 
--- Lazy
+-- lazy.nvim bootstrap
+-- Clone the plugin manager on first run. Everything after this point assumes
+-- lazy.nvim is available and can import `lua/plugins/*.lua` specs.
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
     local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -55,6 +62,8 @@ end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
 local open_float_diagnostic = function()
+    -- Do not open another diagnostic float over an existing floating window.
+    -- This avoids covering picker/help UI with a diagnostic popup.
     for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
         if vim.api.nvim_win_get_config(winid).zindex then
             return
@@ -90,7 +99,12 @@ if vim.uv.fs_stat(gruvbox_path) then
     vim.opt.rtp:prepend(gruvbox_path)
 end
 
--- Restore dashboard/Oil after Lazy install window is closed
+-- Restore dashboard/Oil after Lazy install window is closed.
+--
+-- On a first install, lazy.nvim opens its own UI before the normal startup
+-- screen has a chance to settle. Once the Lazy window closes, recreate the
+-- expected landing state: Oil for directory arguments, otherwise the Snacks
+-- dashboard for an empty buffer.
 vim.api.nvim_create_autocmd("User", {
     pattern = "VeryLazy",
     once = true,

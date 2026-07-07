@@ -1,3 +1,6 @@
+-- Single source of truth for parsers this config wants available on every
+-- machine. Keep this list conservative: adding unavailable parsers breaks
+-- installation on machines with older/newer nvim-treesitter registries.
 local parsers = {
     "bash",
     "c",
@@ -57,6 +60,9 @@ local module_config = {
     },
 }
 
+-- Install compiled parsers into stdpath("data")/site so they are shared by
+-- nvim-treesitter and Neovim's runtimepath, independent of plugin checkout
+-- location. This is important when the same dotfiles run on macOS and Linux.
 local parser_install_dir = vim.fn.stdpath("data") .. "/site"
 
 return {
@@ -74,6 +80,8 @@ return {
     {
         "MeanderingProgrammer/treesitter-modules.nvim",
         dependencies = { "nvim-treesitter/nvim-treesitter" },
+        -- treesitter-modules provides the old-style highlight/incremental
+        -- selection modules for the current nvim-treesitter main branch.
         opts = module_config,
     },
 }

@@ -2,6 +2,9 @@ local function can_edit_buffer()
     return vim.bo.modifiable and not vim.bo.readonly
 end
 
+-- Yanky put mappings eventually call buffer-editing APIs. Wrap only the put
+-- mappings so yanking/searching history still works in read-only buffers, while
+-- paste-like actions quietly do nothing where edits are impossible.
 local function feed_plug(plug)
     return function()
         if not can_edit_buffer() then

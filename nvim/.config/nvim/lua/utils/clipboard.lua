@@ -1,9 +1,17 @@
 local M = {}
 
+-- Cross-platform clipboard integration for the `+` and `*` registers.
+-- Neovim's default clipboard detection can be inconsistent inside tmux, SSH,
+-- or minimal Linux installs, so this module explicitly chooses an available
+-- provider and falls back to OSC52 when no local clipboard tool exists.
+
 local function executable(bin)
     return vim.fn.executable(bin) == 1
 end
 
+-- Neovim expects clipboard providers to be functions keyed by register.
+-- `copy_with` adapts an external command like pbcopy/wl-copy/xclip into that
+-- provider shape, preserving linewise selections with a trailing newline.
 local function copy_with(command)
     return function(lines, regtype)
         local text = table.concat(lines, "\n")
@@ -14,6 +22,8 @@ local function copy_with(command)
     end
 end
 
+-- Paste providers return `{ lines }, regtype`. External clipboard tools return
+-- raw text, so split it into lines without trimming empty trailing fields.
 local function paste_with(command)
     return function()
         local result = vim.system(command, { text = true }):wait()
@@ -29,6 +39,9 @@ function M.setup()
     local paste
     local name
 
+    -- Prefer native providers first, then Linux display-server-specific tools.
+    -- The DISPLAY/XAUTHORITY check supports X11 sessions where DISPLAY may be
+    -- unavailable but X authority is still configured by the environment.
     if vim.fn.has("mac") == 1 and executable("pbcopy") and executable("pbpaste") then
         copy = { "pbcopy" }
         paste = { "pbpaste" }
@@ -48,6 +61,8 @@ function M.setup()
     end
 
     if copy and paste then
+        -- `cache_enabled` lets Neovim avoid repeated paste command calls for
+        -- unchanged clipboard contents.
         vim.g.clipboard = {
             name = name,
             copy = {
@@ -63,6 +78,8 @@ function M.setup()
         return
     end
 
+    -- OSC52 copies through terminal escape sequences. It is not as universal as
+    -- native tools, but it is the best fallback for SSH/tmux/headless sessions.
     local ok, osc52 = pcall(require, "vim.ui.clipboard.osc52")
     if ok then
         vim.g.clipboard = osc52
