@@ -192,7 +192,7 @@ require("lazy").setup({
                                 ignored = false,
                                 on_close = function()
                                     vim.schedule(function()
-                                        vim.cmd.cd(project_dir)
+                                        vim.cmd.cd(vim.fn.fnameescape(project_dir))
                                     end)
                                 end,
                             })
@@ -214,13 +214,6 @@ require("lazy").setup({
     {
         "neovim/nvim-lspconfig",
         event = { "BufReadPre", "BufNewFile" },
-        opts = {
-            diagnostics = {
-                float = {
-                    border = "rounded",
-                },
-            },
-        },
         dependencies = {
             {
                 "williamboman/mason.nvim",
@@ -293,6 +286,11 @@ require("lazy").setup({
             capabilities = vim.tbl_deep_extend("force", capabilities, require("blink.cmp").get_lsp_capabilities())
             capabilities.workspace = capabilities.workspace or {}
             capabilities.workspace.didChangeWatchedFiles = { dynamicRegistration = true }
+            capabilities.textDocument = capabilities.textDocument or {}
+            capabilities.textDocument.foldingRange = {
+                dynamicRegistration = false,
+                lineFoldingOnly = true,
+            }
 
             local servers = {
                 gopls = {
@@ -457,7 +455,7 @@ require("lazy").setup({
                 local disable_filetypes = { c = true, cpp = true }
                 return {
                     timeout_ms = 5000,
-                    lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+                    lsp_format = disable_filetypes[vim.bo[bufnr].filetype] and "never" or "fallback",
                     async = false,
                 }
             end,

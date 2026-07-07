@@ -63,7 +63,7 @@ MAY THE FORCE BE WITH YOU!]],
                     limit = 5,
                     padding = 1,
                     action = function(dir)
-                        vim.cmd.cd(dir)
+                        vim.cmd.cd(vim.fn.fnameescape(dir))
                         require("oil").open(dir)
                     end,
                 },

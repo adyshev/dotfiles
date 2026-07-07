@@ -1,18 +1,5 @@
 return {
     {
-        "neovim/nvim-lspconfig",
-        opts = {
-            capabilities = {
-                textDocument = {
-                    foldingRange = {
-                        dynamicRegistration = false,
-                        lineFoldingOnly = true,
-                    },
-                },
-            },
-        },
-    },
-    {
         "kevinhwang91/nvim-ufo",
         dependencies = {
             "kevinhwang91/promise-async",

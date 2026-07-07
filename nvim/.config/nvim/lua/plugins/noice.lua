@@ -4,8 +4,24 @@ return {
     opts = {
         lsp = {
             signature = {
+                enabled = true,
                 auto_open = {
-                    enabled = false,
+                    enabled = true,
+                    trigger = true,
+                    luasnip = false,
+                    throttle = 50,
+                },
+                view = nil,
+                opts = {},
+            },
+            documentation = {
+                view = "hover",
+                opts = {
+                    lang = "markdown",
+                    replace = true,
+                    render = "plain",
+                    format = { "{message}" },
+                    win_options = { concealcursor = "n", conceallevel = 3 },
                 },
             },
             override = {
@@ -16,17 +32,6 @@ return {
                 enabled = false,
             },
         },
-        signature = {
-            enabled = true,
-            auto_open = {
-                enabled = true,
-                luasnip = true, -- Automatically show signature help when typing a trigger character from the LSP
-                trigger = true, -- Will open signature help when jumping to Luasnip insert nodes
-                throttle = 50, -- Debounce lsp signature help request by 50ms
-            },
-            view = nil, -- when nil, use defaults from documentation
-            opts = {}, -- merged with defaults from documentation
-        },
         presets = {
             bottom_search = true,
             command_palette = false,
@@ -34,16 +39,6 @@ return {
             inc_rename = false,
             lsp_doc_border = true,
             cmdline_output_to_split = false,
-        },
-        documentation = {
-            view = "hover",
-            opts = {
-                lang = "markdown",
-                replace = true,
-                render = "plain",
-                format = { "{message}" },
-                win_options = { concealcursor = "n", conceallevel = 3 },
-            },
         },
         views = {
             split = {

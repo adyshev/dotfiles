@@ -297,8 +297,14 @@ local function mouse_guard(key)
 end
 
 local guarded_events = {
-    "<ScrollWheelUp>", "<ScrollWheelDown>", "<ScrollWheelLeft>", "<ScrollWheelRight>",
-    "<LeftMouse>", "<2-LeftMouse>", "<3-LeftMouse>", "<RightMouse>",
+    "<ScrollWheelUp>",
+    "<ScrollWheelDown>",
+    "<ScrollWheelLeft>",
+    "<ScrollWheelRight>",
+    "<LeftMouse>",
+    "<2-LeftMouse>",
+    "<3-LeftMouse>",
+    "<RightMouse>",
 }
 for _, ev in ipairs(guarded_events) do
     vim.keymap.set({ "n", "i", "v" }, ev, mouse_guard(ev), { expr = true, desc = "Guard mouse while float is focused" })
