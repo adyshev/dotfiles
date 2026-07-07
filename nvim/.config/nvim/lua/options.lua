@@ -59,9 +59,10 @@ vim.o.showtabline = 0
 vim.opt.wildmode = "longest:full,full"
 vim.o.confirm = false
 
--- Leader keys must be set before plugins define mappings.
+-- Leader keys and font capability must be set before plugins define mappings/UI.
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+vim.g.have_nerd_font = true
 
 -- Oil is the file explorer, so disable netrw early to avoid duplicate file
 -- browser autocommands and startup work.

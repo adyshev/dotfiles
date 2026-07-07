@@ -6,8 +6,14 @@ return {
             condition = function(buf)
                 local fn = vim.fn
 
-                -- don't save for special-buffers
+                -- Save only normal, writable file buffers.
                 if fn.getbufvar(buf, "&buftype") ~= "" then
+                    return false
+                end
+                if fn.getbufvar(buf, "&modifiable") ~= 1 or fn.getbufvar(buf, "&readonly") == 1 then
+                    return false
+                end
+                if fn.bufname(buf) == "" then
                     return false
                 end
                 return true

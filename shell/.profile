@@ -1,5 +1,5 @@
-. "$HOME/.cargo/env"
-. "$HOME/.atuin/bin/env"
+[ -r "$HOME/.cargo/env" ] && . "$HOME/.cargo/env"
+[ -r "$HOME/.atuin/bin/env" ] && . "$HOME/.atuin/bin/env"
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:$HOME/.cache/lm-studio/bin"
+[ -d "$HOME/.cache/lm-studio/bin" ] && export PATH="$PATH:$HOME/.cache/lm-studio/bin"

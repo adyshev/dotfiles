@@ -33,8 +33,6 @@ else
     export EDITOR='nvim'
 fi
 
-bindkey '^[[C' autosuggest-accept  # Right arrow accepts autosuggestion
-
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 alias tree='tree -a -I .git'
@@ -44,7 +42,6 @@ alias ls="lsd --color=always"
 alias cat='bat'
 alias diff="diff-so-fancy"
 alias mc="SHELL=/bin/bash mc --skin=gruvbox"
-alias fk="fuck"
 
 # find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
 fif() {
@@ -62,18 +59,33 @@ function yy() {
 	rm -f -- "$tmp"
 }
 
-fk() { eval "$(/opt/homebrew/bin/thefuck --alias fk)" && fk "$@"; unset -f fk; }
+fk() {
+  if command -v thefuck >/dev/null 2>&1; then
+    eval "$(thefuck --alias fk)" && fk "$@"
+    unset -f fk
+  else
+    print -u2 "fk: thefuck is not installed"
+    return 127
+  fi
+}
 
-if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ] && command -v oh-my-posh >/dev/null 2>&1; then
   eval "$(oh-my-posh init zsh --config "$HOME/.config/ohmyposh/config.toml")"
 fi
 
-eval "$(zoxide init zsh)"
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init zsh)"
+fi
 
-source ~/.fzf.zsh
+if command -v fzf >/dev/null 2>&1; then
+  source <(fzf --zsh) 2>/dev/null
+elif [ -r "$HOME/.fzf.zsh" ]; then
+  source "$HOME/.fzf.zsh" 2>/dev/null
+fi
 
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+[ -r /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -r /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ] && source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+(( $+widgets[autosuggest-accept] )) && bindkey '^[[C' autosuggest-accept  # Right arrow accepts autosuggestion
 
 # Docker CLI completions
 fpath=($HOME/.docker/completions $fpath)

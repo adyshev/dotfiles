@@ -124,8 +124,19 @@ return {
 
         require("dap-python").setup("python")
         require("dap-python").resolve_python = function()
-            local python = require("venv-selector").python()
-            return python or vim.fn.exepath("python3") or "python"
+            local ok, venv_selector = pcall(require, "venv-selector")
+            if ok then
+                local python = venv_selector.python()
+                if python and python ~= "" then
+                    return python
+                end
+            end
+
+            local python3 = vim.fn.exepath("python3")
+            if python3 ~= "" then
+                return python3
+            end
+            return vim.fn.exepath("python") ~= "" and vim.fn.exepath("python") or "python"
         end
     end,
 }
