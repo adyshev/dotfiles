@@ -65,3 +65,6 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.fzf.zsh
 
 bindkey -e
+
+# Pi
+export PATH="$HOME/.local/bin:$PATH"
