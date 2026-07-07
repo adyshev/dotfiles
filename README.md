@@ -86,6 +86,16 @@ make shell_linux # Fedora
 make shell       # macOS
 ```
 
+### Notes File
+
+The Neovim dashboard has a `Notes` shortcut that opens `~/.notes/todo.md`.
+Create it once on each machine:
+
+```bash
+mkdir -p ~/.notes
+touch ~/.notes/todo.md
+```
+
 ### tmux Plugins
 
 The tmux config uses TPM-managed plugins. Install TPM once, then press
