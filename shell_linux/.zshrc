@@ -38,17 +38,45 @@ alias cat='bat'
 alias diff="diff-so-fancy"
 alias mc="SHELL=/bin/bash mc --skin=gruvbox"
 
+_open_file() {
+  local opener
+  if [[ "$OSTYPE" == darwin* ]]; then
+    opener=open
+  elif command -v xdg-open >/dev/null 2>&1; then
+    opener=xdg-open
+  else
+    print -u2 "open: no opener found (install xdg-utils on Linux)"
+    return 127
+  fi
+  "$opener" "$@" >/dev/null 2>&1 &!
+}
+
 # find-in-file - usage: fif <searchTerm> or fif "string with spaces" or fif "regex"
 fif() {
-    if [ ! "$#" -gt 0 ]; then echo "Need a string to search for!"; return 1; fi
-    local file
-    file="$(rga --max-count=1 --hidden --ignore-case --files-with-matches --no-messages "$@" | fzf-tmux +m --preview="rga --ignore-case --pretty --context 10 '"$@"' {}")" && open "$file"
+  if (( $# == 0 )); then
+    print -u2 "fif: need a string to search for"
+    return 1
+  fi
+  command -v rga >/dev/null 2>&1 || { print -u2 "fif: ripgrep-all (rga) is not installed"; return 127; }
+  command -v fzf >/dev/null 2>&1 || { print -u2 "fif: fzf is not installed"; return 127; }
+
+  local -a picker
+  if [[ -n "$TMUX" ]] && command -v fzf-tmux >/dev/null 2>&1; then
+    picker=(fzf-tmux +m)
+  else
+    picker=(fzf +m)
+  fi
+
+  local query="$*"
+  local file
+  file="$(rga --max-count=1 --hidden --ignore-case --files-with-matches --no-messages -- "$@" |
+    "${picker[@]}" --preview="rga --ignore-case --pretty --context 10 -- ${(q)query} {}")" && [[ -n "$file" ]] && _open_file "$file"
 }
 
 function yy() {
 	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
 	yazi "$@" --cwd-file="$tmp"
-	if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
 		cd -- "$cwd"
 	fi
 	rm -f -- "$tmp"

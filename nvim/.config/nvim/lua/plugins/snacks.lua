@@ -203,6 +203,20 @@ MAY THE FORCE BE WITH YOU!]],
                 Snacks.toggle.option("relativenumber", { name = "Relative Number" }):map("<leader>oL")
                 Snacks.toggle.diagnostics():map("<leader>od")
                 Snacks.toggle.line_number():map("<leader>ol")
+                Snacks.toggle({
+                    id = "smear_cursor",
+                    name = "Smear Cursor",
+                    get = function()
+                        local ok, smear = pcall(require, "smear_cursor")
+                        return ok and smear.enabled or false
+                    end,
+                    set = function(state)
+                        local ok, smear = pcall(require, "smear_cursor")
+                        if ok then
+                            smear.enabled = state
+                        end
+                    end,
+                }):map("<leader>oC")
             end,
         })
     end,

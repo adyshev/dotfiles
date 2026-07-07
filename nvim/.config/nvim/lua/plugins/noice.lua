@@ -64,7 +64,9 @@ return {
         },
         popupmenu = {
             enabled = true, -- enables the Noice popupmenu UI
-            backend = "native",
+            -- Noice currently supports only "nui" and "cmp" here. "native"
+            -- leaves the backend nil and crashes from scheduled popupmenu hides.
+            backend = "nui",
             -- backend = "cmp", -- backend to use to show regular cmdline completions
             -- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
             kind_icons = {}, -- set to `false` to disable icons
