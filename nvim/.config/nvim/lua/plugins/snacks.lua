@@ -1,5 +1,24 @@
 local tmux = require("utils.tmux")
 
+-- Snacks ships an image query for Neorg, but nvim-treesitter's current main
+-- registry does not provide a working norg parser. Filtering only this
+-- language keeps markdown/html/latex/typst image rendering enabled while
+-- avoiding a persistent healthcheck warning on both Fedora and macOS.
+local function filter_snacks_image_langs()
+    local ok, image = pcall(require, "snacks.image")
+    if not ok or image._dotfiles_lang_filter then
+        return
+    end
+
+    local langs = image.langs
+    image.langs = function()
+        return vim.tbl_filter(function(lang)
+            return lang ~= "norg"
+        end, langs())
+    end
+    image._dotfiles_lang_filter = true
+end
+
 return {
     "folke/snacks.nvim",
     priority = 1000,
@@ -167,6 +186,10 @@ MAY THE FORCE BE WITH YOU!]],
             },
         },
     },
+    config = function(_, opts)
+        require("snacks").setup(opts)
+        filter_snacks_image_langs()
+    end,
     init = function()
         vim.api.nvim_create_autocmd("User", {
             pattern = "VeryLazy",
