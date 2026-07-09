@@ -178,6 +178,7 @@ require("lazy").setup({
                 { "<leader>g", group = "[g]Git" },
                 { "<leader>o", group = "[o]Options" },
             })
+
             -- Main
             vim.keymap.set("n", "<leader>q", "<cmd>bd<CR>", { desc = "[q]Close Buffer" })
             vim.keymap.set("n", "<leader>p", function()
@@ -617,6 +618,7 @@ require("lazy").setup({
             },
         },
     },
+    { "tpope/vim-obsession", lazy = false },
     {
         "nvim-lualine/lualine.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -718,6 +720,24 @@ require("lazy").setup({
                             separator = " ",
                             no_harpoon = "Harpoon not loaded",
                         },
+                    },
+                    lualine_x = {
+                        -- Call the Vimscript function via Lua
+                        function()
+                            -- 1. Safely check if the function exists
+                            if vim.fn.exists("*ObsessionStatus") == 1 then
+                                local status = vim.fn["ObsessionStatus"]()
+
+                                -- 2. If it's tracking, it returns '[$]'
+                                if status ~= "" then
+                                    return status
+                                else
+                                    -- 3. Visible fallback for debugging when idle
+                                    return "[No Session]"
+                                end
+                            end
+                            return "Obsession Missing" -- Appears if the plugin completely failed to install
+                        end,
                     },
                     lualine_z = {
                         { "location" },

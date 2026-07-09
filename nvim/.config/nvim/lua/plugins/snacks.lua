@@ -204,6 +204,24 @@ MAY THE FORCE BE WITH YOU!]],
                 Snacks.toggle.diagnostics():map("<leader>od")
                 Snacks.toggle.line_number():map("<leader>ol")
                 Snacks.toggle({
+                    id = "obsession",
+                    name = "Obsession",
+                    notify = false,
+                    get = function()
+                        return vim.g.this_obsession ~= nil
+                    end,
+                    set = function(state)
+                        if vim.fn.exists(":Obsession") == 0 then
+                            vim.notify("vim-obsession is not available", vim.log.levels.WARN)
+                            return
+                        end
+                        local active = vim.g.this_obsession ~= nil
+                        if state ~= active then
+                            vim.cmd("Obsession")
+                        end
+                    end,
+                }):map("<leader>oO")
+                Snacks.toggle({
                     id = "smear_cursor",
                     name = "Smear Cursor",
                     get = function()
