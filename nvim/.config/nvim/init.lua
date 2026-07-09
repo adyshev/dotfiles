@@ -722,21 +722,11 @@ require("lazy").setup({
                         },
                     },
                     lualine_x = {
-                        -- Call the Vimscript function via Lua
                         function()
-                            -- 1. Safely check if the function exists
                             if vim.fn.exists("*ObsessionStatus") == 1 then
-                                local status = vim.fn["ObsessionStatus"]()
-
-                                -- 2. If it's tracking, it returns '[$]'
-                                if status ~= "" then
-                                    return status
-                                else
-                                    -- 3. Visible fallback for debugging when idle
-                                    return "[No Session]"
-                                end
+                                return vim.fn["ObsessionStatus"]()
                             end
-                            return "Obsession Missing" -- Appears if the plugin completely failed to install
+                            return ""
                         end,
                     },
                     lualine_z = {
